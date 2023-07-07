@@ -1,0 +1,129 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url("./assets/fonts/fontawesome-free-6.3.0-web/css/all.css");
+@import url("./assets/fonts/themify-icons/themify-icons.css");
+
+@import url('./styles/grid-system.css');
+@import url('./styles/toast-message.css');
+@import url('./styles/loading.css');
+@import url('./styles/admin-style.css');
+@import url('./styles/style-validator.css');
+@import url('./styles/page-error.css');
+@import url('./styles/reponsive.css');
+
+/* --------Stylesheet for the common component ------*/
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', "Arial", sans-serif;
+}
+
+:root {
+    --primary-color: #eb984c;
+    --button-color: #df8129;
+    --background-color: #f3f3f3;
+    --text-color: #222222;
+    --background-login-color: #ffd3aa;
+}
+
+
+html {
+    font-size: 62.5%;
+    line-height: 1.6rem;
+    font-family: 'Roboto', sans-serif;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    background-color: transparent;
+}
+
+body {
+    margin: 0;
+    background-color: var(--background-color);
+}
+
+.container {
+    width: 100%;
+    margin-top: 115px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes topToDown {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes downToTop {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+@keyframes modalFadein {
+    from {
+        transform: scale(0);
+    }
+
+    to {
+        transform: scale(100%);
+    }
+}
+
+@keyframes popUp {
+    from {
+        transform: translateY(0)
+    }
+
+    to {
+        transform: translateY(-10px)
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+    border-radius: 0.125rem;
+    background-color: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #b3b3b3;
+}
+
+.edit-icon {
+    color: green;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    zoom: 1.2;
+    outline: none;
+    border: none;
+}
+
+.edit-icon:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}

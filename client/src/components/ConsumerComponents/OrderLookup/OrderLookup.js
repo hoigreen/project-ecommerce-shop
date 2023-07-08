@@ -21,7 +21,7 @@ const OrderLookup = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("https://server-shoptech.onrender.com/api/orders").then(res => res.json()).then(data => {
+            fetch("http://localhost:4000/api/orders").then(res => res.json()).then(data => {
                 setOrders(data.orders)
                 setLoading(false)
             })

@@ -1,6 +1,6 @@
 /* --------Stylesheet for the Login component ------*/
 .login__logo {
-    background-image: url(https://server-shoptech.onrender.com/public/logo-img.png);
+    background-image: url(http://localhost:4000/public/logo-img.png);
     width: 100%;
     height: 160px;
     background-color: transparent;

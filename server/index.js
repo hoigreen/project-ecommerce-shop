@@ -1,16 +1,49 @@
 const express = require("express")
-const app = express()
+const { MongoClient, ServerApiVersion } = require('mongodb');
 const cors = require("cors")
-const http = require('http').Server(app);
-const PORT = 4000
+const dotenv = require("dotenv")
+const morgan = require("morgan")
 const fs = require("fs");
+const connectDB = require("./config/db")
+
+const app = express()
+const http = require('http').Server(app);
+const PORT = 4000 || process.env.PORT;
+
+dotenv.config()
 
 const socketIO = require('socket.io')(http, {
     cors: {
-        // origin: "http://localhost:3000"
-        origin: "https://shoptech-uth.vercel.app"
+        origin: "http://localhost:3000"
+        // origin: "https://shoptech-uth.vercel.app"
     },
 });
+
+const uri = "mongodb+srv://hoigreen:JTvRZqoovMU0jwEj@cluster0.etckxdx.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+    serverApi: {
+        version: ServerApiVersion.v1,
+        strict: true,
+        deprecationErrors: true,
+    }
+});
+
+async function run() {
+    try {
+        // Connect the client to the server	(optional starting in v4.7)
+        await client.connect();
+        // Send a ping to confirm a successful connection
+        await client.db("admin").command({ ping: 1 });
+        console.log("Pinged your deployment. You successfully connected to MongoDB!");
+    } finally {
+        // Ensures that the client will close when you finish/error
+        await client.close();
+    }
+}
+run().catch(console.dir);
+
+connectDB()
+
 
 const savedDataAdmin = fs.readFileSync("datas/data-admin.json")
 const objectDataAdmin = JSON.parse(savedDataAdmin)
@@ -36,6 +69,8 @@ const objectDataComment = JSON.parse(savedDataComment)
 const savedDataFeedback = fs.readFileSync("datas/data-feedback.json")
 const objectDataFeedback = JSON.parse(savedDataFeedback)
 
+app.use(express.json())
+app.use(morgan('dev'))
 app.use(cors())
 app.use('/public', express.static('./public'));
 
@@ -451,6 +486,10 @@ socketIO.on('connection', (socket) => {
     socket.on('disconnect', () => {
         console.log('🔥: A user disconnected');
     });
+});
+
+app.get("/", (req, res) => {
+    res.send("<h1>ShopTECH E-commerce Server</h1>")
 });
 
 app.get("/api/admins", (req, res) => {

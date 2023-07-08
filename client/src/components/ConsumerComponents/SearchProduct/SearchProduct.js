@@ -15,7 +15,7 @@ const ResultSearch = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("https://server-shoptech.onrender.com/api/products").then(res => res.json()).then(data => {
+            fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
                 setProducts(data.products)
                 setLoading(false)
             })

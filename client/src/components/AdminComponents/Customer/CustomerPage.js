@@ -14,7 +14,7 @@ const CustomerPage = () => {
 
     useEffect(() => {
         const fetchAPI = () => {
-            fetch("https://server-shoptech.onrender.com/api/users").then(res => res.json()).then(data => {
+            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
                 setUsers(data.users)
                 setLoading(false)
                 setCountCustomers(data.users.length)

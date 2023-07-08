@@ -21,7 +21,7 @@ const AddProduct = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("https://server-shoptech.onrender.com/api/products").then(res => res.json()).then(data => {
+            fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
                 setProducts(data.products)
             })
         }
@@ -135,7 +135,7 @@ const AddProduct = ({ socket }) => {
                     <div className="add__body">
                         <div className="add__col-left">
                             <div className="add__avatar">
-                                <img src="https://server-shoptech.onrender.com/public/img-product-empty.png" className="add-product__image"></img>
+                                <img src="http://localhost:4000/public/img-product-empty.png" className="add-product__image"></img>
                                 <input type='file' id="image-change" onChange={changeImage} hidden></input>
                                 <label htmlFor="image-change" className="info-admin-product__image-btn">Thêm hình ảnh</label>
                             </div>

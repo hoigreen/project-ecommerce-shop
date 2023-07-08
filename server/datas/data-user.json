@@ -48,7 +48,7 @@
     },
     {
       "userID": "G004",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "kkk_192",
       "password": "121212",
       "fullname": "Võ Ngọc Duy Khiêm",
@@ -60,7 +60,7 @@
     },
     {
       "userID": "G005",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "aduong91",
       "password": "121212",
       "fullname": "Phan Ánh Dương",
@@ -72,7 +72,7 @@
     },
     {
       "userID": "G006",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "aduong",
       "password": "121212",
       "fullname": "Võ Dương Minh",
@@ -83,7 +83,7 @@
     },
     {
       "userID": "G007",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "remi000",
       "password": "121212",
       "fullname": "Lê Dĩnh My",
@@ -93,7 +93,7 @@
       "cart": [
         {
           "indexProduct": 1,
-          "imageLink": "https://server-shoptech.onrender.com/public/products/img-P001.png",
+          "imageLink": "http://localhost:4000/public/products/img-P001.png",
           "id": "P001",
           "productName": "Apple Iphone 13 - 2023",
           "option": "1TB ROM",
@@ -118,7 +118,7 @@
     },
     {
       "userID": "G009",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "ggmm22",
       "password": "121212",
       "fullname": "Lê Huy",
@@ -151,7 +151,7 @@
     },
     {
       "userID": "G0012",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "cslwe",
       "password": "121212a",
       "fullname": "Phạm Vũ Ân",
@@ -163,7 +163,7 @@
     },
     {
       "userID": "G0013",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "vvxox",
       "password": "121212",
       "fullname": "Lê Xuân Tân",
@@ -186,7 +186,7 @@
     },
     {
       "userID": "G0015",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "kl1234",
       "password": "121212",
       "fullname": "Huỳnh Kiên Long",
@@ -222,7 +222,7 @@
     },
     {
       "userID": "G0017",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "aabb11",
       "password": "121212",
       "fullname": "Vũ Hồng",
@@ -233,7 +233,7 @@
     },
     {
       "userID": "G0018",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "vvcc11",
       "password": "121212",
       "fullname": "Huy Trung",
@@ -244,7 +244,7 @@
     },
     {
       "userID": "G0019",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "ggrree",
       "password": "121212",
       "fullname": "Hồ Cường",
@@ -255,7 +255,7 @@
     },
     {
       "userID": "G0020",
-      "avatarUrl": "https://server-shoptech.onrender.com/public/img-avatar-empty.png",
+      "avatarUrl": "http://localhost:4000/public/img-avatar-empty.png",
       "username": "abc123",
       "password": "121212",
       "fullname": "Lê Minh",

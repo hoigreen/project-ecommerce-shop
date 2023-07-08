@@ -19,7 +19,7 @@ const InfoAdmin = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPI = () => {
-            fetch("https://server-shoptech.onrender.com/api/admins").then(res => res.json()).then(data => {
+            fetch("http://localhost:4000/api/admins").then(res => res.json()).then(data => {
                 setAdmins(data.admins)
             })
         }

@@ -17,7 +17,7 @@ const ProductPage = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPI = () => {
-            fetch("https://server-shoptech.onrender.com/api/products").then(res => res.json()).then(data => {
+            fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
                 setProducts(data.products)
                 setCountProduct(data.products.length)
                 setLoading(false)

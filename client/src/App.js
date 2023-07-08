@@ -24,7 +24,7 @@ import ContactPage from './components/ConsumerComponents/Contact/ContactPage';
 
 import { ModalLoading, PageNotFound } from './components/Common/';
 
-const socket = socketIO.connect('https://server-shoptech.onrender.com');
+const socket = socketIO.connect('http://localhost:4000');
 
 function App() {
     return (

@@ -25,7 +25,7 @@ const InfoPromote = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPI = () => {
-            fetch("https://server-shoptech.onrender.com/api/promotes").then(res => res.json()).then(data => {
+            fetch("http://localhost:4000/api/promotes").then(res => res.json()).then(data => {
                 setPromotes(data.promotes)
             });
         }

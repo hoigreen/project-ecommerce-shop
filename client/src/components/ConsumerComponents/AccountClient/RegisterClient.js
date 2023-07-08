@@ -20,7 +20,7 @@ const RegisterClient = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPIUsers = () => {
-            fetch("https://server-shoptech.onrender.com/api/users").then(res => res.json()).then(data => {
+            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
                 setUsers(data.users)
             })
         }
@@ -64,7 +64,7 @@ const RegisterClient = ({ socket }) => {
         users.map((user, index) => {
             if (index = users.length) {
                 setUserID(`G00${index + 1}`);
-                setAvatarUrlRegister("https://server-shoptech.onrender.com/public/img-avatar-empty.png")
+                setAvatarUrlRegister("http://localhost:4000/public/img-avatar-empty.png")
                 setStatusLogin("Chưa đăng nhập");
             }
             index = index + 1;

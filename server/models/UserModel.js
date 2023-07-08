@@ -4,7 +4,7 @@ const UserSchema = new mongoose.Schema(
     {
         avatarUrl: {
             type: String,
-            default:""
+            default: ""
         },
         username: {
             type: String,
@@ -42,4 +42,4 @@ const UserSchema = new mongoose.Schema(
     }
 );
 
-module.exports = userModelSchema = mongoose.model('users', UserSchema);;
+module.exports = mongoose.model('data-user', UserSchema);;

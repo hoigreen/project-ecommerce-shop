@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');;
-// import colors from 'colors'
 
 const connectDB = async () => {
     try {

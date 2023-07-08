@@ -74,7 +74,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 app.use('/public', express.static('./public'));
-app.use('/api/v1/auth', AuthRoutes);
+app.use('/api/auth', AuthRoutes);
 
 //  --------------------------- ADMIN Method -------------------------------------
 const findAdmin = (idKey, myArray, avatarUrlAdmin, fullnameAdmin, emailAdmin, phoneAdmin, addressAdmin) => {

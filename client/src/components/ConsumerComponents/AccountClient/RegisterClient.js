@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
 import Validator from '../../Common/Validator';
 import { handleLoadingPage } from '../../Common';
@@ -71,11 +72,33 @@ const RegisterClient = ({ socket }) => {
         })
     }, [users])
 
-    const handleSubmit = (e) => {
-        const cartEmpty = []
-        if (window.confirm('Bạn chắc chắn những thông tin bạn nhập vào là chính xác!') == true) {
-            socket.emit("registerClient", {
-                userID,
+    // const handleSubmit = (e) => {
+    //     const cartEmpty = []
+    //     if (window.confirm('Bạn chắc chắn những thông tin bạn nhập vào là chính xác!') == true) {
+    //         socket.emit("registerClient", {
+    //             userID,
+    //             avatarUrl: avatarUrlRegister,
+    //             username: usernameRegister,
+    //             password: passwordRegister,
+    //             fullname: fullnameRegister,
+    //             email: emailRegister,
+    //             phone: phoneRegister,
+    //             address: addressRegister,
+    //             statusLogin: statusLogin,
+    //             cart: cartEmpty
+    //         });
+    //         window.alert('Đăng ký thành công! Đang quay trở lại trang đăng nhập')
+    //         handleLoadingPage(1)
+    //         window.setTimeout(() => {
+    //             window.location.href = '/login';
+    //         }, 1000)
+    //     }
+    // }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post(`http://localhost:4000/api/auth/register`, {
                 avatarUrl: avatarUrlRegister,
                 username: usernameRegister,
                 password: passwordRegister,
@@ -83,16 +106,22 @@ const RegisterClient = ({ socket }) => {
                 email: emailRegister,
                 phone: phoneRegister,
                 address: addressRegister,
-                statusLogin: statusLogin,
-                cart: cartEmpty
+                cart: []
             });
-            window.alert('Đăng ký thành công! Đang quay trở lại trang đăng nhập')
-            handleLoadingPage(1)
-            window.setTimeout(() => {
-                window.location.href = '/login';
-            }, 1000)
+            if (res && res.data.success) {
+                window.alert('Đăng ký thành công! Đang quay trở lại trang đăng nhập')
+                handleLoadingPage(1)
+                window.setTimeout(() => {
+                    window.location.href = '/login';
+                }, 1000)
+            } else {
+                window.alert('Đã xảy ra lỗi')
+            }
+        } catch (error) {
+            console.log(error);
+            window.alert(error);
         }
-    }
+    };
 
     return (
         <>

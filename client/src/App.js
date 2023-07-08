@@ -5,7 +5,6 @@ import socketIO from 'socket.io-client';
 // Admin components
 import Login from './components/AdminComponents/Account/Login';
 import InfoAdmin from './components/AdminComponents/Account/InfoAdmin';
-
 import Dashboard from './components/AdminComponents/Dashboard/Dashboard';
 import { CustomerPage, InfoCustomer } from './components/AdminComponents/Customer';
 import { AddProduct, InfoProduct, ProductPage } from './components/AdminComponents/Product'

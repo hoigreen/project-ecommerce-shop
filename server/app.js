@@ -5,10 +5,11 @@ const dotenv = require("dotenv")
 const morgan = require("morgan")
 const fs = require("fs");
 const connectDB = require("./config/db")
+const AuthRoutes = require("./routes/AuthRoutes")
 
 const app = express()
 const http = require('http').Server(app);
-const PORT = 4000 || process.env.PORT;
+const PORT =  process.env.PORT || 4000;
 
 dotenv.config()
 
@@ -73,6 +74,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 app.use('/public', express.static('./public'));
+app.use('/api/v1/auth', AuthRoutes);
 
 //  --------------------------- ADMIN Method -------------------------------------
 const findAdmin = (idKey, myArray, avatarUrlAdmin, fullnameAdmin, emailAdmin, phoneAdmin, addressAdmin) => {

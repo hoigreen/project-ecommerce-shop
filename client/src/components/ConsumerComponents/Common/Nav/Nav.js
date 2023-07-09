@@ -1,14 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { AuthContext } from '../../../../context';
+import { handleLoadingPage } from '../../../Common';
 
 import "./nav.css"
-
-import { handleLoadingPage } from '../../../Common';
 
 const Nav = ({ socket }) => {
     const [users, setUsers] = useState([])
     const [cartUser, setCartUser] = useState([])
     const [countQuantity, setCountQuantity] = useState()
     const [keySearch, setKeySearch] = useState("")
+    const [auth, setAuth] = useContext(AuthContext)
 
     useEffect(() => {
         const fetchAPI = () => {
@@ -30,15 +31,15 @@ const Nav = ({ socket }) => {
 
     const handleLoggout = (e) => {
         e.preventDefault();
-        users.map((user, index) => {
-            if (window.localStorage.getItem("userLogged") === user.username) {
-                socket.emit("setStatusLoginUser", { userID: user.userID, statusLogin: "Chưa đăng nhập" })
-                window.localStorage.removeItem("userLogged")
-                window.localStorage.removeItem("statusLogged")
-                handleLoadingPage(1)
-                window.location.href = "/login"
-            }
-        })
+        setAuth({
+            ...auth,
+            username: null,
+            token: '',
+        });
+        window.localStorage.removeItem("auth")
+        window.alert("Đăng xuất tài khoản thành công")
+        handleLoadingPage(1)
+        window.location.href = "/login"
     }
 
     return (
@@ -85,7 +86,7 @@ const Nav = ({ socket }) => {
                             </button>
 
                             <button className="header-btn hide-on-mobile" onClick={(e) => {
-                                if (window.localStorage.getItem('statusLogged') === "Đã đăng nhập") {
+                                if (auth.username) {
                                     const elementNavOption = document.querySelector('.nav__option-box');
                                     elementNavOption.style.display = 'block';
                                 }

@@ -1,18 +1,16 @@
 const express = require('express');
-const { RegisterController, LoginController } = require('../controllers')
-// import { isAdmin, requireSignIn } from "../middlewares/authMiddleware.js";
+const { RegisterController, LoginController, TestController } = require('../controllers')
+const { RequireSignIn } = require("../middlewares/MiddleWares");
 
 //router object
 const router = express.Router();
 
 //routing
-//REGISTER || METHOD POST
 router.post("/register", RegisterController);
 
-//LOGIN || POST
 router.post("/login", LoginController);
 
-// //test routes
-// router.get("/test", requireSignIn, isAdmin, testController);
+//test routes
+router.get("/test", TestController);
 
 module.exports = router;

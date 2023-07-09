@@ -1,56 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from "axios";
 
 import "./styles/account-client.css"
 
 import { Nav, Breadcrumbs } from '../Common';
 import { Toast, handleLoadingPage } from '../../Common';
+import AuthContext from '../../../context/AuthContext';
 
 
-const LoginClient = ({ socket }) => {
-    const [users, setUsers] = useState([])
-    const [statusLogin, setStatusLogin] = useState('')
+const LoginClient = () => {
     const [details, setDetails] = useState({ username: "", password: "" })
+    // const [auth, setAuth] = useAuth()
+    const [auth, setAuth] = useContext(AuthContext)
 
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const fetchProducts = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
-            })
-        }
-        fetchProducts()
-    }, [])
 
     const showErrorToast = () => {
         Toast({ title: 'Đăng nhập thất bại', message: 'Tên tài khoản hoặc mật khẩu không chính xác!', type: 'error', duration: 3000 })
     }
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        var boolCheck = false;
-        users.map((user, index) => {
-            if (details.username === user.username &&
-                details.password === user.password) {
-                window.localStorage.setItem('userLogged', user.username);
-                window.localStorage.setItem('statusLogged', statusLogin);
-                socket.emit("setStatusLoginUser", { userID: user.userID, statusLogin: statusLogin })
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_API}/api/auth/login`, {
+                username: details.username,
+                password: details.password,
+            });
+            if (res && res.data.success) {
+                localStorage.setItem('auth', JSON.stringify(res.data));
+                setAuth({
+                    ...auth,
+                    username: res.data.user.username,
+                    token: res.data.token,
+                });
+                console.log(res.data)
                 alert("Đăng nhập thành công");
                 handleLoadingPage(1)
                 window.setTimeout(() => {
-                    window.location.href = ('/account');
+                    navigate('/account');
                 }, 1000)
-                boolCheck = true;
+            } else {
+                showErrorToast();
             }
-        })
-        if (boolCheck === false) {
+        } catch (error) {
+            console.log(error);
             showErrorToast();
         }
     };
 
     return (
-        <>
+        <React.Fragment>
             <div id="toast-with-navbar"></div>
             <Nav />
             <Breadcrumbs />
@@ -80,10 +80,7 @@ const LoginClient = ({ socket }) => {
                                         type="text"
                                         name="username"
                                         className="login-client__input"
-                                        onChange={e => {
-                                            setDetails({ ...details, username: e.target.value });
-                                            setStatusLogin("Đã đăng nhập")
-                                        }}
+                                        onChange={e => { setDetails({ ...details, username: e.target.value }); }}
                                         value={details.username}
                                         required
                                         minLength={5}
@@ -146,7 +143,7 @@ const LoginClient = ({ socket }) => {
                     </div>
                 </div>
             </div>
-        </>
+        </React.Fragment>
 
 
     );

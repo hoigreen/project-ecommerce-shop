@@ -8,20 +8,17 @@ import { Breadcrumbs, Nav } from '../Common';
 const RegisterClient = ({ socket }) => {
     const [users, setUsers] = useState([])
     const [userID, setUserID] = useState('')
-    const [avatarUrlRegister, setAvatarUrlRegister] = useState('')
     const [usernameRegister, setUsernameRegister] = useState('')
     const [passwordRegister, setPasswordRegister] = useState('')
     const [fullnameRegister, setFullnameRegister] = useState('')
     const [emailRegister, setEmailRegister] = useState('')
     const [phoneRegister, setPhoneRegister] = useState('')
     const [addressRegister, setAddressRegister] = useState('')
-    const [statusLogin, setStatusLogin] = useState("")
-
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAPIUsers = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
+            fetch(`${process.env.REACT_APP_API}/api/users`).then(res => res.json()).then(data => {
                 setUsers(data.users)
             })
         }
@@ -65,8 +62,6 @@ const RegisterClient = ({ socket }) => {
         users.map((user, index) => {
             if (index = users.length) {
                 setUserID(`G00${index + 1}`);
-                setAvatarUrlRegister("http://localhost:4000/public/img-avatar-empty.png")
-                setStatusLogin("Chưa đăng nhập");
             }
             index = index + 1;
         })
@@ -98,8 +93,8 @@ const RegisterClient = ({ socket }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`http://localhost:4000/api/auth/register`, {
-                avatarUrl: avatarUrlRegister,
+            const res = await axios.post(`${process.env.REACT_APP_API}/api/auth/register`, {
+                avatarUrl: ``,
                 username: usernameRegister,
                 password: passwordRegister,
                 fullname: fullnameRegister,
@@ -115,7 +110,7 @@ const RegisterClient = ({ socket }) => {
                     window.location.href = '/login';
                 }, 1000)
             } else {
-                window.alert('Đã xảy ra lỗi')
+                window.alert("Đã gặp lỗi khi đăng ký! Vui lòng thử lại")
             }
         } catch (error) {
             console.log(error);

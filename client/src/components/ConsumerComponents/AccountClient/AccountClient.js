@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { Breadcrumbs, Nav } from '../Common';
 import SidebarAccount, { handleLoadOptionSidebar } from './SidebarAccount';
 import { handleLoadingPage } from '../../Common';
+import AuthContext from '../../../context/AuthContext';
 
 const AccountClient = ({ socket }) => {
     const [users, setUsers] = useState([])
     const [fullname, setFullname] = useState('')
     const [avatarUrl, setAvatarUrl] = useState('')
+
+    const [auth, setAuth] = useContext(AuthContext)
 
     const [orders, setOrders] = useState([])
     const [countOrderDriving, setCountOrderDriving] = useState()
@@ -72,7 +75,6 @@ const AccountClient = ({ socket }) => {
                 <div className="grid wide">
                     <div className="account-info__container">
                         <SidebarAccount socket={socket} />
-
                         <div className="account__box">
                             <div className="account__box-info">
                                 <img src={avatarUrl} className="account__box-info-avatar"></img>

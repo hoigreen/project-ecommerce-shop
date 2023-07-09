@@ -1,46 +1,47 @@
 const UserModel = require("../models/UserModel");
-// import { comparePassword, hashPassword } from "./../helpers/authHelper.js";
-// import JWT from "jsonwebtoken";
+const { HashPassword } = require("../utils")
 
 const RegisterController = async (req, res) => {
     try {
         const { username, email, password, fullname, phone, address } = req.body;
         //validations
         if (!username) {
-            return res.send({ error: "Name is Required" });
+            return res.send({ error: "Tên là bắt buộc" });
         }
         if (!email) {
-            return res.send({ error: "Email is Required" });
+            return res.send({ error: "Email là bắt buộc" });
         }
         if (!password) {
-            return res.send({ error: "Password is Required" });
+            return res.send({ error: "Mật khẩu là bắt buộc" });
         }
         if (!phone) {
-            return res.send({ error: "Phone no is Required" });
+            return res.send({ error: "Số điện thoại là bắt buộc" });
         }
         if (!address) {
-            return res.send({ error: "Address is Required" });
+            return res.send({ error: "Địa chỉ là bắt buộc" });
         }
         if (!fullname) {
-            return res.send({ error: "Address is Required" });
+            return res.send({ error: "Họ tên là bắt buộc" });
         }
 
-        // //Kiểm tra trùng
-        // const checkExisted = await UserModel.findOne({ userID });
-        // //exisiting user
-        // if (checkExisted) {
-        //     return res.status(200).send({
-        //         success: true,
-        //         message: "Already Register please login",
-        //     });
-        // }
-        //register user
-        // const hashedPassword = await hashPassword(password);
+        //Kiểm tra trùng
+        const checkExisted = await UserModel.findOne({ username });
+
+        // User đã tồn tại
+        if (checkExisted) {
+            return res.status(200).send({
+                success: true,
+                message: "Tài khoản này đã đăng ký bởi người khác!"
+            });
+        }
+
+        // Đăng ký người dùng mới
+        const hashedPassword = await HashPassword(password);
 
         // Đăng ký tài khoản mới
         const user = await new UserModel({
             username,
-            password,
+            password: hashedPassword,
             fullname,
             email,
             phone,

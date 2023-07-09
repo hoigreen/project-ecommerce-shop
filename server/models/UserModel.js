@@ -42,4 +42,4 @@ const UserSchema = new mongoose.Schema(
     }
 );
 
-module.exports = mongoose.model('data-user', UserSchema);;
+module.exports = mongoose.model('users', UserSchema);;

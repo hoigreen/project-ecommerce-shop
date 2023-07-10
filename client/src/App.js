@@ -41,7 +41,7 @@ function App() {
                         <Route path="/admin/info-admin" element={<InfoAdmin socket={socket} />} />
 
                         <Route path="/admin/customer" element={<CustomerPage socket={socket} />} />
-                        <Route path="/admin/customer/info/:userID/:username" element={<InfoCustomer socket={socket} />} />
+                        <Route path="/admin/customer/info/:userID/" element={<InfoCustomer socket={socket} />} />
 
                         <Route path="/admin/product" element={<ProductPage socket={socket} />} />
                         <Route path="/admin/product/add" element={<AddProduct socket={socket} />} />

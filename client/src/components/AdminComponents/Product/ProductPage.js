@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import "./product.css"
-
 import AdminHeader from '../Common/AdminHeader';
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
 import { handleLoadingPage } from '../../Common';
 import EditButtonProduct from "../../EditButton/EditButtonProduct";
 
 
-const ProductPage = ({ socket }) => {
+const ProductPage = () => {
     const [products, setProducts] = useState([])
     const [countProduct, setCountProduct] = useState(0)
 
@@ -18,8 +16,8 @@ const ProductPage = ({ socket }) => {
     useEffect(() => {
         const fetchAPI = () => {
             fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
-                setProducts(data.products)
-                setCountProduct(data.products.length)
+                setProducts(data)
+                setCountProduct(data.length)
                 setLoading(false)
             })
         }
@@ -35,6 +33,7 @@ const ProductPage = ({ socket }) => {
             navigate("/admin/product/add")
         }, 1000)
     }
+
 
     return (
         <>
@@ -55,9 +54,9 @@ const ProductPage = ({ socket }) => {
                     </div>
 
                     <div className='admin__list'>
-                        {loading ? <p>Đang kết nối đến server ... </p> : products.map((product, index) => (
+                        {loading ? <p >Đang kết nối đến server ... </p> : products.map((product, index) => (
                             <div className='admin__item' key={index}>
-                                <label className='admin__item-id'>{product.id}</label>
+                                <label style={{ color: 'white' }} className='admin__item-id'>STT: 0{index + 1}</label>
                                 <div className='product__item-avatar'>
                                     <img src={product.imageLink} className='product__item-img'></img>
                                 </div>

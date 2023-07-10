@@ -8,7 +8,7 @@ const EditButtonCustomer = ({ user }) => {
     const editInfo = (e) => {
         handLoadingPage(1)
         window.setTimeout(() => {
-            navigate(`/admin/customer/info/${user.userID}/${user.username}`, { user })
+            navigate(`/admin/customer/info/${user._id}`, { user })
         }, 1000)
     }
 

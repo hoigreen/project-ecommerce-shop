@@ -1,56 +1,50 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom'
 
-import "./styles/info-style.css" 
+import "./styles/info-style.css"
 
 import AdminHeader from '../Common/AdminHeader';
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
 import { handleLoadingPage } from '../../Common';
+import axios from 'axios';
 
-const InfoCustomer = ({ socket }) => {
-    const [users, setUsers] = useState([])
-    const { userID, username } = useParams()
-
-    const [avatarUrl, setAvatarUrl] = useState('')
-    const [fullnameUser, setFullnameUser] = useState('')
-    const [emailUser, setEmailUser] = useState('')
-    const [phoneUser, setPhoneUser] = useState('')
-    const [addressUser, setAddressUser] = useState('')
+const InfoCustomer = () => {
+    const [user, setUser] = useState({})
+    const { userID } = useParams()
 
     useEffect(() => {
         const fetchAPI = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
-            });
+            fetch(`${process.env.REACT_APP_API}/api/users/${userID}`).then(res => res.json()).then(data => {
+                setUser(data)
+            })
         }
         fetchAPI()
         handleLoadOptionSelected(1)
     }, [])
 
-    useEffect(() => {
-        // show thông tin user
-        users.map((user, index) => {
-            if (user.userID === userID) {
-                setAvatarUrl(user.avatarUrl);
-                setFullnameUser(user.fullname);
-                setEmailUser(user.email);
-                setPhoneUser(user.phone);
-                setAddressUser(user.address);
-            }
-        })
-    }, [users])
-
-    const handleConfirmChange = (e) => {
-        e.preventDefault()
+    const handleConfirmChange = async (e) => {
+        e.preventDefault();
         const inputElements = document.querySelectorAll(".info-page__input");
-        if (window.confirm("Bạn muốn sửa đổi thông tin khách hàng!") == true) {
-            socket.emit("editInfoCustomer", { userID, fullname: inputElements[1].value, email: inputElements[2].value, phone: inputElements[3].value, address: inputElements[4].value })
-            handleLoadingPage(1)
-            window.setTimeout(() => {
-                window.location.reload();
-            }, 1000)
+        try {
+            const res = await axios.put(`${process.env.REACT_APP_API}/api/admins/update-info-user/${userID}`, {
+                fullname: inputElements[1].value,
+                email: inputElements[2].value,
+                phone: inputElements[3].value,
+                address: inputElements[4].value
+            });
+            if (res && res.data.success) {
+                alert("Cập nhật khách hàng thông tin thành công!");
+                console.log(res.data)
+                handleLoadingPage(1)
+                window.location.reload()
+            } else {
+                alert("Cập nhật thông tin thất bại")
+            }
+        } catch (error) {
+            alert(error)
         }
-    }
+    };
+
 
     return (
         <>
@@ -68,9 +62,9 @@ const InfoCustomer = ({ socket }) => {
                     <div className="info-page__body">
                         <div className="info-page__col-1">
                             <div className="info-page__avatar">
-                                <img src={avatarUrl} className="info-page__avatar-img"></img>
+                                <img src={user.avatarUrl || `${process.env.REACT_APP_API}/public/img-avatar-empty.png`} className="info-page__avatar-img"></img>
                             </div>
-                            <label className="info-page__user-id">{username}</label>
+                            <label className="info-page__user-id">{user.username}</label>
                         </div>
 
                         <div className='info-page__col-2'>
@@ -84,16 +78,16 @@ const InfoCustomer = ({ socket }) => {
                                     value={userID} />
 
                                 <label className="info-page__label">Họ và tên khách hàng</label>
-                                <input className='info-page__input' defaultValue={fullnameUser} />
+                                <input className='info-page__input' defaultValue={user.fullname} />
 
                                 <label className="info-page__label">Email</label>
-                                <input className='info-page__input' defaultValue={emailUser} />
+                                <input className='info-page__input' defaultValue={user.email} />
 
                                 <label className="info-page__label">Số điện thoại</label>
-                                <input className='info-page__input' defaultValue={phoneUser} />
+                                <input className='info-page__input' defaultValue={user.phone} />
 
                                 <label className="info-page__label">Địa chỉ</label>
-                                <input className='info-page__input' defaultValue={addressUser} />
+                                <input className='info-page__input' defaultValue={user.address} />
 
                             </div>
                         </div>

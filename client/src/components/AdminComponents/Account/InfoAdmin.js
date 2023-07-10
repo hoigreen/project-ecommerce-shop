@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import "./styles/info-style.css"
 import AdminHeader from '../Common/AdminHeader'
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar'
+import axios from 'axios';
 import { handleLoadingPage } from '../../Common';
 
-const InfoAdmin = ({ socket }) => {
+const InfoAdmin = () => {
     const [admin, setAdmin] = useState({})
 
     useEffect(() => {
@@ -30,24 +31,29 @@ const InfoAdmin = ({ socket }) => {
         }
     }
 
-    const handleConfirmChange = (e) => {
-        e.preventDefault()
+    const handleConfirmChange = async (e) => {
+        e.preventDefault();
         const inputElements = document.querySelectorAll(".info-page__input");
-        const avatarUrl = document.querySelector(".info-page__avatar-img").getAttribute("src")
-        if (window.confirm("Bạn có chắc muốn cập nhật lại thông tin cá nhân của mình?") === true) {
-            socket.emit("editInfoAdmin", {
+        const avatarUrl = String(document.querySelector(".info-page__avatar-img").getAttribute("src"))
+        try {
+            const res = await axios.put(`${process.env.REACT_APP_API}/api/admins/update-info/${JSON.parse(window.localStorage.getItem('authAdmin')).admin._id}`, {
                 avatarUrl: avatarUrl,
                 fullname: inputElements[1].value,
                 email: inputElements[2].value,
                 phone: inputElements[3].value,
                 address: inputElements[4].value
-            })
-            handleLoadingPage(1)
-            setTimeout(() => {
-                window.location.href = window.location.href;
-            })
+            });
+            if (res && res.data.success) {
+                alert("Cập nhật thông tin thành công!");
+                handleLoadingPage(1)
+                window.location.reload()
+            } else {
+                alert("Cập nhật thông tin thất bại")
+            }
+        } catch (error) {
+            alert(error)
         }
-    }
+    };
 
     return (
         <>

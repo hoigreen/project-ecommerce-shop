@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import "./product.css"
-
 import { handleLoadingPage } from '../../Common';
+import axios from 'axios';
 
 
 const AddProduct = ({ socket }) => {
@@ -12,21 +11,13 @@ const AddProduct = ({ socket }) => {
     const [name, setName] = useState('')
     const [type, setType] = useState()
     const [enType, setEnType] = useState('')
+    const [brand, setBrand] = useState('')
     const [price, setPrice] = useState(0)
     const [option, setOption] = useState([])
     const [color, setColor] = useState([])
     const [status, setStatus] = useState('')
 
     const navigate = useNavigate()
-
-    useEffect(() => {
-        const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
-                setProducts(data.products)
-            })
-        }
-        fetchAPIs()
-    }, [])
 
     const changeImage = () => {
         const preview = document.querySelector(".add-product__image")
@@ -97,35 +88,42 @@ const AddProduct = ({ socket }) => {
         return Math.floor(Math.random() * (max - min + 1) + min)
     }
 
-    const handleAddProduct = (e) => {
+    const handleAddProduct = async (e) => {
         e.preventDefault();
-        const idProduct = document.querySelector(".add__input.add__input--readonly").value
         const imageLinkProduct = document.querySelector(".add-product__image").getAttribute("src")
-        socket.emit("addProduct", {
-            imagePrimary: "",
-            imageLink: imageLinkProduct,
-            imageList: [],
-            id: idProduct,
-            name,
-            type,
-            enType,
-            price,
-            option,
-            color,
-            status,
-            star: 0,
-            voter: 0,
-            hotDeal: false,
-            featured: true,
-            percent: randomPercent(1, 5)
-        });
-        handleLoadingPage(1)
-        window.setTimeout(() => {
-            navigate('/admin/product');
-        }, 1000)
-        alert("Thêm sản phẩm thành công")
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_API}/api/products/create`, {
+                imagePrimary: "",
+                imageLink: imageLinkProduct,
+                imageList: [],
+                name,
+                type,
+                enType,
+                brand,
+                price,
+                option,
+                color,
+                status,
+                star: 0,
+                voter: 0,
+                hotDeal: false,
+                featured: true,
+                percent: randomPercent(3, 7)
+            });
+            if (res && res.data.success) {
+                alert("Thêm sản phẩm thành công")
+                handleLoadingPage(1)
+                window.setTimeout(() => {
+                    navigate('/admin/product');
+                }, 1000)
+            } else {
+                window.alert("Đã gặp lỗi khi tạo! Vui lòng thử lại")
+            }
+        } catch (error) {
+            console.log(error);
+            window.alert(error);
+        }
     }
-
 
     return (
         <div className="add-product__container">
@@ -143,8 +141,6 @@ const AddProduct = ({ socket }) => {
                         </div>
                         <div className="add__col-right">
                             <label className="add__title">Thông tin sản phẩm</label>
-                            <label className="add__label">Mã sản phẩm tự khởi tạo</label>
-                            <input style={{ fontWeight: "bold", color: "red" }} readOnly className='add__input add__input--readonly' value={"P00" + Number(products.length + 1)} />
 
                             <label className="add__label">Tên sản phẩm</label>
                             <input className='add__input' onChange={(e) => { setName(e.target.value); }} />
@@ -173,6 +169,9 @@ const AddProduct = ({ socket }) => {
                                 <option value="Máy tính bảng">Máy tính bảng</option>
                                 <option value="Phụ kiện">Phụ kiện công nghệ</option>
                             </select>
+
+                            <label className="add__label">Thương hiệu</label>
+                            <input className='add__input' onChange={(e) => { setBrand(e.target.value); }} />
 
                             <label className="add__label">Tùy chọn sản phẩm</label>
                             <div className="add__option">

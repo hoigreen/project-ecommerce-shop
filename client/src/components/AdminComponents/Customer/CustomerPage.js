@@ -39,6 +39,7 @@ const CustomerPage = () => {
                             <span className='customer__header-counting-number'>{countCustomer}</span>
                         </div>
                     </div>
+                    
                     <div className='customer__table-cover'>
                         <table className='table'>
                             <thead>

@@ -1,6 +1,7 @@
 const express = require('express');
 const LoginAdminController = require('../controllers/admin/LoginAdminController');
 const AdminModel = require('../models/AdminModel');
+const UserModel = require('../models/UserModel');
 const router = express.Router();
 
 // Get All Admin
@@ -25,7 +26,58 @@ router.get("/:id", async (req, res) => {
         res.status(500).json({ error: 'Server error' });
     }
 });
+
 // Login
 router.post("/login", LoginAdminController);
+
+// Update info
+router.put("/update-info/:id", async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const { avatarUrl, fullname, email, phone, address } = req.body;
+        const adminInfoUpdate = await AdminModel.findByIdAndUpdate(
+            _id,
+            { avatarUrl: avatarUrl, fullname, email, phone, address },
+            { new: true }
+        );
+        res.status(200).send({
+            success: true,
+            messsage: "Cập nhật thông tin thành công",
+            adminInfoUpdate,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+            message: "Error while updating",
+        });
+    }
+});
+
+// Update info user
+router.put("/update-info-user/:id", async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const { fullname, email, phone, address } = req.body;
+        const infoUpdate = await UserModel.findByIdAndUpdate(
+            _id,
+            { fullname, email, phone, address },
+            { new: true }
+        );
+        res.status(200).send({
+            success: true,
+            messsage: "Cập nhật thông tin khách hàng thành công",
+            infoUpdate,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+            message: "Error while updating",
+        });
+    }
+});
 
 module.exports = router;

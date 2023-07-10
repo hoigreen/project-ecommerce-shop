@@ -8,6 +8,7 @@ const connectDB = require("./config/db")
 
 const AdminRoutes = require("./routes/AdminRoutes")
 const UserRoutes = require("./routes/UserRoutes")
+const ProductRoutes = require("./routes/ProductRoutes")
 
 const app = express()
 const http = require('http').Server(app);
@@ -56,6 +57,7 @@ app.use('/public', express.static('./public'));
 
 app.use('/api/admins', AdminRoutes);
 app.use('/api/users', UserRoutes);
+app.use('/api/products', ProductRoutes);
 
 //  --------------------------- ADMIN Method -------------------------------------
 const findAdmin = (idKey, myArray, avatarUrlAdmin, fullnameAdmin, emailAdmin, phoneAdmin, addressAdmin) => {
@@ -463,12 +465,6 @@ socketIO.on('connection', (socket) => {
 
 app.get("/", (req, res) => {
     res.send("<h1>ShopTECH E-commerce Server</h1>")
-});
-
-app.get("/api/products", (req, res) => {
-    const dataProduct = fs.readFileSync("datas/data-product.json")
-    const dataProducts = JSON.parse(dataProduct)
-    res.json(dataProducts)
 });
 
 app.get("/api/promotes", (req, res) => {

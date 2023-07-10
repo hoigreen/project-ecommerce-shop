@@ -1,43 +1,18 @@
-import React, { useState, useEffect } from 'react';
-
-import "./styles/login-style.css"
-
+import React, { useState, useEffect, useContext } from 'react';
+import axios from "axios";
 import { handleLoadingPage } from '../../Common';
 import ToastMessage, { Toast } from '../../Common/ToastMessage';
+import AuthAdminContext from '../../../context/AuthAdminContext';
+import "./styles/login-style.css"
 
 const Login = () => {
-    const [admins, setAdmins] = useState([])
-
-    useEffect(() => {
-        const fetchAdmins = () => {
-            fetch("http://localhost:4000/api/admins").then(res => res.json()).then(data => {
-                setAdmins(data.admins)
-            })
-        }
-        fetchAdmins()
-    }, [])
+    const [authAdmin, setAuthAdmin] = useContext(AuthAdminContext)
 
     const [details, setDetails] = useState({ adminName: "", password: "" })
 
-    const handleSubmitLogin = (e) => {
-        e.preventDefault();
-        var boolCheck = false;
-        admins.map((admin, index) => {
-            if (details.adminName === admin.adminName &&
-                details.password === admin.password) {
-                window.localStorage.setItem('adminNameLogin', admin.adminName);
-                alert("Đăng nhập thành công");
-                handleLoadingPage(1)
-                window.setTimeout(() => {
-                    window.location.href = `/admin/dashboard`
-                }, 1000)
-                boolCheck = true;
-            }
-        })
-        if (boolCheck === false) {
-            showErrorToast();
-        }
-    };
+    useEffect(() => {
+        if (window.localStorage.getItem("authAdmin") && authAdmin) { window.location.href = '/admin/dashboard' }
+    }, [authAdmin])
 
     function showErrorToast() {
         Toast({
@@ -47,6 +22,35 @@ const Login = () => {
             duration: 3000
         })
     }
+
+    const handleSubmitLogin = async (e) => {
+        e.preventDefault();
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_API}/api/admins/login`, {
+                adminName: details.adminName,
+                password: details.password,
+            });
+            if (res && res.data.success) {
+                localStorage.setItem('authAdmin', JSON.stringify(res.data));
+                setAuthAdmin({
+                    admin: res.data.admin,
+                    token: res.data.token,
+                });
+
+                alert("Đăng nhập thành công");
+                handleLoadingPage(1)
+                window.setTimeout(() => {
+                    window.location.href = `/admin/dashboard`
+                }, 1000)
+
+            } else {
+                showErrorToast();
+            }
+        } catch (error) {
+            console.log(error);
+            showErrorToast();
+        }
+    };
 
     return (
         <div className='login--admin-container'>
@@ -58,7 +62,6 @@ const Login = () => {
                     <label className="login__label" htmlFor="adminName">Vui lòng nhập tên tài khoản</label>
                     <input
                         className="login__input"
-                        //type="text"
                         name="username"
                         onChange={e => setDetails({ ...details, adminName: e.target.value })}
                         value={details.adminName}

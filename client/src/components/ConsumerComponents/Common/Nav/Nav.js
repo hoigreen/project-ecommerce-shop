@@ -4,7 +4,7 @@ import { handleLoadingPage } from '../../../Common';
 
 import "./nav.css"
 
-const Nav = ({ socket }) => {
+const Nav = () => {
     const [users, setUsers] = useState([])
     const [cartUser, setCartUser] = useState([])
     const [countQuantity, setCountQuantity] = useState()
@@ -14,7 +14,7 @@ const Nav = ({ socket }) => {
     useEffect(() => {
         const fetchAPI = () => {
             fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
+                setUsers(data)
             })
         }
         fetchAPI()
@@ -39,7 +39,9 @@ const Nav = ({ socket }) => {
         window.localStorage.removeItem("auth")
         window.alert("Đăng xuất tài khoản thành công")
         handleLoadingPage(1)
-        window.location.href = "/login"
+        setTimeout(() => {
+            window.location.href = "/login";
+        }, 1000)
     }
 
     return (

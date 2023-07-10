@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { handleLoadingPage } from '../../Common';
+import AuthAdminContext from '../../../context/AuthAdminContext';
 
 const handleLoadOptionSelected = (index) => {
     const optionItems = document.querySelectorAll('.sidebar__component-item')
@@ -14,13 +16,14 @@ const handleLoadOptionSelected = (index) => {
 }
 
 const AdminSidebar = () => {
+    const [authAdmin, setAuthAdmin] = useContext(AuthAdminContext)
     const [admins, setAdmins] = useState([])
     const [adminID, setAdminID] = useState('')
 
     useEffect(() => {
         const fetchAPIs = () => {
             fetch("http://localhost:4000/api/admins").then(res => res.json()).then(data => {
-                setAdmins(data.admins)
+                setAdmins(data)
             })
         }
         fetchAPIs()
@@ -37,26 +40,21 @@ const AdminSidebar = () => {
     const navigate = useNavigate()
 
     const handleNevigate = (link) => {
-        handLoadingPage(1)
+        handleLoadingPage(1)
         window.setTimeout(() => {
             navigate(link)
         }, 1000)
     }
 
-    const LogOut = () => {
-        window.localStorage.removeItem('adminNameLogin')
-        handLoadingPage(1)
+    const LogOut = (e) => {
+        e.preventDefault();
+        setAuthAdmin({ adminName: null, token: '' });
+        window.localStorage.removeItem('authAdmin')
+        window.alert("Đăng xuất tài khoản thành công")
+        handleLoadingPage(1)
         window.setTimeout(() => {
             window.location.href = `/admin`
         }, 1000)
-    }
-
-    const handLoadingPage = (second) => {
-        const loading = document.querySelector(".modal__cover")
-        loading.classList.add("modal--active")
-        window.setTimeout(() => {
-            loading.classList.remove("modal--active")
-        }, second * 1000)
     }
 
     return (

@@ -1,46 +1,37 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
-
 import { handleLoadingPage } from '../../Common';
+import AuthAdminContext from '../../../context/AuthAdminContext';
 
 
 const AdminHeader = () => {
-    const [admins, setAdmins] = useState([])
-    const [adminID, setAdminID] = useState('')
-    const [fullname, setFullname] = useState('')
-    const [avatarUrlAdmin, setAvatarUrlAdmin] = useState('')
-
-    useEffect(() => {
-        const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/admins").then(res => res.json()).then(data => {
-                setAdmins(data.admins)
-            })
-        }
-        fetchAPIs()
-    }, [])
-
-    useEffect(() => {
-        admins.map((admin, index) => {
-            if (admin.adminName == window.localStorage.getItem('adminNameLogin')) {
-                setAdminID(admin.adminID);
-                setFullname(admin.fullname);
-                setAvatarUrlAdmin(admin.avatarUrl);
-            }
-        })
-    }, [admins])
+    const [authAdmin, setAuthAdmin] = useContext(AuthAdminContext)
+    const [admin, setAdmin] = useState({})
 
     const navigate = useNavigate()
+
+    useEffect(() => {
+        const fetchAPI = () => {
+            fetch(`${process.env.REACT_APP_API}/api/admins/${JSON.parse(window.localStorage.getItem('authAdmin')).admin._id}`).then(res => res.json()).then(data => {
+                setAdmin(data)
+            })
+        }
+        fetchAPI()
+    }, [])
 
     const handleNevigateInfo = () => {
         handleLoadingPage(1)
         window.setTimeout(() => {
-            navigate(`/admin/info-admin/${adminID}`)
+            navigate(`/admin/info-admin`)
         }, 1000)
     }
 
-    const LogOut = () => {
-        window.localStorage.removeItem('adminNameLogin')
+    const LogOut = (e) => {
+        e.preventDefault();
+        setAuthAdmin({ adminName: null, token: '' });
+        window.localStorage.removeItem('authAdmin')
+        window.alert("Đăng xuất tài khoản thành công")
         handleLoadingPage(1)
         window.setTimeout(() => {
             window.location.href = `/admin`
@@ -54,11 +45,11 @@ const AdminHeader = () => {
                 <div className="admin__header-admin">
                     <div className="admin__header-info">
                         Hello,
-                        <span className="admin__header-name">{fullname}</span>
+                        <span className="admin__header-name">{admin.fullname}</span>
                         --
                     </div>
 
-                    <img src={avatarUrlAdmin} className="admin__header-avatar"></img>
+                    <img src={admin.avatarUrl} className="admin__header-avatar"></img>
 
                     <div className='admin__header-option'>
                         <div className="admin__header-option-item" onClick={handleNevigateInfo} >Thông tin cá nhân</div>

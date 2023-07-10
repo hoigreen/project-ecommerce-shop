@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
 import "./styles/customer-style.css"
-
 import AdminHeader from '../Common/AdminHeader';
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
 import EditButtonCustomer from "../../EditButton/EditButtonCustomer"
@@ -15,9 +13,9 @@ const CustomerPage = () => {
     useEffect(() => {
         const fetchAPI = () => {
             fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
+                setUsers(data)
                 setLoading(false)
-                setCountCustomers(data.users.length)
+                setCountCustomers(data.length)
             });
         }
         fetchAPI()

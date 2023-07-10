@@ -1,47 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
 import "./styles/info-style.css"
-
 import AdminHeader from '../Common/AdminHeader'
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar'
 import { handleLoadingPage } from '../../Common';
 
 const InfoAdmin = ({ socket }) => {
-    const [admins, setAdmins] = useState([])
-    const [adminName, setAdminName] = useState('')
-    const [adminID, setAdminID] = useState('')
-    const [avatarUrlAdmin, setAvatarUrlAdmin] = useState('')
-    const [fullname, setFullname] = useState('')
-    const [emailAdmin, setEmailAdmin] = useState('')
-    const [phoneAdmin, setPhoneAdmin] = useState('')
-    const [addressAdmin, setAddressAdmin] = useState('')
+    const [admin, setAdmin] = useState({})
 
     useEffect(() => {
         const fetchAPI = () => {
-            fetch("http://localhost:4000/api/admins").then(res => res.json()).then(data => {
-                setAdmins(data.admins)
+            fetch(`${process.env.REACT_APP_API}/api/admins/${JSON.parse(window.localStorage.getItem('authAdmin')).admin._id}`).then(res => res.json()).then(data => {
+                setAdmin(data)
             })
         }
         fetchAPI()
-    }, [])
-
-    useEffect(() => {
-        // show thông tin admin đăng nhập
-        admins.map((admin, index) => {
-            if (admin.adminName == window.localStorage.getItem('adminNameLogin')) {
-                setAdminID(admin.adminID);
-                setAdminName(admin.adminName);
-                setFullname(admin.fullname);
-                setAvatarUrlAdmin(admin.avatarUrl);
-                setEmailAdmin(admin.email);
-                setPhoneAdmin(admin.phone);
-                setAddressAdmin(admin.address);
-            }
-        })
         handleLoadOptionSelected(5)
-    })
-
+    }, [])
 
     const changeImageAdmin = () => {
         const preview = document.querySelector(".info-page__avatar-img")
@@ -63,7 +37,6 @@ const InfoAdmin = ({ socket }) => {
         if (window.confirm("Bạn có chắc muốn cập nhật lại thông tin cá nhân của mình?") === true) {
             socket.emit("editInfoAdmin", {
                 avatarUrl: avatarUrl,
-                adminID,
                 fullname: inputElements[1].value,
                 email: inputElements[2].value,
                 phone: inputElements[3].value,
@@ -77,7 +50,6 @@ const InfoAdmin = ({ socket }) => {
     }
 
     return (
-        // <div className='customer__container'>
         <>
             <AdminSidebar />
             <div id="admin-box">
@@ -93,34 +65,34 @@ const InfoAdmin = ({ socket }) => {
                     <div className="info-page__body">
                         <div className="info-page__col-1">
                             <div className="info-page__avatar">
-                                <img className="info-page__avatar-img" src={avatarUrlAdmin}></img>
+                                <img className="info-page__avatar-img" src={admin.avatarUrl}></img>
                             </div>
                             <input type='file' className="info-page__avatar-input" id="avatar-change-input" onChange={(e) => { changeImageAdmin() }} hidden></input>
                             <label className="info-page__avatar-btn" htmlFor="avatar-change-input">Thay đổi Avatar</label>
-                            <label className="info-page__user-id">{adminName}</label>
+                            <label className="info-page__user-id">{admin.adminName}</label>
                         </div>
 
                         <div className='info-page__col-2'>
                             <label className="info-page__title">Thông tin cá nhân</label>
 
                             <div className="info-page__box-info">
-                                <label className="info-page__label">Mã khách hàng</label>
+                                <label className="info-page__label">Mã quản trị viên</label>
                                 <input style={{ fontWeight: 'bold' }}
                                     readOnly
                                     className='info-page__input info-page__input--readonly'
-                                    value={adminID} />
+                                    value={String(admin._id).toUpperCase()} />
 
                                 <label className="info-page__label">Họ và tên đầy đủ</label>
-                                <input className='info-page__input' defaultValue={fullname} />
+                                <input className='info-page__input' defaultValue={admin.fullname} />
 
                                 <label className="info-page__label">Email</label>
-                                <input className='info-page__input' defaultValue={emailAdmin} />
+                                <input className='info-page__input' defaultValue={admin.email} />
 
                                 <label className="info-page__label">Số điện thoại</label>
-                                <input className='info-page__input' minLength="10" maxLength="10" defaultValue={phoneAdmin} />
+                                <input className='info-page__input' minLength="10" maxLength="10" defaultValue={admin.phone} />
 
                                 <label className="info-page__label">Địa chỉ</label>
-                                <input className='info-page__input' defaultValue={addressAdmin} />
+                                <input className='info-page__input' defaultValue={admin.address} />
 
                             </div>
                         </div>

@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from "axios";
-
-import "./styles/account-client.css"
-
 import { Nav, Breadcrumbs } from '../Common';
 import { Toast, handleLoadingPage } from '../../Common';
 import AuthContext from '../../../context/AuthContext';
+import "./styles/account-client.css"
 
 
 const LoginClient = () => {
     const [details, setDetails] = useState({ username: "", password: "" })
-    // const [auth, setAuth] = useAuth()
     const [auth, setAuth] = useContext(AuthContext)
 
     const navigate = useNavigate();
+
+    useEffect(() => {
+        if (window.localStorage.getItem("auth") && auth.username) { window.location.href = '/account' }
+    }, [auth])
 
     const showErrorToast = () => {
         Toast({ title: 'Đăng nhập thất bại', message: 'Tên tài khoản hoặc mật khẩu không chính xác!', type: 'error', duration: 3000 })
@@ -23,7 +24,7 @@ const LoginClient = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`${process.env.REACT_APP_API}/api/auth/login`, {
+            const res = await axios.post(`${process.env.REACT_APP_API}/api/users/login`, {
                 username: details.username,
                 password: details.password,
             });

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
-import "./dashboard-style.css"
-
 import AdminHeader from '../Common/AdminHeader'
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar'
+import "./dashboard-style.css"
 
 const Dashboard = () => {
     const [admins, setAdmins] = useState([])
@@ -16,18 +15,18 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/admins").then(res => res.json()).then(data => {
-                setAdmins(data.admins)
-                setCountAdmin(data.admins.length)
+            fetch(`http://localhost:4000/api/admins`).then(res => res.json()).then(data => {
+                setAdmins(data)
+                setCountAdmin(data.length)
                 setLoading(false)
             });
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setCountUser(data.users.length)
+            fetch(`http://localhost:4000/api/users`).then(res => res.json()).then(data => {
+                setCountUser(data.length)
             });
-            fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
+            fetch(`http://localhost:4000/api/products`).then(res => res.json()).then(data => {
                 setCountProduct(data.products.length)
             });
-            fetch("http://localhost:4000/api/promotes").then(res => res.json()).then(data => {
+            fetch(`http://localhost:4000/api/promotes`).then(res => res.json()).then(data => {
                 setCountPromotes(data.promotes.length)
             });
         }
@@ -89,7 +88,7 @@ const Dashboard = () => {
                     <div className='admin__list'>
                         {loading ? <p>Đang kết nối đến server ... </p> : admins.map((admin, index) => (
                             <div className='admin__item' key={index}>
-                                <label className='admin__item-id'>{admin.adminID}</label>
+                                <label className='admin__item-id'>ADMIN {index + 1}</label>
                                 <div className='admin__item-avatar'>
                                     <img src={admin.avatarUrl} className='admin__item-img'></img>
                                 </div>

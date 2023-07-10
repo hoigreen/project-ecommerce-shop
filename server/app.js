@@ -5,7 +5,9 @@ const dotenv = require("dotenv")
 const morgan = require("morgan")
 const fs = require("fs");
 const connectDB = require("./config/db")
-const AuthRoutes = require("./routes/AuthRoutes")
+
+const AdminRoutes = require("./routes/AdminRoutes")
+const UserRoutes = require("./routes/UserRoutes")
 
 const app = express()
 const http = require('http').Server(app);
@@ -51,7 +53,9 @@ app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 app.use('/public', express.static('./public'));
-app.use('/api/auth', AuthRoutes);
+
+app.use('/api/admins', AdminRoutes);
+app.use('/api/users', UserRoutes);
 
 //  --------------------------- ADMIN Method -------------------------------------
 const findAdmin = (idKey, myArray, avatarUrlAdmin, fullnameAdmin, emailAdmin, phoneAdmin, addressAdmin) => {
@@ -459,18 +463,6 @@ socketIO.on('connection', (socket) => {
 
 app.get("/", (req, res) => {
     res.send("<h1>ShopTECH E-commerce Server</h1>")
-});
-
-app.get("/api/admins", (req, res) => {
-    const dataAdmin = fs.readFileSync("datas/data-admin.json")
-    const dataAdmins = JSON.parse(dataAdmin)
-    res.json(dataAdmins)
-});
-
-app.get("/api/users", (req, res) => {
-    const dataUser = fs.readFileSync("datas/data-user.json")
-    const dataUsers = JSON.parse(dataUser)
-    res.json(dataUsers)
 });
 
 app.get("/api/products", (req, res) => {

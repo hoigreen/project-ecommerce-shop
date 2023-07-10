@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+import slugify from 'slugify'
 import './styles/homepage-style.css';
 
 import { Nav, Footer, SideBanner } from '../Common';
@@ -201,7 +201,7 @@ const Home = ({ socket }) => {
 
     return (
         <>
-            <Nav socket={socket} />
+            <Nav />
             <HotPromote socket={socket} />
             <div className="grid wide">
                 <div className="home__container">
@@ -260,7 +260,7 @@ const Home = ({ socket }) => {
                                                 e.preventDefault();
                                                 handleLoadingPage(1)
                                                 window.setTimeout(() => {
-                                                    window.location.href = `/product/${product.enType}/${product.name}`
+                                                   window.location.href = `/product/${product.enType}/${product.name}`
                                                 }, 1000)
                                             }}>
                                             <img src={product.imageLink} className='home__flash-sale-item-img'></img>
@@ -378,7 +378,7 @@ const Home = ({ socket }) => {
                                         e.preventDefault();
                                         handleLoadingPage(1)
                                         window.setTimeout(() => {
-                                            window.location.href = `/product/${product.enType}/${product.name}`
+                                           window.location.href = `/product/${product.enType}/${product.name}`
                                         }, 1000)
                                     }}
                                 >
@@ -417,7 +417,7 @@ const Home = ({ socket }) => {
                                         e.preventDefault();
                                         handleLoadingPage(1)
                                         window.setTimeout(() => {
-                                            window.location.href = `/product/${product.enType}/${product.name}`
+                                           window.location.href = `/product/${product.enType}/${product.name}`
                                         }, 1000)
                                     }}
                                 >

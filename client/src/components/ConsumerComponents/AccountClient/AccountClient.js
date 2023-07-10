@@ -7,9 +7,7 @@ import { handleLoadingPage } from '../../Common';
 import AuthContext from '../../../context/AuthContext';
 
 const AccountClient = ({ socket }) => {
-    const [users, setUsers] = useState([])
-    const [fullname, setFullname] = useState('')
-    const [avatarUrl, setAvatarUrl] = useState('')
+    const [user, setUser] = useState({})
 
     const [auth, setAuth] = useContext(AuthContext)
 
@@ -22,9 +20,10 @@ const AccountClient = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
+            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+                setUser(data)
             })
+
             fetch("http://localhost:4000/api/orders").then(res => res.json()).then(data => {
                 setOrders(data.orders)
             })
@@ -32,15 +31,6 @@ const AccountClient = ({ socket }) => {
         fetchAPIs()
         handleLoadOptionSidebar(0)
     }, [])
-
-    useEffect(() => {
-        users.map((user, index) => {
-            if (user.username === window.localStorage.getItem("userLogged")) {
-                setFullname(user.fullname)
-                setAvatarUrl(user.avatarUrl)
-            }
-        })
-    }, [users])
 
     useEffect(() => {
         // Show thông tin số đơn hàng đang giao
@@ -77,9 +67,9 @@ const AccountClient = ({ socket }) => {
                         <SidebarAccount socket={socket} />
                         <div className="account__box">
                             <div className="account__box-info">
-                                <img src={avatarUrl} className="account__box-info-avatar"></img>
+                                <img src={user.avatarUrl || `${process.env.REACT_APP_API}/public/img-avatar-empty.png`} className="account__box-info-avatar"></img>
                                 <label className="account__box-info-label">Xin chào</label>
-                                <label className="account__box-info-fullname">{fullname}</label>
+                                <label className="account__box-info-fullname">{user.fullname}</label>
                                 <div className='account__box-info-list'>
                                     <div className='account__box-info-item'>
                                         <label className='account__box-info-item-label'>Đơn hàng đang giao</label>

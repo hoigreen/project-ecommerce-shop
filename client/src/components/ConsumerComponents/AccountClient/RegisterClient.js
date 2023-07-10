@@ -5,9 +5,7 @@ import Validator from '../../Common/Validator';
 import { handleLoadingPage } from '../../Common';
 import { Breadcrumbs, Nav } from '../Common';
 
-const RegisterClient = ({ socket }) => {
-    const [users, setUsers] = useState([])
-    const [userID, setUserID] = useState('')
+const RegisterClient = () => {
     const [usernameRegister, setUsernameRegister] = useState('')
     const [passwordRegister, setPasswordRegister] = useState('')
     const [fullnameRegister, setFullnameRegister] = useState('')
@@ -17,12 +15,7 @@ const RegisterClient = ({ socket }) => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchAPIUsers = () => {
-            fetch(`${process.env.REACT_APP_API}/api/users`).then(res => res.json()).then(data => {
-                setUsers(data.users)
-            })
-        }
-        fetchAPIUsers()
+        if (window.localStorage.getItem("auth")) { window.location.href = '/account' }
     }, [])
 
     window.onload = () => {
@@ -57,43 +50,10 @@ const RegisterClient = ({ socket }) => {
         });
     }
 
-    useEffect(() => {
-        // Khởi tạo thông tin cho người dùng đăng ký mới
-        users.map((user, index) => {
-            if (index = users.length) {
-                setUserID(`G00${index + 1}`);
-            }
-            index = index + 1;
-        })
-    }, [users])
-
-    // const handleSubmit = (e) => {
-    //     const cartEmpty = []
-    //     if (window.confirm('Bạn chắc chắn những thông tin bạn nhập vào là chính xác!') == true) {
-    //         socket.emit("registerClient", {
-    //             userID,
-    //             avatarUrl: avatarUrlRegister,
-    //             username: usernameRegister,
-    //             password: passwordRegister,
-    //             fullname: fullnameRegister,
-    //             email: emailRegister,
-    //             phone: phoneRegister,
-    //             address: addressRegister,
-    //             statusLogin: statusLogin,
-    //             cart: cartEmpty
-    //         });
-    //         window.alert('Đăng ký thành công! Đang quay trở lại trang đăng nhập')
-    //         handleLoadingPage(1)
-    //         window.setTimeout(() => {
-    //             window.location.href = '/login';
-    //         }, 1000)
-    //     }
-    // }
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`${process.env.REACT_APP_API}/api/auth/register`, {
+            const res = await axios.post(`${process.env.REACT_APP_API}/api/users/register`, {
                 avatarUrl: ``,
                 username: usernameRegister,
                 password: passwordRegister,

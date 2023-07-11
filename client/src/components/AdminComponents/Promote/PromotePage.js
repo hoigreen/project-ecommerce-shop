@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import "./styles/promote-style.css"
-
 import AdminHeader from '../Common/AdminHeader';
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
 import { handleLoadingPage } from '../../Common';
@@ -10,7 +8,6 @@ import EditButtonPromote from '../../EditButton/EditButtonPromote';
 
 const PromotePage = () => {
     const [promotes, setPromotes] = useState([])
-
     const [loading, setLoading] = useState(true)
 
     const navigate = useNavigate();
@@ -18,7 +15,7 @@ const PromotePage = () => {
     useEffect(() => {
         const fetchAPI = () => {
             fetch("http://localhost:4000/api/promotes").then(res => res.json()).then(data => {
-                setPromotes(data.promotes)
+                setPromotes(data)
                 setLoading(false)
             });
         }
@@ -68,7 +65,7 @@ const PromotePage = () => {
                         <tbody className='table__tbody-primary'>
                             {loading ? <tr><td>Loading...</td></tr> : promotes.map((promote, index) => (
                                 <tr className='table__row-loading' key={index}>
-                                    <td style={{ textAlign: "center", background: "#ffcdd2", fontWeight: 700 }}>{promote.id}</td>
+                                    <td style={{ textAlign: "center", background: "#ffcdd2", fontWeight: 700 }}>{index + 1}</td>
                                     <td style={{ color: "red", fontWeight: 700, textAlign: 'left' }}>{promote.name}</td>
                                     <td style={{ backgroundColor: "#e0f1d4" }}>{promote.timeStart}</td>
                                     <td style={{ backgroundColor: "#d5a2f7", fontWeight: 700 }}>{promote.timeEnd}</td>

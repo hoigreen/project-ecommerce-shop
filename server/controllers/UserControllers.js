@@ -1,5 +1,5 @@
-const UserModel = require("../../models/UserModel");
-const { ComparePassword, HashPassword } = require("../../utils");
+const UserModel = require("../models/UserModel");
+const { ComparePassword, HashPassword } = require("../utils");
 const JWT = require("jsonwebtoken");
 
 

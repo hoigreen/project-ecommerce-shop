@@ -1,51 +1,26 @@
-import React from 'react'
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
-
 import "./styles/promote-style.css"
-
 import AdminHeader from '../Common/AdminHeader';
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
 import { handleLoadingPage } from '../../Common';
+import axios from 'axios';
 
 const InfoPromote = ({ socket }) => {
+    const [promote, setPromote] = useState({})
     const { id } = useParams()
-
-    const [promotes, setPromotes] = useState([])
-
-    const [imageLink, setImageLink] = useState('')
-    const [namePromote, setNamePromote] = useState('')
-    const [timeStartPromote, setTimeStartPromote] = useState('')
-    const [timeEndPromote, setTimeEndPromote] = useState('')
-    const [percentPromote, setPercentPromote] = useState()
-    const [applyPromote, setApplyPromote] = useState('')
-
     const navigate = useNavigate();
 
     useEffect(() => {
         const fetchAPI = () => {
-            fetch("http://localhost:4000/api/promotes").then(res => res.json()).then(data => {
-                setPromotes(data.promotes)
+            fetch("http://localhost:4000/api/promotes/" + id).then(res => res.json()).then(data => {
+                setPromote(data)
             });
         }
         fetchAPI()
         handleLoadOptionSelected(3)
     }, [])
-
-    useEffect(() => {
-        promotes.map((promote, index) => {
-            if (promote.id === id) {
-                setImageLink(promote.imageLink);
-                setNamePromote(promote.name);
-                setTimeStartPromote(promote.timeStart);
-                setTimeEndPromote(promote.timeEnd);
-                setPercentPromote(promote.percent);
-                setApplyPromote(promote.apply);
-            }
-        })
-
-    })
 
     const changeImage = () => {
         const preview = document.querySelector(".info-promote__avatar-img")
@@ -60,26 +35,53 @@ const InfoPromote = ({ socket }) => {
         }
     }
 
-    const handleConfirmChange = (e) => {
+    const handleConfirmChange = async (e) => {
         e.preventDefault()
         const imageLink = document.querySelector(".info-promote__avatar-img").getAttribute("src")
         const inputName = document.querySelector(".info-promote__input-name");
         const inputElements = document.querySelectorAll(".info-promote__input");
         if (window.confirm("Bạn muốn cập nhật thông tin chương trình khuyến mãi này?") == true) {
-            socket.emit("editInfoPromote", {
-                imageLink: imageLink,
-                id,
-                name: inputName.value,
-                timeStart: inputElements[0].value,
-                timeEnd: inputElements[1].value,
-                percent: Number(inputElements[2].value),
-                apply: inputElements[3].value
-            })
-            window.alert("Cập nhật thông tin thành công!")
-            handleLoadingPage(1)
-            window.setTimeout(() => {
-                navigate(`/admin/promote`)
-            }, 1000)
+            try {
+                const res = await axios.put(`${process.env.REACT_APP_API}/api/promotes/update=${id}`, {
+                    imageLink: imageLink,
+                    name: inputName.value,
+                    timeStart: inputElements[0].value,
+                    timeEnd: inputElements[1].value,
+                    percent: Number(inputElements[2].value),
+                    apply: inputElements[3].value
+                });
+                if (res && res.data.success) {
+                    window.alert("Cập nhật thông tin thành công!")
+                    handleLoadingPage(1)
+                    window.setTimeout(() => {
+                        navigate(`/admin/promote`)
+                    }, 1000)
+                } else {
+                    alert("Cập nhật thông tin thất bại")
+                }
+            } catch (error) {
+                alert(error)
+            }
+        }
+    }
+
+    const handleDelete = async (e) => {
+        e.preventDefault()
+        if (window.confirm("Bạn có chắc muốn xóa toàn bộ thông tin của sản phẩm này?") == true) {
+            try {
+                const res = await axios.delete(`${process.env.REACT_APP_API}/api/promotes/delete/${id}`);
+                if (res && res.data.success) {
+                    window.alert("Xóa Thành công!")
+                    handleLoadingPage(1)
+                    window.setTimeout(() => {
+                        window.location.href = '/admin/promote'
+                    }, 1000)
+                } else {
+                    alert("Xóa thất bại")
+                }
+            } catch (error) {
+                alert(error)
+            }
         }
     }
 
@@ -98,36 +100,35 @@ const InfoPromote = ({ socket }) => {
 
                     <div className="info-promote__body">
                         <div className="add__avatar">
-                            <img src={imageLink} className="info-promote__avatar-img"></img>
+                            <img src={promote.imageLink} className="info-promote__avatar-img"></img>
                             <input type='file' id="image-change" onChange={changeImage} hidden></input>
                             <label htmlFor="image-change" className="info-admin-product__image-btn">Thay đổi hình ảnh khuyến mãi</label>
                         </div>
 
-                        <label style={{ fontWeight: "600" }} className="info-page__user-id">{id}</label>
-
                         <label style={{ textAlign: "center", fontWeight: "600" }} className="info-page__label">Tên chương trình khuyến mãi</label>
-                        <input style={{ fontWeight: 'bold', color: "green" }} className='info-promote__input-name' defaultValue={namePromote} />
+                        <input style={{ fontWeight: 'bold', color: "green" }} className='info-promote__input-name' defaultValue={promote.name} />
 
                         <div className="info-promote__box-info">
                             <div className="info-promote__col-1">
                                 <label className="info-promote__label">Thời gian bắt đầu</label>
-                                <input type="date" className='info-promote__input' defaultValue={timeStartPromote} />
+                                <input type="date" className='info-promote__input' defaultValue={promote.timeStart} />
 
                                 <label className="info-promote__label">Đến ngày</label>
-                                <input type="date" className='info-promote__input' defaultValue={timeEndPromote} />
+                                <input type="date" className='info-promote__input' defaultValue={promote.timeEnd} />
                             </div>
 
                             <div className="info-promote__col-2">
                                 <label style={{ fontWeight: 'bold', color: "red" }} className="info-promote__label">Phần trăm (%) giảm</label>
-                                <input type="number" className='info-promote__input' defaultValue={percentPromote} />
+                                <input type="number" className='info-promote__input' defaultValue={promote.percent} />
 
                                 <label className="info-promote__label">Khuyến mãi áp dụng cho</label>
-                                <input className='info-promote__input' defaultValue={applyPromote} />
+                                <input className='info-promote__input' defaultValue={promote.apply} />
                             </div>
                         </div>
                     </div>
 
                     <div className="info-page__footer">
+                        <button className="info-page__btn" style={{ backgroundColor: "red" }} onClick={handleDelete}>Xóa khuyến mãi<i className="ti-close"></i></button>
                         <button className="info-page__btn" onClick={handleConfirmChange}>Xác nhận<i className="ti-check"></i></button>
                     </div>
                 </div>

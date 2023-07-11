@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import "./styles/promote-style.css"
 import { handleLoadingPage } from '../../Common';
+import axios from 'axios';
 
-const AddPromote = ({ socket }) => {
-    const [promotes, setPromotes] = useState([])
-
+const AddPromote = () => {
     const [name, setName] = useState('')
     const [timeStart, setTimeStart] = useState('')
     const [timeEnd, setTimeEnd] = useState('')
@@ -14,15 +13,6 @@ const AddPromote = ({ socket }) => {
     const [apply, setApply] = useState('')
 
     const navigate = useNavigate()
-
-    useEffect(() => {
-        const fetchAPI = () => {
-            fetch("http://localhost:4000/api/promotes").then(res => res.json()).then(data => {
-                setPromotes(data.promotes)
-            })
-        }
-        fetchAPI()
-    }, [])
 
     const changeImage = () => {
         const preview = document.querySelector(".add__avatar-img-promote")
@@ -39,23 +29,31 @@ const AddPromote = ({ socket }) => {
         }
     }
 
-    const handleAddPromote = (e) => {
+    const handleAddPromote = async (e) => {
         e.preventDefault();
         const imageLink = document.querySelector(".add__avatar-img-promote").getAttribute("src")
-        const idValue = document.querySelector(".add__input.add__input--readonly").value
-        socket.emit("addPromote", {
-            imageLink: imageLink,
-            id: idValue,
-            name,
-            timeStart,
-            timeEnd,
-            percent,
-            apply
-        });
-        handleLoadingPage(1)
-        window.setTimeout(() => {
-            navigate('/admin/promote');
-        }, 1000)
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_API}/api/promotes/create`, {
+                imageLink: imageLink,
+                name,
+                timeStart,
+                timeEnd,
+                percent,
+                apply
+            });
+            if (res && res.data.success) {
+                alert("Thêm chương trình khuyến mãi thành công")
+                handleLoadingPage(1)
+                window.setTimeout(() => {
+                    navigate('/admin/promote');
+                }, 1000)
+            } else {
+                window.alert("Đã gặp lỗi khi tạo! Vui lòng thử lại")
+            }
+        } catch (error) {
+            console.log(error);
+            window.alert(error);
+        }
     }
 
     return (
@@ -71,9 +69,6 @@ const AddPromote = ({ socket }) => {
                         </div>
 
                         <label className="add__title">Thông tin khuyến mãi</label>
-
-                        <label className="add__label">Mã sản phẩm tự khởi tạo</label>
-                        <input style={{ fontWeight: "bold" }} readOnly className='add__input add__input--readonly' value={"PM00" + Number(promotes.length + 1)} />
 
                         <label className="add__label">Tên chương trình khuyến mãi </label>
                         <input style={{ fontWeight: "bold", color: "green" }} className='add__input' onChange={(e) => {

@@ -181,10 +181,10 @@ const UpdateImageList = async (req, res) => {
     }
 }
 
+// Xóa sản phẩm
 const DeleteProduct = async (req, res) => {
     try {
         const _id = req.params.id;
-        console.log(_id)
         await ProductModel.deleteOne({ _id: _id });
         res.status(200).send({
             success: true,

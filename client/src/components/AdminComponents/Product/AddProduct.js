@@ -1,13 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./product.css"
 import { handleLoadingPage } from '../../Common';
 import axios from 'axios';
 
-
-const AddProduct = ({ socket }) => {
-    const [products, setProducts] = useState([])
-
+const AddProduct = () => {
     const [name, setName] = useState('')
     const [type, setType] = useState()
     const [enType, setEnType] = useState('')

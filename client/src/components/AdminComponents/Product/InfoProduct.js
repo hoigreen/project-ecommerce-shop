@@ -7,7 +7,7 @@ import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
 import { handleLoadingPage } from '../../Common';
 import axios from 'axios';
 
-const InfoProduct = ({ socket }) => {
+const InfoProduct = () => {
     const [product, setProduct] = useState({})
     const { id } = useParams()
     const [enType, setEnType] = useState('')
@@ -197,7 +197,6 @@ const InfoProduct = ({ socket }) => {
             } catch (error) {
                 alert(error)
             }
-
         }
     }
 
@@ -218,7 +217,6 @@ const InfoProduct = ({ socket }) => {
             } catch (error) {
                 alert(error)
             }
-
         }
     }
 

@@ -1,22 +1,15 @@
 import React from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
+import { handleLoadingPage } from '../Common'
 
 const EditButtonPromote = ({ promote }) => {
     const navigate = useNavigate(promote)
 
     const editInfoPromote = (e) => {
-        handLoadingPage(1)
+        handleLoadingPage(1)
         window.setTimeout(() => {
-            navigate(`/admin/promote/info/${promote.id}`, { promote })
+            navigate(`/admin/promote/info/${promote._id}`, { promote })
         }, 1000)
-    }
-
-    const handLoadingPage = (second) => {
-        const loading = document.querySelector(".modal__cover")
-        loading.classList.add("modal--active")
-        window.setTimeout(() => {
-            loading.classList.remove("modal--active")
-        }, second * 1000)
     }
 
     return (
@@ -29,7 +22,7 @@ const EditButtonPromote = ({ promote }) => {
                     </div>
                 </div>
             </div>
-            
+
             <svg xmlns="http://www.w3.org/2000/svg"
                 className="h-6 w-6 edit-icon"
                 fill="none"

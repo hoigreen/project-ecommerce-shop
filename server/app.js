@@ -6,9 +6,7 @@ const morgan = require("morgan")
 const fs = require("fs");
 const connectDB = require("./config/db")
 
-const AdminRoutes = require("./routes/AdminRoutes")
-const UserRoutes = require("./routes/UserRoutes")
-const ProductRoutes = require("./routes/ProductRoutes")
+const { AdminRoute, UserRoute, ProductRoute, PromoteRoute } = require("./routes")
 
 const app = express()
 const http = require('http').Server(app);
@@ -55,9 +53,10 @@ app.use(morgan('dev'))
 app.use(cors())
 app.use('/public', express.static('./public'));
 
-app.use('/api/admins', AdminRoutes);
-app.use('/api/users', UserRoutes);
-app.use('/api/products', ProductRoutes);
+app.use('/api/admins', AdminRoute);
+app.use('/api/users', UserRoute);
+app.use('/api/products', ProductRoute);
+app.use('/api/promotes', PromoteRoute);
 
 //  --------------------------- ADMIN Method -------------------------------------
 const findAdmin = (idKey, myArray, avatarUrlAdmin, fullnameAdmin, emailAdmin, phoneAdmin, addressAdmin) => {
@@ -110,43 +109,6 @@ const findProduct = (idKey, myArray, nameProduct, typeProduct, enTypeProduct, pr
     })
 }
 
-const findProductToEditBanner = (idKey, myArray, imagePrimaryProduct) => {
-    for (let i = 0; i < myArray.length; i++) {
-        if (myArray[i].id === idKey) {
-            myArray[i].imagePrimary = imagePrimaryProduct;
-        }
-    }
-    const stringData = JSON.stringify(objectDataProduct, null, 2)
-    fs.writeFile("datas/data-product.json", stringData, (err) => {
-        console.error(err)
-    })
-}
-
-const findProductToEditImageLink = (idKey, myArray, imageLinkProduct) => {
-    for (let i = 0; i < myArray.length; i++) {
-        if (myArray[i].id === idKey) {
-            myArray[i].imageLink = imageLinkProduct;
-        }
-    }
-    const stringData = JSON.stringify(objectDataProduct, null, 2)
-    fs.writeFile("datas/data-product.json", stringData, (err) => {
-        console.error(err)
-    })
-}
-
-const findProductToEditImageList = (idKey, myArray, imageListProduct) => {
-    for (let i = 0; i < myArray.length; i++) {
-        if (myArray[i].id === idKey) {
-            var data = myArray[i].imageList;
-            myArray[i].imageList = data.concat(imageListProduct);
-        }
-    }
-    const stringData = JSON.stringify(objectDataProduct, null, 2)
-    fs.writeFile("datas/data-product.json", stringData, (err) => {
-        console.error(err)
-    })
-}
-
 const findPromote = (idKey, myArray, imageLinkPromote, namePromote, timeStartPromote, timeEndPromote, percentPromote, applyPromote) => {
     for (let i = 0; i < myArray.length; i++) {
         if (myArray[i].id === idKey) {
@@ -165,17 +127,6 @@ const findPromote = (idKey, myArray, imageLinkPromote, namePromote, timeStartPro
 }
 
 //  -------------------------Client Method ------------------------------------------
-const findUserToSetStatus = (idKey, myArray, statusLoginUser) => {
-    for (let i = 0; i < myArray.length; i++) {
-        if (myArray[i].userID === idKey) {
-            myArray[i].statusLogin = statusLoginUser;
-        }
-    }
-    const stringData = JSON.stringify(objectDataUser, null, 2)
-    fs.writeFile("datas/data-user.json", stringData, (err) => {
-        console.error(err)
-    })
-}
 
 const findUserToAddToCart = (idKey, myArray, cartToAdd) => {
     for (let i = 0; i < myArray.length; i++) {
@@ -465,12 +416,6 @@ socketIO.on('connection', (socket) => {
 
 app.get("/", (req, res) => {
     res.send("<h1>ShopTECH E-commerce Server</h1>")
-});
-
-app.get("/api/promotes", (req, res) => {
-    const dataPromote = fs.readFileSync("datas/data-promote.json")
-    const dataPromotes = JSON.parse(dataPromote)
-    res.json(dataPromotes)
 });
 
 app.get("/api/orders", (req, res) => {

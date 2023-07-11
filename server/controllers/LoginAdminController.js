@@ -1,5 +1,5 @@
-const AdminModel = require("../../models/AdminModel");
-const { ComparePassword } = require("../../utils")
+const AdminModel = require("../models/AdminModel");
+const { ComparePassword } = require("../utils")
 const JWT = require("jsonwebtoken");
 
 const LoginAdminController = async (req, res) => {

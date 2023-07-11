@@ -4,7 +4,7 @@ const {
     RegisterController,
     LoginController,
     TestController,
-} = require('../controllers/user/UserControllers')
+} = require('../controllers/UserControllers')
 
 const { RequireSignIn } = require("../middlewares/MiddleWares");
 

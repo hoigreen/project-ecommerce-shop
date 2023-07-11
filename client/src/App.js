@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import socketIO from 'socket.io-client';
 import { AuthProvider } from './context';
 
 // Admin components
@@ -25,8 +24,6 @@ import ContactPage from './components/ConsumerComponents/Contact/ContactPage';
 import { ModalLoading, PageNotFound } from './components/Common/';
 import AuthAdminProvider from './context/AuthAdminProvider';
 
-const socket = socketIO.connect(`${process.env.REACT_APP_API}`);
-
 function App() {
     return (
         <ModalLoading>
@@ -34,24 +31,24 @@ function App() {
                 <AuthAdminProvider>
                     <Routes>
                         {/* ------------------------------------- Route Admin ------------------------------------- */}
-                        <Route path="/admin" element={<Login socket={socket} />} />
+                        <Route path="/admin" element={<Login />} />
 
-                        <Route path="/admin/dashboard" element={<Dashboard socket={socket} />} />
+                        <Route path="/admin/dashboard" element={<Dashboard />} />
 
-                        <Route path="/admin/info-admin" element={<InfoAdmin socket={socket} />} />
+                        <Route path="/admin/info-admin" element={<InfoAdmin />} />
 
-                        <Route path="/admin/customer" element={<CustomerPage socket={socket} />} />
-                        <Route path="/admin/customer/info/:userID/" element={<InfoCustomer socket={socket} />} />
+                        <Route path="/admin/customer" element={<CustomerPage />} />
+                        <Route path="/admin/customer/info/:userID/" element={<InfoCustomer />} />
 
-                        <Route path="/admin/product" element={<ProductPage socket={socket} />} />
-                        <Route path="/admin/product/add" element={<AddProduct socket={socket} />} />
-                        <Route path="/admin/product/info/:id" element={<InfoProduct socket={socket} />} />
+                        <Route path="/admin/product" element={<ProductPage />} />
+                        <Route path="/admin/product/add" element={<AddProduct />} />
+                        <Route path="/admin/product/info/:id" element={<InfoProduct />} />
 
-                        <Route path="/admin/promote" element={<PromotePage socket={socket} />} />
-                        <Route path="/admin/promote/add" element={<AddPromote socket={socket} />} />
-                        <Route path="/admin/promote/info/:id" element={<InfoPromote socket={socket} />} />
+                        <Route path="/admin/promote" element={<PromotePage />} />
+                        <Route path="/admin/promote/add" element={<AddPromote />} />
+                        <Route path="/admin/promote/info/:id" element={<InfoPromote />} />
 
-                        <Route path="/admin/feedback" element={<FeedbackPage socket={socket} />} />
+                        <Route path="/admin/feedback" element={<FeedbackPage />} />
 
                         {/* ----------------------------- Page not found ------------------------------ */}
                         <Route path="/admin/*" element={<PageNotFound />} />
@@ -66,41 +63,41 @@ function App() {
                         <Route path="/register" element={<RegisterClient />} />
 
                         {/* Home */}
-                        <Route path="/" element={<Home socket={socket} />} />
-                        <Route path="/home" element={<Home socket={socket} />} />
-                        <Route path="/product" element={<Home socket={socket} />} />
+                        <Route path="/" element={<Home />} />
+                        <Route path="/home" element={<Home />} />
+                        <Route path="/product" element={<Home />} />
 
                         {/* Product */}
-                        <Route path="/product/smartphone" element={<SmartPhone socket={socket} />} />
-                        <Route path="/product/laptop" element={<Laptop socket={socket} />} />
-                        <Route path="/product/tablet" element={<Tablet socket={socket} />} />
-                        <Route path="/product/accessories" element={<Accessories socket={socket} />} />
-                        <Route path="/product/:enType/:name" element={<InfoProductClient socket={socket} />} />
+                        <Route path="/product/smartphone" element={<SmartPhone />} />
+                        <Route path="/product/laptop" element={<Laptop />} />
+                        <Route path="/product/tablet" element={<Tablet />} />
+                        <Route path="/product/accessories" element={<Accessories />} />
+                        <Route path="/product/:enType/:name" element={<InfoProductClient />} />
 
 
                         {/* Account */}
-                        <Route path="/account" element={<AccountClient socket={socket} />} />
-                        <Route path="/account/info" element={<AccountClientInfo socket={socket} />} />
-                        <Route path="/account/history" element={<AccountHistory socket={socket} />} />
-                        <Route path="/account/history/:orderID" element={<AccountOrderDetail socket={socket} />} />
-                        <Route path="/account/history/:orderID/:productID" element={<VoteProductInOrder socket={socket} />} />
+                        <Route path="/account" element={<AccountClient />} />
+                        <Route path="/account/info" element={<AccountClientInfo />} />
+                        <Route path="/account/history" element={<AccountHistory />} />
+                        <Route path="/account/history/:orderID" element={<AccountOrderDetail />} />
+                        <Route path="/account/history/:orderID/:productID" element={<VoteProductInOrder />} />
 
                         {/* Search Product */}
-                        <Route path="/search/:keySearch" element={<SearchProduct socket={socket} />} />
+                        <Route path="/search/:keySearch" element={<SearchProduct />} />
 
 
                         {/* Cart and Payment */}
-                        <Route path="/cart" element={<Cart socket={socket} />} />
-                        <Route path="/cart/info" element={<CartInfo socket={socket} />} />
-                        <Route path="/cart/info/giftcode" element={<Giftcode socket={socket} />} />
-                        <Route path="/cart/info/giftcode/confirm" element={<CartConfirm socket={socket} />} />
-                        <Route path="/cart/info/giftcode/confirm/payment" element={<Payment socket={socket} />} />
+                        <Route path="/cart" element={<Cart />} />
+                        <Route path="/cart/info" element={<CartInfo />} />
+                        <Route path="/cart/info/giftcode" element={<Giftcode />} />
+                        <Route path="/cart/info/giftcode/confirm" element={<CartConfirm />} />
+                        <Route path="/cart/info/giftcode/confirm/payment" element={<Payment />} />
 
                         {/* Order */}
-                        <Route path="/order" element={<OrderLookup socket={socket} />} />
+                        <Route path="/order" element={<OrderLookup />} />
 
                         {/* Contact */}
-                        <Route path="/contact" element={<ContactPage socket={socket} />} />
+                        <Route path="/contact" element={<ContactPage />} />
                     </Routes>
                 </AuthProvider>
             </Router>

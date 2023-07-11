@@ -88,27 +88,7 @@ const UpdateStatusOrder = async (req, res) => {
     }
 }
 
-// Xóa sản phẩm
-const DeleteProduct = async (req, res) => {
-    try {
-        const _id = req.params.id;
-        await ProductModel.deleteOne({ _id: _id });
-        res.status(200).send({
-            success: true,
-            message: "Xóa thành công"
-        });
-    } catch (error) {
-        console.log(error);
-        res.status(500).send({
-            success: false,
-            message: "Đã xảy ra một lỗi nào đó",
-            error,
-        });
-    }
-};
-
 module.exports = {
     CreateProductController,
-    UpdateStatusOrder,
-    DeleteProduct
+    UpdateStatusOrder
 };

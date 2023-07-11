@@ -1,43 +1,50 @@
 import React, { useState, useRef } from 'react';
 import emailjs from '@emailjs/browser';
-
 import './styles/contact.css'
-
 import { Nav, Footer, Breadcrumbs } from '../Common/';
-import { Toast } from '../../Common';
+import { Toast, handleLoadingPage } from '../../Common';
+import axios from 'axios';
 
-const ContactPage = ({ socket }) => {
+const ContactPage = () => {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [type, setType] = useState('')
     const [content, setContent] = useState('')
+    const form = useRef();
 
     const showSuccessMessage = () => {
         Toast({ title: 'Gửi góp ý thành công', message: 'Cám ơn bạn với góp ý dành cho ShopTECH!', type: 'success', duration: 5000 })
     }
 
-    const form = useRef();
-    const handleSend = (e) => {
+    const handleSend = async (e) => {
         e.preventDefault();
         if (window.confirm('Bạn chắc chắn muốn gửi những thông tin bạn nhập vào cho đội ngũ quản trị viên!') === true) {
-            socket.emit("sendFeedbackFromGuest", {
-                name: name,
-                email: email,
-                type: type,
-                content: content,
-            });
-
-            emailjs.sendForm('service_tz648gc', 'template_2tugvgr', form.current, 'zD-R_dG5L23lbkbpU')
-                .then((result) => {
-                    console.log(result.text);
-                }, (error) => {
-                    console.log(error.text);
+            try {
+                const res = await axios.post(`${process.env.REACT_APP_API}/api/feedbacks/send`, {
+                    name: name,
+                    email: email,
+                    type: type,
+                    content: content
                 });
+                if (res && res.data.success) {
+                    emailjs.sendForm('service_tz648gc', 'template_2tugvgr', form.current, 'zD-R_dG5L23lbkbpU')
+                        .then((result) => {
+                            console.log(result.text);
+                        }, (error) => {
+                            console.log(error.text);
+                        });
+                    showSuccessMessage()
+                    setTimeout(() => {
+                        handleLoadingPage(1)
+                        window.location.reload()
+                    }, 5000)
+                } else {
+                    alert("Gửi phản ánh thất bại")
+                }
+            } catch (error) {
+                alert(error)
+            }
         }
-        showSuccessMessage()
-        setTimeout(() => {
-            window.location.reload()
-        }, 5000)
     }
 
     return (
@@ -134,7 +141,7 @@ const ContactPage = ({ socket }) => {
             </div>
 
             <Footer />
-            <p className='app-copyright'>©️ Bản quyền thuộc nhóm 7 -  Chuyên đề thực tế 2 - CN20A - năm 2023 <br />
+            <p className='app-copyright'>©️ Bản quyền thuộc ShopTECH - năm 2023 <br />
                 Địa chỉ: 70 Tô Ký, phường Tân Chánh Hiệp. Quận 12, Thành phố Hồ Chí Minh.</p>
         </>
     );

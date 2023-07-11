@@ -1,5 +1,6 @@
 const express = require('express');
 const FeedbackModel = require('../models/FeedbackModel');
+const { SendFeedback } = require('../controllers/FeedbackControlller')
 const router = express.Router();
 
 // Get all feedbacks
@@ -13,7 +14,7 @@ router.get("/", async (req, res) => {
     }
 });
 
-// Create 1 product
-router.post("/create")
+// Gửi 1 feedback
+router.post("/send", SendFeedback);
 
 module.exports = router;

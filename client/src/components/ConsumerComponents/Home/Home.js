@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import slugify from 'slugify'
 import './styles/homepage-style.css';
 
 import { Nav, Footer, SideBanner } from '../Common';

@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-
 import "./styles/cart-style.css"
-
 import { Nav, Breadcrumbs } from '../Common';
 import { handleLoadingPage } from '../../Common';
 
 const Cart = ({ socket }) => {
-    const [users, setUsers] = useState([])
+    const [user, setUser] = useState({})
     const [cartUser, setCartUser] = useState([])
     const [countTotalPrice, setCountTotalPrice] = useState()
 
@@ -15,8 +13,8 @@ const Cart = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
+            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+                setUser(data)
                 setLoading(false)
             })
         }
@@ -24,17 +22,9 @@ const Cart = ({ socket }) => {
     }, [])
 
     useEffect(() => {
-        users.map((user, index) => {
-            if (user.username === window.localStorage.getItem("userLogged")) {
-                setCartUser(user.cart);
-            }
-        })
-    }, [users])
-
-    useEffect(() => {
         // show thông tin tổng tiền giỏ hàng
         let countPriceAll = 0
-        cartUser.map((cartItem, index) => {
+        user.cart.map((cartItem, index) => {
             if (cartItem) countPriceAll += Number(cartItem.price) * cartItem.quantity;
         })
         setCountTotalPrice(countPriceAll)
@@ -42,7 +32,7 @@ const Cart = ({ socket }) => {
 
         // show điều kiện giỏ hàng
         for (let i = 0; i < 5; i++) {
-            if (cartUser.length == 0) {
+            if (user.cart.length == 0) {
                 document.querySelector('.cart__container--empty').style.display = 'flex';
                 document.querySelector('.cart__control-container').style.display = 'none';
             }
@@ -52,72 +42,72 @@ const Cart = ({ socket }) => {
                 document.querySelector('.cart__container--empty').style.display = 'none'
             }
         }
-    }, [cartUser])
+    }, [user])
 
     const handleClickAddQuantity = (indexProduct) => {
-        users.map((user, index) => {
-            if (window.localStorage.getItem("userLogged") === user.username) {
-                socket.emit("addQuantityProductInCart",
-                    {
-                        userID: user.userID,
-                    }, indexProduct
-                )
-            }
-        })
-        handleLoadingPage(1)
-        window.setTimeout(() => {
-            window.location.reload()
-        }, 1000)
+        // user.map((user, index) => {
+        //     if (window.localStorage.getItem("userLogged") === user.username) {
+        //         socket.emit("addQuantityProductInCart",
+        //             {
+        //                 userID: user.userID,
+        //             }, indexProduct
+        //         )
+        //     }
+        // })
+        // handleLoadingPage(1)
+        // window.setTimeout(() => {
+        //     window.location.reload()
+        // }, 1000)
     }
 
     const handleClickMinusQuantity = (indexProduct) => {
-        users.map((user, index) => {
-            if (window.localStorage.getItem("userLogged") === user.username) {
-                socket.emit("minusQuantityProductInCart",
-                    {
-                        userID: user.userID,
-                    }, indexProduct
-                )
-            }
-        })
-        handleLoadingPage(1)
-        window.setTimeout(() => {
-            window.location.reload()
-        }, 1000)
+        // users.map((user, index) => {
+        //     if (window.localStorage.getItem("userLogged") === user.username) {
+        //         socket.emit("minusQuantityProductInCart",
+        //             {
+        //                 userID: user.userID,
+        //             }, indexProduct
+        //         )
+        //     }
+        // })
+        // handleLoadingPage(1)
+        // window.setTimeout(() => {
+        //     window.location.reload()
+        // }, 1000)
     }
 
     const handleClickRemoveProduct = (indexProduct) => {
-        users.map((user, index) => {
-            if (window.localStorage.getItem("userLogged") === user.username) {
-                socket.emit("removeProductInCart",
-                    {
-                        userID: user.userID,
-                    }, indexProduct
-                )
-            }
-        })
-        handleLoadingPage(1)
-        window.setTimeout(() => {
-            window.location.reload()
-        }, 1000)
+        // users.map((user, index) => {
+        //     if (window.localStorage.getItem("userLogged") === user.username) {
+        //         socket.emit("removeProductInCart",
+        //             {
+        //                 userID: user.userID,
+        //             }, indexProduct
+        //         )
+        //     }
+        // })
+        // handleLoadingPage(1)
+        // window.setTimeout(() => {
+        //     window.location.reload()
+        // }, 1000)
     }
 
     const handleClickRemoveAll = () => {
-        if (window.confirm("Bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng")) {
-            users.map((user, index) => {
-                if (window.localStorage.getItem("userLogged") === user.username) {
-                    socket.emit("removeAllInCart",
-                        {
-                            userID: user.userID,
-                        }
-                    )
-                }
-            })
-            handleLoadingPage(1)
-            window.setTimeout(() => {
-                window.location.reload()
-            }, 1000)
-        }
+        // if (window.confirm("Bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng")) {
+        //     users.map((user, index) => {
+        //         if (window.localStorage.getItem("userLogged") === user.username) {
+        //             socket.emit("removeAllInCart",
+        //                 {
+        //                     userID: user.userID,
+        //                 }
+        //             )
+        //         }
+        //     })
+        //     handleLoadingPage(1)
+        //     window.setTimeout(() => {
+        //         window.location.reload()
+        //     }, 1000)
+        // }
     }
 
     return (

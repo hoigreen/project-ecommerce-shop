@@ -23,7 +23,6 @@
     width: 400px;
     height: 420px;
     background-color: transparent;
-    /* background-image: url(../../../../assets/images/client/login-img/img-login-1.png); */
     background-image: url(../../../../assets/images/client/login-img/img-login-1.png);
     background-position: center center;
     background-size: 95%;
@@ -348,7 +347,7 @@
     display: block;
     font-size: 2.6rem;
     line-height: 2.8rem;
-    color: rgb(83, 175, 83);
+    color: red;
     font-weight: 600;
 }
 

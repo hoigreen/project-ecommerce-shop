@@ -19,9 +19,13 @@
 }
 
 :root {
-    --primary-color: #eb984c;
-    --button-color: #df8129;
-    --background-color: #f3f3f3;
+    /* --primary-color: #eb984c;
+    --button-color: #df8129; */
+    /* --background-color: #f3f3f3; */
+    --primary-color: #7eba9f;
+    --button-color: #2c9a79;
+    --background-color: #e9e8e4;
+    --navbar-background-color: #0d6139;
     --text-color: #222222;
     --background-login-color: #ffd3aa;
 }

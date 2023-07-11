@@ -2,7 +2,6 @@ const express = require("express")
 const cors = require("cors")
 const dotenv = require("dotenv")
 const morgan = require("morgan")
-const fs = require("fs");
 const connectDB = require("./config/db")
 
 const { AdminRoute, UserRoute, ProductRoute, PromoteRoute, FeedbackRoute, OrderRoute } = require("./routes")
@@ -30,18 +29,6 @@ app.use('/api/products', ProductRoute);
 app.use('/api/promotes', PromoteRoute);
 app.use('/api/feedbacks', FeedbackRoute);
 app.use('/api/orders', OrderRoute);
-
-app.get("/api/giftcodes", (req, res) => {
-    const dataGiftcode = fs.readFileSync("datas/data-giftcode.json")
-    const dataGiftcodes = JSON.parse(dataGiftcode)
-    res.json(dataGiftcodes)
-});
-
-app.get("/api/comments", (req, res) => {
-    const dataComment = fs.readFileSync("datas/data-comment.json")
-    const dataComments = JSON.parse(dataComment)
-    res.json(dataComments)
-});
 
 http.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);

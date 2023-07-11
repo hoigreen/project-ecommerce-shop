@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import './styles/homepage-style.css';
-
 import { Nav, Footer, SideBanner } from '../Common';
 import HotPromote from './HotPromote';
 import HomeList from './HomeList';
@@ -16,17 +14,15 @@ const Home = ({ socket }) => {
 
     const [loading, setLoading] = useState(true)
 
-    const navigate = useNavigate();
-
     useEffect(() => {
         const fetchAPIs = () => {
             fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
-                setProducts(data.products)
+                setProducts(data)
                 setLoading(false)
             })
 
             fetch("http://localhost:4000/api/promotes").then(res => res.json()).then(data => {
-                setPromotes(data.promotes)
+                setPromotes(data)
                 setLoading(false)
             })
         }

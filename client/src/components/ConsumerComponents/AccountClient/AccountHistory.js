@@ -1,21 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import { Breadcrumbs, Nav } from '../Common';
 import SidebarAccount, { handleLoadOptionSidebar } from './SidebarAccount';
 import { handleLoadingPage } from '../../Common';
+import { AuthContext } from '../../../context';
 
-const AccountHistory = ({ socket }) => {
+const AccountHistory = () => {
     const [orders, setOrders] = useState([])
+    const [auth, setAuth] = useContext(AuthContext)
 
-    const [countOrder, setCountOrder] = useState()
-    const [countPriceOrder, setCountPriceOrder] = useState()
+    const [countOrder, setCountOrder] = useState(0)
+    const [countPriceOrder, setCountPriceOrder] = useState(0)
 
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchAPIs = () => {
             fetch("http://localhost:4000/api/orders").then(res => res.json()).then(data => {
-                setOrders(data.orders)
+                setOrders(data)
                 setLoading(false)
             })
         }
@@ -27,7 +29,7 @@ const AccountHistory = ({ socket }) => {
         // Show danh sách đơn hàng của khách hàng
         orders.map((order, index) => {
             const elementRowTable = document.querySelectorAll(".table__row-loading")[index]
-            if (order.owner != window.localStorage.getItem("userLogged")) {
+            if (order.owner != auth.username) {
                 elementRowTable.style.display = "none";
             }
         })
@@ -36,7 +38,7 @@ const AccountHistory = ({ socket }) => {
         let sumCountOrder = 0;
         let sumCountPriceOrder = 0
         orders.map((order, index) => {
-            if (order.owner == window.localStorage.getItem("userLogged")) {
+            if (order.owner == auth.username) {
                 sumCountOrder += 1;
                 sumCountPriceOrder += Number(order.price);
                 setCountOrder(sumCountOrder)
@@ -82,7 +84,7 @@ const AccountHistory = ({ socket }) => {
             <div className="container">
                 <div className="grid wide">
                     <div className="account-info__container">
-                        <SidebarAccount socket={socket} />
+                        <SidebarAccount />
                         <div className="account__box">
                             <div className="account__box-info">
                                 <label className="account__box-info-header">LỊCH SỬ MUA HÀNG</label>

@@ -45,7 +45,6 @@ const InfoCustomer = () => {
         }
     };
 
-
     return (
         <>
             <AdminSidebar />

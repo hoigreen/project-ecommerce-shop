@@ -1,21 +1,12 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import SidebarAccount, { handleLoadOptionSidebar } from './SidebarAccount';
 import { Breadcrumbs, Nav } from '../Common';
-import { handleLoadingPage } from '../../Common';
-import { AuthContext } from '../../../context';
+import { changeImage, handleLoadingPage } from '../../Common';
 
 const AccountClientInfo = ({ socket }) => {
-    const [auth, setAuth] = useContext(AuthContext)
 
     const [user, setUser] = useState({})
-    const [userID, setUserID] = useState('')
-    const [avatarUrl, setAvatarUrl] = useState('')
-
-    const [fullname, setFullname] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
-    const [address, setAddress] = useState('')
 
     useEffect(() => {
         const fetchAPIs = () => {
@@ -27,37 +18,31 @@ const AccountClientInfo = ({ socket }) => {
         handleLoadOptionSidebar(1)
     }, [])
 
-    const changeImage = () => {
-        const preview = document.querySelector(".account__box-info-avatar")
-        const imageAdmin = document.querySelector("#avatar-change").files[0]
-        const reader = new FileReader()
-        reader.addEventListener("load", () => {
-            preview.src = reader.result;
-        }, false)
-
-        if (imageAdmin) {
-            reader.readAsDataURL(imageAdmin)
-        }
-    }
-
-    const handleEditInfo = (e) => {
+    const handleEditInfo = async (e) => {
         e.preventDefault()
         const avatarUrl = document.querySelector(".account__box-info-avatar").getAttribute("src")
         const inputElements = document.querySelectorAll(".account__box-info-input")
         if (window.confirm("Bạn muốn sửa đổi thông tin cá nhân!") == true) {
-            socket.emit("editInfoCustomer", {
-                userID: userID,
-                avatarUrl: avatarUrl,
-                fullname: inputElements[0].value,
-                email: inputElements[1].value,
-                phone: inputElements[2].value,
-                address: inputElements[3].value
-            })
-            window.alert("Thành công!")
-            handleLoadingPage(1)
-            window.setTimeout(() => {
-                window.location.reload();
-            }, 1000)
+            try {
+                const res = await axios.put(`${process.env.REACT_APP_API}/api/users/update/${JSON.parse(window.localStorage.getItem('auth')).user._id}`, {
+                    avatarUrl: avatarUrl,
+                    fullname: inputElements[0].value,
+                    email: inputElements[1].value,
+                    phone: inputElements[2].value,
+                    address: inputElements[3].value
+                });
+                if (res && res.data.success) {
+                    alert("Cập nhật thông tin thành công!");
+                    handleLoadingPage(1)
+                    window.setTimeout(() => {
+                        window.location.reload();
+                    }, 1000)
+                } else {
+                    alert("Cập nhật thông tin thất bại")
+                }
+            } catch (error) {
+                alert(error)
+            }
         }
     }
 

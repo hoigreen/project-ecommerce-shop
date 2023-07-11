@@ -1,34 +1,36 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import { Breadcrumbs, Nav } from '../Common';
 import SidebarAccount, { handleLoadOptionSidebar } from './SidebarAccount';
 import { handleLoadingPage } from '../../Common';
-import AuthContext from '../../../context/AuthContext';
+import { AuthContext } from '../../../context';
 
-const AccountClient = ({ socket }) => {
-    const [user, setUser] = useState({})
-
+const AccountClient = () => {
     const [auth, setAuth] = useContext(AuthContext)
-
+    const [user, setUser] = useState({})
     const [orders, setOrders] = useState([])
     const [countOrderDriving, setCountOrderDriving] = useState()
     const [countOrder, setCountOrder] = useState()
-    const [countPriceOrder, setCountPriceOrder] = useState()
+    const [countPriceOrder, setCountPriceOrder] = useState(0)
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchAPIs = () => {
-            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
-                setUser(data)
-            })
+        if (window.localStorage.getItem("auth")) {
+            const fetchAPIs = () => {
+                fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+                    setUser(data)
+                })
 
-            fetch("http://localhost:4000/api/orders").then(res => res.json()).then(data => {
-                setOrders(data.orders)
-            })
+                fetch("http://localhost:4000/api/orders").then(res => res.json()).then(data => {
+                    setOrders(data)
+                })
+            }
+            fetchAPIs()
         }
-        fetchAPIs()
+        else {
+            window.location.href = "/login"
+        }
         handleLoadOptionSidebar(0)
     }, [])
 
@@ -36,7 +38,7 @@ const AccountClient = ({ socket }) => {
         // Show thông tin số đơn hàng đang giao
         let sumCountOrderDriving = 0;
         orders.map((order, index) => {
-            if (order.owner == window.localStorage.getItem("userLogged")) {
+            if (order.owner == auth.username) {
                 if (order.status === "Đang giao hàng") {
                     sumCountOrderDriving++;
                     setCountOrderDriving(sumCountOrderDriving)
@@ -48,7 +50,7 @@ const AccountClient = ({ socket }) => {
         let sumCountOrder = 0;
         let sumCountPriceOrder = 0;
         orders.map((order, index) => {
-            if (order.owner == window.localStorage.getItem("userLogged")) {
+            if (order.owner == auth.username) {
                 sumCountOrder += 1;
                 sumCountPriceOrder += Number(order.price);
                 setCountOrder(sumCountOrder)
@@ -64,7 +66,7 @@ const AccountClient = ({ socket }) => {
             <div className="container">
                 <div className="grid wide">
                     <div className="account-info__container">
-                        <SidebarAccount socket={socket} />
+                        <SidebarAccount />
                         <div className="account__box">
                             <div className="account__box-info">
                                 <img src={user.avatarUrl || `${process.env.REACT_APP_API}/public/img-avatar-empty.png`} className="account__box-info-avatar"></img>

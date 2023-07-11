@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleLoadingPage } from '../../Common';
+import { AuthContext } from '../../../context';
 
 const handleLoadOptionSidebar = (index) => {
     const optionItems = document.querySelectorAll('.account__sidebar-item')
@@ -13,32 +14,24 @@ const handleLoadOptionSidebar = (index) => {
     optionItems[index].classList.add("account__sidebar-item--active")
 }
 
-const SidebarAccount = ({ socket }) => {
-    const [users, setUsers] = useState([])
+const SidebarAccount = () => {
+    const [auth, setAuth] = useContext(AuthContext)
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
-            })
-        }
-        fetchAPIs()
-    }, [])
-
-    const handleLoggout = () => {
-        users.map((user, index) => {
-            if (window.localStorage.getItem("userLogged") === user.username) {
-                socket.emit("setStatusLoginUser", { userID: user.userID, statusLogin: "Chưa đăng nhập" })
-                window.localStorage.removeItem("userLogged")
-                window.localStorage.removeItem("statusLogged")
-                handleLoadingPage(1)
-                window.setTimeout(() => {
-                    window.location.href = `/login`
-                }, 1000)
-            }
-        })
+    const handleLoggout = (e) => {
+        e.preventDefault();
+        setAuth({
+            ...auth,
+            username: null,
+            token: '',
+        });
+        window.localStorage.removeItem("auth")
+        window.alert("Đăng xuất tài khoản thành công")
+        handleLoadingPage(1)
+        setTimeout(() => {
+            window.location.href = "/login";
+        }, 1000)
     }
 
     return (

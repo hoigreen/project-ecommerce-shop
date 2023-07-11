@@ -5,7 +5,7 @@ const morgan = require("morgan")
 const fs = require("fs");
 const connectDB = require("./config/db")
 
-const { AdminRoute, UserRoute, ProductRoute, PromoteRoute, FeedbackRoute } = require("./routes")
+const { AdminRoute, UserRoute, ProductRoute, PromoteRoute, FeedbackRoute, OrderRoute } = require("./routes")
 
 const app = express()
 const http = require('http').Server(app);
@@ -22,41 +22,28 @@ const socketIO = require('socket.io')(http, {
 
 connectDB()
 
-
-const savedDataAdmin = fs.readFileSync("datas/data-admin.json")
-const objectDataAdmin = JSON.parse(savedDataAdmin)
-
-const savedDataUser = fs.readFileSync("datas/data-user.json")
-const objectDataUser = JSON.parse(savedDataUser)
-
-const savedDataProduct = fs.readFileSync("datas/data-product.json")
-const objectDataProduct = JSON.parse(savedDataProduct)
-
-const savedDataPromote = fs.readFileSync("datas/data-promote.json")
-const objectDataPromote = JSON.parse(savedDataPromote)
-
-const savedDataOrder = fs.readFileSync("datas/data-order.json")
-const objectDataOrder = JSON.parse(savedDataOrder)
-
 const savedDataGiftcode = fs.readFileSync("datas/data-giftcode.json")
 const objectDataGiftcode = JSON.parse(savedDataGiftcode)
 
 const savedDataComment = fs.readFileSync("datas/data-comment.json")
 const objectDataComment = JSON.parse(savedDataComment)
 
-const savedDataFeedback = fs.readFileSync("datas/data-feedback.json")
-const objectDataFeedback = JSON.parse(savedDataFeedback)
 
 app.use(express.json())
 app.use(morgan('dev'))
 app.use(cors())
 app.use('/public', express.static('./public'));
 
+app.get("/", (req, res) => {
+    res.send("<h1>ShopTECH E-commerce Server</h1>")
+});
+
 app.use('/api/admins', AdminRoute);
 app.use('/api/users', UserRoute);
 app.use('/api/products', ProductRoute);
 app.use('/api/promotes', PromoteRoute);
 app.use('/api/feedbacks', FeedbackRoute);
+app.use('/api/orders', OrderRoute);
 
 //  --------------------------- ADMIN Method -------------------------------------
 const findAdmin = (idKey, myArray, avatarUrlAdmin, fullnameAdmin, emailAdmin, phoneAdmin, addressAdmin) => {
@@ -414,15 +401,7 @@ socketIO.on('connection', (socket) => {
     });
 });
 
-app.get("/", (req, res) => {
-    res.send("<h1>ShopTECH E-commerce Server</h1>")
-});
 
-app.get("/api/orders", (req, res) => {
-    const dataOrder = fs.readFileSync("datas/data-order.json")
-    const dataOrders = JSON.parse(dataOrder)
-    res.json(dataOrders)
-});
 
 app.get("/api/giftcodes", (req, res) => {
     const dataGiftcode = fs.readFileSync("datas/data-giftcode.json")

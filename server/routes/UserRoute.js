@@ -4,14 +4,13 @@ const {
     RegisterController,
     LoginController,
     TestController,
+    UpdateInfo,
 } = require('../controllers/UserControllers')
 
 const { RequireSignIn } = require("../middlewares/MiddleWares");
-
-//router object
 const router = express.Router();
 
-//routing
+
 // GET All
 router.get("/", async (req, res) => {
     try {
@@ -35,9 +34,15 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+// Đăng ký
 router.post("/register", RegisterController);
 
+
+// Đăng nhập
 router.post("/login", LoginController);
+
+// Cập nhật thông tin cá nhân
+router.put("/update/:id", UpdateInfo, RequireSignIn)
 
 //test routes
 router.get("/test", TestController, RequireSignIn);

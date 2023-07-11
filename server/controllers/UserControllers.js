@@ -133,9 +133,33 @@ const TestController = (req, res) => {
     }
 };
 
+const UpdateInfo = async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const { avatarUrl, fullname, email, phone, address } = req.body;
+        const infoUpdate = await UserModel.findByIdAndUpdate(
+            _id,
+            { avatarUrl, fullname, email, phone, address },
+            { new: true }
+        );
+        res.status(200).send({
+            success: true,
+            messsage: "Cập nhật thông tin  thành công",
+            infoUpdate,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+            message: "Error while updating",
+        });
+    }
+}
 
 module.exports = {
     LoginController,
     RegisterController,
-    TestController
+    TestController,
+    UpdateInfo
 };

@@ -1,31 +1,21 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-
+import axios from 'axios';
 import { Breadcrumbs, Nav } from '../Common';
 import SidebarAccount, { handleLoadOptionSidebar } from './SidebarAccount';
 import { handleLoadingPage } from '../../Common';
 
-const AccountOrderDetail = ({ socket }) => {
+const AccountOrderDetail = () => {
     const { orderID } = useParams()
-
-    const [orders, setOrders] = useState([])
-    const [fullName, setFullName] = useState("")
-    const [email, setEmail] = useState("")
-    const [phone, setPhone] = useState("")
-    const [address, setAddress] = useState("")
-    const [price, setPrice] = useState("")
-    const [time, setTime] = useState("")
-    const [status, setStatus] = useState("")
-    const [listProduct, setListProduct] = useState([])
-
+    const [order, setOrder] = useState([])
     const [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/orders").then(res => res.json()).then(data => {
-                setOrders(data.orders)
+            fetch("http://localhost:4000/api/orders/" + orderID).then(res => res.json()).then(data => {
+                setOrder(data)
                 setLoading(false)
             })
         }
@@ -35,39 +25,27 @@ const AccountOrderDetail = ({ socket }) => {
     }, [])
 
     useEffect(() => {
-        // Show thông tin đơn hàng của khách hàng
-        orders.map((order, index) => {
-            if (order.orderID === orderID) {
-                setFullName(order.fullname)
-                setEmail(order.email)
-                setPhone(order.phone)
-                setAddress(order.address)
-                setPrice(order.price)
-                setTime(order.time)
-                setListProduct(order.lists)
-                setStatus(order.status)
-            }
-        })
-    }, [orders])
-
-    useEffect(() => {
-        if (status === "Giao hàng thành công") {
+        if (order.status === "Giao hàng thành công") {
             document.querySelector(".order-detail__btn").style.display = "none"
         }
-    }, [status])
+    }, [order.status])
 
-    const handleConfirmReceived = (e) => {
+    const handleConfirmReceived = async (e) => {
         e.preventDefault()
-        orders.map((item, index) => {
-            if (item.orderID === orderID) {
-                socket.emit("setStatusOrder", { orderID: item.orderID, status: "Giao hàng thành công" })
-                handleLoadingPage(2)
+        try {
+            const res = await axios.put(`${process.env.REACT_APP_API}/api/orders/update-status/${order._id}`);
+            if (res && res.data.success) {
+                alert("Xác nhận đã nhận hàng thành công!")
+                handleLoadingPage(1)
                 setTimeout(() => {
-                    alert("Xác nhận đã nhận hàng thành công!")
                     window.location.reload()
                 })
+            } else {
+                alert("Cập nhật thông tin thất bại")
             }
-        })
+        } catch (error) {
+            alert(error)
+        }
     }
 
     const handleFormatCrumbs = () => {
@@ -79,14 +57,14 @@ const AccountOrderDetail = ({ socket }) => {
         })
     }
 
-    const checkVote = (itemVoted, itemID) => {
+    const checkVote = (itemVoted, itemName) => {
         if (itemVoted)
             return <button className='order-detail__item-btn order-detail__item-btn--disabled' disabled>Đã đánh giá </button>
         return (
             <button className='order-detail__item-btn' onClick={e => {
                 e.preventDefault();
-                if (status === "Giao hàng thành công")
-                    navigate(`/account/history/${orderID}/${itemID}`);
+                if (order.status === "Giao hàng thành công")
+                    navigate(`/account/history/${orderID}/${itemName}`);
                 else {
                     alert("Đơn hàng đang trong trạng thái giao hàng nên chưa thể đánh giá sản phẩm!")
                 }
@@ -101,7 +79,7 @@ const AccountOrderDetail = ({ socket }) => {
             <div className="container">
                 <div className="grid wide">
                     <div className="account-info__container">
-                        <SidebarAccount socket={socket} />
+                        <SidebarAccount />
                         <div className="account__box">
                             <div className="account__box-info">
                                 <button className="cart__btn-cancel" onClick={() => { window.location.href = "/account/history" }}>
@@ -117,11 +95,11 @@ const AccountOrderDetail = ({ socket }) => {
                                     </div>
                                     <div className="order-detail__group">
                                         <label className="order-detail__label">Thời gian đặt hàng:</label>
-                                        <p className="order-detail__content">{time}</p>
+                                        <p className="order-detail__content">{order.time}</p>
                                     </div>
                                     <div className="order-detail__group">
                                         <label className="order-detail__label">Trạng thái đơn hàng</label>
-                                        <p style={{ color: 'purple', fontWeight: "600" }} className="order-detail__content">{status}</p>
+                                        <p style={{ color: 'purple', fontWeight: "600" }} className="order-detail__content">{order.status}</p>
                                     </div>
                                 </div>
 
@@ -132,31 +110,31 @@ const AccountOrderDetail = ({ socket }) => {
                                             <i className="order-detail__label-icon fa fa-user"></i>
                                             Họ và tên người nhận:
                                         </label>
-                                        <p className="order-detail__content">{fullName}</p>
+                                        <p className="order-detail__content">{order.fullname}</p>
                                     </div>
                                     <div className="order-detail__group">
                                         <label className="order-detail__label">
                                             <i className="order-detail__label-icon fa fa-phone"></i>
                                             Số điện thoại:</label>
-                                        <p className="order-detail__content">{phone}</p>
+                                        <p className="order-detail__content">{order.phone}</p>
                                     </div>
                                     <div className="order-detail__group">
                                         <label className="order-detail__label">
                                             <i className="order-detail__label-icon fa fa-envelope"></i>
                                             Địa chỉ email:</label>
-                                        <p className="order-detail__content">{email}</p>
+                                        <p className="order-detail__content">{order.email}</p>
                                     </div>
                                     <div className="order-detail__group">
                                         <label className="order-detail__label">
                                             <i className="order-detail__label-icon fa fa-map"></i>
                                             Địa chỉ nhận hàng:</label>
-                                        <p className="order-detail__content">{address || "Showroom 70 Tô Ký, p.Tân Chánh Hiệp, Q.12"}</p>
+                                        <p className="order-detail__content">{order.address || "Showroom 70 Tô Ký, p.Tân Chánh Hiệp, Q.12"}</p>
                                     </div>
                                 </div>
 
                                 <label className="order-detail__title">Danh sách sản phẩm</label>
                                 <ul className='order-detail__list'>
-                                    {loading ? <p>Loading...</p> : listProduct.map((item, index) => (
+                                    {loading ? <p>Loading...</p> : order.lists.map((item, index) => (
                                         <li className='order-detail__item' key={index}>
                                             <img src={item.imageLink} className='order-detail__item-img' />
                                             <div className='order-detail__item-info'>
@@ -167,13 +145,13 @@ const AccountOrderDetail = ({ socket }) => {
                                                 <p className='order-detail__item-price'>{Number(item.price).toLocaleString()} đ</p>
                                             </div>
                                             <div className='order_detail__item-btn-box'>
-                                                {checkVote(item.voted, item.id)}
+                                                {checkVote(item.voted, item.productName)}
                                             </div>
                                         </li>
                                     ))}
                                     <div className="order-detail__group">
                                         <label className="order-detail__label">Tổng giá trị đơn hàng</label>
-                                        <p style={{ color: 'green', fontWeight: "600" }} className="order-detail__content">{Number(price).toLocaleString()} đ</p>
+                                        <p style={{ color: 'green', fontWeight: "600" }} className="order-detail__content">{Number(order.price).toLocaleString()} đ</p>
                                     </div>
                                 </ul>
 

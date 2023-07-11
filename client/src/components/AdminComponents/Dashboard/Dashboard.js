@@ -24,10 +24,10 @@ const Dashboard = () => {
                 setCountUser(data.length)
             });
             fetch(`http://localhost:4000/api/products`).then(res => res.json()).then(data => {
-                setCountProduct(data.products.length)
+                setCountProduct(data.length)
             });
             fetch(`http://localhost:4000/api/promotes`).then(res => res.json()).then(data => {
-                setCountPromotes(data.promotes.length)
+                setCountPromotes(data.length)
             });
         }
         fetchAPIs()

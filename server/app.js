@@ -1,12 +1,11 @@
 const express = require("express")
-const { MongoClient, ServerApiVersion } = require('mongodb');
 const cors = require("cors")
 const dotenv = require("dotenv")
 const morgan = require("morgan")
 const fs = require("fs");
 const connectDB = require("./config/db")
 
-const { AdminRoute, UserRoute, ProductRoute, PromoteRoute } = require("./routes")
+const { AdminRoute, UserRoute, ProductRoute, PromoteRoute, FeedbackRoute } = require("./routes")
 
 const app = express()
 const http = require('http').Server(app);
@@ -57,6 +56,7 @@ app.use('/api/admins', AdminRoute);
 app.use('/api/users', UserRoute);
 app.use('/api/products', ProductRoute);
 app.use('/api/promotes', PromoteRoute);
+app.use('/api/feedbacks', FeedbackRoute);
 
 //  --------------------------- ADMIN Method -------------------------------------
 const findAdmin = (idKey, myArray, avatarUrlAdmin, fullnameAdmin, emailAdmin, phoneAdmin, addressAdmin) => {
@@ -434,12 +434,6 @@ app.get("/api/comments", (req, res) => {
     const dataComment = fs.readFileSync("datas/data-comment.json")
     const dataComments = JSON.parse(dataComment)
     res.json(dataComments)
-});
-
-app.get("/api/feedbacks", (req, res) => {
-    const dataFeedback = fs.readFileSync("datas/data-feedback.json")
-    const dataFeedbacks = JSON.parse(dataFeedback)
-    res.json(dataFeedbacks)
 });
 
 http.listen(PORT, () => {

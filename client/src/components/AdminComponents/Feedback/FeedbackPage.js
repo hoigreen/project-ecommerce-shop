@@ -1,20 +1,16 @@
 import React, { useState, useEffect } from 'react';
-
 import AdminHeader from '../Common/AdminHeader';
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
 import { handleLoadingPage } from '../../Common';
 
 const FeedbackPage = () => {
-
     const [feedbacks, setFeedbacks] = useState([])
-
-
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchAPIs = () => {
             fetch("http://localhost:4000/api/feedbacks").then(res => res.json()).then(data => {
-                setFeedbacks(data.feedbacks)
+                setFeedbacks(data)
                 setLoading(false)
             });
         }
@@ -95,7 +91,6 @@ const FeedbackPage = () => {
                 </div>
             </div>
         </React.Fragment>
-
     );
 }
 

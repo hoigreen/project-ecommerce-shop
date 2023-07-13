@@ -26,6 +26,18 @@ router.get("/:id", async (req, res) => {
     }
 });
 
+// Get 1 product
+router.get("/get-by-name/:name", async (req, res) => {
+    try {
+        const name = req.params.name;
+        const product = await ProductModel.findOne({ name });
+        res.json(product);
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).json({ error: 'Server error' });
+    }
+});
+
 // Create 1 product
 router.post("/create", CreateProductController)
 

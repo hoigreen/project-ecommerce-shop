@@ -4,13 +4,16 @@ const dotenv = require("dotenv")
 const morgan = require("morgan")
 const connectDB = require("./config/db")
 
-const { AdminRoute,
+const { 
+    AdminRoute,
     UserRoute,
     ProductRoute,
     PromoteRoute,
     FeedbackRoute,
     OrderRoute,
-    GiftcodeRoute } = require("./routes")
+    GiftcodeRoute,
+    CommentRoute
+} = require("./routes")
 
 const app = express()
 const http = require('http').Server(app);
@@ -36,6 +39,7 @@ app.use('/api/promotes', PromoteRoute);
 app.use('/api/feedbacks', FeedbackRoute);
 app.use('/api/orders', OrderRoute);
 app.use('/api/giftcodes', GiftcodeRoute);
+app.use('/api/comments', CommentRoute);
 
 http.listen(PORT, () => {
     console.log(`Server listening on port: ${PORT}`);

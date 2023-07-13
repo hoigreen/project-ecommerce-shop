@@ -170,11 +170,34 @@ const UpdateInfo = async (req, res) => {
     }
 }
 
+const AddProductToCart = (req, res) => {
+    try {
+        const _id = req.params.id;
+        const item = req.body;
+
+        UserModel.findByIdAndUpdate(
+            _id,
+            { $push: { cart: item } },
+            { new: true }
+        )
+            .then(updatedUser => {
+                res.status(200).json(updatedUser);
+            })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+            message: "Error while updating",
+        });
+    }
+}
+
 const IncreaseQuantityProductInCart = async (req, res) => {
     try {
         const _id = req.params.id;
         const { productName } = req.body;
-        console.log(productName);
 
         UserModel.findByIdAndUpdate(
             _id,
@@ -275,5 +298,6 @@ module.exports = {
     IncreaseQuantityProductInCart,
     DecreaseQuantityProductInCart,
     RemoveProductInCart,
-    RemoveAllInCart
+    RemoveAllInCart,
+    AddProductToCart
 };

@@ -1,58 +1,46 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-
 import './styles/info-product.css';
-
 import { Breadcrumbs, Footer, Nav } from '../Common';
 import { Toast, handleLoadingPage } from '../../Common';
+import axios from 'axios';
 
 const InfoProductClient = ({ socket }) => {
-    const [users, setUsers] = useState([])
-    const [cartUser, setCartUser] = useState([])
-
     const [products, setProducts] = useState([])
-    const [productID, setProductID] = useState('')
+    const [product, setProduct] = useState({})
     const { name } = useParams()
-    const [imagePrimary, setImagePrimary] = useState('')
-    const [imageLink, setImageLink] = useState('')
     const [imageList, setImageList] = useState([])
-    const [type, setType] = useState('')
     const [option, setOption] = useState([])
     const [optionEdit, setOptionEdit] = useState('')
     const [color, setColor] = useState([])
     const [colorEdit, setColorEdit] = useState([])
-    const [price, setPrice] = useState('')
-    const [priceEdit, setPriceEdit] = useState('')
-    const [percent, setPercent] = useState()
-    const [starProduct, setStarProduct] = useState()
-    const [voterProduct, setVoterProduct] = useState()
-
+    const [priceEdit, setPriceEdit] = useState(0)
     const [promotes, setPromotes] = useState([])
-
     const [comments, setComments] = useState([])
-
     const [loading, setLoading] = useState(true)
 
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
-                setLoading(false)
-            })
-
-            fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
-                setProducts(data.products)
-                setLoading(false)
+            fetch("http://localhost:4000/api/products/get-by-name/" + name).then(res => res.json()).then(data => {
+                setProduct(data)
+                setImageList(data.imageList)
+                setOption(data.option)
+                setColor(data.color)
             })
 
             fetch("http://localhost:4000/api/promotes").then(res => res.json()).then(data => {
-                setPromotes(data.promotes)
+                setPromotes(data)
                 setLoading(false)
             })
 
             fetch("http://localhost:4000/api/comments").then(res => res.json()).then(data => {
-                setComments(data.comments)
+                setComments(data)
+                setLoading(false)
+            })
+
+            fetch("http://localhost:4000/api/products/").then(res => res.json()).then(data => {
+                setProducts(data)
                 setLoading(false)
             })
         }
@@ -60,34 +48,11 @@ const InfoProductClient = ({ socket }) => {
     }, [])
 
     useEffect(() => {
-        users.map((user, index) => {
-            if (user.username === window.localStorage.getItem("userLogged")) {
-                setCartUser(user.cart);
-            }
-        })
-        // show thông tin sản phẩm
-        products.map((product, index) => {
-            if (name === product.name) {
-                setProductID(product.id)
-                setImagePrimary(product.imagePrimary);
-                setImageLink(product.imageLink);
-                setImageList(product.imageList);
-                setType(product.type);
-                setOption(product.option);
-                setColor(product.color);
-                setPrice(product.price);
-                setPercent(product.percent);
-                setStarProduct(product.star);
-                setVoterProduct(product.voter);
-            }
-        })
-
         // show các khuyến mãi dành cho sản phẩm
         var indexPromote = 1;
         promotes.map((promote, index) => {
             const promoteElement = document.querySelectorAll(".info-product__detail-promote-item")[index]
             const promoteIndex = promoteElement.querySelector(".info-product__detail-promote-item-index")
-
             products.map((product, i) => {
                 if (name === product.name) {
                     if ((String(promote.apply).toLowerCase()).includes(String(product.type).toLowerCase())) {
@@ -100,9 +65,9 @@ const InfoProductClient = ({ socket }) => {
         })
 
         // show thông tin sản phẩm tương tự
-        products.map((product, index) => {
+        products.map((p, index) => {
             const infoProductSimilar = document.querySelectorAll('.product__sell-item')[index];
-            if (product.type === type) {
+            if (p.type === product.type) {
                 infoProductSimilar.style.display = "block";
             }
         })
@@ -214,13 +179,9 @@ const InfoProductClient = ({ socket }) => {
     }
 
     const arrayImage = []
-    products.map((product, index) => {
-        if (name === product.name) {
-            arrayImage.push(product.imagePrimary, product.imageLink)
-            imageList.map((imageItem, i) => {
-                arrayImage.push(imageItem)
-            })
-        }
+    arrayImage.push(product.imagePrimary, product.imageLink)
+    imageList.map((imageItem, i) => {
+        arrayImage.push(imageItem)
     })
 
     let indexImageInArray = 0;
@@ -248,43 +209,36 @@ const InfoProductClient = ({ socket }) => {
         Toast({ title: 'Bạn chưa đăng nhập vào ShopTECH', message: 'Vui lòng đăng nhập để sử dụng tính năng này!', type: 'error', duration: 4000 })
     }
 
-
     const handleClickAddToCart = () => {
         const elementClickActive = document.querySelector(".info-product__detail-option-item.info-product__detail-option-item--active")
         if (elementClickActive) {
-            console.log(window.localStorage.getItem("userLogged"))
-            if (window.localStorage.getItem("userLogged") === null) {
+            if (!window.localStorage.getItem("auth")) {
                 showErrorNotLoginMessage()
                 return;
             }
-            users.map((user, index) => {
-                if (window.localStorage.getItem("userLogged") === user.username) {
-                    var indexProduct = cartUser.length + 1;
-                    socket.emit("addProductToCart",
-                        {
-                            userID: user.userID,
-                            cart:
-                            {
-                                indexProduct: indexProduct,
-                                imageLink: imageLink,
-                                id: productID,
-                                productName: name,
-                                option: optionEdit,
-                                color: colorEdit,
-                                price: priceEdit,
-                                percent: percent,
-                                quantity: 1,
-                                voted: false
-                            }
-                        }
-                    )
+
+            axios.put('http://localhost:4000/api/users/add-product-to-cart-user/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
+                {
+                    imageLink: "",
+                    productName: name,
+                    option: optionEdit,
+                    color: colorEdit,
+                    price: priceEdit,
+                    percent: product.percent,
+                    quantity: 1,
+                    voted: false
                 }
-            })
-            showSuccessMessage();
-            handleLoadingPage(1)
-            window.setTimeout(() => {
-                window.location.href = window.location.href
-            }, 1000)
+            )
+                .then(response => {
+                    showSuccessMessage();
+                    handleLoadingPage(1)
+                    window.setTimeout(() => {
+                        window.location.href = window.location.href
+                    }, 1000)
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
         else {
             showErrorMessage();
@@ -294,37 +248,32 @@ const InfoProductClient = ({ socket }) => {
     const handleClickBuyNow = () => {
         const elementClickActive = document.querySelector(".info-product__detail-option-item.info-product__detail-option-item--active")
         if (elementClickActive) {
-            if (window.localStorage.getItem("userLogged") === null) {
+            if (!window.localStorage.getItem("auth")) {
                 showErrorNotLoginMessage()
                 return;
             }
-            users.map((user, index) => {
-                if (window.localStorage.getItem("userLogged") === user.username) {
-                    var indexProduct = cartUser.length + 1;
-                    socket.emit("addProductToCart",
-                        {
-                            userID: user.userID,
-                            cart:
-                            {
-                                indexProduct: indexProduct,
-                                imageLink: imageLink,
-                                id: productID,
-                                productName: name,
-                                option: optionEdit,
-                                color: colorEdit,
-                                price: priceEdit,
-                                percent: percent,
-                                quantity: 1
-                            }
-                        }
-                    )
+
+            axios.put('http://localhost:4000/api/users/add-product-to-cart-user/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
+                {
+                    imageLink: "",
+                    productName: name,
+                    option: optionEdit,
+                    color: colorEdit,
+                    price: priceEdit,
+                    percent: product.percent,
+                    quantity: 1,
+                    voted: false
                 }
-            })
-            showSuccessMessage();
-            handleLoadingPage(1)
-            window.setTimeout(() => {
-                window.location.href = '/cart/info'
-            }, 2)
+            )
+                .then(response => {
+                    handleLoadingPage(1)
+                    window.setTimeout(() => {
+                        window.location.href = "/cart/info"
+                    }, 1000)
+                })
+                .catch(error => {
+                    console.error(error);
+                });
         }
         else {
             showErrorMessage();
@@ -341,15 +290,15 @@ const InfoProductClient = ({ socket }) => {
                     <div className="info-product__container">
                         <div className="info-product__header">
                             <label className="info-product__header-name">{name}</label>
-                            <p className="info-product__header-star">{handleFormatStarProduct(starProduct)}</p>
-                            <p className="info-product__header-voters">({voterProduct} người bình chọn)</p>
+                            <p className="info-product__header-star">{handleFormatStarProduct(product.star)}</p>
+                            <p className="info-product__header-voters">({product.voter} người bình chọn)</p>
                         </div>
 
                         <div className="info-product__box">
                             <div className="info-product__image-group">
                                 <div className="info-product__image-primary"
                                     style={{
-                                        backgroundImage: `url(${imagePrimary})`,
+                                        backgroundImage: `url(${product.imagePrimary})`,
                                         backgroundPosition: "center center",
                                         backgroundColor: "transparent",
                                         backgroundRepeat: "no-repeat",
@@ -365,14 +314,14 @@ const InfoProductClient = ({ socket }) => {
                                 <label className="info-product__image-label">Những hình ảnh của sản phẩm</label>
                                 <ul className="info-product__image-list">
                                     <li style={{
-                                        backgroundImage: `url(${imageLink})`,
+                                        backgroundImage: `url(${product.imageLink})`,
                                         backgroundPosition: "center center",
                                         backgroundColor: "transparent",
                                         backgroundRepeat: "no-repeat",
                                         backgroundSize: "contain"
                                     }} className='info-product__image-item info-product__image-item--active'
                                         onClick={(e) => {
-                                            changeImage(imageLink)
+                                            changeImage(product.imageLink)
                                         }}>
                                     </li>
 
@@ -420,9 +369,9 @@ const InfoProductClient = ({ socket }) => {
                             <div className='info-product__detail'>
                                 <label className='info-product__detail-label info-product__detail-label-price'>Giá sản phẩm:</label>
                                 <div className='info-product__detail-price'>
-                                    <label className='info-product__detail-current-price'>{Number(price).toLocaleString()} đ</label>
-                                    <label className='info-product__detail-old-price'>{(Number(price) * (100 + percent) / 100).toLocaleString()} đ</label>
-                                    <label className='info-product__detail-percent'>-{percent}%</label>
+                                    <label className='info-product__detail-current-price'>{Number(product.price).toLocaleString()} đ</label>
+                                    <label className='info-product__detail-old-price'>{(Number(product.price) * (100 + product.percent) / 100).toLocaleString()} đ</label>
+                                    <label className='info-product__detail-percent'>-{product.percent}%</label>
                                 </div>
                                 <label className='info-product__detail-installment'>
                                     <i className="info-product__detail-installment-icon fa fa-tag"></i>
@@ -445,7 +394,7 @@ const InfoProductClient = ({ socket }) => {
                                     {loading ? <p>Đang kết nối đến server ... </p> : color.map((c, i) => (
                                         <div key={i} className='info-product__detail-option-item' onClick={() => { handleSelectColor(c) }}>
                                             <div className='info-product__detail-option-item-content'>{c}</div>
-                                            <div className='info-product__detail-option-item-price'>{Number(price).toLocaleString()} đ</div>
+                                            <div className='info-product__detail-option-item-price'>{Number(product.price).toLocaleString()} đ</div>
                                         </div>
                                     ))}
                                 </div>
@@ -508,9 +457,9 @@ const InfoProductClient = ({ socket }) => {
                         <div className='info-product__review-container'>
                             <div className="info-product__rating-box">
                                 <label className="info-product__rating-label">ĐÁNH GIÁ SẢN PHẨM</label>
-                                <p className="info-product__rating-star">{Number(starProduct).toFixed(1)}/5</p>
-                                <p className="info-product__rating-star-icon">{handleFormatStarProduct(starProduct)}</p>
-                                <p className="info-product__rating-number">{voterProduct} lượt đánh giá</p>
+                                <p className="info-product__rating-star">{Number(product.star).toFixed(1)}/5</p>
+                                <p className="info-product__rating-star-icon">{handleFormatStarProduct(product.name)}</p>
+                                <p className="info-product__rating-number">{product.voter} lượt đánh giá</p>
                             </div>
 
                             <ul className="info-product__review-list">

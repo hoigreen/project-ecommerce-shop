@@ -8,6 +8,7 @@ const {
     DecreaseQuantityProductInCart,
     RemoveProductInCart,
     RemoveAllInCart,
+    AddProductToCart,
 } = require('../controllers/UserControllers')
 
 const { RequireSignIn } = require("../middlewares/MiddleWares");
@@ -48,6 +49,9 @@ router.post("/login", LoginController);
 router.put("/update/:id", UpdateInfo, RequireSignIn)
 
 // Giỏ hàng
+// Thêm sản phẩm vào giỏ hàng
+router.put("/add-product-to-cart-user/:id", AddProductToCart)
+
 // Tăng số lượng của 1 sản phẩm trong giỏ hàng
 router.put("/increase-quantity-product-in-cart/:id", IncreaseQuantityProductInCart)
 

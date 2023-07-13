@@ -6,12 +6,6 @@ const CartSchema = new mongoose.Schema(
             type: String,
             default: ""
         },
-        // id: {
-        //     type: String,
-        //     required: true,
-        //     unique: true,
-        //     trim: true
-        // },
         productName: {
             type: String,
             required: true,

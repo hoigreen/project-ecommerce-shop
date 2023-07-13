@@ -5,6 +5,7 @@ const PromoteRoute = require('./PromoteRoute')
 const FeedbackRoute = require('./FeedbackRoute')
 const OrderRoute = require('./OrderRoute')
 const GiftcodeRoute = require('./GiftcodeRoute')
+const CommentRoute = require('./CommentRoute')
 
 module.exports = {
     AdminRoute,
@@ -13,5 +14,6 @@ module.exports = {
     PromoteRoute,
     FeedbackRoute,
     OrderRoute,
-    GiftcodeRoute
+    GiftcodeRoute,
+    CommentRoute
 }

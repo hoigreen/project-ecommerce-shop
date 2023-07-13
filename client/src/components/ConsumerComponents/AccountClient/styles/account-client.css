@@ -917,7 +917,7 @@
 .vote-product__start-group-item:hover~.vote-product__start-group-item,
 .vote-product__start-group-item.vote-product__start-group-item--selected~.vote-product__start-group-item {
     transition: color 0.8s ease;
-    color: var(--primary-color);
+    color: var(--star-color);
 }
 
 .vote-product__textbox {

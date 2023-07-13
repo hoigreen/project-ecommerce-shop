@@ -1,6 +1,7 @@
 const express = require('express');
 const OrderModel = require('../models/OrderModel')
-const { UpdateStatusOrder } = require('../controllers/OrderController');
+const { UpdateStatusOrder, UpdateStatusVoteProduct, CreateOrder } = require('../controllers/OrderController');
+const { RequireSignIn } = require('../middlewares/MiddleWares');
 const router = express.Router();
 
 // Get all orders
@@ -28,5 +29,11 @@ router.get("/:id", async (req, res) => {
 
 // Update status order
 router.put("/update-status/:id", UpdateStatusOrder);
+
+// Update status vode 1 product
+router.put("/update-status/:id/:productName", UpdateStatusVoteProduct)
+
+// Tạo đơn hàng mới
+router.post("/create", CreateOrder)
 
 module.exports = router;

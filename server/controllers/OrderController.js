@@ -1,65 +1,59 @@
 const OrderModel = require("../models/OrderModel");
 
-const CreateProductController = async (req, res) => {
+const CreateOrder = async (req, res) => {
     try {
         const {
-            imagePrimary,
-            imageLink,
-            imageList,
-            name,
-            type,
-            enType,
-            brand,
+            orderID,
+            owner,
+            fullname,
+            email,
+            phone,
+            method,
+            address,
+            note,
             price,
-            option,
-            color,
+            giftcodeApply,
+            time,
             status,
-            star,
-            voter,
-            hotDeal,
-            featured,
-            percent } = req.body;
+            lists
+        } = req.body;
 
         //Kiểm tra trùng
-        const checkExisted = await ProductModel.findOne({ name });
+        const checkExisted = await OrderModel.findOne({ orderID });
 
-        // Nếu sản phẩm tồn tại
         if (checkExisted) {
             return res.status(200).send({
                 success: true,
-                message: "Sản phẩm đã tồn tại!"
+                message: "Đơn hàng đã tồn tại"
             });
         }
 
-        const product = await new ProductModel({
-            imagePrimary,
-            imageLink,
-            imageList,
-            name,
-            type,
-            enType,
-            brand,
+        const order = await new OrderModel({
+            orderID,
+            owner,
+            fullname,
+            email,
+            phone,
+            method,
+            address,
+            note,
             price,
-            option,
-            color,
+            giftcodeApply,
+            time,
             status,
-            star,
-            voter,
-            hotDeal,
-            featured,
-            percent
+            lists
         }).save();
 
         res.status(201).send({
             success: true,
-            message: "Thêm sản phẩm thành công",
-            product,
+            message: "Tạo đơn hàng thành công",
+            order,
         });
     } catch (error) {
         console.log(error);
         res.status(500).send({
             success: false,
-            message: "Đã xảy ra lỗi khi đăng ký tài khoản",
+            message: "Đã xảy ra lỗi khi tạo đơn hàng",
             error,
         });
     }
@@ -88,7 +82,41 @@ const UpdateStatusOrder = async (req, res) => {
     }
 }
 
+const UpdateStatusVoteProduct = async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const { productName } = req.body;
+        // const status3 = await OrderModel.findByIdAndUpdate(
+        //     _id,
+        //     { $set: { 'lists.$[element].voted': true } },
+        //     {
+        //         arrayFilters: [{ 'element.productName': productName }],
+        //         new: true
+        //     }
+        // )
+
+        const status = await OrderModel.findByIdAndUpdate(
+            _id,
+            { $set: { "lists.$.voted": true } },
+            { arrayFilters: [{ "productName": productName }], new: true }
+        )
+        res.status(200).send({
+            success: true,
+            messsage: "Đã đánh giá thành công",
+            status
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+            message: "Error while updating",
+        });
+    }
+}
+
 module.exports = {
-    CreateProductController,
-    UpdateStatusOrder
+    CreateOrder,
+    UpdateStatusOrder,
+    UpdateStatusVoteProduct
 };

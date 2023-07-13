@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import { Toast, handleLoadingPage } from '../../Common';
 import { Breadcrumbs, Nav } from '../Common';
+import axios from 'axios';
 
 const Payment = ({ socket }) => {
-    const [users, setUsers] = useState([])
+    const [user, setUser] = useState({})
     const [userID, setUserID] = useState("")
     const [cartUser, setCartUser] = useState([])
 
@@ -14,25 +15,17 @@ const Payment = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
+            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+                setUser(data)
+                setCartUser(data.cart)
             })
 
             fetch("http://localhost:4000/api/orders").then(res => res.json()).then(data => {
-                setOrders(data.orders)
+                setOrders(data)
             })
         }
         fetchAPIs()
     }, [])
-
-    useEffect(() => {
-        users.map((user, index) => {
-            if (user.username === window.localStorage.getItem("userLogged")) {
-                setUserID(user.userID)
-                setCartUser(user.cart);
-            }
-        })
-    }, [users])
 
 
     const showSuccessMessage = () => {
@@ -53,44 +46,6 @@ const Payment = ({ socket }) => {
                 } else {
                     methodItem.classList.add('payment__item--active')
                 }
-            }
-        })
-    }
-
-    const handleComplePayment = () => {
-        var today = new Date();
-        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        var dateTime = date + ' ' + time;
-        setTimeOrder(dateTime)
-        orders.map((order, i) => {
-            if (order.orderID === window.localStorage.getItem("orderIDCache")) {
-                showErrorMessage()
-                return;
-            }
-            if (i === orders.length - 1) {
-                socket.emit("addOrder", {
-                    orderID: window.localStorage.getItem("orderIDCache"),
-                    owner: window.localStorage.getItem("userLogged"),
-                    fullname: window.localStorage.getItem("fullnameCache"),
-                    email: window.localStorage.getItem("emailCache"),
-                    phone: window.localStorage.getItem("phoneCache"),
-                    method: window.localStorage.getItem("methodCache"),
-                    address: window.localStorage.getItem("addressCache"),
-                    note: window.localStorage.getItem("noteCache"),
-                    price: window.localStorage.getItem("countTotalPriceCache"),
-                    giftcodeApply: window.localStorage.getItem("percentApply"),
-                    time: dateTime,
-                    status: "Đang giao hàng",
-                    lists: cartUser
-                }, {
-                    userID: userID,
-                });
-                handleLoadingPage(2)
-                setTimeout(() => {
-                    completePayment()
-                }, 2000)
-                showSuccessMessage()
             }
         })
     }
@@ -127,7 +82,8 @@ const Payment = ({ socket }) => {
             }
         }, 1000)
 
-        paymentBox.innerHTML = `
+        paymentBox.innerHTML =
+            `
             <div class='payment-done__box'>
                 <div class="payment-done__icon checkmark-circle">
                     <div class="background"></div>
@@ -140,6 +96,77 @@ const Payment = ({ socket }) => {
             </div>
         `
         document.querySelector(".cart__control-container").style.display = 'none';
+    }
+
+    const handleClickRemoveAll = () => {
+        axios.put('http://localhost:4000/api/users/remove-all-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id)
+    }
+
+    const handleComplePayment = async (e) => {
+        var today = new Date();
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date + ' ' + time;
+        setTimeOrder(dateTime)
+        try {
+            const res = await axios.post(`${process.env.REACT_APP_API}/api/orders/create`, {
+                orderID: window.localStorage.getItem("orderIDCache"),
+                owner: JSON.parse(window.localStorage.getItem('auth')).user.username,
+                fullname: window.localStorage.getItem("fullnameCache"),
+                email: window.localStorage.getItem("emailCache"),
+                phone: window.localStorage.getItem("phoneCache"),
+                method: window.localStorage.getItem("methodCache"),
+                address: window.localStorage.getItem("addressCache"),
+                note: window.localStorage.getItem("noteCache"),
+                price: window.localStorage.getItem("countTotalPriceCache"),
+                giftcodeApply: window.localStorage.getItem("percentApply"),
+                time: dateTime,
+                status: "Đang giao hàng",
+                lists: cartUser
+            });
+            if (res && res.data.success) {
+                handleLoadingPage(2)
+                setTimeout(() => {
+                    completePayment()
+                }, 2000)
+                showSuccessMessage()
+                try {
+                    const res = await axios.post(`${process.env.REACT_APP_API}/api/orders/create`, {
+                        orderID: window.localStorage.getItem("orderIDCache"),
+                        owner: JSON.parse(window.localStorage.getItem('auth')).user.username,
+                        fullname: window.localStorage.getItem("fullnameCache"),
+                        email: window.localStorage.getItem("emailCache"),
+                        phone: window.localStorage.getItem("phoneCache"),
+                        method: window.localStorage.getItem("methodCache"),
+                        address: window.localStorage.getItem("addressCache"),
+                        note: window.localStorage.getItem("noteCache"),
+                        price: window.localStorage.getItem("countTotalPriceCache"),
+                        giftcodeApply: window.localStorage.getItem("percentApply"),
+                        time: dateTime,
+                        status: "Đang giao hàng",
+                        lists: cartUser
+                    });
+                    if (res && res.data.success) {
+                        handleLoadingPage(2)
+                        setTimeout(() => {
+                            handleClickRemoveAll()
+                            completePayment()
+                        }, 2000)
+                        showSuccessMessage()
+                    } else {
+                        window.alert("Đã gặp lỗi khi tạo! Vui lòng thử lại")
+                    }
+                } catch (error) {
+                    console.log(error);
+                    window.alert(error);
+                }
+            } else {
+                window.alert("Đã gặp lỗi khi tạo! Vui lòng thử lại")
+            }
+        } catch (error) {
+            console.log(error);
+            window.alert(error);
+        }
     }
 
     return (
@@ -222,6 +249,7 @@ const Payment = ({ socket }) => {
                     </li>
                 </ul>
 
+                {/* Gửi thông tin đơn hàng qua email */}
                 <form className='form-confirm' style={{ display: 'none' }}>
                     <input name='order_id' readOnly value={window.localStorage.getItem("orderIDCache")} />
                     <input name='order_fullname' readOnly value={window.localStorage.getItem("fullnameCache")} />
@@ -234,7 +262,7 @@ const Payment = ({ socket }) => {
 
                 <div className="cart__control-container">
                     <div className='cart__control-box' style={{ paddingTop: "10px" }}>
-                        <button className="cart__control-btn cart__control-btn--payment" onClick={(e) => { handleComplePayment() }}>Hoàn tất đặt hàng</button>
+                        <button className="cart__control-btn cart__control-btn--payment" onClick={handleComplePayment}>Hoàn tất đặt hàng</button>
                     </div>
                 </div>
             </div>

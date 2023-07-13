@@ -3,18 +3,14 @@ import { Breadcrumbs, Nav } from '../Common';
 import { handleLoadingPage } from '../../Common';
 
 const CartInfo = () => {
-    const [users, setUsers] = useState([])
-    const [fullname, setFullName] = useState('')
-    const [email, setEmail] = useState('')
-    const [phone, setPhone] = useState('')
-    const [address, setAddress] = useState('')
-    const [methodReceive, setMethodReceive] = useState('')
+    const [user, setUser] = useState({})
 
     const [fullnameEdit, setFullNameEdit] = useState('')
     const [emailEdit, setEmailEdit] = useState('')
     const [phoneEdit, setPhoneEdit] = useState('')
     const [addressEdit, setAddressEdit] = useState('')
     const [noteEdit, setNoteEdit] = useState('')
+    const [methodReceive, setMethodReceive] = useState('')
 
     const [cartUser, setCartUser] = useState([])
     const [countTotalPrice, setCountTotalPrice] = useState()
@@ -22,24 +18,15 @@ const CartInfo = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
+            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+                setUser(data)
+                setCartUser(data.cart)
             })
         }
         fetchAPIs()
     }, [])
 
     useEffect(() => {
-        users.map((user, index) => {
-            if (user.username === window.localStorage.getItem("userLogged")) {
-                setCartUser(user.cart);
-                setFullName(user.fullname);
-                setEmail(user.email);
-                setPhone(user.phone);
-                setAddress(user.address);
-            }
-        })
-
         // show thông tin tổng tiền giỏ hàng
         let countPriceAll = 0
         cartUser.map((cartItem, index) => {
@@ -53,12 +40,12 @@ const CartInfo = () => {
         const checkboxDefaultInfo = document.querySelector(".cart-info__input-default-info")
         const inputElement = document.querySelectorAll(".cart-info__input")
         if (checkboxDefaultInfo.checked) {
-            inputElement[0].value = `${fullname}`
-            inputElement[1].value = `${email}`
-            inputElement[2].value = `${phone}`
-            setFullNameEdit(fullname)
-            setEmailEdit(email)
-            setPhoneEdit(phone)
+            inputElement[0].value = `${user.fullname}`
+            inputElement[1].value = `${user.email}`
+            inputElement[2].value = `${user.phone}`
+            setFullNameEdit(user.fullname)
+            setEmailEdit(user.email)
+            setPhoneEdit(user.phone)
         }
         else {
             inputElement[0].value = ``
@@ -100,8 +87,8 @@ const CartInfo = () => {
         const checkboxDefaultAddress = document.querySelector(".cart-info__input-default-address")
         const inputElement = document.querySelectorAll(".cart-info__input")
         if (checkboxDefaultAddress.checked) {
-            inputElement[3].value = `${address}`
-            setAddressEdit(address)
+            inputElement[3].value = `${user.address}`
+            setAddressEdit(user.address)
         }
         else {
             inputElement[3].value = ``

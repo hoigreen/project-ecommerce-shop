@@ -1,12 +1,9 @@
 import React, { useState, useEffect } from 'react';
-
 import { Breadcrumbs, Nav } from '../Common';
 import { handleLoadingPage } from '../../Common';
 
 
 const CartConfirm = () => {
-    const [users, setUsers] = useState([])
-
     const [cartUser, setCartUser] = useState([])
     const [totalPriceOld, setTotalPriceOld] = useState()
     const [countTotalPrice, setCountTotalPrice] = useState()
@@ -17,8 +14,8 @@ const CartConfirm = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
+            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+                setCartUser(data.cart)
                 setLoading(false)
             })
         }
@@ -26,12 +23,6 @@ const CartConfirm = () => {
     }, [])
 
     useEffect(() => {
-        users.map((user, index) => {
-            if (user.username === window.localStorage.getItem("userLogged")) {
-                setCartUser(user.cart);
-            }
-        })
-
         // show thông tin tổng tiền giỏ hàng
         let countPriceAll = 0
         let countTotalPriceOld = 0
@@ -42,9 +33,10 @@ const CartConfirm = () => {
             }
 
         })
+
         setTotalPriceOld(countTotalPriceOld)
         setCountTotalPrice(countPriceAll)
-    })
+    }, [cartUser])
 
     window.onload = () => {
         setOrderID(makeID(10))
@@ -65,7 +57,7 @@ const CartConfirm = () => {
     const handleNextStep = () => {
         window.localStorage.setItem('orderIDCache', orderID)
         handleLoadingPage(1)
-        setTimeout(() =>{
+        setTimeout(() => {
             window.location.href = "/cart/info/giftcode/confirm/payment"
         }, 2000)
     }

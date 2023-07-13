@@ -1,5 +1,51 @@
 const mongoose = require('mongoose')
 
+const CartSchema = new mongoose.Schema(
+    {
+        imageLink: {
+            type: String,
+            default: ""
+        },
+        // id: {
+        //     type: String,
+        //     required: true,
+        //     unique: true,
+        //     trim: true
+        // },
+        productName: {
+            type: String,
+            required: true,
+            unique: true,
+        },
+        option: {
+            type: String,
+            default: '',
+            required: true
+        },
+        color: {
+            type: String,
+            required: true,
+        },
+        price: {
+            type: Number,
+            required: true
+        },
+        percent: {
+            type: Number,
+            required: true
+        },
+        quantity: {
+            type: Number,
+            required: true,
+        },
+        voted: {
+            type: Boolean,
+            required: true,
+            default: false
+        }
+    }
+);
+
 const UserSchema = new mongoose.Schema(
     {
         avatarUrl: {
@@ -16,11 +62,7 @@ const UserSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        cart: {
-            type: Array,
-            default: [],
-            required: true
-        },
+        cart: [CartSchema],
         fullname: {
             type: String,
             required: true,

@@ -73,12 +73,10 @@ const OrderModel = new mongoose.Schema(
         address: {
             type: String,
             default: "",
-            required: true
         },
         note: {
             type: String,
             default: "",
-            required: true
         },
         price: {
             type: String,

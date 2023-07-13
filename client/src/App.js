@@ -80,7 +80,7 @@ function App() {
                         <Route path="/account/info" element={<AccountClientInfo />} />
                         <Route path="/account/history" element={<AccountHistory />} />
                         <Route path="/account/history/:orderID" element={<AccountOrderDetail />} />
-                        <Route path="/account/history/:orderID/:productID" element={<VoteProductInOrder />} />
+                        <Route path="/account/history/:orderID/:productName" element={<VoteProductInOrder />} />
 
                         {/* Search Product */}
                         <Route path="/search/:keySearch" element={<SearchProduct />} />

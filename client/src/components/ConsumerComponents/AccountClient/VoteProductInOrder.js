@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Nav } from '../Common';
 import { handleLoadingPage } from '../../Common';
+import axios from 'axios';
 
 const VoteProductInOrder = ({ socket }) => {
-    const { orderID, nameProduct } = useParams()
+    const { orderID, productName } = useParams()
     const [user, setUser] = useState({})
     const [order, setOrder] = useState({})
-    const [listProduct, setListProduct] = useState()
+    const [listProduct, setListProduct] = useState([])
 
     const [owner, setOwner] = useState("")
     const [ownerFullname, setOwnerFullname] = useState("")
     const [imageLink, setImageLink] = useState("")
-    const [productName, setProductName] = useState("")
+    // const [productName, setProductName] = useState("")
     const [option, setOption] = useState("")
     const [color, setColor] = useState("")
     const [price, setPrice] = useState()
@@ -30,104 +31,128 @@ const VoteProductInOrder = ({ socket }) => {
                 setUser(data)
             })
 
+            fetch("http://localhost:4000/api/orders/" + orderID).then(res => res.json()).then(data => {
+                setOrder(data)
+                setListProduct(data.lists)
+            })
+
             fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
                 setProducts(data)
             })
 
-            fetch("http://localhost:4000/api/orders/" + orderID).then(res => res.json()).then(data => {
-                setOrder(data)
-            })
         }
         fetchAPIs()
         handleClickStar()
     }, [])
 
     useEffect(() => {
-        setListProduct(Array(order.lists))
-    }, [order])
-
-
-
-
-    useEffect(() => {
-        // listProduct.map((item, index) => {
-        //     if (item.productName = nameProduct) {
-        //         setImageLink(item.imageLink)
-        //         setProductName(item.productName)
-        //         setOption(item.option)
-        //         setColor(item.color)
-        //         setPrice(item.price)
-        //     }
-        // })
+        listProduct.map((item, index) => {
+            if (item.productName = productName) {
+                setImageLink(item.imageLink)
+                // setProductName(item.productName)
+                setOption(item.option)
+                setColor(item.color)
+                setPrice(item.price)
+            }
+        })
     }, [listProduct])
 
     const handleClickStar = () => {
-        // const stars = document.querySelectorAll(".vote-product__start-group-item")
-        // for (let i = 0; i < stars.length; i++) {
-        //     stars[i].onclick = () => {
-        //         for (let j = 0; j < stars.length; j++) {
-        //             stars[j].classList.remove("vote-product__start-group-item--selected")
-        //         }
-        //         stars[i].classList.add("vote-product__start-group-item--selected")
-        //         switch (i) {
-        //             case 0:
-        //                 setNumberStar(5)
-        //                 break;
-        //             case 1:
-        //                 setNumberStar(4)
-        //                 break;
-        //             case 2:
-        //                 setNumberStar(3)
-        //                 break;
-        //             case 3:
-        //                 setNumberStar(2)
-        //                 break;
-        //             case 4:
-        //                 setNumberStar(1)
-        //                 break;
-        //         }
-        //     }
-        // }
+        const stars = document.querySelectorAll(".vote-product__start-group-item")
+        for (let i = 0; i < stars.length; i++) {
+            stars[i].onclick = () => {
+                for (let j = 0; j < stars.length; j++) {
+                    stars[j].classList.remove("vote-product__start-group-item--selected")
+                }
+                stars[i].classList.add("vote-product__start-group-item--selected")
+                switch (i) {
+                    case 0:
+                        setNumberStar(5)
+                        break;
+                    case 1:
+                        setNumberStar(4)
+                        break;
+                    case 2:
+                        setNumberStar(3)
+                        break;
+                    case 3:
+                        setNumberStar(2)
+                        break;
+                    case 4:
+                        setNumberStar(1)
+                        break;
+                }
+            }
+        }
 
     }
 
-    const handleConfirm = () => {
-        // setListProduct([...order.lists])
-        console.log(typeof order.lists)
-        // if (!numberStar) {
-        //     alert("Vui lòng bình chọn số sao sản phẩm này")
-        //     return;
-        // }
-        // alert("Đánh giá sản phẩm thành công!")
-        // handleLoadingPage(1.5)
+    const handleConfirm = async (e) => {
+        e.preventDefault()
+        var today = new Date();
+        var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+        var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        var dateTime = date + ' ' + time;
+
+        if (!numberStar) {
+            alert("Vui lòng bình chọn số sao sản phẩm này")
+            return;
+        }
+
+        try {
+            const res = await axios.put(`${process.env.REACT_APP_API}/api/orders/update-status/${order._id}/${productName}`, { productName: productName });
+            if (res && res.data.success) {
+                console.log(res.data)
+                alert("Đánh giá sản phẩm thành công!")
+                // handleLoadingPage(1)
+                // setTimeout(() => {
+                //     window.location.reload()
+                // })
+            } else {
+                alert("Cập nhật thông tin thất bại")
+            }
+        } catch (error) {
+            alert(error)
+        }
+
+
+        // Vote sản phẩm:
+        // 1. Tìm order - set trạng thái vote
+
+
+        // 2. Tìm đến sản phẩm - thêm số sao đánh giá => tính trung bình số sao và + 1 vote
+
+        // Thêm comment vào sản phẩm
+
+
+
+        // orders.map((item, index) => {
+        //     if (item.orderID === orderID) 
+        //     {
+        //         products.map((product, i) => {
+        //             if (product.id === productID) {
+        //                 socket.emit("handleVoteProduct",
+        //                     { orderID: item.orderID },
+        //                     { id: product.id },
+        //                     {
+        //                         nameProductVoted: productName,
+        //                         owner: owner,
+        //                         ownerAvatar: avatarLink,
+        //                         ownerName: ownerFullname,
+        //                         time: dateTime,
+        //                         content: contentComment,
+        //                         starVoted: numberStar
+        //                     },
+        //                     productID,
+        //                     numberStar
+        //                 )
+        //             }
+        //         })
+        //     }
+        // })
+
+        // handleLoadingPage(1)
         // setTimeout(() => {
-        //     var today = new Date();
-        //     var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-        //     var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-        //     var dateTime = date + ' ' + time;
-        //     orders.map((item, index) => {
-        //         if (item.orderID === orderID) {
-        //             products.map((product, i) => {
-        //                 if (product.id === productID) {
-        //                     socket.emit("handleVoteProduct",
-        //                         { orderID: item.orderID },
-        //                         { id: product.id },
-        //                         {
-        //                             nameProductVoted: productName,
-        //                             owner: owner,
-        //                             ownerAvatar: avatarLink,
-        //                             ownerName: ownerFullname,
-        //                             time: dateTime,
-        //                             content: contentComment,
-        //                             starVoted: numberStar
-        //                         },
-        //                         productID,
-        //                         numberStar
-        //                     )
-        //                 }
-        //             })
-        //         }
-        //     })
         //     window.location.href = `/account/history/${orderID}`
         // }, 1500)
     }
@@ -140,7 +165,7 @@ const VoteProductInOrder = ({ socket }) => {
                     <div className="vote-product__header">ĐÁNH GIÁ SẢN PHẨM</div>
                     <div className="vote-product__body">
                         <div className='vote-product__item'>
-                            <img src={123} className='vote-product__item-img' />
+                            <img src={imageLink} className='vote-product__item-img' />
                             <div className='vote-product__item-info'>
                                 <label className='vote-product__item-name'>{productName}</label>
                                 <label className='vote-product__item-content'>{option}</label>

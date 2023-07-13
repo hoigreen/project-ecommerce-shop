@@ -3,8 +3,11 @@ const UserModel = require('../models/UserModel');
 const {
     RegisterController,
     LoginController,
-    TestController,
     UpdateInfo,
+    IncreaseQuantityProductInCart,
+    DecreaseQuantityProductInCart,
+    RemoveProductInCart,
+    RemoveAllInCart,
 } = require('../controllers/UserControllers')
 
 const { RequireSignIn } = require("../middlewares/MiddleWares");
@@ -44,7 +47,17 @@ router.post("/login", LoginController);
 // Cập nhật thông tin cá nhân
 router.put("/update/:id", UpdateInfo, RequireSignIn)
 
-//test routes
-router.get("/test", TestController, RequireSignIn);
+// Giỏ hàng
+// Tăng số lượng của 1 sản phẩm trong giỏ hàng
+router.put("/increase-quantity-product-in-cart/:id", IncreaseQuantityProductInCart)
+
+// Giảm số lượng của 1 sản phẩm trong giỏ hàng
+router.put("/decrease-quantity-product-in-cart/:id", DecreaseQuantityProductInCart)
+
+// Xóa 1 sản phẩm trong giỏ hàng
+router.put("/remove-product-in-cart/:id", RemoveProductInCart)
+
+// Xóa toàn bộ sản phẩm trong giỏ hàng
+router.put("/remove-all-in-cart/:id", RemoveAllInCart)
 
 module.exports = router;

@@ -1,22 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import "./styles/cart-style.css"
 import { Nav, Breadcrumbs } from '../Common';
 import { handleLoadingPage } from '../../Common';
+import { AuthContext } from '../../../context';
+import axios from 'axios';
 
-const Cart = ({ socket }) => {
+const Cart = () => {
+    const [auth, setAuth] = useContext(AuthContext)
     const [user, setUser] = useState({})
     const [cartUser, setCartUser] = useState([])
     const [countTotalPrice, setCountTotalPrice] = useState()
 
     const [loading, setLoading] = useState(true)
 
-
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
-                setUser(data)
-                setLoading(false)
-            })
+            if (window.localStorage.auth)
+                fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+                    setUser(data)
+                    setLoading(false)
+                    setCartUser(data.cart)
+                })
+            else {
+                document.querySelector(".cart__label--empty").innerText = "Vui lòng đăng nhập để thêm sản phẩm vào giỏ hàng"
+            }
         }
         fetchAPIs()
     }, [])
@@ -24,7 +31,7 @@ const Cart = ({ socket }) => {
     useEffect(() => {
         // show thông tin tổng tiền giỏ hàng
         let countPriceAll = 0
-        user.cart.map((cartItem, index) => {
+        cartUser.map((cartItem, index) => {
             if (cartItem) countPriceAll += Number(cartItem.price) * cartItem.quantity;
         })
         setCountTotalPrice(countPriceAll)
@@ -32,7 +39,7 @@ const Cart = ({ socket }) => {
 
         // show điều kiện giỏ hàng
         for (let i = 0; i < 5; i++) {
-            if (user.cart.length == 0) {
+            if (cartUser.length == 0) {
                 document.querySelector('.cart__container--empty').style.display = 'flex';
                 document.querySelector('.cart__control-container').style.display = 'none';
             }
@@ -44,70 +51,73 @@ const Cart = ({ socket }) => {
         }
     }, [user])
 
-    const handleClickAddQuantity = (indexProduct) => {
-        // user.map((user, index) => {
-        //     if (window.localStorage.getItem("userLogged") === user.username) {
-        //         socket.emit("addQuantityProductInCart",
-        //             {
-        //                 userID: user.userID,
-        //             }, indexProduct
-        //         )
-        //     }
-        // })
-        // handleLoadingPage(1)
-        // window.setTimeout(() => {
-        //     window.location.reload()
-        // }, 1000)
+    const handleClickAddQuantity = (productName) => {
+        axios.put('http://localhost:4000/api/users/increase-quantity-product-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
+            { productName }
+        )
+            .then(response => {
+                handleLoadingPage(1)
+                window.setTimeout(() => {
+                    window.location.reload()
+                }, 1000)
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
 
-    const handleClickMinusQuantity = (indexProduct) => {
-        // users.map((user, index) => {
-        //     if (window.localStorage.getItem("userLogged") === user.username) {
-        //         socket.emit("minusQuantityProductInCart",
-        //             {
-        //                 userID: user.userID,
-        //             }, indexProduct
-        //         )
-        //     }
-        // })
-        // handleLoadingPage(1)
-        // window.setTimeout(() => {
-        //     window.location.reload()
-        // }, 1000)
+    const handleClickMinusQuantity = (productName) => {
+        cartUser.map((p, i) => {
+            if (p.productName === productName && Number(p.quantity) > 1) {
+                axios.put('http://localhost:4000/api/users/decrease-quantity-product-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
+                    { productName }
+                )
+                    .then(response => {
+                        handleLoadingPage(1)
+                        window.setTimeout(() => {
+                            window.location.reload()
+                        }, 1000)
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+
+            if (i >= cartUser.length)
+                return
+        })
+        window.alert("Không thể giảm số lượng sản phẩm = 0")
+
     }
 
-    const handleClickRemoveProduct = (indexProduct) => {
-        // users.map((user, index) => {
-        //     if (window.localStorage.getItem("userLogged") === user.username) {
-        //         socket.emit("removeProductInCart",
-        //             {
-        //                 userID: user.userID,
-        //             }, indexProduct
-        //         )
-        //     }
-        // })
-        // handleLoadingPage(1)
-        // window.setTimeout(() => {
-        //     window.location.reload()
-        // }, 1000)
+    const handleClickRemoveProduct = (productName) => {
+        axios.put('http://localhost:4000/api/users/remove-product-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
+            { productName }
+        )
+            .then(response => {
+                handleLoadingPage(1)
+                window.setTimeout(() => {
+                    window.location.reload()
+                }, 1000)
+            })
+            .catch(error => {
+                console.error(error);
+            });
     }
 
     const handleClickRemoveAll = () => {
-        // if (window.confirm("Bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng")) {
-        //     users.map((user, index) => {
-        //         if (window.localStorage.getItem("userLogged") === user.username) {
-        //             socket.emit("removeAllInCart",
-        //                 {
-        //                     userID: user.userID,
-        //                 }
-        //             )
-        //         }
-        //     })
-        //     handleLoadingPage(1)
-        //     window.setTimeout(() => {
-        //         window.location.reload()
-        //     }, 1000)
-        // }
+        if (window.confirm("Bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng")) {
+            axios.put('http://localhost:4000/api/users/remove-all-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id)
+                .then(() => {
+                    handleLoadingPage(1)
+                    window.setTimeout(() => {
+                        window.location.reload()
+                    }, 1000)
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        }
     }
 
     return (
@@ -137,7 +147,7 @@ const Cart = ({ socket }) => {
                         <ul className="cart__list">
                             {loading ? <p>Đang kết nối đến server ... </p> : cartUser.map((p, index) => (
                                 <li className="cart__item" key={index}>
-                                    <img className="cart__item-img" src={p.imageLink}></img>
+                                    <img className="cart__item-img" src={p.imageLink || "http://localhost:4000/public/products/img-product-empty.png"}></img>
                                     <div className="cart__item-info">
                                         <label className="cart__item-info-name">{p.productName} - {p.option} - {p.color}</label>
                                         <p className="cart__item-info-price">{Number(p.price).toLocaleString()} đ</p>
@@ -147,12 +157,12 @@ const Cart = ({ socket }) => {
                                             <i className="cart__item-info-installment-icon fa fa-tag"></i>
                                             Trả góp 0%</span>
                                         <div className="cart__item-quantity">
-                                            <button className="cart__item-quantity-edit" onClick={(e) => { handleClickMinusQuantity(index + 1) }}>-</button>
+                                            <button className="cart__item-quantity-edit" onClick={(e) => { handleClickMinusQuantity(p.productName) }}>-</button>
                                             <input className="cart__item-quantity-input" defaultValue={p.quantity} readOnly />
-                                            <button className="cart__item-quantity-edit" onClick={(e) => { handleClickAddQuantity(index + 1) }}>+</button>
+                                            <button className="cart__item-quantity-edit" onClick={(e) => { handleClickAddQuantity(p.productName) }}>+</button>
                                         </div>
                                     </div>
-                                    <button className="cart__item-remove" onClick={(e) => { handleClickRemoveProduct(index + 1) }}>
+                                    <button className="cart__item-remove" onClick={(e) => { handleClickRemoveProduct(p.productName) }}>
                                         <i className="cart__item-remove-icon fa fa-trash"></i>
                                         Xóa
                                     </button>

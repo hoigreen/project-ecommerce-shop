@@ -3,11 +3,8 @@ import { Toast, handleLoadingPage } from '../../Common';
 import { Breadcrumbs, Nav } from '../Common';
 
 const Giftcode = () => {
-    const [users, setUsers] = useState([])
-
     const [cartUser, setCartUser] = useState([])
     const [countTotalPrice, setCountTotalPrice] = useState()
-
     const [countTotalPriceEdit, setCountTotalPriceEdit] = useState()
     const [giftcodes, setGiftcodes] = useState([])
     const [giftcodeID, setGiftcodeID] = useState('')
@@ -15,24 +12,18 @@ const Giftcode = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data.users)
+            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+                setCartUser(data.cart)
             })
 
             fetch("http://localhost:4000/api/giftcodes").then(res => res.json()).then(data => {
-                setGiftcodes(data.giftcodes)
+                setGiftcodes(data)
             })
         }
         fetchAPIs()
     }, [])
 
     useEffect(() => {
-        users.map((user, index) => {
-            if (user.username === window.localStorage.getItem("userLogged")) {
-                setCartUser(user.cart);
-            }
-        })
-
         // set thông tin % giảm cho khuyến mãi
         giftcodes.map((gf, i) => {
             if (giftcodeID === gf.id) {

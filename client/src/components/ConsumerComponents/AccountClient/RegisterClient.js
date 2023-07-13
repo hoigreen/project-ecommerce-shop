@@ -16,9 +16,6 @@ const RegisterClient = () => {
 
     useEffect(() => {
         if (window.localStorage.getItem("auth")) { window.location.href = '/account' }
-    }, [])
-
-    window.onload = () => {
         Validator({
             form: '#form-1',
             error: '.form-message',
@@ -48,14 +45,14 @@ const RegisterClient = () => {
                 Validator.isMinLength('#address', 5),
             ]
         });
-    }
+    }, [])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const res = await axios.post(`${process.env.REACT_APP_API}/api/users/register`, {
                 avatarUrl: ``,
-                username: usernameRegister,
+                username: String(usernameRegister),
                 password: passwordRegister,
                 fullname: fullnameRegister,
                 email: emailRegister,
@@ -64,11 +61,16 @@ const RegisterClient = () => {
                 cart: []
             });
             if (res && res.data.success) {
-                window.alert('Đăng ký thành công! Đang quay trở lại trang đăng nhập')
-                handleLoadingPage(1)
-                window.setTimeout(() => {
-                    window.location.href = '/login';
-                }, 1000)
+                if (res.data.message === "Tài khoản này đã đăng ký bởi người khác!") {
+                    window.alert(res.data.message)
+                }
+                else {
+                    window.alert('Đăng ký thành công! Đang quay trở lại trang đăng nhập')
+                    handleLoadingPage(1)
+                    window.setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 1000)
+                }
             } else {
                 window.alert("Đã gặp lỗi khi đăng ký! Vui lòng thử lại")
             }

@@ -44,7 +44,7 @@ const AdminHeader = () => {
                 <div className="admin__header-title">Trang quản trị hệ thống ShopTECH</div>
                 <div className="admin__header-admin">
                     <div className="admin__header-info">
-                        Hello,
+                        Xin chào,
                         <span className="admin__header-name">{admin.fullname}</span>
                         --
                     </div>

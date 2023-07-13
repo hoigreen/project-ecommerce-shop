@@ -66,7 +66,7 @@ const PromotePage = () => {
                             {loading ? <tr><td>Loading...</td></tr> : promotes.map((promote, index) => (
                                 <tr className='table__row-loading' key={index}>
                                     <td style={{ textAlign: "center", background: "#ffcdd2", fontWeight: 700 }}>{index + 1}</td>
-                                    <td style={{ color: "red", fontWeight: 700, textAlign: 'left' }}>{promote.name}</td>
+                                    <td style={{ color: "#333", fontWeight: 700, textAlign: 'left' }}>{promote.name}</td>
                                     <td style={{ backgroundColor: "#e0f1d4" }}>{promote.timeStart}</td>
                                     <td style={{ backgroundColor: "#d5a2f7", fontWeight: 700 }}>{promote.timeEnd}</td>
                                     <td style={{ fontWeight: 600, textAlign: "center", fontSize: "2.4rem", color: "red" }}>{promote.percent || "None"} %</td>

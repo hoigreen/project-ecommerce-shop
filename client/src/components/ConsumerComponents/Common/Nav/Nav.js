@@ -5,29 +5,18 @@ import { handleLoadingPage } from '../../../Common';
 import "./nav.css"
 
 const Nav = () => {
-    const [users, setUsers] = useState([])
-    const [cartUser, setCartUser] = useState([])
     const [countQuantity, setCountQuantity] = useState()
     const [keySearch, setKeySearch] = useState("")
     const [auth, setAuth] = useContext(AuthContext)
 
     useEffect(() => {
         const fetchAPI = () => {
-            fetch("http://localhost:4000/api/users").then(res => res.json()).then(data => {
-                setUsers(data)
+            fetch("http://localhost:4000/api/users/" + JSON.parse(window.localStorage.getItem("auth")).user._id).then(res => res.json()).then(data => {
+                setCountQuantity(data.cart.length)
             })
         }
         fetchAPI()
     }, [])
-
-    useEffect(() => {
-        users.map((user, index) => {
-            if (user.username === window.localStorage.getItem("userLogged")) {
-                setCartUser(user.cart);
-                setCountQuantity(cartUser.length)
-            }
-        })
-    }, [users])
 
     const handleLoggout = (e) => {
         e.preventDefault();

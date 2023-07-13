@@ -6,6 +6,7 @@ const JWT = require("jsonwebtoken");
 const LoginController = async (req, res) => {
     try {
         const { username, password } = req.body;
+
         //validation
         if (!username || !password) {
             return res.status(404).send({
@@ -64,7 +65,16 @@ const LoginController = async (req, res) => {
 
 const RegisterController = async (req, res) => {
     try {
-        const { username, email, password, fullname, phone, address } = req.body;
+        const {
+            avatarUrl,
+            username,
+            password,
+            fullname,
+            email,
+            phone,
+            address,
+            cart
+        } = req.body;
         //validations
         if (!username) {
             return res.send({ error: "Tên là bắt buộc" });
@@ -87,6 +97,7 @@ const RegisterController = async (req, res) => {
 
         //Kiểm tra trùng
         const checkExisted = await UserModel.findOne({ username });
+        console.log(checkExisted)
 
         // User đã tồn tại
         if (checkExisted) {
@@ -94,26 +105,28 @@ const RegisterController = async (req, res) => {
                 success: true,
                 message: "Tài khoản này đã đăng ký bởi người khác!"
             });
+        } else {
+            // Đăng ký người dùng mới
+            const hashedPassword = await HashPassword(password);
+
+            // Đăng ký tài khoản mới
+            const user = await new UserModel({
+                avatarUrl,
+                username,
+                password: hashedPassword,
+                fullname,
+                email,
+                phone,
+                address,
+                cart
+            }).save();
+
+            res.status(201).send({
+                success: true,
+                message: "Đăng ký tài khoản thành công",
+                user,
+            });
         }
-
-        // Đăng ký người dùng mới
-        const hashedPassword = await HashPassword(password);
-
-        // Đăng ký tài khoản mới
-        const user = await new UserModel({
-            username,
-            password: hashedPassword,
-            fullname,
-            email,
-            phone,
-            address
-        }).save();
-
-        res.status(201).send({
-            success: true,
-            message: "Đăng ký tài khoản thành công",
-            user,
-        });
     } catch (error) {
         console.log(error);
         res.status(500).send({
@@ -157,9 +170,110 @@ const UpdateInfo = async (req, res) => {
     }
 }
 
+const IncreaseQuantityProductInCart = async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const { productName } = req.body;
+        console.log(productName);
+
+        UserModel.findByIdAndUpdate(
+            _id,
+            { $inc: { "cart.$[elem].quantity": 1 } },
+            { arrayFilters: [{ "elem.productName": productName }] }
+        )
+            .then(updatedUser => {
+                res.status(200).json(updatedUser);
+            })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+            message: "Error while updating",
+        });
+    }
+}
+
+const DecreaseQuantityProductInCart = async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const { productName } = req.body;
+        console.log(productName);
+
+        UserModel.findByIdAndUpdate(
+            _id,
+            { $inc: { "cart.$[elem].quantity": -1 } },
+            { arrayFilters: [{ "elem.productName": productName }] }
+        )
+            .then(updatedUser => {
+                res.status(200).json(updatedUser);
+            })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+            message: "Error while updating",
+        });
+    }
+}
+
+const RemoveProductInCart = async (req, res) => {
+    try {
+        const _id = req.params.id;
+        const { productName } = req.body;
+        console.log(productName);
+
+        UserModel.findByIdAndUpdate(
+            _id,
+            { $pull: { cart: { productName: productName } } },
+            // { arrayFilters: [{ "elem.productName": productName }] }
+        )
+            .then(updatedUser => {
+                res.status(200).json(updatedUser);
+            })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+            message: "Error while updating",
+        });
+    }
+}
+
+const RemoveAllInCart = async (req, res) => {
+    try {
+        const _id = req.params.id;
+
+        UserModel.findByIdAndUpdate(
+            _id,
+            { cart: [] },
+        )
+            .then(updatedUser => {
+                res.status(200).json(updatedUser);
+            })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+            message: "Error while updating",
+        });
+    }
+}
+
 module.exports = {
     LoginController,
     RegisterController,
     TestController,
-    UpdateInfo
+    UpdateInfo,
+    IncreaseQuantityProductInCart,
+    DecreaseQuantityProductInCart,
+    RemoveProductInCart,
+    RemoveAllInCart
 };

@@ -1,11 +1,8 @@
 const express = require('express');
-const multer = require("multer");
-
 const LoginAdminController = require('../controllers/LoginAdminController');
 const AdminModel = require('../models/AdminModel');
 const UserModel = require('../models/UserModel');
-// const Upload = require('../middlewares/Upload');
-// const Upload = require('../middlewares/Upload');
+const { uploadAvatarAdmin } = require('../middlewares/UploadFile');
 const router = express.Router();
 
 // Get All Admin
@@ -85,22 +82,10 @@ router.put("/update-info-user/:id", async (req, res) => {
 });
 
 // Upload avatar admin
-// Middlewares multer
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, './public/uploads/admins'); // Thư mục lưu trữ ảnh
-    },
-    filename: (req, file, cb) => {
-        cb(null, file.originalname); // Đặt tên file dựa trên thời gian và tên gốc của file
-    },
-});
-
-const uploadAvatarAdmin = multer({ storage });
-
 router.post('/upload-image', uploadAvatarAdmin.single('avatar-admin'), (req, res) => {
-    const imagePath = req.file.path; // Đường dẫn đến ảnh đã upload
+    const imagePath = req.file.path;
     console.log(imagePath)
-    res.status(200).json({ error: 'Upload failed' });
+    res.status(200).json({ error: 'Thành công' });
 });
 
 module.exports = router;

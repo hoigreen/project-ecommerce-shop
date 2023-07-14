@@ -19,19 +19,6 @@ const InfoAdmin = () => {
         handleLoadOptionSelected(5)
     }, [])
 
-    const changeImageAdmin2 = () => {
-        const preview = document.querySelector(".info-page__avatar-img")
-        const imageAdmin = document.querySelector("#avatar-change-input").files[0]
-        const reader = new FileReader()
-        reader.addEventListener("load", () => {
-            preview.src = reader.result;
-        }, false)
-
-        if (imageAdmin) {
-            reader.readAsDataURL(imageAdmin)
-        }
-    }
-
     const changeImageAdmin = (filename) => {
         const preview = document.querySelector(".info-page__avatar-img")
         const imageAdmin = document.querySelector("#avatar-change-input").files[0]
@@ -50,8 +37,12 @@ const InfoAdmin = () => {
     const handleUploadAvatarAdmin = () => {
         const formData = new FormData();
         formData.append('avatar-admin', imageFile, changeFilename(imageFile.name, admin._id));
+        console.log(imageFile);
 
         axios.post('http://localhost:4000/api/admins/upload-image', formData)
+            .then(response => {
+                console.log(response)
+            })
             .catch((error) => {
                 alert('Lỗi khi upload:', error);
             });

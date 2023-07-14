@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 const UserModel = require('../models/UserModel');
 const {
     RegisterController,
@@ -12,6 +13,7 @@ const {
 } = require('../controllers/UserControllers')
 
 const { RequireSignIn } = require("../middlewares/MiddleWares");
+const { uploadAvatarUser } = require('../middlewares/UploadFile');
 const router = express.Router();
 
 
@@ -41,9 +43,13 @@ router.get("/:id", async (req, res) => {
 // Đăng ký
 router.post("/register", RegisterController);
 
-
 // Đăng nhập
 router.post("/login", LoginController);
+
+// Upload ảnh khách hàng
+router.post('/upload-image', uploadAvatarUser.single('avatar-change'), (req, res) => {
+    res.status(200).json({ error: 'Upload thành công' });
+});
 
 // Cập nhật thông tin cá nhân
 router.put("/update/:id", UpdateInfo, RequireSignIn)

@@ -61,7 +61,7 @@ const InfoCustomer = () => {
                     <div className="info-page__body">
                         <div className="info-page__col-1">
                             <div className="info-page__avatar">
-                                <img src={user.avatarUrl || `${process.env.REACT_APP_API}/public/img-avatar-empty.png`} className="info-page__avatar-img"></img>
+                                <img src={process.env.REACT_APP_API + user.avatarUrl || `${process.env.REACT_APP_API}/public/img-avatar-empty.png`} className="info-page__avatar-img"></img>
                             </div>
                             <label className="info-page__user-id">{user.username}</label>
                         </div>

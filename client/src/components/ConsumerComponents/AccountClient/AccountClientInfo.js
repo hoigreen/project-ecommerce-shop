@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import SidebarAccount, { handleLoadOptionSidebar } from './SidebarAccount';
 import { Breadcrumbs, Nav } from '../Common';
-import { changeImage, handleLoadingPage } from '../../Common';
+import { changeFilename, handleLoadingPage } from '../../Common';
 
-const AccountClientInfo = ({ socket }) => {
-
+const AccountClientInfo = () => {
     const [user, setUser] = useState({})
+    const [imageFile, setImageFile] = useState(null)
 
     useEffect(() => {
         const fetchAPIs = () => {
@@ -18,10 +18,40 @@ const AccountClientInfo = ({ socket }) => {
         handleLoadOptionSidebar(1)
     }, [])
 
+    const changeImageUser = (filename) => {
+        const preview = document.querySelector(".account__box-info-avatar")
+        const imageUser = document.querySelector("#avatar-change").files[0]
+
+        const reader = new FileReader()
+        reader.addEventListener("load", () => {
+            preview.src = reader.result;
+        }, false)
+
+        if (imageUser) {
+            reader.readAsDataURL(imageUser)
+            setImageFile(imageUser)
+        }
+    }
+
+    const handleUploadAvatar = () => {
+        const formData = new FormData();
+        formData.append('avatar-change', imageFile, changeFilename(imageFile.name, user._id));
+
+        axios.post('http://localhost:4000/api/users/upload-image', formData)
+            .then(response => {
+                console.log(response)
+            })
+            .catch((error) => {
+                alert('Lỗi khi upload:', error);
+            });
+    }
+
     const handleEditInfo = async (e) => {
         e.preventDefault()
-        const avatarUrl = document.querySelector(".account__box-info-avatar").getAttribute("src")
+        handleUploadAvatar()
         const inputElements = document.querySelectorAll(".account__box-info-input")
+        const avatarUrl = `/public/uploads/users/${changeFilename(imageFile.name, user._id)}`;
+
         if (window.confirm("Bạn muốn sửa đổi thông tin cá nhân!") == true) {
             try {
                 const res = await axios.put(`${process.env.REACT_APP_API}/api/users/update/${JSON.parse(window.localStorage.getItem('auth')).user._id}`, {
@@ -53,12 +83,12 @@ const AccountClientInfo = ({ socket }) => {
             <div className="container">
                 <div className="grid wide">
                     <div className="account-info__container">
-                        <SidebarAccount socket={socket} />
+                        <SidebarAccount />
                         <div className="account__box">
                             <div className="account__box-info">
                                 <div className="account__box-info-container">
-                                    <img className="account__box-info-avatar" src={user.avatarUrl || "http://localhost:4000/public/img-avatar-empty.png"}></img>
-                                    <input type='file' id="avatar-change" onChange={(e) => { changeImage() }} hidden></input>
+                                    <img className="account__box-info-avatar" src={process.env.REACT_APP_API + user.avatarUrl || "http://localhost:4000/public/img-avatar-empty.png"}></img>
+                                    <input type='file' id="avatar-change" onChange={(e) => { changeImageUser(user._id) }} hidden></input>
                                     <label className="account__box-info-avatar-btn" htmlFor="avatar-change">Thay đổi Avatar</label>
                                 </div>
 

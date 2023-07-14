@@ -49,7 +49,7 @@ const AdminHeader = () => {
                         --
                     </div>
 
-                    <img src={admin.avatarUrl} className="admin__header-avatar"></img>
+                    <img src={process.env.REACT_APP_API + admin.avatarUrl} className="admin__header-avatar"></img>
 
                     <div className='admin__header-option'>
                         <div className="admin__header-option-item" onClick={handleNevigateInfo} >Thông tin cá nhân</div>

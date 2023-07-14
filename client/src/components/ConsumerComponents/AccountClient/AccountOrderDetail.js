@@ -7,7 +7,8 @@ import { handleLoadingPage } from '../../Common';
 
 const AccountOrderDetail = () => {
     const { orderID } = useParams()
-    const [order, setOrder] = useState([])
+    const [order, setOrder] = useState({})
+    const [listProduct, setListProduct] = useState([])
     const [loading, setLoading] = useState(true)
 
     const navigate = useNavigate()
@@ -16,6 +17,7 @@ const AccountOrderDetail = () => {
         const fetchAPIs = () => {
             fetch("http://localhost:4000/api/orders/" + orderID).then(res => res.json()).then(data => {
                 setOrder(data)
+                setListProduct(data.lists)
                 setLoading(false)
             })
         }
@@ -149,7 +151,7 @@ const AccountOrderDetail = () => {
                                             </div>
                                         </li>
                                     ))}
-                                    <div className="order-detail__group">
+                                    <div className="order-detail__group">                                        
                                         <label className="order-detail__label">Tổng giá trị đơn hàng</label>
                                         <p style={{ color: 'green', fontWeight: "600" }} className="order-detail__content">{Number(order.price).toLocaleString()} đ</p>
                                     </div>

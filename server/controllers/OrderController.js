@@ -84,27 +84,20 @@ const UpdateStatusOrder = async (req, res) => {
 
 const UpdateStatusVoteProduct = async (req, res) => {
     try {
-        const _id = req.params.id;
+        const orderID = req.params.orderID;
         const { productName } = req.body;
-        // const status3 = await OrderModel.findByIdAndUpdate(
-        //     _id,
-        //     { $set: { 'lists.$[element].voted': true } },
-        //     {
-        //         arrayFilters: [{ 'element.productName': productName }],
-        //         new: true
-        //     }
-        // )
 
-        const status = await OrderModel.findByIdAndUpdate(
-            _id,
-            { $set: { "lists.$.voted": true } },
-            { arrayFilters: [{ "productName": productName }], new: true }
+        const updateStatus = await OrderModel.findOneAndUpdate(
+            { orderID: orderID, "lists.productName": productName },
+            { $set: { "lists.$.voted": true } }
         )
+            
         res.status(200).send({
             success: true,
-            messsage: "Đã đánh giá thành công",
-            status
+            message: "Thành công",
+            updateStatus
         });
+
     } catch (error) {
         console.log(error);
         res.status(500).send({

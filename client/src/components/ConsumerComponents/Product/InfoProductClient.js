@@ -219,7 +219,7 @@ const InfoProductClient = ({ socket }) => {
 
             axios.put('http://localhost:4000/api/users/add-product-to-cart-user/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
                 {
-                    imageLink: "",
+                    imageLink: "123",
                     productName: name,
                     option: optionEdit,
                     color: colorEdit,

@@ -10,6 +10,8 @@ const VoteProductInOrder = ({ socket }) => {
     const [order, setOrder] = useState({})
     const [listProduct, setListProduct] = useState([])
 
+
+
     const [owner, setOwner] = useState("")
     const [ownerFullname, setOwnerFullname] = useState("")
     const [imageLink, setImageLink] = useState("")
@@ -22,6 +24,7 @@ const VoteProductInOrder = ({ socket }) => {
     const [contentComment, setContentComment] = useState("")
 
     const [products, setProducts] = useState([])
+    const [productId, setProductId] = useState()
 
     const navigate = useNavigate()
 
@@ -49,13 +52,20 @@ const VoteProductInOrder = ({ socket }) => {
         listProduct.map((item, index) => {
             if (item.productName = productName) {
                 setImageLink(item.imageLink)
-                // setProductName(item.productName)
                 setOption(item.option)
                 setColor(item.color)
                 setPrice(item.price)
             }
         })
     }, [listProduct])
+
+    useEffect(() => {
+        products.map((p, index) => {
+            if (p.productName = productName) {
+                setProductId(p._id)
+            }
+        })
+    }, [products])
 
     const handleClickStar = () => {
         const stars = document.querySelectorAll(".vote-product__start-group-item")
@@ -84,7 +94,6 @@ const VoteProductInOrder = ({ socket }) => {
                 }
             }
         }
-
     }
 
     const handleConfirm = async (e) => {
@@ -100,29 +109,44 @@ const VoteProductInOrder = ({ socket }) => {
         }
 
         try {
-            const res = await axios.put(`${process.env.REACT_APP_API}/api/orders/update-status/${order._id}/${productName}`, { productName: productName });
-            if (res && res.data.success) {
-                console.log(res.data)
-                alert("Đánh giá sản phẩm thành công!")
-                // handleLoadingPage(1)
-                // setTimeout(() => {
-                //     window.location.reload()
-                // })
-            } else {
-                alert("Cập nhật thông tin thất bại")
-            }
+            const res = await axios.put(`http://localhost:4000/api/products/update-vote/${productId}`, { star: numberStar })
+            console.log(res)
+            // const [orderRes, productRes] = Promise.all([
+            // await axios.put(`${process.env.REACT_APP_API}/api/orders/update-status-vote/${orderID}`, { productName: productName })
+            // ])
+            // // await axios.put(`${process.env.REACT_APP_API}/api/orders/update-status-vote/${orderID}`, { productName: productName })
+
+            // // 1. Tìm order - set trạng thái vote
+            // if (orderRes && orderRes.data.success) {
+            //     console.log(orderRes.data)
+            //     // handleLoadingPage(1)
+            //     // setTimeout(() => {
+            //     //     window.location.reload()
+            //     // })
+            // } else {
+            //     alert("Cập nhật thông tin thất bại")
+            // }
+            // console.log(productRes)
+
+            // // 2. Tìm đến sản phẩm - thêm số sao đánh giá => tính trung bình số sao và + 1 vote
+            // if (productRes && productRes.data.success) {
+            //     console.log(productRes.data)
+            //     // handleLoadingPage(1)
+            //     // setTimeout(() => {
+            //     //     window.location.reload()
+            //     // })
+            // } else {
+            //     alert("Cập nhật thông tin thất bại")
+            // }
         } catch (error) {
             alert(error)
+            console.log(error)
         }
 
 
         // Vote sản phẩm:
         // 1. Tìm order - set trạng thái vote
-
-
-        // 2. Tìm đến sản phẩm - thêm số sao đánh giá => tính trung bình số sao và + 1 vote
-
-        // Thêm comment vào sản phẩm
+        // 3. Thêm comment vào sản phẩm
 
 
 

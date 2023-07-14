@@ -1,6 +1,6 @@
 const express = require('express');
 const ProductModel = require('../models/ProductModel');
-const { CreateProductController, UpdateProductController, UpdateImageLink, UpdateImageBanner, UpdateImageList, DeleteProduct } = require('../controllers/ProductController');
+const { CreateProductController, UpdateProductController, UpdateImageLink, UpdateImageBanner, UpdateImageList, DeleteProduct, VoteProduct } = require('../controllers/ProductController');
 const router = express.Router();
 
 // Get All Product
@@ -46,6 +46,9 @@ router.put("/update=:id", UpdateProductController)
 router.put("/update/image-link=:id", UpdateImageLink)
 router.put("/update/image-banner=:id", UpdateImageBanner)
 router.put("/update/image-list=:id", UpdateImageList)
+
+// Vote Product
+router.put("/update-vote/:id", VoteProduct)
 
 // Delete 1 product
 router.delete("/delete/:id", DeleteProduct);

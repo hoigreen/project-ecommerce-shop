@@ -34,6 +34,10 @@ const listProductSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    voted: {
+        type: Boolean,
+        required: true
+    }
 });
 
 const OrderModel = new mongoose.Schema(

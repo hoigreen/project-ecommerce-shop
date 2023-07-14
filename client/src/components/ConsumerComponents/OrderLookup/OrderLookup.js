@@ -5,12 +5,11 @@ import { Toast, handleLoadingPage } from '../../Common';
 import axios from 'axios';
 
 const OrderLookup = () => {
-    const [order, setOrder] = useState({})
-
+    const [order, setOrder] = useState(null)
     const [phone, setPhone] = useState('')
     const [orderID, setOrderID] = useState('')
 
-    // const [lists, setLists] = useState([])
+    const [lists, setLists] = useState([])
     const [totalPriceOld, setTotalPriceOld] = useState()
     const [countTotalPrice, setCountTotalPrice] = useState()
     const [percentApply, setPercentApply] = useState('')
@@ -22,7 +21,7 @@ const OrderLookup = () => {
         // show thông tin tổng tiền giỏ hàng
         let countTotalPriceOld = 0
         let countPriceAll = 0
-        order.lists.map((item, index) => {
+        lists.map((item, index) => {
             if (item) {
                 countTotalPriceOld += Number(item.price) * (100 + item.percent) / 100 * item.quantity;
                 countPriceAll += Number(item.price) * item.quantity;
@@ -44,115 +43,17 @@ const OrderLookup = () => {
             const res = await axios.get(`${process.env.REACT_APP_API}/api/orders/${orderID}`);
             document.querySelector(".modal__cover").classList.remove("modal--active")
             setOrder(res.data)
+            setLists(res.data.lists)
+            document.querySelector(".order-lookup__box").style.display = "none"
         } catch (error) {
             alert(error)
             console.error(error);
         }
 
         setTimeout(() => {
-            var boolCheck = false;
-            const result = document.querySelector(".order-result__box")
-            // orders.map((order, index) => {
-            //     if (phone === order.phone && orderID === order.orderID) {
-            //         document.querySelector(".order-lookup__box").style.display = "none"
-            //         boolCheck = true;
-            //         result.style.animation = "fadeIn 0.2s linear"
-            //         result.innerHTML = `
-            //             <div class="cart__container" style="display: flex;, width: 60%">
-            //                 <div class="cart__header">
-            //                 <h1 class="cart__title" style='padding: 30px 0'>THÔNG TIN ĐƠN HÀNG</h1>
+        }, 3000)
 
-            //                 <ul class="cart-confirm__list-info">
-            //                     <li class="cart-confirm__item">
-            //                         <label class='cart-confirm__label'>Mã đơn hàng của bạn:</label>
-            //                         <p class='cart-confirm__data' style='color: red'>${orderID}</p>
-            //                     </li>
-            //                     <li class="cart-confirm__item">
-            //                         <label class='cart-confirm__label'>Người đặt hàng:</label>
-            //                         <p class='cart-confirm__data' style='color: green'>${order.fullname}</p>
-            //                     </li>
-            //                     <li class="cart-confirm__item">
-            //                         <label class='cart-confirm__label'>Email:</label>
-            //                         <p class='cart-confirm__data' style='font-weight: 400'>${order.email}</p>
-            //                     </li>
-            //                     <li class="cart-confirm__item">
-            //                         <label class='cart-confirm__label'>Số điện thoại:</label>
-            //                         <p class='cart-confirm__data' style='font-weight: 600'>${order.phone}</p>
-            //                     </li>
-            //                     <li class="cart-confirm__item">
-            //                         <label class='cart-confirm__label'>Hình thức nhận hàng:</label>
-            //                         <p class='cart-confirm__data' style='font-weight: 400'>${order.method}</p>
-            //                     </li>
-            //                     <li class="cart-confirm__item">
-            //                         <label class='cart-confirm__label'>Địa chỉ nhận hàng:</label>
-            //                         <p class='cart-confirm__data' style='font-weight: 400'>${order.address}</p>
-            //                     </li>
-            //                     <li class="cart-confirm__item">
-            //                         <label class='cart-confirm__label'>Ghi chú:</label>
-            //                         <p class='cart-confirm__data' style='font-size: 1.6rem; font-weight: 400; font-style: italic;'>"${order.note}"</p>
-            //                     </li>
-            //                     <li class="cart-confirm__item">
-            //                         <label class='cart-confirm__label'>Trạng thái đơn hàng:</label>
-            //                         <p class='cart-confirm__data' style="font-weight: 600; color: blue">${order.status}</p>
-            //                     </li>
-            //                 </ul>
-
-            //                 <ul class='cart-confirm__list'>
-            //                     <label class="detail-price__header">Chi tiết sản phẩm</label>
-            //                 ${loading ? <p>Đang kết nối đến server ... </p> : lists.map((item, i) => (
-            //             `<li class="cart-confirm__item-product" key="${i}">
-            //                             <img class='cart-confirm__item-product-img' src="${item.imageLink}"></img>
-            //                             <div class='cart-confirm__item-product-info'>
-            //                                 <label class='cart-confirm__item-product-info-label'>${item.productName}</label>
-            //                                 <p class='cart-confirm__item-product-info-quantity'>x${item.quantity}</p>
-            //                                 <p class='cart-confirm__item-product-info-price'>${item.quantity} x ${Number(item.price).toLocaleString()} đ = ${Number(item.quantity * item.price).toLocaleString()} đ</p>
-            //                             </div>
-            //                         </li>`
-            //         ))}
-            //                 </ul>
-
-            //                 <ul class='cart-confirm__list'>
-            //                     <label class="detail-price__header">Chi tiết đơn hàng</label>
-            //                     <li class='detail-price__item'>
-            //                         <label class="detail-price__item-label">Tổng giá trị đơn hàng: </label>
-            //                         <span class="detail-price__item-price">${Number(totalPriceOld).toLocaleString()} đ</span>
-            //                     </li>
-
-            //                     ${loading ? <p>Đang kết nối đến server ... </p> : lists.map((item, i) => (
-            //             `<li class='detail-price__item' key="${i}">
-            //                             <label class="detail-price__item-label">Khuyến mãi giảm cho sản phẩm #${i + 1}: </label>
-            //                             <span class="detail-price__item-price">- ${Number(item.percent)}% = ${Number(item.percent / 100 * item.price).toLocaleString()} đ</span>
-            //                         </li>`
-            //         ))}
-
-            //                     <li class='detail-price__item'>
-            //                         <label class="detail-price__item-label">Áp dụng mã giảm giá:</label>
-            //                         <span class="detail-price__item-price">- ${Number(percentApply)}% = ${Number(Number(percentApply) / 100 * Number(countTotalPrice)).toLocaleString()} đ</span>
-            //                     </li>
-
-            //                     <li class='detail-price__item'>
-            //                         <label class="detail-price__item-label">Phí vận chuyển:</label>
-            //                         <span class="detail-price__item-price">29,000 đ</span>
-            //                     </li>
-            //                     <li class='detail-price__item'>
-            //                         <label class="detail-price__item-label">Giảm giá phí vận chuyển:</label>
-            //                         <span class="detail-price__item-price">- 100% = - 29,000 đ</span>
-            //                     </li>
-
-            //                     <li class='detail-price__item detail-price__item-total'>
-            //                         <label class="detail-price__item-label">Thành tiền</label>
-            //                         <span class="detail-price__item-price" style="color:red">${Number(countTotalPrice).toLocaleString()} đ</span>
-            //                     </li>
-            //                 </ul>
-            //             </div>
-            //         </div>`
-            //     }
-            // })
-            // if (boolCheck == false)
-            //     showErrorToast();
-        }, 2000)
-
-        console.log(order.list)
+        console.log(lists)
     }
 
     return (
@@ -186,6 +87,94 @@ const OrderLookup = () => {
                     </div>
 
                     <div className="order-result__box">
+                        {order && <div className="cart__container" style={{ display: 'flex', width: '65%' }}>
+                            <div className="cart__header">
+                                <h1 className="cart__title" style={{ padding: "30px 0" }}>THÔNG TIN ĐƠN HÀNG</h1>
+
+                                <ul className="cart-confirm__list-info">
+                                    <li className="cart-confirm__item">
+                                        <label className='cart-confirm__label'>Mã đơn hàng của bạn:</label>
+                                        <p className='cart-confirm__data' style={{ color: "red" }}>{orderID}</p>
+                                    </li>
+                                    <li className="cart-confirm__item">
+                                        <label className='cart-confirm__label'>Người đặt hàng:</label>
+                                        <p className='cart-confirm__data' style={{ color: 'green' }} >{order.fullname}</p>
+                                    </li>
+                                    <li className="cart-confirm__item">
+                                        <label className='cart-confirm__label'>Email:</label>
+                                        <p className='cart-confirm__data' style={{ fontWeight: 400 }} >{order.email}</p>
+                                    </li>
+                                    <li className="cart-confirm__item">
+                                        <label className='cart-confirm__label'>Số điện thoại:</label>
+                                        <p className='cart-confirm__data' style={{ fontWeight: 600 }} >{order.phone}</p>
+                                    </li>
+                                    <li className="cart-confirm__item">
+                                        <label className='cart-confirm__label'>Hình thức nhận hàng:</label>
+                                        <p className='cart-confirm__data' style={{ fontWeight: 400 }}>{order.method}</p>
+                                    </li>
+                                    <li className="cart-confirm__item">
+                                        <label className='cart-confirm__label'>Địa chỉ nhận hàng:</label>
+                                        <p className='cart-confirm__data' style={{ fontWeight: 400 }}>{order.address}</p>
+                                    </li>
+                                    <li className="cart-confirm__item">
+                                        <label className='cart-confirm__label'>Ghi chú:</label>
+                                        <p className='cart-confirm__data' style={{ fontWeight: 400, fontSize: "1.6rem", fontStyle: "italic" }}>"{order.note}"</p>
+                                    </li>
+                                    <li className="cart-confirm__item">
+                                        <label className='cart-confirm__label'>Trạng thái đơn hàng:</label>
+                                        <p className='cart-confirm__data' style={{ fontWeight: 600, color: "blue" }}>{order.status}</p>
+                                    </li>
+                                </ul>
+
+                                <ul className='cart-confirm__list'>
+                                    <label className="detail-price__header">Chi tiết sản phẩm</label>
+                                    {lists && lists.map((item, i) => (
+                                        <li className="cart-confirm__item-product" key={i}>
+                                            <img className='cart-confirm__item-product-img' src={item.imageLink}></img>
+                                            <div className='cart-confirm__item-product-info'>
+                                                <label className='cart-confirm__item-product-info-label'>{item.productName}</label>
+                                                <p className='cart-confirm__item-product-info-quantity'>x{item.quantity}</p>
+                                                <p className='cart-confirm__item-product-info-price'>{item.quantity} x {Number(item.price).toLocaleString()} đ = ${Number(item.quantity * item.price).toLocaleString()} đ</p>
+                                            </div>
+                                        </li>
+                                    ))}
+                                </ul>
+
+                                <ul className='cart-confirm__list'>
+                                    <label className="detail-price__header">Chi tiết đơn hàng</label>
+                                    <li className='detail-price__item'>
+                                        <label className="detail-price__item-label">Tổng giá trị đơn hàng: </label>
+                                        <span className="detail-price__item-price">{Number(totalPriceOld).toLocaleString()} đ</span>
+                                    </li>
+
+                                    {lists && lists.map((item, i) => (
+                                        <li className='detail-price__item' key="${i}">
+                                            <label className="detail-price__item-label">Khuyến mãi giảm cho sản phẩm #{i + 1}: </label>
+                                            <span className="detail-price__item-price">- {Number(item.percent)}% = {Number(item.percent / 100 * item.price).toLocaleString()} đ</span>
+                                        </li>
+                                    ))}
+
+                                    <li className='detail-price__item'>
+                                        <label className="detail-price__item-label">Áp dụng mã giảm giá:</label>
+                                        <span className="detail-price__item-price">- {Number(percentApply)}% = {Number(Number(percentApply) / 100 * Number(countTotalPrice)).toLocaleString()} đ</span>
+                                    </li>
+
+                                    <li className='detail-price__item'>
+                                        <label className="detail-price__item-label">Phí vận chuyển:</label>
+                                        <span className="detail-price__item-price">29,000 đ</span>
+                                    </li>
+                                    <li className='detail-price__item'>
+                                        <label className="detail-price__item-label">Giảm giá phí vận chuyển:</label>
+                                        <span className="detail-price__item-price">- 100% = - 29,000 đ</span>
+                                    </li>
+
+                                    <li className='detail-price__item detail-price__item-total'>
+                                        <label className="detail-price__item-label">Thành tiền</label>
+                                        <span className="detail-price__item-price" >{Number(countTotalPrice).toLocaleString()} đ</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>}
                     </div>
                 </div>
             </div>

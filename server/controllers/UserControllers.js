@@ -252,7 +252,6 @@ const RemoveProductInCart = async (req, res) => {
         UserModel.findByIdAndUpdate(
             _id,
             { $pull: { cart: { productName: productName } } },
-            // { arrayFilters: [{ "elem.productName": productName }] }
         )
             .then(updatedUser => {
                 res.status(200).json(updatedUser);
@@ -272,9 +271,7 @@ const RemoveAllInCart = async (req, res) => {
     try {
         const _id = req.params.id;
 
-        UserModel.findByIdAndUpdate(
-            _id,
-            { cart: [] },
+        UserModel.findByIdAndUpdate(_id, { cart: [] },
         )
             .then(updatedUser => {
                 res.status(200).json(updatedUser);

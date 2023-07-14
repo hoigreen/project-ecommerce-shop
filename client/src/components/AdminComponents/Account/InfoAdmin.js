@@ -3,10 +3,11 @@ import "./styles/info-style.css"
 import AdminHeader from '../Common/AdminHeader'
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar'
 import axios from 'axios';
-import { handleLoadingPage } from '../../Common';
+import { changeFilename, handleLoadingPage } from '../../Common';
 
 const InfoAdmin = () => {
     const [admin, setAdmin] = useState({})
+    const [imageFile, setImageFile] = useState(null);
 
     useEffect(() => {
         const fetchAPI = () => {
@@ -18,7 +19,7 @@ const InfoAdmin = () => {
         handleLoadOptionSelected(5)
     }, [])
 
-    const changeImageAdmin = () => {
+    const changeImageAdmin2 = () => {
         const preview = document.querySelector(".info-page__avatar-img")
         const imageAdmin = document.querySelector("#avatar-change-input").files[0]
         const reader = new FileReader()
@@ -31,12 +32,38 @@ const InfoAdmin = () => {
         }
     }
 
+    const changeImageAdmin = (filename) => {
+        const preview = document.querySelector(".info-page__avatar-img")
+        const imageAdmin = document.querySelector("#avatar-change-input").files[0]
+
+        const reader = new FileReader()
+        reader.addEventListener("load", () => {
+            preview.src = reader.result;
+        }, false)
+
+        if (imageAdmin) {
+            reader.readAsDataURL(imageAdmin)
+            setImageFile(imageAdmin)
+        }
+    }
+
+    const handleUploadAvatarAdmin = () => {
+        const formData = new FormData();
+        formData.append('avatar-admin', imageFile, changeFilename(imageFile.name, admin._id));
+
+        axios.post('http://localhost:4000/api/admins/upload-image', formData)
+            .catch((error) => {
+                alert('Lỗi khi upload:', error);
+            });
+    }
+
     const handleConfirmChange = async (e) => {
         e.preventDefault();
+        handleUploadAvatarAdmin()
         const inputElements = document.querySelectorAll(".info-page__input");
-        const avatarUrl = String(document.querySelector(".info-page__avatar-img").getAttribute("src"))
+        const avatarUrl = `/public/uploads/admins/${changeFilename(imageFile.name, admin._id)}`;
         try {
-            const res = await axios.put(`${process.env.REACT_APP_API}/api/admins/update-info/${JSON.parse(window.localStorage.getItem('authAdmin')).admin._id}`, {
+            const res = await axios.put(`${process.env.REACT_APP_API}/api/admins/update-info/${JSON.parse(window.localStorage.getItem('authAdmin')).admin._id} `, {
                 avatarUrl: avatarUrl,
                 fullname: inputElements[1].value,
                 email: inputElements[2].value,
@@ -70,10 +97,10 @@ const InfoAdmin = () => {
 
                     <div className="info-page__body">
                         <div className="info-page__col-1">
-                            <div className="info-page__avatar">
-                                <img className="info-page__avatar-img" src={admin.avatarUrl}></img>
+                            <div className="info-page__avatar">+
+                                <img className="info-page__avatar-img" src={process.env.REACT_APP_API + admin.avatarUrl}></img>
                             </div>
-                            <input type='file' className="info-page__avatar-input" id="avatar-change-input" onChange={(e) => { changeImageAdmin() }} hidden></input>
+                            <input type='file' name='avatar-admin' className="info-page__avatar-input" id="avatar-change-input" onChange={(e) => { changeImageAdmin() }} hidden></input>
                             <label className="info-page__avatar-btn" htmlFor="avatar-change-input">Thay đổi Avatar</label>
                             <label className="info-page__user-id">{admin.adminName}</label>
                         </div>

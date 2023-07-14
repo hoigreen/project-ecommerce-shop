@@ -16,7 +16,7 @@ const ResultSearch = () => {
     useEffect(() => {
         const fetchAPIs = () => {
             fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
-                setProducts(data.products)
+                setProducts(data)
                 setLoading(false)
             })
         }

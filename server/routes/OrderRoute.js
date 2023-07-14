@@ -31,7 +31,7 @@ router.get("/:id", async (req, res) => {
 router.put("/update-status/:id", UpdateStatusOrder);
 
 // Update status vode 1 product
-router.put("/update-status/:id/:productName", UpdateStatusVoteProduct)
+router.put("/update-status-vote/:orderID", UpdateStatusVoteProduct)
 
 // Tạo đơn hàng mới
 router.post("/create", CreateOrder)

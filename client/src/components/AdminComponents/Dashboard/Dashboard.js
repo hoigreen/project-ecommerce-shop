@@ -90,7 +90,7 @@ const Dashboard = () => {
                             <div className='admin__item' key={index}>
                                 <label className='admin__item-id'>ADMIN {index + 1}</label>
                                 <div className='admin__item-avatar'>
-                                    <img src={admin.avatarUrl} className='admin__item-img'></img>
+                                    <img src={process.env.REACT_APP_API + admin.avatarUrl} className='admin__item-img'></img>
                                 </div>
                                 <label className='admin__item-admin-name'>{admin.adminName}</label>
 

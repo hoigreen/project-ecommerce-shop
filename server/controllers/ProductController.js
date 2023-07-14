@@ -181,6 +181,39 @@ const UpdateImageList = async (req, res) => {
     }
 }
 
+const VoteProduct = async (req, res) => {
+    try {
+        const _id = req.params.id;
+        // const name = req.params.name;
+        const {
+            star
+        } = req.body;
+
+        // console.log(name)
+
+        const infoProduct = await ProductModel.findByIdAndUpdate(
+            _id,
+            {
+                $inc: { voter: 1 },
+                $set: { star: star + 1 }
+            },
+            { new: true }
+        );
+        res.status(200).send({
+            success: true,
+            messsage: "Cập nhật thông tin thành công",
+            infoProduct,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            error,
+            message: "Error while updating",
+        });
+    }
+}
+
 // Xóa sản phẩm
 const DeleteProduct = async (req, res) => {
     try {
@@ -206,5 +239,6 @@ module.exports = {
     UpdateImageLink,
     UpdateImageBanner,
     UpdateImageList,
-    DeleteProduct
+    DeleteProduct,
+    VoteProduct
 };

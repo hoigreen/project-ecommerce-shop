@@ -13,21 +13,7 @@ const AddProduct = () => {
     const [option, setOption] = useState([])
     const [color, setColor] = useState([])
     const [status, setStatus] = useState('')
-
     const navigate = useNavigate()
-
-    const changeImage = () => {
-        const preview = document.querySelector(".add-product__image")
-        const imageAdmin = document.querySelector("#image-change").files[0]
-        const reader = new FileReader()
-        reader.addEventListener("load", () => {
-            preview.src = reader.result;
-        }, false)
-
-        if (imageAdmin) {
-            reader.readAsDataURL(imageAdmin)
-        }
-    }
 
     const handleAddOption = () => {
         const optionList = document.querySelector(".add__option-list")
@@ -87,11 +73,10 @@ const AddProduct = () => {
 
     const handleAddProduct = async (e) => {
         e.preventDefault();
-        const imageLinkProduct = document.querySelector(".add-product__image").getAttribute("src")
         try {
             const res = await axios.post(`${process.env.REACT_APP_API}/api/products/create`, {
                 imagePrimary: "",
-                imageLink: imageLinkProduct,
+                imageLink: "",
                 imageList: [],
                 name,
                 type,
@@ -128,14 +113,6 @@ const AddProduct = () => {
                 <div className="add">
                     <div className="add__header">THÊM SẢN PHẨM MỚI</div>
                     <div className="add__body">
-                        <div className="add__col-left">
-                            <div className="add__avatar">
-                                <img src="http://localhost:4000/public/img-product-empty.png" className="add-product__image"></img>
-                                <input type='file' id="image-change" onChange={changeImage} hidden></input>
-                                <label htmlFor="image-change" className="info-admin-product__image-btn">Thêm hình ảnh</label>
-                            </div>
-
-                        </div>
                         <div className="add__col-right">
                             <label className="add__title">Thông tin sản phẩm</label>
 

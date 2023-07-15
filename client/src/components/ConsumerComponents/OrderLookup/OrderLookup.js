@@ -130,7 +130,7 @@ const OrderLookup = () => {
                                     <label className="detail-price__header">Chi tiết sản phẩm</label>
                                     {lists && lists.map((item, i) => (
                                         <li className="cart-confirm__item-product" key={i}>
-                                            <img className='cart-confirm__item-product-img' src={item.imageLink}></img>
+                                            <img className='cart-confirm__item-product-img' src={process.env.REACT_APP_API + item.imageLink}></img>
                                             <div className='cart-confirm__item-product-info'>
                                                 <label className='cart-confirm__item-product-info-label'>{item.productName}</label>
                                                 <p className='cart-confirm__item-product-info-quantity'>x{item.quantity}</p>

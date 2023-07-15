@@ -34,28 +34,34 @@ const AccountClientInfo = () => {
     }
 
     const handleUploadAvatar = () => {
-        const formData = new FormData();
-        formData.append('avatar-change', imageFile, changeFilename(imageFile.name, user._id));
+        if (imageFile) {
+            const formData = new FormData();
+            formData.append('avatar-change', imageFile, changeFilename(imageFile.name, user._id));
 
-        axios.post('http://localhost:4000/api/users/upload-image', formData)
-            .then(response => {
-                console.log(response)
-            })
-            .catch((error) => {
-                alert('Lỗi khi upload:', error);
-            });
+            axios.post('http://localhost:4000/api/users/upload-image', formData)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch((error) => {
+                    alert('Lỗi khi upload:', error);
+                });
+        }
+
     }
 
     const handleEditInfo = async (e) => {
         e.preventDefault()
         handleUploadAvatar()
         const inputElements = document.querySelectorAll(".account__box-info-input")
-        const avatarUrl = `/public/uploads/users/${changeFilename(imageFile.name, user._id)}`;
+        var avatarUrl = ''
+        if (imageFile) {
+            avatarUrl = `/public/uploads/users/${changeFilename(imageFile.name, user._id)}`;
+        }
 
         if (window.confirm("Bạn muốn sửa đổi thông tin cá nhân!") == true) {
             try {
                 const res = await axios.put(`${process.env.REACT_APP_API}/api/users/update/${JSON.parse(window.localStorage.getItem('auth')).user._id}`, {
-                    avatarUrl: avatarUrl,
+                    avatarUrl: avatarUrl || user.avatarUrl,
                     fullname: inputElements[0].value,
                     email: inputElements[1].value,
                     phone: inputElements[2].value,

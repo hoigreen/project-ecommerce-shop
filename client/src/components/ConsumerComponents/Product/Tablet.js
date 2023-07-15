@@ -148,7 +148,7 @@ const Tablet = () => {
                                     }, 1000)
                                 }}
                             >
-                                <img src={product.imageLink}
+                                <img src={process.env.REACT_APP_API + product.imageLink}
                                     className='product-client__item-img'>
                                 </img>
                                 <label className='product-client__item-label'>{product.name}</label>
@@ -166,7 +166,7 @@ const Tablet = () => {
                 </div >
             </div>
             <Footer />
-            <p className='app-copyright'>©️ Bản quyền thuộc nhóm 7 -  Chuyên đề thực tế 2 - CN20A - năm 2023 <br />
+            <p className='app-copyright'>©️ Bản quyền thuộc ShopTECH - năm 2023 <br />
                 Địa chỉ: 70 Tô Ký, phường Tân Chánh Hiệp. Quận 12, Thành phố Hồ Chí Minh.</p>
         </>
     );

@@ -58,7 +58,7 @@ const ProductPage = () => {
                             <div className='admin__item' key={index}>
                                 <label style={{ color: 'white' }} className='admin__item-id'>STT: 0{index + 1}</label>
                                 <div className='product__item-avatar'>
-                                    <img src={product.imageLink} className='product__item-img'></img>
+                                    <img src={process.env.REACT_APP_API + product.imageLink} className='product__item-img'></img>
                                 </div>
                                 <label
                                     style={{

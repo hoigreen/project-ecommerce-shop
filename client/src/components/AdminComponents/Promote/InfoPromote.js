@@ -4,12 +4,13 @@ import { useParams } from 'react-router-dom'
 import "./styles/promote-style.css"
 import AdminHeader from '../Common/AdminHeader';
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
-import { handleLoadingPage } from '../../Common';
+import { changeFilename, handleLoadingPage } from '../../Common';
 import axios from 'axios';
 
-const InfoPromote = ({ socket }) => {
+const InfoPromote = () => {
     const [promote, setPromote] = useState({})
     const { id } = useParams()
+    const [imageFile, setImageFile] = useState(null)
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,12 +33,31 @@ const InfoPromote = ({ socket }) => {
 
         if (image) {
             reader.readAsDataURL(image)
+            setImageFile(image)
+        }
+    }
+
+    const handleUploadImage = () => {
+        if (imageFile) {
+            const formData = new FormData();
+            formData.append('image-change', imageFile, changeFilename(imageFile.name, promote._id));
+
+            axios.post('http://localhost:4000/api/promotes/upload-image', formData)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch((error) => {
+                    alert('Lỗi khi upload:', error);
+                });
         }
     }
 
     const handleConfirmChange = async (e) => {
         e.preventDefault()
-        const imageLink = document.querySelector(".info-promote__avatar-img").getAttribute("src")
+        handleUploadImage()
+        var imageLink = promote.imageLink
+        if (imageFile)
+            imageLink = `/public/uploads/promotes/${changeFilename(imageFile.name, promote._id)}`
         const inputName = document.querySelector(".info-promote__input-name");
         const inputElements = document.querySelectorAll(".info-promote__input");
         if (window.confirm("Bạn muốn cập nhật thông tin chương trình khuyến mãi này?") == true) {
@@ -100,7 +120,7 @@ const InfoPromote = ({ socket }) => {
 
                     <div className="info-promote__body">
                         <div className="add__avatar">
-                            <img src={promote.imageLink} className="info-promote__avatar-img"></img>
+                            <img src={process.env.REACT_APP_API + promote.imageLink} className="info-promote__avatar-img"></img>
                             <input type='file' id="image-change" onChange={changeImage} hidden></input>
                             <label htmlFor="image-change" className="info-admin-product__image-btn">Thay đổi hình ảnh khuyến mãi</label>
                         </div>

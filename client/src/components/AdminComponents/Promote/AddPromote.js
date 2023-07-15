@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
 import "./styles/promote-style.css"
 import { handleLoadingPage } from '../../Common';
 import axios from 'axios';
@@ -14,27 +13,11 @@ const AddPromote = () => {
 
     const navigate = useNavigate()
 
-    const changeImage = () => {
-        const preview = document.querySelector(".add__avatar-img-promote")
-        const imageAdmin = document.querySelector("#image-change").files[0]
-        const reader = new FileReader()
-        reader.addEventListener("load", () => {
-            preview.src = reader.result;
-            preview.style.objectFit = "fill"
-            preview.style.backgroundColor = "#fff"
-        }, false)
-
-        if (imageAdmin) {
-            reader.readAsDataURL(imageAdmin)
-        }
-    }
-
     const handleAddPromote = async (e) => {
         e.preventDefault();
-        const imageLink = document.querySelector(".add__avatar-img-promote").getAttribute("src")
         try {
             const res = await axios.post(`${process.env.REACT_APP_API}/api/promotes/create`, {
-                imageLink: imageLink,
+                imageLink: "trống",
                 name,
                 timeStart,
                 timeEnd,
@@ -62,12 +45,6 @@ const AddPromote = () => {
                 <div className="add add__promote-container">
                     <div className="add__header">THÊM CHƯƠNG TRÌNH KHUYẾN MÃI MỚI</div>
                     <div className="add-promote__body">
-                        <div className="add__avatar">
-                            <img src='https://cdn1.iconfinder.com/data/icons/business-company-1/500/image-512.png' className="add__avatar-img-promote"></img>
-                            <input type='file' id="image-change" onChange={changeImage} hidden></input>
-                            <label htmlFor="image-change" className="info-admin-product__image-btn">Thêm hình ảnh khuyến mãi</label>
-                        </div>
-
                         <label className="add__title">Thông tin khuyến mãi</label>
 
                         <label className="add__label">Tên chương trình khuyến mãi </label>

@@ -96,7 +96,7 @@ const SmartPhone = () => {
         <>
             <Nav />
             <Breadcrumbs />
-            <div className='container' style={{ backgroundImage: "url(http://localhost:4000/public/product-img/smartphone-img/background.png)", backgroundRepeat:"no-repeat", backgroundPosition: "center", backgroundSize: "cover", marginTop: "60px", padding: "50px 0 40px" }}>
+            <div className='container' style={{ backgroundImage: "url(http://localhost:4000/public/product-img/smartphone-img/background.png)", backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover", marginTop: "60px", padding: "50px 0 40px" }}>
                 <div className='grid wide'>
                     <SideBanner />
                     <div className="product-client__event">
@@ -148,7 +148,7 @@ const SmartPhone = () => {
                                     }, 1000)
                                 }}
                             >
-                                <img src={product.imageLink} className='product-client__item-img'></img>
+                                <img src={process.env.REACT_APP_API + product.imageLink} className='product-client__item-img'></img>
                                 <label className='product-client__item-label'>{product.name}</label>
                                 <img className="product-client__item-hot-icon" src="http://localhost:4000/public/product-img/smartphone-img/icon-hot.gif"></img>
                                 <img className="product-client__item-icon" src="http://localhost:4000/public/product-img/smartphone-img/icon-18-month.png"></img>

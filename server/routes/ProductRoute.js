@@ -1,6 +1,7 @@
 const express = require('express');
 const ProductModel = require('../models/ProductModel');
 const { CreateProductController, UpdateProductController, UpdateImageLink, UpdateImageBanner, UpdateImageList, DeleteProduct, VoteProduct } = require('../controllers/ProductController');
+const { uploadImageLinkProduct } = require('../middlewares/UploadFile');
 const router = express.Router();
 
 // Get All Product
@@ -40,6 +41,21 @@ router.get("/get-by-name/:name", async (req, res) => {
 
 // Create 1 product
 router.post("/create", CreateProductController)
+
+// Upload ảnh chính sản phẩm
+router.post('/upload-image', uploadImageLinkProduct.single('image-primary'), (req, res) => {
+    res.status(200).json({ error: 'Upload thành công' });
+});
+
+// Upload ảnh banner sản phẩm
+router.post('/upload-image-primary', uploadImageLinkProduct.single('image-banner'), (req, res) => {
+    res.status(200).json({ error: 'Upload thành công' });
+});
+
+// Upload ảnh chi tiết sản phẩm
+router.post('/upload-image-list', uploadImageLinkProduct.single('image-list'), (req, res) => {
+    res.status(200).json({ error: 'Upload thành công' });
+});
 
 // Update product
 router.put("/update=:id", UpdateProductController)

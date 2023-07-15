@@ -11,9 +11,10 @@ const Nav = () => {
 
     useEffect(() => {
         const fetchAPI = () => {
-            fetch("http://localhost:4000/api/users/" + JSON.parse(window.localStorage.getItem("auth")).user._id).then(res => res.json()).then(data => {
-                setCountQuantity(data.cart.length)
-            })
+            if (localStorage.auth)
+                fetch("http://localhost:4000/api/users/" + JSON.parse(window.localStorage.getItem("auth")).user._id).then(res => res.json()).then(data => {
+                    setCountQuantity(data.cart.length)
+                })
         }
         fetchAPI()
     }, [])

@@ -54,7 +54,7 @@ const ResultSearch = () => {
                     margin: 0 5px 12px;'
                     >
 
-                    <img src=${p.imageLink} class='home__flash-sale-item-img' />
+                    <img src=${process.env.REACT_APP_API + p.imageLink} class='home__flash-sale-item-img' />
                     <label class='product__sell-item-label'>${p.name}</label>
                     <label class='product__sell-item-price'>${Number(p.price).toLocaleString()} ₫</label>
                     <span class='product__sell-item-percent'>${(Number(p.price) * 1.065).toLocaleString()}đ</span>
@@ -87,12 +87,12 @@ const ResultSearch = () => {
                 ${loading ? <p>Đang kết nối đến server ... </p> : listArray.map((p, i) => (
                     `
                     <li
-                    class="product__sell-item--tablet"
+                    class="product__sell-item"
                     key=${index}
                     style='display:block;
                     margin: 10px 10px 12px;'>
 
-                    <img src=${p.imageLink} class='home__flash-sale-item-img' />
+                    <img src=${process.env.REACT_APP_API + p.imageLink} class='home__flash-sale-item-img' />
                     <label class='product__sell-item-label'>${p.name}</label>
                     <label class='product__sell-item-price'>${Number(p.price).toLocaleString()} ₫</label>
                     <span class='product__sell-item-percent'>${(Number(p.price) * 1.065).toLocaleString()}đ</span>
@@ -164,34 +164,34 @@ const ResultSearch = () => {
 
                         <div className="search-control">
                             <button className="search-control__btn search-control__btn--active" onClick={(e) => {
-                                handleLoadingPage(2)
+                                handleLoadingPage(1)
                                 setTimeout(() => {
                                     window.location.reload()
-                                }, 2000)
+                                }, 1000)
                             }}>Tất cả</button>
                             <button className="search-control__btn" onClick={(e) => {
-                                handleLoadingPage(2)
+                                handleLoadingPage(1)
                                 setTimeout(() => {
                                     handleClickSearchByType("smartphone")
-                                }, 2000)
+                                }, 1000)
                             }}>Điện thoại</button>
                             <button className="search-control__btn" onClick={(e) => {
-                                handleLoadingPage(2)
+                                handleLoadingPage(1)
                                 setTimeout(() => {
                                     handleClickSearchByType("tablet")
-                                }, 2000)
+                                }, 1000)
                             }}>Máy tính bảng</button>
                             <button className="search-control__btn" onClick={(e) => {
-                                handleLoadingPage(2)
+                                handleLoadingPage(1)
                                 setTimeout(() => {
                                     handleClickSearchByType("laptop")
-                                }, 2000)
+                                }, 1000)
                             }}>Máy tính xách tay</button>
                             <button className="search-control__btn" onClick={(e) => {
-                                handleLoadingPage(2)
+                                handleLoadingPage(1)
                                 setTimeout(() => {
                                     handleClickSearchByType("accessories")
-                                }, 2000)
+                                }, 1000)
                             }}>Phụ kiện</button>
                         </div>
 

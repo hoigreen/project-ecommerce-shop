@@ -1,6 +1,7 @@
 const express = require('express');
 const PromoteModel = require('../models/PromoteModel');
 const { CreatePromote, UpdatePromote, DeletePromote } = require('../controllers/PromoteController');
+const { uploadImagePromote } = require('../middlewares/UploadFile');
 const router = express.Router();
 
 // Get all promote
@@ -28,6 +29,11 @@ router.get("/:id", async (req, res) => {
 
 // Create 1 promote
 router.post("/create", CreatePromote)
+
+// Upload ảnh khuyến mãi
+router.post('/upload-image', uploadImagePromote.single('image-change'), (req, res) => {
+    res.status(200).json({ error: 'Upload thành công' });
+});
 
 // // Update product
 router.put("/update=:id", UpdatePromote)

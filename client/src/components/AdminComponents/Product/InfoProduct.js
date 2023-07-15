@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import "./product.css"
 import AdminHeader from '../Common/AdminHeader';
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar';
-import { handleLoadingPage } from '../../Common';
+import { changeFilename, handleLoadingPage } from '../../Common';
 import axios from 'axios';
 
 const InfoProduct = () => {
@@ -14,12 +14,19 @@ const InfoProduct = () => {
     const [colorProductEdit, setColorProductEdit] = useState([])
     const [boolHotDeal, setBoolHotDeal] = useState(false)
     const [boolFeatured, setBoolFeatured] = useState(false)
+    const [imageLinkFile, setImageLinkFile] = useState(null)
+    const [imagePrimaryFile, setImagePrimaryFile] = useState(null)
+    const [countImageInList, setCountImageInList] = useState(0)
+    const [imageFileInList, setImageFileInList] = useState(null)
+    // const [arrayImageList, setArrayImageList] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
         const fetchAPIs = () => {
             fetch("http://localhost:4000/api/products/" + id).then(res => res.json()).then(data => {
                 setProduct(data)
+                setCountImageInList(data.imageList.length)
+                // setArrayImageList(data.imageList)
                 setLoading(false)
             })
         }
@@ -27,64 +34,46 @@ const InfoProduct = () => {
         handleLoadOptionSelected(2)
     }, [])
 
-    const changeImageBanner = () => {
-        const preview = document.querySelector(".info-admin-product__image-banner-img")
-        const imageAdmin = document.querySelector("#image-banner").files[0]
-        const reader = new FileReader()
-        reader.addEventListener("load", () => {
-            preview.src = reader.result;
-        }, false)
 
-        if (imageAdmin) {
-            reader.readAsDataURL(imageAdmin)
-        }
-    }
-
-    const changeImagePrimary = () => {
+    // Thay đổi ảnh chính
+    const changeImageLink = () => {
         const preview = document.querySelector(".info-admin-product__image-primary-img")
-        const imageAdmin = document.querySelector("#image-primary").files[0]
+        const imageProductLink = document.querySelector("#image-primary").files[0]
+
         const reader = new FileReader()
         reader.addEventListener("load", () => {
             preview.src = reader.result;
         }, false)
 
-        if (imageAdmin) {
-            reader.readAsDataURL(imageAdmin)
+        if (imageProductLink) {
+            reader.readAsDataURL(imageProductLink)
+            setImageLinkFile(imageProductLink)
         }
     }
 
-    var indexImageItem = 0;
-    const handleAddImageInList = () => {
-        const imagesList = document.querySelector(".info-admin-product__image-list")
-        if (imagesList) {
-            const item = document.createElement("div");
-            item.classList.add("info-admin-product__image-item")
-            item.innerHTML = `
-                    <img src="http://localhost:4000/public/img-product-empty.png" class="info-admin-product__image-item-img" src="">
-                    <label for="image-list-${indexImageItem}" class="info-admin-product__image-item-btn--remove"></label>
-                    <input type="file" class="image-list" id="image-list-${indexImageItem}" hidden/>
-            `
-            imagesList.appendChild(item);
-            handleAddImage(Number(indexImageItem))
-            indexImageItem = indexImageItem + 1;
-        }
-    }
+    const handleUploadImage = () => {
+        if (imageLinkFile) {
+            const formData = new FormData();
+            formData.append('image-primary', imageLinkFile, changeFilename(imageLinkFile.name, "imageLink-" + product._id));
 
-    const handleAddImage = (index) => {
-        const imageItems = document.querySelectorAll(".image-list");
-        const preview = document.querySelectorAll(".info-admin-product__image-item-img")
-        imageItems[index].onchange = () => {
-            const reader = new FileReader()
-            reader.addEventListener("load", () => {
-                preview[index].src = reader.result;
-            }, false)
-            reader.readAsDataURL(imageItems[index].files[0])
+            axios.post('http://localhost:4000/api/products/upload-image', formData)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch((error) => {
+                    alert('Lỗi khi upload:', error);
+                });
         }
     }
 
     const handleConfirmChangeImageLink = async (e) => {
         e.preventDefault()
-        const imageLinkProduct = document.querySelector(".info-admin-product__image-primary-img").getAttribute("src")
+        handleUploadImage()
+        var imageLinkProduct = ''
+        if (imageLinkFile) {
+            imageLinkProduct = `/public/uploads/products/${changeFilename(imageLinkFile.name, "imageLink-" + product._id)}`;
+        }
+
         if (window.confirm("Bạn muốn cập nhật thông tin sản phẩm?") == true) {
             try {
                 const res = await axios.put(`${process.env.REACT_APP_API}/api/products/update/image-link=${id}`, {
@@ -105,9 +94,45 @@ const InfoProduct = () => {
         }
     }
 
+
+    // Thay đổi ảnh banner
+    const changeImageBanner = () => {
+        const preview = document.querySelector(".info-admin-product__image-banner-img")
+        const imageProductLink = document.querySelector("#image-banner").files[0]
+
+        const reader = new FileReader()
+        reader.addEventListener("load", () => {
+            preview.src = reader.result;
+        }, false)
+
+        if (imageProductLink) {
+            reader.readAsDataURL(imageProductLink)
+            setImagePrimaryFile(imageProductLink)
+        }
+    }
+
+    const handleUploadImagePrimary = () => {
+        if (imagePrimaryFile) {
+            const formData = new FormData();
+            formData.append('image-banner', imagePrimaryFile, changeFilename(imagePrimaryFile.name, "imagePrimary-" + product._id));
+
+            axios.post('http://localhost:4000/api/products/upload-image-primary', formData)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch((error) => {
+                    alert('Lỗi khi upload:', error);
+                });
+        }
+    }
+
     const handleConfirmChangeImageBanner = async (e) => {
         e.preventDefault()
-        const imagePrimaryProduct = document.querySelector(".info-admin-product__image-banner-img").getAttribute("src")
+        handleUploadImagePrimary()
+        var imagePrimaryProduct = ''
+        if (imagePrimaryFile) {
+            imagePrimaryProduct = `/public/uploads/products/${changeFilename(imagePrimaryFile.name, "imagePrimary-" + product._id)}`;
+        }
         if (window.confirm("Bạn muốn cập nhật thông tin sản phẩm?") == true) {
             try {
                 const res = await axios.put(`${process.env.REACT_APP_API}/api/products/update/image-banner=${id}`, {
@@ -128,13 +153,46 @@ const InfoProduct = () => {
         }
     }
 
-    var arrayImageList = product.imageList;
+
+    // Thay đổi ảnh trong list ảnh
+    const changeImageInList = () => {
+        const preview = document.querySelector(".img-new")
+        const elementWapper = document.querySelector(".info-admin-product__image-item--disable")
+        console.log(preview)
+        const imageProductFile = document.querySelector("#image-list").files[0]
+
+        const reader = new FileReader()
+        reader.addEventListener("load", () => {
+            elementWapper.style.display = "block"
+            preview.src = reader.result;
+        }, false)
+
+        if (imageProductFile) {
+            reader.readAsDataURL(imageProductFile)
+            setImageFileInList(imageProductFile)
+        }
+    }
+
+    const handleUploadImageInList = () => {
+        if (imageFileInList) {
+            const formData = new FormData();
+            formData.append('image-list', imageFileInList, changeFilename(imageFileInList.name, "imageList-" + product._id + "-" + countImageInList));
+
+            axios.post('http://localhost:4000/api/products/upload-image-list', formData)
+                .then(response => {
+                    console.log(response)
+                })
+                .catch((error) => {
+                    alert('Lỗi khi upload:', error);
+                });
+        }
+    }
+
+    var arrayImageList = []
     const handleConfirmEditList = async () => {
-        const imagesItems = document.querySelectorAll(".info-admin-product__image-item-img")
-        if (imagesItems) {
-            for (var i = 0; i < imagesItems.length; i++) {
-                arrayImageList.push(imagesItems[i].src)
-            }
+        handleUploadImageInList()
+        if (imageFileInList) {
+            arrayImageList = [...product.imageList, `/public/uploads/products/${changeFilename(imageFileInList.name, "imageList-" + product._id + "-" + countImageInList)}`]
         }
         try {
             const res = await axios.put(`${process.env.REACT_APP_API}/api/products/update/image-list=${id}`, {
@@ -236,8 +294,8 @@ const InfoProduct = () => {
                     <div className="info-admin-product__body">
                         <div className="info-admin-product__col-1">
                             <div className="info-admin-product__image-primary">
-                                <img className="info-admin-product__image-primary-img" src={product.imageLink || "http://localhost:4000/public/img-product-empty.png"}></img>
-                                <input type='file' id="image-primary" value="" onChange={changeImagePrimary} hidden></input>
+                                <img className="info-admin-product__image-primary-img" src={process.env.REACT_APP_API + product.imageLink || "http://localhost:4000/public/img-product-empty.png"}></img>
+                                <input type='file' id="image-primary" value="" onChange={changeImageLink} hidden></input>
                                 <div className="info-admin-product__image-controll">
                                     <label htmlFor="image-primary" className="info-admin-product__image-btn">Chỉnh sửa</label>
                                     <button className="info-admin-product__image-btn" style={{ backgroundColor: "#df8129", color: "#fff" }}
@@ -247,7 +305,7 @@ const InfoProduct = () => {
 
                             <div className="info-admin-product__image-box">
                                 <div className="info-admin-product__image-banner">
-                                    <img className="info-admin-product__image-banner-img" src={product.imagePrimary || "http://localhost:4000/public/img-product-empty.png"}></img>
+                                    <img className="info-admin-product__image-banner-img" src={process.env.REACT_APP_API + product.imagePrimary || "http://localhost:4000/public/img-product-empty.png"}></img>
                                     <input type='file' id="image-banner" value="" onChange={changeImageBanner} hidden></input>
                                     <div className="info-admin-product__image-controll">
                                         <label htmlFor="image-banner" className="info-admin-product__image-btn">Chỉnh sửa</label>
@@ -259,10 +317,24 @@ const InfoProduct = () => {
                                 </div>
 
                                 <ul className="info-admin-product__image-list">
-                                    <button className="info-admin-product__item-image-btn" onClick={handleAddImageInList}>+</button>
+                                    <label for="image-list" class="info-admin-product__image-btn"
+                                        style={{
+                                            margin: "0px 6px 0 0",
+                                            width: "cacl(25% - 10px)",
+                                            height: "56px",
+                                            minWidth: "56px",
+                                            padding: "0",
+                                            lineHeight: "56px",
+                                            fontSize: "4rem",
+                                        }}>+</label>
+                                    <input type="file" name="image-list" class="image-list" id="image-list" hidden onChange={changeImageInList} />
+                                    <div className="info-admin-product__image-item info-admin-product__image-item--disable" style={{ display: "none" }}>
+                                        <img className="info-admin-product__image-item-img--existed img-new" src="http://localhost:4000/public/img-product-empty.png" />
+                                    </div>
+
                                     {loading ? <p>Đang kết nối đến server...</p> : product.imageList.map((item, index) => (
                                         <div className="info-admin-product__image-item" key={index}>
-                                            <img className="info-admin-product__image-item-img--existed" src={product.imageList[index]} />
+                                            <img className="info-admin-product__image-item-img--existed" src={process.env.REACT_APP_API + product.imageList[index]} />
                                         </div>
                                     ))}
                                 </ul>
@@ -303,7 +375,7 @@ const InfoProduct = () => {
                                 </select>
 
                                 <label className="info-admin-product__label">Thương hiệu</label>
-                                <input className='info-admin-product__input' value={product.brand} />
+                                <input className='info-admin-product__input' defaultValue={product.brand} />
 
                                 <label className="info-admin-product__label">Màu sắc</label>
                                 <input type='text' className='info-admin-product__input' onChange={(e) => {

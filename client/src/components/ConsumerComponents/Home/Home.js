@@ -197,7 +197,7 @@ const Home = ({ socket }) => {
     return (
         <>
             <Nav />
-            <HotPromote socket={socket} />
+            <HotPromote />
             <div className="grid wide">
                 <div className="home__container">
                     <SideBanner />
@@ -211,7 +211,7 @@ const Home = ({ socket }) => {
 
                         <div className='home-promote__group'>
                             {loading ? <p>Đang kết nối đến server...</p> : promotes.map((promote, index) => (
-                                <img src={promote.imageLink} className='home-promote__item' alt='' key={index}>
+                                <img src={process.env.REACT_APP_API + promote.imageLink} className='home-promote__item' alt='' key={index}>
                                 </img>
                             ))}
                         </div>
@@ -255,10 +255,10 @@ const Home = ({ socket }) => {
                                                 e.preventDefault();
                                                 handleLoadingPage(1)
                                                 window.setTimeout(() => {
-                                                   window.location.href = `/product/${product.enType}/${product.name}`
+                                                    window.location.href = `/product/${product.enType}/${product.name}`
                                                 }, 1000)
                                             }}>
-                                            <img src={product.imageLink} className='home__flash-sale-item-img'></img>
+                                            <img src={process.env.REACT_APP_API + product.imageLink} className='home__flash-sale-item-img'></img>
                                             <img className="product-client__item-hot-icon" src="http://localhost:4000/public/product-img/smartphone-img/icon-hot.gif"></img>
                                             <label className='home__flash-sale-item-label'>{product.name}</label>
                                             <label className='home__flash-sale-item-price'>{Number(product.price).toLocaleString()} ₫</label>
@@ -296,9 +296,15 @@ const Home = ({ socket }) => {
                                 <li
                                     className="product__sell-item product__sell-item--smartphone"
                                     key={index}
-                                    onClick={(e) => { handleLoadingPage(1, `/product/${product.enType}/${product.name}`) }}
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        handleLoadingPage(1)
+                                        window.setTimeout(() => {
+                                            window.location.href = `/product/${product.enType}/${product.name}`
+                                        }, 1000)
+                                    }}
                                 >
-                                    <img src={product.imageLink}
+                                    <img src={process.env.REACT_APP_API + product.imageLink}
                                         className='home__flash-sale-item-img'>
                                     </img>
                                     <img className="product-client__item-hot-icon" src="http://localhost:4000/public/product-img/smartphone-img/icon-hot.gif"></img>
@@ -338,7 +344,7 @@ const Home = ({ socket }) => {
                                         }, 1000)
                                     }}
                                 >
-                                    <img src={product.imageLink} className='home__flash-sale-item-img'></img>
+                                    <img src={process.env.REACT_APP_API + product.imageLink} className='home__flash-sale-item-img'></img>
                                     <img className="product-client__item-hot-icon" src="http://localhost:4000/public/product-img/smartphone-img/icon-hot.gif"></img>
                                     <label className='product__sell-item-label'>{product.name}</label>
                                     <label className='product__sell-item-price'>{Number(product.price).toLocaleString()} ₫</label>
@@ -373,11 +379,11 @@ const Home = ({ socket }) => {
                                         e.preventDefault();
                                         handleLoadingPage(1)
                                         window.setTimeout(() => {
-                                           window.location.href = `/product/${product.enType}/${product.name}`
+                                            window.location.href = `/product/${product.enType}/${product.name}`
                                         }, 1000)
                                     }}
                                 >
-                                    <img src={product.imageLink}
+                                    <img src={process.env.REACT_APP_API + product.imageLink}
                                         className='home__flash-sale-item-img'>
                                     </img>
                                     <img className="product-client__item-hot-icon" src="http://localhost:4000/public/product-img/smartphone-img/icon-hot.gif"></img>
@@ -412,11 +418,11 @@ const Home = ({ socket }) => {
                                         e.preventDefault();
                                         handleLoadingPage(1)
                                         window.setTimeout(() => {
-                                           window.location.href = `/product/${product.enType}/${product.name}`
+                                            window.location.href = `/product/${product.enType}/${product.name}`
                                         }, 1000)
                                     }}
                                 >
-                                    <img src={product.imageLink}
+                                    <img src={process.env.REACT_APP_API + product.imageLink}
                                         className='home__flash-sale-item-img'>
                                     </img>
                                     <img className="product-client__item-hot-icon" src="http://localhost:4000/public/product-img/smartphone-img/icon-hot.gif"></img>

@@ -219,7 +219,7 @@ const InfoProductClient = ({ socket }) => {
 
             axios.put('http://localhost:4000/api/users/add-product-to-cart-user/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
                 {
-                    imageLink: "123",
+                    imageLink: product.imageLink,
                     productName: name,
                     option: optionEdit,
                     color: colorEdit,
@@ -298,7 +298,7 @@ const InfoProductClient = ({ socket }) => {
                             <div className="info-product__image-group">
                                 <div className="info-product__image-primary"
                                     style={{
-                                        backgroundImage: `url(${product.imagePrimary})`,
+                                        backgroundImage: `url(${process.env.REACT_APP_API + product.imagePrimary})`,
                                         backgroundPosition: "center center",
                                         backgroundColor: "transparent",
                                         backgroundRepeat: "no-repeat",
@@ -314,7 +314,7 @@ const InfoProductClient = ({ socket }) => {
                                 <label className="info-product__image-label">Những hình ảnh của sản phẩm</label>
                                 <ul className="info-product__image-list">
                                     <li style={{
-                                        backgroundImage: `url(${product.imageLink})`,
+                                        backgroundImage: `url(${process.env.REACT_APP_API + product.imageLink})`,
                                         backgroundPosition: "center center",
                                         backgroundColor: "transparent",
                                         backgroundRepeat: "no-repeat",
@@ -328,7 +328,7 @@ const InfoProductClient = ({ socket }) => {
                                     {loading ? <p>Đang kết nối đến server ... </p> : imageList.map((image, i) => (
                                         <li key={i}
                                             style={{
-                                                backgroundImage: `url(${image})`,
+                                                backgroundImage: `url(${process.env.REACT_APP_API + image})`,
                                                 backgroundPosition: "center center",
                                                 backgroundColor: "transparent",
                                                 backgroundRepeat: "no-repeat",
@@ -441,7 +441,7 @@ const InfoProductClient = ({ socket }) => {
                                             e.preventDefault();
                                             window.location.href = `/product/${product.enType}/${product.name}`
                                         }}>
-                                        <img src={product.imageLink} className='product__sell-item-img'></img>
+                                        <img src={process.env.REACT_APP_API + product.imageLink} className='product__sell-item-img'></img>
                                         <label className='product__sell-item-label'>{product.name}</label>
                                         <label className='product__sell-item-price'>{Number(product.price).toLocaleString()} ₫</label>
                                         <span className='product__sell-item-percent'>{(Number(product.price) * 1.065).toLocaleString()}đ</span>
@@ -470,7 +470,7 @@ const InfoProductClient = ({ socket }) => {
                                             <div className='info-product__review-item-info'>
                                                 <div className='info-product__review-item-avatar'
                                                     style={{
-                                                        backgroundImage: `url(${comment.ownerAvatar})`
+                                                        backgroundImage: `url(${process.env.REACT_APP_API + comment.ownerAvatar})`
                                                     }}>
                                                 </div>
                                                 <div className='info-product__review-item-fullname'>{comment.ownerName}</div>

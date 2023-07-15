@@ -281,6 +281,7 @@
 
 .info-admin-product__image-list {
     display: flex;
+    justify-content: space-between;
     margin: 0 20px 0;
     width: 50%;
     padding: 10px;
@@ -309,9 +310,14 @@
 .info-admin-product__image-item {
     display: block;
     position: relative;
-    margin: 0 10px 10px 0;
-    width: calc(25% - 10px);
+    /* margin: 0 10px 10px 0; */
+    width: calc(25%);
+    max-width: 56px;
     height: 56px;
+}
+
+.info-admin-product__image-item--disable {
+    display: none;
 }
 
 .info-admin-product__image-item-img {
@@ -330,10 +336,11 @@
 .info-admin-product__image-item-img--existed {
     display: block;
     width: 100%;
+    min-width: 56px;
     height: 56px;
     border: 1px solid #ddd;
     border-radius: 8px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 

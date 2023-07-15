@@ -147,9 +147,9 @@ const Payment = ({ socket }) => {
                         lists: cartUser
                     });
                     if (res && res.data.success) {
+                        handleClickRemoveAll()
                         handleLoadingPage(2)
                         setTimeout(() => {
-                            handleClickRemoveAll()
                             completePayment()
                         }, 2000)
                         showSuccessMessage()

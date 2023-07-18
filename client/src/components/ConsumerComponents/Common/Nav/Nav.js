@@ -46,7 +46,7 @@ const Nav = () => {
                         }}>
                         </div>
 
-                        <a href="Tel: 00000" className="header-btn header-btn__link hide-on-mobile-tablet">
+                        <a href="Tel: 00000" className="header-btn header-btn__link hide-on-mobile">
                             <i className="header--btn-icon fa-solid fa-phone"></i>
                             <p className="header--btn-name">Hỗ trợ
                                 <span className="header--btn-describe">1800.4433</span>
@@ -91,13 +91,13 @@ const Nav = () => {
                                 <p className="header--btn-name">Thành viên</p>
                             </button>
 
-                            <button className="header-btn hide-on-mobile-tablet" onClick={() => {
+                            <button className="header-btn hide-on-mobile" onClick={() => {
                                 handleLoadingPage(1); window.location.href = "/order"
                             }}>
                                 <i className="header--btn-icon fa-solid fa-history"></i>
                                 <p className="header--btn-name">Đơn hàng</p>
                             </button>
-                            <button className="header-btn hide-on-mobile-tablet" onClick={() => {
+                            <button className="header-btn hide-on-mobile" onClick={() => {
                                 handleLoadingPage(1);
                                 window.location.href = "/contact"
                             }}>

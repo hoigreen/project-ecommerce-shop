@@ -13,7 +13,6 @@
 .breadcrumbs {
     font-size: 1.6rem;
     color: #333;
-
 }
 
 .breadcrumbs>* {
@@ -35,11 +34,6 @@
     content: "//";
     margin-left: 10px;
 }
-
-/* .breadcrumbs .crumb:last-child {
-    display: none;
-} */
-
 
 .breadcrumbs .crumb:last-child:after {
     display: none;
@@ -68,4 +62,24 @@
     margin-right: 6px;
     font-size: 2rem;
     line-height: 30px
+}
+
+@media screen and (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .breadcrumbs {
+        font-size: 1.2rem;
+    }
+
+    .crumb {
+        display: inline-block;
+        font-size: 1.2rem;
+        color: #333;
+    }
+
+    .crumb__home {
+        font-size: 1.4rem;
+    }
 }

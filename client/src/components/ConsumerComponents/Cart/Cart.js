@@ -42,6 +42,7 @@ const Cart = () => {
             if (cartUser.length == 0) {
                 document.querySelector('.cart__container--empty').style.display = 'flex';
                 document.querySelector('.cart__control-container').style.display = 'none';
+                document.querySelector('.cart__container').style.display = 'none';
             }
             else {
                 document.querySelector('.cart__container').style.display = 'flex';

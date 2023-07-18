@@ -180,3 +180,58 @@
     background-color: #eee;
     opacity: 0.8;
 }
+
+@media screen and (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .navbar {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .header--logo {
+        width: 120px;
+        min-width: 100px;
+        height: 56px;
+        margin-left: 10px;
+        margin-right: 20px;
+    }
+
+
+    .header-btn__cart {
+        justify-content: center;
+        min-width: 42px;
+        max-width: 46px;
+        height: 42px;
+    }
+
+    .header-search {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    .header-search__button {
+        height: 42px;
+        width: 42px;
+    }
+
+    .header__btn-group {
+        flex: 0;
+    }
+
+    .header-btn__link {
+        display: none;
+    }
+
+    .header-search__input {
+        width: 140px;
+        font-size: 1.6rem;
+    }
+
+    .table {
+        overflow: scroll;
+    }
+}

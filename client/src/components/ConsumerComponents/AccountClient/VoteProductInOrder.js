@@ -25,6 +25,8 @@ const VoteProductInOrder = ({ socket }) => {
 
     const [products, setProducts] = useState([])
     const [productId, setProductId] = useState()
+    const [starCurrent, setStarCurrent] = useState(0)
+    const [voter, setVoter] = useState(0)
 
     const navigate = useNavigate()
 
@@ -63,6 +65,8 @@ const VoteProductInOrder = ({ socket }) => {
         products.map((p, index) => {
             if (p.productName = productName) {
                 setProductId(p._id)
+                setVoter(p.voter)
+                setStarCurrent(p.star)
             }
         })
     }, [products])
@@ -109,8 +113,31 @@ const VoteProductInOrder = ({ socket }) => {
         }
 
         try {
-            const res = await axios.put(`http://localhost:4000/api/products/update-vote/${productId}`, { star: numberStar })
-            console.log(res)
+            axios.put(`http://localhost:4000/api/products/update-vote/${productId}`,
+                { star: (Number(starCurrent) * voter + numberStar) / (voter + 1) }
+            )
+                .then(() => {
+                    axios.put(`${process.env.REACT_APP_API}/api/orders/update-status-vote/${orderID}`, { productName: productName })
+                        .then(() => {
+                            axios.post(`${process.env.REACT_APP_API}/api/comments/create`,
+                                {
+                                    nameProductVoted: productName,
+                                    owner: user.username,
+                                    ownerAvatar: user.avatarUrl,
+                                    ownerName: user.fullname,
+                                    time: dateTime,
+                                    content: contentComment,
+                                    starVoted: numberStar
+                                }
+                            )
+                                .then(() => {
+                                    handleLoadingPage(1)
+                                    setTimeout(() => {
+                                        window.location.reload()
+                                    }, 1000)
+                                })
+                        })
+                })
             // const [orderRes, productRes] = Promise.all([
             // await axios.put(`${process.env.REACT_APP_API}/api/orders/update-status-vote/${orderID}`, { productName: productName })
             // ])
@@ -147,33 +174,6 @@ const VoteProductInOrder = ({ socket }) => {
         // Vote sản phẩm:
         // 1. Tìm order - set trạng thái vote
         // 3. Thêm comment vào sản phẩm
-
-
-
-        // orders.map((item, index) => {
-        //     if (item.orderID === orderID) 
-        //     {
-        //         products.map((product, i) => {
-        //             if (product.id === productID) {
-        //                 socket.emit("handleVoteProduct",
-        //                     { orderID: item.orderID },
-        //                     { id: product.id },
-        //                     {
-        //                         nameProductVoted: productName,
-        //                         owner: owner,
-        //                         ownerAvatar: avatarLink,
-        //                         ownerName: ownerFullname,
-        //                         time: dateTime,
-        //                         content: contentComment,
-        //                         starVoted: numberStar
-        //                     },
-        //                     productID,
-        //                     numberStar
-        //                 )
-        //             }
-        //         })
-        //     }
-        // })
 
         // handleLoadingPage(1)
         // setTimeout(() => {

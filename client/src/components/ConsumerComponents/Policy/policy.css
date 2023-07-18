@@ -57,3 +57,19 @@
     font-size: 1.8rem;
     text-align: justify;
 }
+
+@media screen and (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .policy__container {
+        width: calc(100% - 20px);
+        margin: 0 auto;
+    }
+
+    .policy__header {
+        font-size: 3rem;
+        line-height: 3.4rem
+    }
+}

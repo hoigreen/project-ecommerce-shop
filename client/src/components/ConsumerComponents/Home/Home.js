@@ -279,7 +279,7 @@ const Home = ({ socket }) => {
                     </div>
 
                     <div id="home__featured">
-                        <div className="home__featured-label">⚡⚡⚡ Sản phẩm nổi bật ⚡⚡⚡</div>
+                        <div className="home__featured-label">SẢN PHẨM NỔI BẬT</div>
                         <div className='home__featured-banner-phone' onClick={(e) => { handleLoadingPage(1, `/product/smartphone`) }}></div>
                         <div className="home__featured-type" onClick={(e) => { handleLoadingPage(1, `/product/smartphone`) }}>ĐIỆN THOẠI</div>
                         <div className="home__featured-brand-list">

@@ -51,3 +51,15 @@
     font-weight: bold;
     border-radius: 10px
 }
+
+@media screen and (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .order-lookup__box {
+        min-width: unset;
+        max-width: unset;
+        width: calc(100% - 20px);
+    }
+}

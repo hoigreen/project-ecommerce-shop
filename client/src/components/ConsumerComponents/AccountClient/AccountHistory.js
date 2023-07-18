@@ -113,44 +113,46 @@ const AccountHistory = () => {
                                     </div>
                                 </div>
 
-                                <table className='table'>
-                                    <thead>
-                                        <tr className='table__thead-primary'>
-                                            <td>Thời gian</td>
-                                            <td>Mã đơn hàng</td>
-                                            <td>Sản phẩm</td>
-                                            <td>Tổng tiền</td>
-                                            <td>Tình trạng</td>
-                                            <td></td>
-                                        </tr>
-                                    </thead>
-                                    <tbody className='table__tbody-primary'>
-                                        {loading ? <tr><td>Loading...</td></tr> : orders.map((order, index) => (
-                                            <tr className='table__row-loading' key={index}>
-                                                <td style={{ backgroundColor: "", fontSize: "1.4rem" }}>{order.time}</td>
-                                                <td style={{ textAlign: "center", background: "#ffcdd2", fontWeight: 700, fontSize: "1.5rem" }}>{order.orderID}</td>
-                                                <td style={{ color: "red", textAlign: 'left' }}>
-                                                    {
-                                                        order.lists.map((list, i) => (
-                                                            <div className="table-td-element" key={i}>
-                                                                <img className="table-td__img" src={process.env.REACT_APP_API + list.imageLink} ></img>
-                                                                <label style={{ fontSize: "1.4rem" }} className="table-td__label">{list.productName}</label>
-                                                            </div>
-                                                        ))
-                                                    }
-                                                </td>
-                                                <td style={{ fontWeight: 600, textAlign: "center", fontSize: "1.6rem", color: "red" }}>{Number(order.price).toLocaleString() || "None"} đ</td>
-                                                <td style={{ backgroundColor: "", fontWeight: 700, fontSize: "1.4rem" }}>{order.status}</td>
-                                                <td><button className="account-history__btn-detail" onClick={(e) => {
-                                                    handleLoadingPage(1);
-                                                    setTimeout(() => {
-                                                        window.location.href = `/account/history/${order.orderID}`
-                                                    })
-                                                }}>Xem chi tiết</button></td>
+                                <div className='account__box-info-table'>
+                                    <table className='table'>
+                                        <thead>
+                                            <tr className='table__thead-primary'>
+                                                <td>Thời gian</td>
+                                                <td>Mã đơn hàng</td>
+                                                <td>Sản phẩm</td>
+                                                <td>Tổng tiền</td>
+                                                <td>Tình trạng</td>
+                                                <td></td>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody className='table__tbody-primary'>
+                                            {loading ? <tr><td>Loading...</td></tr> : orders.map((order, index) => (
+                                                <tr className='table__row-loading' key={index}>
+                                                    <td style={{ backgroundColor: "", fontSize: "1.4rem" }}>{order.time}</td>
+                                                    <td style={{ textAlign: "center", background: "#ffcdd2", fontWeight: 700, fontSize: "1.5rem" }}>{order.orderID}</td>
+                                                    <td style={{ color: "red", textAlign: 'left' }}>
+                                                        {
+                                                            order.lists.map((list, i) => (
+                                                                <div className="table-td-element" key={i}>
+                                                                    <img className="table-td__img" src={process.env.REACT_APP_API + list.imageLink} ></img>
+                                                                    <label style={{ fontSize: "1.4rem" }} className="table-td__label">{list.productName}</label>
+                                                                </div>
+                                                            ))
+                                                        }
+                                                    </td>
+                                                    <td style={{ fontWeight: 600, textAlign: "center", fontSize: "1.6rem", color: "red" }}>{Number(order.price).toLocaleString() || "None"} đ</td>
+                                                    <td style={{ backgroundColor: "", fontWeight: 700, fontSize: "1.4rem" }}>{order.status}</td>
+                                                    <td><button className="account-history__btn-detail" onClick={(e) => {
+                                                        handleLoadingPage(1);
+                                                        setTimeout(() => {
+                                                            window.location.href = `/account/history/${order.orderID}`
+                                                        })
+                                                    }}>Xem chi tiết</button></td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

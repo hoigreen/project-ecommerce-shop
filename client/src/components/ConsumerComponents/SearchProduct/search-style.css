@@ -97,7 +97,15 @@
     height: 320px;
     background-repeat: no-repeat;
     background-position: center;
-    background-size:contain;
+    background-size: contain;
     background-color: transparent;
     margin: 20px 0 30px;
+}
+
+@media screen and (max-width: 739px) {
+    .search-container {
+        width: calc(100% - 20px);
+        margin-left: auto;
+        margin-right: auto;
+    }
 }

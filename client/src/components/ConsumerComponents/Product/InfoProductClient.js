@@ -161,7 +161,7 @@ const InfoProductClient = ({ socket }) => {
 
     const changeImage = (fileName) => {
         const imageElement = document.querySelector(".info-product__image-primary")
-        imageElement.style.backgroundImage = `url(${fileName})`
+        imageElement.style.backgroundImage = `url(${process.env.REACT_APP_API + fileName})`
         imageElement.style.animation = `toRight 0.2s linear`
 
         const imgItems = document.querySelectorAll('.info-product__image-item')
@@ -189,14 +189,14 @@ const InfoProductClient = ({ socket }) => {
         if (indexImageInArray >= arrayImage.length - 1) indexImageInArray = -1;
         indexImageInArray++;
         const imageElement = document.querySelector(".info-product__image-primary")
-        imageElement.style.backgroundImage = `url(${arrayImage[indexImageInArray]})`
+        imageElement.style.backgroundImage = `url(${process.env.REACT_APP_API + arrayImage[indexImageInArray]})`
 
     }
     const handlePrevImage = () => {
         if (indexImageInArray <= 0) indexImageInArray = arrayImage.length;
         indexImageInArray--;
         const imageElement = document.querySelector(".info-product__image-primary")
-        imageElement.style.backgroundImage = `url(${arrayImage[indexImageInArray]})`
+        imageElement.style.backgroundImage = `url(${process.env.REACT_APP_API + arrayImage[indexImageInArray]})`
     }
 
     const showSuccessMessage = () => {
@@ -401,7 +401,7 @@ const InfoProductClient = ({ socket }) => {
                                 <div className='info-product__detail-promote'>
                                     <label className='info-product__detail-promote-label'>
                                         <i className='info-product__detail-promote-label-icon fa fa-gift'></i>
-                                        ƯU MÃI RIÊNG CHO SẢN PHẨM
+                                        NHỮNG ƯU ĐÃI HẤP DẪN KHÁC
                                     </label>
                                     {loading ? <p>Đang kết nối đến server ... </p> : promotes.map((promote, i) => (
                                         <div className='info-product__detail-promote-item' key={i}>

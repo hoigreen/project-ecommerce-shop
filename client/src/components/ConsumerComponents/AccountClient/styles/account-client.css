@@ -992,3 +992,211 @@
 .vote-product__btn-close:hover {
     opacity: 0.8;
 }
+
+@media screen and (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .account__sidebar {
+        display: none;
+    }
+
+    .account__box-info {
+        width: calc(100% - 20px);
+    }
+
+    .account__box {
+        margin-left: 0;
+        margin-bottom: 100px;
+    }
+
+    .account__box-info {
+        margin: 0 auto 30px;
+    }
+
+
+    .account__box-info-item-label {
+        margin-top: 6px;
+        padding: 4px;
+    }
+
+    .account__box-info-list {
+        display: block;
+    }
+
+    .account__box-info-item {
+        width: 100%;
+        flex: 0;
+    }
+
+    .account__box-option {
+        display: block;
+    }
+
+    .account__box-option-item {
+        display: inline-block;
+        width: calc(33% - 20px);
+        margin: 4px 10px;
+        padding: 8px 0;
+    }
+
+    .account__box-option-item-img {
+        width: 40px;
+        height: 40px;
+        background-size: contain;
+    }
+
+    .account__box-option-item-title {
+        font-size: 1.6rem;
+        padding: 4px;
+        margin-bottom: 6px;
+        min-height: 26px;
+        max-height: 26px;
+
+    }
+
+    .account__box-option-item-btn {
+        width: 80%;
+        margin: 8px auto;
+        padding: 8px 4px;
+        font-size: 1.2rem;
+    }
+
+    .account__box-info-header {
+        font-size: 2rem;
+    }
+
+    .account__box-info-title {
+        width: 90%;
+    }
+
+    .account__box-info-input {
+        width: 90%;
+    }
+
+    .login-client__box {
+        margin-bottom: 100px;
+    }
+
+    .login-client__col-1 {
+        display: none;
+    }
+
+    .login-client__col-2 {
+        width: 100%;
+    }
+
+    .login-client__label-login {
+        font-size: 3.2rem;
+        line-height: 3.6rem;
+        margin: 10px 0 30px;
+    }
+
+    .login-client__label {
+        font-size: 1.6rem;
+        margin: 4px 0 6px;
+    }
+
+    .login-client__input {
+        font-size: 1.6rem;
+    }
+
+    .login-client__btn {
+        width: 100%;
+    }
+
+    .login-client__label-or {
+        font-size: 1.2rem;
+    }
+
+    .login-client__direct-btn {
+        width: calc(100% - 40px);
+        padding: 10px 0;
+        margin: 0 0 10px 0;
+        justify-content: center;
+    }
+
+    .form-label {
+        font-size: 1.4rem;
+        margin: 8px 0 4px;
+    }
+
+    .form-control {
+        font-size: 1.2rem;
+    }
+
+    .login-client__question {
+        font-size: 1rem;
+    }
+
+    .login-client__register {
+        font-size: 1rem;
+    }
+
+    .account__box-info-table {
+        overflow-x: scroll;
+        width: 100%;
+        display: block;
+    }
+
+    .order-detail__list {
+        padding: 4px;
+    }
+
+    .order-detail__item-img {}
+
+    .order-detail__item-name {
+        font-size: 1.4rem;
+    }
+
+    .order_detail__item-btn-box {
+        width: fit-content;
+    }
+
+    .order-detail__item-btn {
+        font-size: 1.2rem;
+        padding: 6px 4px;
+    }
+
+    .order-detail__item-info {
+        padding: 0 0 0 4px;
+    }
+
+    .order-detail__item-price {
+        font-size: 1.4rem;
+    }
+
+    .vote-product {
+        width: 80%;
+    }
+
+    .vote-product__item {
+        padding: 4px;
+    }
+
+    .vote-product__item-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .vote-product__item-name {
+        font-size: 1.4rem;
+    }
+
+    .vote-product__item-price {
+        font-size: 1.6rem;
+    }
+
+    .vote-product__title {
+        font-size: 2rem;
+    }
+
+    .vote-product__describe {
+        font-size: 1.4rem;
+    }
+
+    .vote-product__start-group-item:before {
+        font-size: 6rem;
+    }
+}

@@ -96,7 +96,7 @@ const SmartPhone = () => {
         <>
             <Nav />
             <Breadcrumbs />
-            <div className='container' style={{ backgroundImage: "url(http://localhost:4000/public/product-img/smartphone-img/background.png)", backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover", marginTop: "60px", padding: "50px 0 40px" }}>
+            <div className='container' style={{ backgroundRepeat: "no-repeat", backgroundPosition: "center", backgroundSize: "cover", marginTop: "60px", padding: "50px 0 40px" }}>
                 <div className='grid wide'>
                     <SideBanner />
                     <div className="product-client__event">

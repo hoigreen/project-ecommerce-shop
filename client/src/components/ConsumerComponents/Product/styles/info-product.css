@@ -356,7 +356,7 @@
     display: block;
     width: 100%;
     background-color: var(--primary-color);
-    color: #d70018;
+    color: #4510f3;
     font-weight: 600;
     font-size: 2.4rem;
     line-height: 2.8rem;
@@ -479,10 +479,9 @@
 
 .info-product__similar-label {
     display: inline-block;
-    height: 60px;
     font-size: 2.6rem;
     font-weight: 600;
-    margin-top: 8px;
+    margin: 8px 0 20px;
 }
 
 .info-product__similar-list {
@@ -685,4 +684,194 @@
     color: #333;
     text-indent: 12px;
     font-size: 1.6rem;
+}
+
+@media screen and (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .product-client__event-primary {
+        width: calc(100% - 20px);
+        margin-left: auto;
+        margin-right: auto;
+        height: 140px;
+    }
+
+    .product-client__event-list {
+        width: calc(100% - 20px);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .product-client__event-col-left {
+        margin: 0 6px 0 0;
+    }
+
+    .product-client__event-col-left-item {
+        margin-bottom: 2px;
+        border-radius: 6px;
+    }
+
+    .product-client__event-gif,
+    .product-client__list {
+        width: calc(100% - 20px);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .product-client__title-brand {
+        font-size: 2.6rem;
+    }
+
+    .product-client__brand {
+        gap: unset;
+    }
+
+    .product-client__brand-item {
+        width: calc(25% - 8px);
+        margin: 6px 4px;
+        object-fit: contain;
+    }
+
+
+    .product-client__item {
+        width: calc(50% - 8px);
+        margin: 0 4px 8px;
+    }
+
+    .product-client__item-img {
+        margin-bottom: 8px;
+        height: 180px;
+    }
+
+    .product-client__item-icon {
+        top: calc(50% - 60px);
+    }
+
+    .product-client__item-label,
+    .product-client__item-price {
+        font-size: 1.4rem;
+    }
+
+    .product-client__item-percent {
+        font-size: 1.2rem;
+    }
+
+    .product-client__item {
+        height: 360px;
+    }
+
+    .accessories__group-cate {
+        display: none
+    }
+
+    .accessories__list-category {
+        flex-wrap: wrap;
+        padding-top: 4px;
+    }
+
+    .accessories__group-category {
+        width: calc(25% - 16px);
+        margin: 0 8px;
+    }
+
+    .info-product__container {
+        width: calc(100% - 20px);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .info-product__header {
+        padding: 8px 6px;
+    }
+
+    .info-product__header-name {
+        font-size: 1.6rem;
+        margin-right: 0;
+    }
+
+    .info-product__header-star,
+    .info-product__header-voters {
+        font-size: 1.2rem;
+    }
+
+    .info-product__image-primary {
+        width: calc(100% - 20px);
+        margin-left: auto;
+        margin-right: auto;
+        height: 260px;
+    }
+
+    .info-product__image-group {
+        width: calc(100%);
+        margin: 0;
+    }
+
+    .info-product__image-list {
+        margin-top: 8px;
+    }
+
+    .info-product__policy {
+        width: calc(100% - 20px);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .info-product__policy-item {
+        width: 100%;
+    }
+
+    .info-product__box {
+        flex-wrap: wrap;
+    }
+
+    .info-product__detail {
+        margin-top: 20px;
+        width: calc(100% - 20px);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .info-product__policy-header,
+    .info-product__detail-label-price {
+        font-size: 2rem;
+    }
+
+    .info-product__policy-item-content {
+        font-size: 1.2rem;
+    }
+
+    .info-product__detail-option-item {
+        width: calc(25%);
+    }
+
+    .info-product__detail-payment-btn-cart,
+    .info-product__detail-payment-btn-installment {
+        font-size: 1.4rem;
+    }
+
+    .info-product__detail-payment-describe {
+        font-size: 1.2rem
+    }
+
+    .product__sell-item-img {
+        width: 100%;
+    }
+
+    .info-product__review-container {
+        flex-direction: column;
+    }
+
+    .info-product__rating-box {
+        width: calc(100% - 20px);
+        margin-left: auto;
+        margin-right: auto;
+        height: 240px;
+    }
+
+    .info-product__review-list {
+        margin-top: 20px;
+    }
+
 }

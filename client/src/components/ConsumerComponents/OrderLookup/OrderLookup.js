@@ -87,7 +87,7 @@ const OrderLookup = () => {
                     </div>
 
                     <div className="order-result__box">
-                        {order && <div className="cart__container" style={{ display: 'flex', width: '65%' }}>
+                        {order && <div className="cart__container">
                             <div className="cart__header">
                                 <h1 className="cart__title" style={{ padding: "30px 0" }}>THÔNG TIN ĐƠN HÀNG</h1>
 

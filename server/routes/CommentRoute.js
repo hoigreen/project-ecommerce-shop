@@ -25,13 +25,42 @@ router.get("/:id", async (req, res) => {
     }
 });
 
-// // Create 1 promote
-// router.post("/create", CreatePromote)
+// Create 1 comment
+router.post("/create", async (req, res) => {
+    try {
+        const {
+            nameProductVoted,
+            owner,
+            ownerAvatar,
+            ownerName,
+            time,
+            content,
+            starVoted
+        } = req.body;
 
-// // // Update product
-// router.put("/update=:id", UpdatePromote)
+        const order = await new CommentModel({
+            nameProductVoted,
+            owner,
+            ownerAvatar,
+            ownerName,
+            time,
+            content,
+            starVoted
+        }).save();
 
-// // // Delete 1 product
-// router.delete("/delete/:id", DeletePromote);
+        res.status(201).send({
+            success: true,
+            message: "Tạo comment thành công",
+            order,
+        });
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message: "Đã xảy ra lỗi khi tạo đnáh giá",
+            error,
+        });
+    }
+})
 
 module.exports = router;

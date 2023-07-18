@@ -58,7 +58,7 @@ const Footer = () => {
                             <label className='footer__label'>Tổng đài viên hỗ trợ 24/7 <span style={{ fontWeight: "300", color: "red" }}>(Miễn phí tư vấn)</span></label>
                             <div href='/' className='footer__text'>
                                 <p className='footer__text-title'>Hỗ trợ mua hàng:</p>
-                                <span style={{ fontWeight: "bold", color: "blue", paddingRight: "6px" }}>1800 3234</span>
+                                <span className='footer__text-info' style={{ fontWeight: "bold", color: "blue", paddingRight: "6px" }}>1800 3234</span>
                                 (24/7)
                             </div>
                             <div href='/' className='footer__text'>

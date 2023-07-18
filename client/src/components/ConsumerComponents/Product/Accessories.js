@@ -97,7 +97,7 @@ const Accessories = () => {
         <>
             <Nav />
             <Breadcrumbs />
-            <div className='container' style={{ backgroundColor: "#FFFFCC", marginTop: "60px", padding: "50px 0 40px" }}>
+            <div className='container' style={{ marginTop: "60px", padding: "50px 0 40px" }}>
                 <div className='grid wide'>
                     <SideBanner />
                     <div className="product-client__event">
@@ -174,7 +174,8 @@ const Accessories = () => {
                     </div>
 
                     <div>
-                        <label class="accessories__title-category">PHỤ KIỆN ĐỈNH CHÓP</label>
+                        <label className="product-client__title-brand">PHỤ KIỆN ĐỈNH CHÓP</label>
+
                         <div class="accessories__list-category">
                             <div class="accessories__group-category" >
                                 <img src="https://cdn.tgdd.vn/Category/9518/10-Cápsạcchuyểndổi-120x120.png"></img>

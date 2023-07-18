@@ -176,7 +176,7 @@ const Payment = ({ socket }) => {
             <div id="toast-with-navbar"></div>
             <div className="grid wide">
                 <div className="container" style={{ paddingBottom: "200px" }}>
-                    <div className="cart__container" style={{ display: "flex", width: "60%" }}>
+                    <div className="cart__container" >
                         <div className="cart__header">
                             <button className="cart__btn-cancel" onClick={() => { window.location.href = "/cart/info/giftcode/confirm" }}>
                                 <i className="cart__btn-cancel-icon fa fa-arrow-left"></i>Trở lại trang trước</button>
@@ -223,25 +223,25 @@ const Payment = ({ socket }) => {
                         <i className='block-process__item-icon block-process__item-icon--active fa fa-shopping-cart '></i>
                         <label className='block-process__item-label'>Chọn sản phẩm</label>
                     </li>
-                    <i className='block-process__item-arrow block-process__item-arrow--active'>↓</i>
+                    <i className='block-process__item-arrow block-process__item-arrow--active'>-</i>
 
                     <li className="block-process__item block-process__item--active">
                         <i className='block-process__item-icon fa fa-user block-process__item-icon--active'></i>
                         <label className='block-process__item-label'>Thông tin đơn hàng</label>
                     </li>
-                    <i className='block-process__item-arrow block-process__item-arrow--active'>↓</i>
+                    <i className='block-process__item-arrow block-process__item-arrow--active'>-</i>
 
                     <li className="block-process__item block-process__item--active">
                         <i className='block-process__item-icon fa fa-tag block-process__item-icon--active'></i>
                         <label className='block-process__item-label '>Mã khuyến mãi</label>
                     </li>
-                    <i className='block-process__item-arrow block-process__item-arrow--active'>↓</i>
+                    <i className='block-process__item-arrow block-process__item-arrow--active'>-</i>
 
                     <li className="block-process__item block-process__item--active">
                         <i className='block-process__item-icon fa fa-check block-process__item-icon--active'></i>
                         <label className='block-process__item-label'>Xác nhận đơn hàng</label>
                     </li>
-                    <i className='block-process__item-arrow block-process__item-arrow--active'>↓</i>
+                    <i className='block-process__item-arrow block-process__item-arrow--active'>-</i>
 
                     <li className="block-process__item block-process__item--active">
                         <i className='block-process__item-icon fa fa-credit-card block-process__item-icon--active'></i>

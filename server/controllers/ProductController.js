@@ -189,13 +189,11 @@ const VoteProduct = async (req, res) => {
             star
         } = req.body;
 
-        // console.log(name)
-
         const infoProduct = await ProductModel.findByIdAndUpdate(
             _id,
             {
                 $inc: { voter: 1 },
-                $set: { star: star + 1 }
+                $set: { star: star }
             },
             { new: true }
         );

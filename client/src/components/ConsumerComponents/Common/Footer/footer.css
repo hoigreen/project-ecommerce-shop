@@ -79,3 +79,10 @@
     max-width: 100px;
     margin-right: 6px;
 }
+
+.footer__map {
+    margin: 10px 0 0;
+    width: calc(100% - 10px);
+    border-radius: 10px;
+    border: 1px solid #ccc
+}

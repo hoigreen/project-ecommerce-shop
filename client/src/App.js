@@ -23,6 +23,7 @@ import ContactPage from './components/ConsumerComponents/Contact/ContactPage';
 
 import { ModalLoading, PageNotFound } from './components/Common/';
 import AuthAdminProvider from './context/AuthAdminProvider';
+import PolicyPage from './components/ConsumerComponents/Policy/PolicyPage';
 
 function App() {
     return (
@@ -98,10 +99,12 @@ function App() {
 
                         {/* Contact */}
                         <Route path="/contact" element={<ContactPage />} />
+
+                        <Route path="/policy" element={<PolicyPage />} />
                     </Routes>
                 </AuthProvider>
             </Router>
-        </ModalLoading>
+        </ModalLoading >
     );
 }
 

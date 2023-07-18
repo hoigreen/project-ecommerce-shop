@@ -10,9 +10,17 @@ const Footer = () => {
                     <div className='footer__col'>
                         <div className='footer__col-group'>
                             <label className='footer__label'>Tìm chi nhánh cửa hàng ShopTECH</label>
-                            <a href='/' className='footer__link'>Tìm cửa hàng gần bạn</a>
+                            <iframe
+                                className='footer__map'
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2946148745355!2d106.6138108750036!3d10.865181857550368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752a10b0f0554f%3A0x769800e8967d6703!2zNzAgVMO0IEvDvSwgVMOibiBDaMOhbmggSGnhu4dwLCBRdeG6rW4gMTIsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1689436941428!5m2!1sen!2s"
+                                allowfullscreen=""
+                                loading="lazy"
+                                referrerpolicy="no-referrer-when-downgrade">
+
+                            </iframe>
+                            {/* <a href='/' className='footer__link'>Tìm cửa hàng gần bạn</a>
                             <a href='/' className='footer__link'>Mua hàng trực tuyến</a>
-                            <a href='/' className='footer__link'>Danh sách chi nhánh cửa hàng <span style={{ color: "red" }}>(124 chi nhánh)</span></a>
+                            <a href='/' className='footer__link'>Danh sách chi nhánh cửa hàng <span style={{ color: "red" }}>(124 chi nhánh)</span></a> */}
                         </div>
                         <div className='footer__col-group'>
                             <label className='footer__label'>Những phương thức thanh toán</label>
@@ -32,15 +40,15 @@ const Footer = () => {
                     <div className='footer__col'>
                         <div className='footer__col-group'>
                             <label className='footer__label'>Thông tin, chính sách và điều khoản sử dụng</label>
-                            <a href='/' className='footer__link'>Mua hàng và thanh toán</a>
-                            <a href='/' className='footer__link'>Mua trả góp sản phẩm</a>
-                            <a href='/' className='footer__link'>Tra cứu thông tin đơn hàng</a>
-                            <a href='/' className='footer__link'>Tra cứu ưu đãi</a>
-                            <a href='/' className='footer__link'>Tra cứu thông tin bảo hành</a>
-                            <a href='/' className='footer__link'>Tra cứu hóa đơn điện tử</a>
-                            <a href='/' className='footer__link'>Chính sách bảo hành</a>
-                            <a href='/' className='footer__link'>Chính sách hậu mãi</a>
-                            <a href='/' className='footer__link'>Điều khoản sử dụng</a>
+                            <a href='/policy' className='footer__link'>Mua hàng và thanh toán</a>
+                            <a href='/policy' className='footer__link'>Mua trả góp sản phẩm</a>
+                            <a href='/policy' className='footer__link'>Tra cứu thông tin đơn hàng</a>
+                            <a href='/policy' className='footer__link'>Tra cứu ưu đãi</a>
+                            <a href='/policy' className='footer__link'>Tra cứu thông tin bảo hành</a>
+                            <a href='/policy' className='footer__link'>Tra cứu hóa đơn điện tử</a>
+                            <a href='/policy' className='footer__link'>Chính sách bảo hành</a>
+                            <a href='/policy' className='footer__link'>Chính sách hậu mãi</a>
+                            <a href='/policy' className='footer__link'>Điều khoản sử dụng</a>
 
                         </div>
                     </div>

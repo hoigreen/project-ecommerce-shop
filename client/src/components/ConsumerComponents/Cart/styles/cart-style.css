@@ -902,7 +902,8 @@
     }
 
     .cart__control-container {
-        width: calc(100% - 20px)
+        width: calc(100% - 20px);
+        bottom: 60px;
     }
 
     .cart__control-btn {
@@ -949,10 +950,18 @@
 
     .block-process {
         top: unset;
-        bottom: 190px;
+        bottom: 240px;
         right: 50%;
         transform: translateX(50%);
         flex-direction: row;
+    }
+
+    .block-process--lower {
+        bottom: 190px;
+    }
+
+    .block-process-payment--lower {
+        bottom: 160px;
     }
 
     .block-process__item-arrow {

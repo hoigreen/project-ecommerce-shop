@@ -167,7 +167,7 @@ const CartConfirm = () => {
                     </div>
                 </div>
 
-                <ul className="block-process" style={{ marginTop: "20px" }}>
+                <ul className="block-process block-process--lower" style={{ marginTop: "20px" }}>
                     <li className="block-process__item block-process__item--active">
                         <i className='block-process__item-icon block-process__item-icon--active fa fa-shopping-cart '></i>
                         <label className='block-process__item-label'>Chọn sản phẩm</label>

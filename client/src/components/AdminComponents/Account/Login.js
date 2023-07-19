@@ -87,7 +87,7 @@ const Login = () => {
             </div>
             <p className='app-copyright'
                 style={{ position: "fixed", bottom: 0, left: "50%", transform: "translateX(-50%)" }}
-            >©️ Bản quyền thuộc nhóm 7 -  Chuyên đề thực tế 2 - CN20A - năm 2023 <br />
+            >©️ Bản quyền thuộc ShopTECH - năm 2023 <br />
                 Địa chỉ: 70 Tô Ký, phường Tân Chánh Hiệp. Quận 12, Thành phố Hồ Chí Minh.</p>
         </div>
     );

@@ -24,6 +24,7 @@ import ContactPage from './components/ConsumerComponents/Contact/ContactPage';
 import { ModalLoading, PageNotFound } from './components/Common/';
 import AuthAdminProvider from './context/AuthAdminProvider';
 import PolicyPage from './components/ConsumerComponents/Policy/PolicyPage';
+import { NavMobile } from './components/ConsumerComponents/Common';
 
 function App() {
     return (
@@ -102,6 +103,7 @@ function App() {
 
                         <Route path="/policy" element={<PolicyPage />} />
                     </Routes>
+                    <NavMobile />
                 </AuthProvider>
             </Router>
         </ModalLoading >

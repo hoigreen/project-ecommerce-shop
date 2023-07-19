@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './styles/homepage-style.css';
-import { Nav, Footer, SideBanner } from '../Common';
+import { Nav, Footer, SideBanner, NavMobile } from '../Common';
 import HotPromote from './HotPromote';
 import HomeList from './HomeList';
 import { handleLoadingPage } from '../../Common';
@@ -442,7 +442,7 @@ const Home = ({ socket }) => {
                 </div>
             </div >
             <Footer />
-            <p className='app-copyright'>©️ Bản quyền thuộc nhóm 7 -  Chuyên đề thực tế 2 - CN20A - năm 2023 <br />
+            <p className='app-copyright'>©️ Bản quyền thuộc ShopTECH - năm 2023 <br />
                 Địa chỉ: 70 Tô Ký, phường Tân Chánh Hiệp. Quận 12, Thành phố Hồ Chí Minh.</p>
         </ >
     );

@@ -95,7 +95,6 @@
     width: 100%;
     padding: 20px 0 20px 0;
     color: var(--button-color);
-    height: 60px;
 }
 
 .login-client__form {
@@ -1090,7 +1089,8 @@
     .login-client__label-login {
         font-size: 3.2rem;
         line-height: 3.6rem;
-        margin: 10px 0 30px;
+        padding: 10px 0;
+        margin: 10px 0 20px;
     }
 
     .login-client__label {

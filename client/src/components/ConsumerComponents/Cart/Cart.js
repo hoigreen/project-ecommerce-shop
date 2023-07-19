@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import "./styles/cart-style.css"
-import { Nav, Breadcrumbs } from '../Common';
+import { Nav, Breadcrumbs, NavMobile } from '../Common';
 import { handleLoadingPage } from '../../Common';
 import { AuthContext } from '../../../context';
 import axios from 'axios';
@@ -124,6 +124,7 @@ const Cart = () => {
     return (
         <>
             <Nav />
+            <NavMobile />
             <Breadcrumbs />
             <div className="grid wide">
                 <div className="container" style={{ paddingBottom: "200px" }}>

@@ -108,4 +108,20 @@
         margin-left: auto;
         margin-right: auto;
     }
+
+    .product__sell-item {
+        padding: 6px;
+        height: 350px;
+    }
+
+    .search-header__count,
+    .product__sell-item-label,
+    .product__sell-item-price,
+    .product__sell-item-sold {
+        font-size: 1.4rem;
+    }
+
+    .product__sell-item-sold {
+        width: 100%;
+    }
 }

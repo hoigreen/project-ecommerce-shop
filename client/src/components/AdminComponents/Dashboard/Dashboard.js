@@ -1,38 +1,105 @@
 import React, { useState, useEffect } from 'react';
-
+import _ from 'lodash';
 import AdminHeader from '../Common/AdminHeader'
 import AdminSidebar, { handleLoadOptionSelected } from '../Common/AdminSidebar'
 import "./dashboard-style.css"
+import PieChart from '../../Chart/PieChart';
+import BarChart from '../../Chart/BarChart';
 
 const Dashboard = () => {
-    const [admins, setAdmins] = useState([])
     const [countAdmin, setCountAdmin] = useState(0)
+    const [chartDataProduct, setChartDataProduct] = useState({ labels: "", datasets: [{ label: "", data: 0 }] })
+    const [chartDataOrder, setChartDataOrder] = useState({ labels: "", datasets: [{ label: "", data: 0 }] })
     const [countProduct, setCountProduct] = useState(0)
     const [countUser, setCountUser] = useState(0)
     const [countPromotes, setCountPromotes] = useState(0)
 
-    const [loading, setLoading] = useState(true)
-
     useEffect(() => {
         const fetchAPIs = () => {
+            fetch(`http://localhost:4000/api/products`).then(res => res.json()).then(data => {
+                setCountProduct(data.length)
+                processDataProduct(data)
+            })
             fetch(`http://localhost:4000/api/admins`).then(res => res.json()).then(data => {
-                setAdmins(data)
                 setCountAdmin(data.length)
-                setLoading(false)
             });
             fetch(`http://localhost:4000/api/users`).then(res => res.json()).then(data => {
                 setCountUser(data.length)
             });
-            fetch(`http://localhost:4000/api/products`).then(res => res.json()).then(data => {
-                setCountProduct(data.length)
-            });
             fetch(`http://localhost:4000/api/promotes`).then(res => res.json()).then(data => {
                 setCountPromotes(data.length)
             });
+            fetch(`http://localhost:4000/api/orders`).then(res => res.json()).then(data => {
+                processDataOrder(data)
+            });
+
         }
         fetchAPIs()
         handleLoadOptionSelected(0)
     }, [])
+
+    const processDataProduct = (data) => {
+        const groupedData = _.groupBy(data, 'type');
+
+        setChartDataProduct({
+            labels: (Object.keys(groupedData)),
+            datasets: [
+                {
+                    label: 'Số lượng',
+                    data: Object.values(groupedData).map((group) => group.length), // Lấy số lượng phần tử trong mỗi nhóm
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                    ],
+                    borderWidth: 1,
+                    display: true,
+                    align: 'center',
+                    font: {
+                        size: "18px",
+                    }
+                },
+            ],
+        })
+    };
+
+    const processDataOrder = (data) => {
+        data.map((item) => {
+            item.time = item.time[5]
+        })
+
+        const groupedData = _.groupBy(data, 'time');
+        setChartDataOrder({
+            labels: Object.keys(groupedData).map(group => group = "Tháng " + group),
+            datasets: [
+                {
+                    label: 'Doanh thu sản phẩm',
+                    data: Object.values(groupedData).map((group) => {
+                        var total = 0;
+                        group.map((item) => {
+                            total += item.lists.reduce((sum, cur) => sum + Number(cur.price), 1)
+                        })
+                        return total
+                    }),
+                    backgroundColor: [
+                        'rgb(255, 99, 132)',
+                        'rgb(255, 159, 64)',
+                        'rgb(255, 205, 86)',
+                        'rgb(75, 192, 192)',
+                        'rgb(54, 162, 235)',
+                    ],
+                    borderWidth: 1,
+                    display: true,
+                    align: 'center',
+                    font: {
+                        size: "18px",
+                    }
+                },
+            ],
+        })
+    };
 
     return (
         <div className='admin__container'>
@@ -83,7 +150,21 @@ const Dashboard = () => {
                 </div>
 
                 <div className='admin__group'>
+                    <label className='dash__group-title'>Thống kê ShopTECH</label>
+                    <div className='dash__chart-list'>
+                        <div className='dash__chart-item dash__chart-item--pie'>
+                            <PieChart chartData={chartDataProduct} />
+                        </div>
+
+                        <div className='dash__chart-item dash__chart-item--bar'>
+                            <BarChart chartData={chartDataOrder} />
+                        </div>
+                    </div>
+                </div>
+
+                {/* <div className='admin__group'>
                     <label className='dash__group-title'>Danh sách quản trị viên</label>
+                    <PieChart chartData={productData} />
 
                     <div className='admin__list'>
                         {loading ? <p>Đang kết nối đến server ... </p> : admins.map((admin, index) => (
@@ -113,7 +194,7 @@ const Dashboard = () => {
                             </div>
                         ))}
                     </div>
-                </div>
+                </div> */}
             </div>
         </div>
 

@@ -6,6 +6,7 @@
     height: 100%;
     display: flex;
     position: relative;
+    overflow: scroll;
 }
 
 #sidebar {
@@ -88,15 +89,6 @@
 
 .sidebar__component-item--active:hover {
     color: #fff;
-}
-
-
-#admin-box {
-    display: block;
-    position: fixed;
-    left: 260px;
-    top: 0;
-    width: calc(100% - 260px);
 }
 
 .admin__header {

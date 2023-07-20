@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './styles/product-client.css';
 
 import { Breadcrumbs, Footer, Nav, SideBanner } from '../Common';
-import { handleLoadingPage } from '../../Common';
+import { FillterByPrice, handleLoadingPage } from '../../Common';
 
 const Laptop = () => {
     const [products, setProducts] = useState([])
@@ -94,11 +94,16 @@ const Laptop = () => {
         }
     }
 
+    const handleFilterChange = (minPrice, maxPrice) => {
+        const filteredProducts = products.filter((product) => Number(product.price) >= (minPrice) && Number(product.price) <= maxPrice && product.enType === "smartphone");
+        setProducts(filteredProducts);
+    };
+
     return (
         <>
             <Nav />
             <Breadcrumbs />
-            <div className='container' style={{ backgroundImage: "url(http://localhost:4000/public/product-img/laptop-img/background.gif)", backgroundSize: "contain", marginTop: "60px", padding: "50px 0 40px" }}>
+            <div className='container' style={{ backgroundSize: "contain", marginTop: "60px", padding: "50px 0 40px" }}>
                 <div className='grid wide'>
                     <SideBanner />
                     <div className="product-client__event">
@@ -123,7 +128,7 @@ const Laptop = () => {
                         <img className="product-client__event-gif" src="http://localhost:4000/public/product-img/laptop-img/event-item-gif.gif" alt="ảnh gif" ></img>
                     </div>
 
-                    <label className="product-client__title-brand" style={{ color: "white" }}>THƯƠNG HIỆU HÀNG ĐẦU</label>
+                    <label className="product-client__title-brand" >THƯƠNG HIỆU HÀNG ĐẦU</label>
                     <div className='product-brand-list'>
                         <div className='product-client__brand'>
                             <img className='product-client__brand-item' src="http://localhost:4000/public/product-img/laptop-img/logo-macbook.png"></img>
@@ -139,6 +144,8 @@ const Laptop = () => {
                         </div>
                     </div>
 
+                    <label className="product-client__title-brand" >Lọc sản phẩm</label>
+                    <FillterByPrice minPrice={0} maxPrice={100000000} onFilterChange={handleFilterChange} />
                     <ul className="product-client__list">
                         {loading ? <p>Đang kết nối đến server ... </p> : products.map((product, index) => (
                             <li

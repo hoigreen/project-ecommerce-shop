@@ -7,7 +7,7 @@ import { handleLoadingPage } from '../../Common';
 
 const Home = ({ socket }) => {
     const [products, setProducts] = useState([])
-    const [timeStart, setTimeStartSale] = useState(1)
+    const [timeStart, setTimeStartSale] = useState(20)
     const [timeEnd, setTimeEndSale] = useState(31)
 
     const [promotes, setPromotes] = useState([])
@@ -74,7 +74,7 @@ const Home = ({ socket }) => {
     }, [products])
 
     window.onload = () => {
-        var countDownDate = new Date(`5 ${timeEnd}, 2023 00:00:00`).getTime();
+        var countDownDate = new Date(`7 ${timeEnd}, 2023 00:00:00`).getTime();
         const countdown = setInterval(() => {
             var now = new Date().getTime();
             var timeleft = countDownDate - now;
@@ -184,10 +184,7 @@ const Home = ({ socket }) => {
     const handleTransitionSlideUp = () => {
         if (indexSlide < 0) indexSlide = 0;
         const slideGroup = document.querySelector(".home-flash-sale__group")
-        const slideList = document.querySelectorAll(".home__flash-sale-item")
         indexSlide -= 1;
-        console.log(indexSlide)
-        console.log((slideList.length - (slideList.length % 10)) / 10)
         if (indexSlide < 0) return;
         else {
             slideGroup.style.transform = `translateY(-${(indexSlide + 1) * 790 - 790}px)`
@@ -238,7 +235,7 @@ const Home = ({ socket }) => {
                                 </div>
                                 <div className='home__flash-sale-header-col'>
                                     <div className="home__flash-sale-time">Thời gian khuyến mãi</div>
-                                    <div className='home__flash-sale-time-valid'>{timeStart}/5/2023 - {timeEnd}/5/2023</div>
+                                    <div className='home__flash-sale-time-valid'>{timeStart}/7/2023 - {timeEnd}/7/2023</div>
                                 </div>
                             </div>
 

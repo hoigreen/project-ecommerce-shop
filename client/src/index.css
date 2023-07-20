@@ -132,3 +132,50 @@ body {
     cursor: pointer;
     opacity: 0.8;
 }
+
+input[type="range"] {
+    accent-color: var(--primary-color);
+}
+
+.fillter-range {
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    padding: 10px 4px 20px;
+}
+
+.fillter-range__label {
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 4px 10px 0 0;
+}
+
+.fillter-range__control {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4px 8px;
+}
+
+.fillter-range__price {
+    font-size: 2rem;
+    font-style: italic;
+    color: var(--button-color);
+}
+
+.fillter-range__input {
+    width: 200px;
+}
+
+.fillter-range__btn {
+    display: block;
+    margin: 10px 16px;
+    padding: 12px 26px;
+    border: none;
+    font-size: 1.8rem;
+    color: #fff;
+    background-color: var(--button-color);
+    font-weight: bold;
+    border-radius: 10px
+}

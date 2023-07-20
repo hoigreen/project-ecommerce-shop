@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Breadcrumbs, Footer, Nav, SideBanner } from '../Common';
 
 import './styles/product-client.css'
-import { handleLoadingPage } from '../../Common';
+import { FillterByPrice, handleLoadingPage } from '../../Common';
 
 const SmartPhone = () => {
     const [products, setProducts] = useState([])
@@ -75,7 +75,6 @@ const SmartPhone = () => {
         document.querySelector(".product-client__event-col-right-item").src = arrayPromote[indexPromote];
     }
 
-
     const handleFormatStarProduct = (starOfProduct) => {
         if (starOfProduct < 1) {
             return `☆☆☆☆☆`
@@ -91,6 +90,11 @@ const SmartPhone = () => {
             return `★★★★★`
         }
     }
+
+    const handleFilterChange = (minPrice, maxPrice) => {
+        const filteredProducts = products.filter((product) => Number(product.price) >= (minPrice) && Number(product.price) <= maxPrice && product.enType === "smartphone");
+        setProducts(filteredProducts);
+    };
 
     return (
         <>
@@ -135,8 +139,10 @@ const SmartPhone = () => {
                         </div>
                     </div>
 
+                    <label className="product-client__title-brand">Lọc sản phẩm</label>
+                    <FillterByPrice minPrice={0} maxPrice={100000000} onFilterChange={handleFilterChange} />
                     <ul className="product-client__list">
-                        {loading ? <p>Đang kết nối đến server ... </p> : products.map((product, index) => (
+                        {products.map((product, index) => (
                             <li
                                 className="product-client__item"
                                 key={index}

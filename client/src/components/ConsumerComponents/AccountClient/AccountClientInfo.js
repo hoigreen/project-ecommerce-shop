@@ -10,7 +10,7 @@ const AccountClientInfo = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+            fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                 setUser(data)
             })
         }
@@ -38,7 +38,7 @@ const AccountClientInfo = () => {
             const formData = new FormData();
             formData.append('avatar-change', imageFile, changeFilename(imageFile.name, user._id));
 
-            axios.post('http://localhost:4000/api/users/upload-image', formData)
+            axios.post('https://server-shoptech.onrender.com/api/users/upload-image', formData)
                 .then(response => {
                     console.log(response)
                 })
@@ -93,7 +93,7 @@ const AccountClientInfo = () => {
                         <div className="account__box">
                             <div className="account__box-info">
                                 <div className="account__box-info-container">
-                                    <img className="account__box-info-avatar" src={process.env.REACT_APP_API + user.avatarUrl || "http://localhost:4000/public/img-avatar-empty.png"}></img>
+                                    <img className="account__box-info-avatar" src={process.env.REACT_APP_API + user.avatarUrl || "https://server-shoptech.onrender.com/public/img-avatar-empty.png"}></img>
                                     <input type='file' id="avatar-change" onChange={(e) => { changeImageUser(user._id) }} hidden></input>
                                     <label className="account__box-info-avatar-btn" htmlFor="avatar-change">Thay đổi Avatar</label>
                                 </div>

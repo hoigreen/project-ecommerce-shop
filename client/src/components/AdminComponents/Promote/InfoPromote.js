@@ -15,7 +15,7 @@ const InfoPromote = () => {
 
     useEffect(() => {
         const fetchAPI = () => {
-            fetch("http://localhost:4000/api/promotes/" + id).then(res => res.json()).then(data => {
+            fetch("https://server-shoptech.onrender.com/api/promotes/" + id).then(res => res.json()).then(data => {
                 setPromote(data)
             });
         }
@@ -42,7 +42,7 @@ const InfoPromote = () => {
             const formData = new FormData();
             formData.append('image-change', imageFile, changeFilename(imageFile.name, promote._id));
 
-            axios.post('http://localhost:4000/api/promotes/upload-image', formData)
+            axios.post('https://server-shoptech.onrender.com/api/promotes/upload-image', formData)
                 .then(response => {
                     console.log(response)
                 })

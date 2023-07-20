@@ -32,16 +32,16 @@ const VoteProductInOrder = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+            fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                 setUser(data)
             })
 
-            fetch("http://localhost:4000/api/orders/" + orderID).then(res => res.json()).then(data => {
+            fetch("https://server-shoptech.onrender.com/api/orders/" + orderID).then(res => res.json()).then(data => {
                 setOrder(data)
                 setListProduct(data.lists)
             })
 
-            fetch("http://localhost:4000/api/products").then(res => res.json()).then(data => {
+            fetch("https://server-shoptech.onrender.com/api/products").then(res => res.json()).then(data => {
                 setProducts(data)
             })
 
@@ -113,7 +113,7 @@ const VoteProductInOrder = ({ socket }) => {
         }
 
         try {
-            axios.put(`http://localhost:4000/api/products/update-vote/${productId}`,
+            axios.put(`https://server-shoptech.onrender.com/api/products/update-vote/${productId}`,
                 { star: (Number(starCurrent) * voter + numberStar) / (voter + 1) }
             )
                 .then(() => {

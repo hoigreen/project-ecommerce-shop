@@ -18,7 +18,7 @@ const CartInfo = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+            fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                 setUser(data)
                 setCartUser(data.cart)
             })

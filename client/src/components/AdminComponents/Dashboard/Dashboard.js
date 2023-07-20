@@ -16,20 +16,20 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch(`http://localhost:4000/api/products`).then(res => res.json()).then(data => {
+            fetch(`https://server-shoptech.onrender.com/api/products`).then(res => res.json()).then(data => {
                 setCountProduct(data.length)
                 processDataProduct(data)
             })
-            fetch(`http://localhost:4000/api/admins`).then(res => res.json()).then(data => {
+            fetch(`https://server-shoptech.onrender.com/api/admins`).then(res => res.json()).then(data => {
                 setCountAdmin(data.length)
             });
-            fetch(`http://localhost:4000/api/users`).then(res => res.json()).then(data => {
+            fetch(`https://server-shoptech.onrender.com/api/users`).then(res => res.json()).then(data => {
                 setCountUser(data.length)
             });
-            fetch(`http://localhost:4000/api/promotes`).then(res => res.json()).then(data => {
+            fetch(`https://server-shoptech.onrender.com/api/promotes`).then(res => res.json()).then(data => {
                 setCountPromotes(data.length)
             });
-            fetch(`http://localhost:4000/api/orders`).then(res => res.json()).then(data => {
+            fetch(`https://server-shoptech.onrender.com/api/orders`).then(res => res.json()).then(data => {
                 processDataOrder(data)
             });
 

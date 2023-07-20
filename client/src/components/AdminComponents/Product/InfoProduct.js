@@ -23,7 +23,7 @@ const InfoProduct = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/products/" + id).then(res => res.json()).then(data => {
+            fetch("https://server-shoptech.onrender.com/api/products/" + id).then(res => res.json()).then(data => {
                 setProduct(data)
                 setCountImageInList(data.imageList.length)
                 // setArrayImageList(data.imageList)
@@ -56,7 +56,7 @@ const InfoProduct = () => {
             const formData = new FormData();
             formData.append('image-primary', imageLinkFile, changeFilename(imageLinkFile.name, "imageLink-" + product._id));
 
-            axios.post('http://localhost:4000/api/products/upload-image', formData)
+            axios.post('https://server-shoptech.onrender.com/api/products/upload-image', formData)
                 .then(response => {
                     console.log(response)
                 })
@@ -116,7 +116,7 @@ const InfoProduct = () => {
             const formData = new FormData();
             formData.append('image-banner', imagePrimaryFile, changeFilename(imagePrimaryFile.name, "imagePrimary-" + product._id));
 
-            axios.post('http://localhost:4000/api/products/upload-image-primary', formData)
+            axios.post('https://server-shoptech.onrender.com/api/products/upload-image-primary', formData)
                 .then(response => {
                     console.log(response)
                 })
@@ -178,7 +178,7 @@ const InfoProduct = () => {
             const formData = new FormData();
             formData.append('image-list', imageFileInList, changeFilename(imageFileInList.name, "imageList-" + product._id + "-" + countImageInList));
 
-            axios.post('http://localhost:4000/api/products/upload-image-list', formData)
+            axios.post('https://server-shoptech.onrender.com/api/products/upload-image-list', formData)
                 .then(response => {
                     console.log(response)
                 })
@@ -294,7 +294,7 @@ const InfoProduct = () => {
                     <div className="info-admin-product__body">
                         <div className="info-admin-product__col-1">
                             <div className="info-admin-product__image-primary">
-                                <img className="info-admin-product__image-primary-img" src={process.env.REACT_APP_API + product.imageLink || "http://localhost:4000/public/img-product-empty.png"}></img>
+                                <img className="info-admin-product__image-primary-img" src={process.env.REACT_APP_API + product.imageLink || "https://server-shoptech.onrender.com/public/img-product-empty.png"}></img>
                                 <input type='file' id="image-primary" value="" onChange={changeImageLink} hidden></input>
                                 <div className="info-admin-product__image-controll">
                                     <label htmlFor="image-primary" className="info-admin-product__image-btn">Chỉnh sửa</label>
@@ -305,7 +305,7 @@ const InfoProduct = () => {
 
                             <div className="info-admin-product__image-box">
                                 <div className="info-admin-product__image-banner">
-                                    <img className="info-admin-product__image-banner-img" src={process.env.REACT_APP_API + product.imagePrimary || "http://localhost:4000/public/img-product-empty.png"}></img>
+                                    <img className="info-admin-product__image-banner-img" src={process.env.REACT_APP_API + product.imagePrimary || "https://server-shoptech.onrender.com/public/img-product-empty.png"}></img>
                                     <input type='file' id="image-banner" value="" onChange={changeImageBanner} hidden></input>
                                     <div className="info-admin-product__image-controll">
                                         <label htmlFor="image-banner" className="info-admin-product__image-btn">Chỉnh sửa</label>
@@ -329,7 +329,7 @@ const InfoProduct = () => {
                                         }}>+</label>
                                     <input type="file" name="image-list" class="image-list" id="image-list" hidden onChange={changeImageInList} />
                                     <div className="info-admin-product__image-item info-admin-product__image-item--disable" style={{ display: "none" }}>
-                                        <img className="info-admin-product__image-item-img--existed img-new" src="http://localhost:4000/public/img-product-empty.png" />
+                                        <img className="info-admin-product__image-item-img--existed img-new" src="https://server-shoptech.onrender.com/public/img-product-empty.png" />
                                     </div>
 
                                     {loading ? <p>Đang kết nối đến server...</p> : product.imageList.map((item, index) => (

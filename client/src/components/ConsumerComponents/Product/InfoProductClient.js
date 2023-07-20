@@ -22,24 +22,24 @@ const InfoProductClient = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch("http://localhost:4000/api/products/get-by-name/" + name).then(res => res.json()).then(data => {
+            fetch("https://server-shoptech.onrender.com/api/products/get-by-name/" + name).then(res => res.json()).then(data => {
                 setProduct(data)
                 setImageList(data.imageList)
                 setOption(data.option)
                 setColor(data.color)
             })
 
-            fetch("http://localhost:4000/api/promotes").then(res => res.json()).then(data => {
+            fetch("https://server-shoptech.onrender.com/api/promotes").then(res => res.json()).then(data => {
                 setPromotes(data)
                 setLoading(false)
             })
 
-            fetch("http://localhost:4000/api/comments").then(res => res.json()).then(data => {
+            fetch("https://server-shoptech.onrender.com/api/comments").then(res => res.json()).then(data => {
                 setComments(data)
                 setLoading(false)
             })
 
-            fetch("http://localhost:4000/api/products/").then(res => res.json()).then(data => {
+            fetch("https://server-shoptech.onrender.com/api/products/").then(res => res.json()).then(data => {
                 setProducts(data)
                 setLoading(false)
             })
@@ -217,7 +217,7 @@ const InfoProductClient = ({ socket }) => {
                 return;
             }
 
-            axios.put('http://localhost:4000/api/users/add-product-to-cart-user/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
+            axios.put('https://server-shoptech.onrender.com/api/users/add-product-to-cart-user/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
                 {
                     imageLink: product.imageLink,
                     productName: name,
@@ -253,7 +253,7 @@ const InfoProductClient = ({ socket }) => {
                 return;
             }
 
-            axios.put('http://localhost:4000/api/users/add-product-to-cart-user/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
+            axios.put('https://server-shoptech.onrender.com/api/users/add-product-to-cart-user/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
                 {
                     imageLink: "",
                     productName: name,

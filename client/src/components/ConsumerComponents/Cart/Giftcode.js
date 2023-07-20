@@ -12,11 +12,11 @@ const Giftcode = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+            fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                 setCartUser(data.cart)
             })
 
-            fetch("http://localhost:4000/api/giftcodes").then(res => res.json()).then(data => {
+            fetch("https://server-shoptech.onrender.com/api/giftcodes").then(res => res.json()).then(data => {
                 setGiftcodes(data)
             })
         }

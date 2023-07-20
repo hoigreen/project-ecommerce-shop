@@ -16,7 +16,7 @@ const Cart = () => {
     useEffect(() => {
         const fetchAPIs = () => {
             if (window.localStorage.auth)
-                fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+                fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                     setUser(data)
                     setLoading(false)
                     setCartUser(data.cart)
@@ -53,7 +53,7 @@ const Cart = () => {
     }, [user])
 
     const handleClickAddQuantity = (productName) => {
-        axios.put('http://localhost:4000/api/users/increase-quantity-product-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
+        axios.put('https://server-shoptech.onrender.com/api/users/increase-quantity-product-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
             { productName }
         )
             .then(response => {
@@ -70,7 +70,7 @@ const Cart = () => {
     const handleClickMinusQuantity = (productName) => {
         cartUser.map((p, i) => {
             if (p.productName === productName && Number(p.quantity) > 1) {
-                axios.put('http://localhost:4000/api/users/decrease-quantity-product-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
+                axios.put('https://server-shoptech.onrender.com/api/users/decrease-quantity-product-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
                     { productName }
                 )
                     .then(response => {
@@ -92,7 +92,7 @@ const Cart = () => {
     }
 
     const handleClickRemoveProduct = (productName) => {
-        axios.put('http://localhost:4000/api/users/remove-product-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
+        axios.put('https://server-shoptech.onrender.com/api/users/remove-product-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
             { productName }
         )
             .then(response => {
@@ -108,7 +108,7 @@ const Cart = () => {
 
     const handleClickRemoveAll = () => {
         if (window.confirm("Bạn có chắc muốn xóa toàn bộ sản phẩm trong giỏ hàng")) {
-            axios.put('http://localhost:4000/api/users/remove-all-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id)
+            axios.put('https://server-shoptech.onrender.com/api/users/remove-all-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id)
                 .then(() => {
                     handleLoadingPage(1)
                     window.setTimeout(() => {
@@ -149,7 +149,7 @@ const Cart = () => {
                         <ul className="cart__list">
                             {loading ? <p>Đang kết nối đến server ... </p> : cartUser.map((p, index) => (
                                 <li className="cart__item" key={index}>
-                                    <img className="cart__item-img" src={process.env.REACT_APP_API + p.imageLink || "http://localhost:4000/public/products/img-product-empty.png"}></img>
+                                    <img className="cart__item-img" src={process.env.REACT_APP_API + p.imageLink || "https://server-shoptech.onrender.com/public/products/img-product-empty.png"}></img>
                                     <div className="cart__item-info">
                                         <label className="cart__item-info-name">{p.productName} - {p.option} - {p.color}</label>
                                         <p className="cart__item-info-price">{Number(p.price).toLocaleString()} đ</p>

@@ -15,12 +15,12 @@ const Payment = ({ socket }) => {
 
     useEffect(() => {
         const fetchAPIs = () => {
-            fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+            fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                 setUser(data)
                 setCartUser(data.cart)
             })
 
-            fetch("http://localhost:4000/api/orders").then(res => res.json()).then(data => {
+            fetch("https://server-shoptech.onrender.com/api/orders").then(res => res.json()).then(data => {
                 setOrders(data)
             })
         }
@@ -99,7 +99,7 @@ const Payment = ({ socket }) => {
     }
 
     const handleClickRemoveAll = () => {
-        axios.put('http://localhost:4000/api/users/remove-all-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id)
+        axios.put('https://server-shoptech.onrender.com/api/users/remove-all-in-cart/' + JSON.parse(window.localStorage.getItem('auth')).user._id)
     }
 
     const handleComplePayment = async (e) => {

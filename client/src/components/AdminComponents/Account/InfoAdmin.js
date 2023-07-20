@@ -39,7 +39,7 @@ const InfoAdmin = () => {
         formData.append('avatar-admin', imageFile, changeFilename(imageFile.name, admin._id));
         console.log(imageFile);
 
-        axios.post('http://localhost:4000/api/admins/upload-image', formData)
+        axios.post('https://server-shoptech.onrender.com/api/admins/upload-image', formData)
             .then(response => {
                 console.log(response)
             })

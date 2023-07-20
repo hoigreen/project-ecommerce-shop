@@ -18,11 +18,11 @@ const AccountClient = () => {
     useEffect(() => {
         if (window.localStorage.getItem("auth")) {
             const fetchAPIs = () => {
-                fetch(`http://localhost:4000/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
+                fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                     setUser(data)
                 })
 
-                fetch("http://localhost:4000/api/orders").then(res => res.json()).then(data => {
+                fetch("https://server-shoptech.onrender.com/api/orders").then(res => res.json()).then(data => {
                     setOrders(data)
                 })
             }

@@ -95,7 +95,7 @@ const Laptop = () => {
     }
 
     const handleFilterChange = (minPrice, maxPrice) => {
-        const filteredProducts = products.filter((product) => Number(product.price) >= (minPrice) && Number(product.price) <= maxPrice && product.enType === "smartphone");
+        const filteredProducts = products.filter((product) => Number(product.price) >= (minPrice) && Number(product.price) <= maxPrice && product.enType === "laptop");
         setProducts(filteredProducts);
     };
 

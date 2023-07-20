@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './styles/product-client.css';
 
 import { Breadcrumbs, Footer, Nav, SideBanner } from '../Common';
-import { handleLoadingPage } from '../../Common';
+import { FillterByPrice, handleLoadingPage } from '../../Common';
 
 const Accessories = () => {
     const [products, setProducts] = useState([])
@@ -92,6 +92,11 @@ const Accessories = () => {
             return `★★★★★`
         }
     }
+
+    const handleFilterChange = (minPrice, maxPrice) => {
+        const filteredProducts = products.filter((product) => Number(product.price) >= (minPrice) && Number(product.price) <= maxPrice && product.enType === "accessories");
+        setProducts(filteredProducts);
+    };
 
     return (
         <>
@@ -232,6 +237,9 @@ const Accessories = () => {
                             <img className='product-client__brand-item' src="http://localhost:4000/public/product-img/accessories-img/logo-razer.png"></img>
                         </div>
                     </div>
+
+                    <label className="product-client__title-brand" >Lọc sản phẩm</label>
+                    <FillterByPrice minPrice={0} maxPrice={100000000} onFilterChange={handleFilterChange} />
 
                     <ul className="product-client__list">
                         {loading ? <p>Đang kết nối đến server ... </p> : products.map((product, index) => (

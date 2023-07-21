@@ -125,11 +125,6 @@ const Payment = ({ socket }) => {
                 lists: cartUser
             });
             if (res && res.data.success) {
-                handleLoadingPage(2)
-                setTimeout(() => {
-                    completePayment()
-                }, 2000)
-                showSuccessMessage()
                 try {
                     const res = await axios.post(`${process.env.REACT_APP_API}/api/orders/create`, {
                         orderID: window.localStorage.getItem("orderIDCache"),

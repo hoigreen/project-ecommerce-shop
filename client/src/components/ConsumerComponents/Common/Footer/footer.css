@@ -89,6 +89,9 @@
 
 /* Mobile */
 @media screen and (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
 
     .footer-bar {
         flex-wrap: wrap;
@@ -96,8 +99,8 @@
     }
 
     .footer__col {
-        width: calc(50% - 24px);
-        margin: 0px 12px 12px 12px;
+        width: calc(50% - 26px);
+        margin: 0px 16px 16px 10px;
     }
 
     .footer__col-group {
@@ -117,6 +120,17 @@
     .footer__text {
         display: flex;
         justify-content: space-between;
+        font-size: 0.8rem;
+        line-height: 1.2rem;
+    }
+
+    .footer__label {
         font-size: 1rem;
+        line-height: 1.4rem;
+    }
+
+    .footer__link {
+        font-size: 0.8rem;
+        line-height: 1.2rem;
     }
 }

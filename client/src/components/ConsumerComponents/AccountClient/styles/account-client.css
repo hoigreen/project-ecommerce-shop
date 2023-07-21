@@ -649,7 +649,7 @@
 .order-detail__label-icon {
     margin-right: 8px;
     font-weight: bold;
-    font-size: 2.2rem
+    font-size: 2rem
 }
 
 .order-detail__list {
@@ -1016,8 +1016,9 @@
 
 
     .account__box-info-item-label {
-        margin-top: 6px;
+        margin: 4px 0 12px;
         padding: 4px;
+        font-size: 1rem;
     }
 
     .account__box-info-list {
@@ -1035,8 +1036,8 @@
 
     .account__box-option-item {
         display: inline-block;
-        width: calc(33% - 20px);
-        margin: 4px 10px;
+        width: calc(33% - 12px);
+        margin: 4px 6px;
         padding: 8px 0;
     }
 
@@ -1047,7 +1048,7 @@
     }
 
     .account__box-option-item-title {
-        font-size: 1.6rem;
+        font-size: 1rem;
         padding: 4px;
         margin-bottom: 6px;
         min-height: 26px;
@@ -1059,19 +1060,24 @@
         width: 80%;
         margin: 8px auto;
         padding: 8px 4px;
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .account__box-info-header {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        width: 100%;
+        line-height: 2.2rem;
     }
 
     .account__box-info-title {
         width: 90%;
+        font-size: 1.2rem;
+        line-height: 1.6rem;
     }
 
     .account__box-info-input {
         width: 90%;
+        font-size: 1.2rem;
     }
 
     .login-client__box {
@@ -1087,19 +1093,25 @@
     }
 
     .login-client__label-login {
-        font-size: 3.2rem;
-        line-height: 3.6rem;
-        padding: 10px 0;
-        margin: 10px 0 20px;
+        font-size: 2.2rem;
+        line-height: 3rem;
+        padding: 8px 0;
+        margin: 10px 0 12px;
+    }
+
+    .login-client__forgot {
+        font-size: 1.2rem;
     }
 
     .login-client__label {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
         margin: 4px 0 6px;
+        padding: 6px 10px;
     }
 
     .login-client__input {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
+        padding: 12px 16px;
     }
 
     .login-client__btn {
@@ -1140,14 +1152,75 @@
         display: block;
     }
 
+    .account__box-info-label {
+        font-size: 1.4rem;
+        margin: 10px 0 12px;
+    }
+
+    .account__box-info-fullname {
+        font-size: 1.6rem;
+        line-height: 2rem;
+        margin: 4px 0 12px
+    }
+
+    .account__box-info-item-icon {
+        font-size: 2.6rem
+    }
+
+    .account__box-info-item-data {
+        font-size: 1.6rem;
+        margin: 4px 0 8px;
+        padding: 4px;
+    }
+
+    .account__box-info-avatar-btn {
+        font-size: 1.2rem;
+        padding: 6px 12px;
+        margin: 6px auto 12px;
+    }
+
+    .account__box-info-btn {
+        font-size: 1.4rem;
+    }
+
     .order-detail__list {
         padding: 4px;
     }
 
-    .order-detail__item-img {}
+    .order-detail__title {
+        font-size: 1.6rem;
+    }
+
+    .order-detail__label {
+        font-size: 1.2rem;
+        padding-left: 4px;
+        line-height: 1.6rem;
+    }
+
+    .order-detail__content {
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+
+    .order-detail__item-img {
+        width: 80px;
+        height: 80px;
+    }
 
     .order-detail__item-name {
-        font-size: 1.4rem;
+        font-size: 1rem;
+        padding: 0;
+        margin-bottom: 4px;
+    }
+
+    .order-detail__item-content {
+        font-size: 0.8rem;
+        line-height: 1.2rem;
+        padding: 0
+    }
+
+    .order-detail__item-quantity {
+        font-size: 0.8rem;
     }
 
     .order_detail__item-btn-box {
@@ -1155,8 +1228,9 @@
     }
 
     .order-detail__item-btn {
-        font-size: 1.2rem;
-        padding: 6px 4px;
+        font-size: 0.8rem;
+        padding: 6px 8px;
+        border-width: 1px;
     }
 
     .order-detail__item-info {
@@ -1164,39 +1238,68 @@
     }
 
     .order-detail__item-price {
-        font-size: 1.4rem;
+        font-size: 1rem;
     }
 
     .vote-product {
-        width: 80%;
+        width: calc(100% - 20px);
+    }
+
+    .vote-product__header {
+        font-size: 2rem;
     }
 
     .vote-product__item {
         padding: 4px;
     }
 
+    .vote-product__item-info {
+        font-size: 0.8rem;
+        line-height: 1.4rem;
+    }
+
     .vote-product__item-img {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
     }
 
     .vote-product__item-name {
-        font-size: 1.4rem;
+        font-size: 1rem;
+        line-height: 1.6rem;
     }
 
     .vote-product__item-price {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
     }
 
     .vote-product__title {
-        font-size: 2rem;
+        font-size: 1.4rem;
+        margin: 10px auto 6px;
+        padding: 4px;
     }
 
     .vote-product__describe {
-        font-size: 1.4rem;
+        font-size: 1rem;
+        line-height: 1.4rem;
     }
 
     .vote-product__start-group-item:before {
-        font-size: 6rem;
+        font-size: 4rem;
+        margin: 6px auto;
+    }
+
+    .vote-product__textbox {
+        font-size: 1rem;
+    }
+
+    .vote-product__footer {
+        margin-top: 10px;
+
+    }
+
+    .vote-product__btn-confirm,
+    .vote-product__btn-close {
+        font-size: 1.2rem;
+        padding: 8px 12px;
     }
 }

@@ -127,7 +127,7 @@ const Giftcode = () => {
             <Breadcrumbs />
             <div id="toast-with-navbar"></div>
             <div className="grid wide">
-                <div className="container" style={{ paddingBottom: "200px" }}>
+                <div className="container" style={{ paddingBottom: "280px" }}>
                     <div className="cart__container">
                         <div className="cart__header">
                             <button className="cart__btn-cancel" onClick={() => { window.location.href = "/cart/info" }}>

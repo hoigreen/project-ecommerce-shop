@@ -192,11 +192,10 @@
     }
 
     .header--logo {
-        width: 120px;
-        min-width: 100px;
-        height: 56px;
-        margin-left: 10px;
-        margin-right: 20px;
+        width: 80px;
+        min-width: 80px;
+        margin-left: 8px;
+        margin-right: 8px;
     }
 
 
@@ -216,6 +215,7 @@
     .header-search__button {
         height: 42px;
         width: 42px;
+        min-width: 42px;
     }
 
     .header__btn-group {
@@ -227,8 +227,14 @@
     }
 
     .header-search__input {
-        width: 140px;
-        font-size: 1.6rem;
+        width: 100%;
+        font-size: 1.2rem;
+        padding: 4px 8px;
+    }
+
+    .header-btn__red-dot {
+        font-size: 0.8rem;
+        line-height: 1.6rem;
     }
 
     .table {

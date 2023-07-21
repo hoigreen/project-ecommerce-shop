@@ -117,3 +117,32 @@
 .toast--error .toast__icon {
     color: #ff623d;
 }
+
+@media screen and (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    #toast-with-navbar {
+        right: 50%;
+        transform: translateX(50%);
+        width: calc(100% - 20px);
+    }
+
+    #toast {
+        right: 50%;
+        transform: translateX(50%);
+        width: calc(100% - 20px);
+    }
+
+    .toast__title {
+        font-size: 1rem;
+        line-height: 1.6rem;
+    }
+
+
+    .toast__msg {
+        font-size: 0.8rem;
+        list-style: 1.2rem;
+    }
+}

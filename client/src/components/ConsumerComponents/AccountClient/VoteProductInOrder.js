@@ -133,52 +133,15 @@ const VoteProductInOrder = ({ socket }) => {
                                 .then(() => {
                                     handleLoadingPage(1)
                                     setTimeout(() => {
-                                        window.location.reload()
+                                        window.location.href = `/account/history/${orderID}`
                                     }, 1000)
                                 })
                         })
                 })
-            // const [orderRes, productRes] = Promise.all([
-            // await axios.put(`${process.env.REACT_APP_API}/api/orders/update-status-vote/${orderID}`, { productName: productName })
-            // ])
-            // // await axios.put(`${process.env.REACT_APP_API}/api/orders/update-status-vote/${orderID}`, { productName: productName })
-
-            // // 1. Tìm order - set trạng thái vote
-            // if (orderRes && orderRes.data.success) {
-            //     console.log(orderRes.data)
-            //     // handleLoadingPage(1)
-            //     // setTimeout(() => {
-            //     //     window.location.reload()
-            //     // })
-            // } else {
-            //     alert("Cập nhật thông tin thất bại")
-            // }
-            // console.log(productRes)
-
-            // // 2. Tìm đến sản phẩm - thêm số sao đánh giá => tính trung bình số sao và + 1 vote
-            // if (productRes && productRes.data.success) {
-            //     console.log(productRes.data)
-            //     // handleLoadingPage(1)
-            //     // setTimeout(() => {
-            //     //     window.location.reload()
-            //     // })
-            // } else {
-            //     alert("Cập nhật thông tin thất bại")
-            // }
         } catch (error) {
             alert(error)
             console.log(error)
         }
-
-
-        // Vote sản phẩm:
-        // 1. Tìm order - set trạng thái vote
-        // 3. Thêm comment vào sản phẩm
-
-        // handleLoadingPage(1)
-        // setTimeout(() => {
-        //     window.location.href = `/account/history/${orderID}`
-        // }, 1500)
     }
 
     return (

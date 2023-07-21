@@ -13,10 +13,13 @@
 .breadcrumbs {
     font-size: 1.6rem;
     color: #333;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: nowrap;
+    overflow: hidden;
 }
 
 .breadcrumbs>* {
-    display: inline-block;
     margin-right: 8px;
 }
 
@@ -70,16 +73,17 @@
     }
 
     .breadcrumbs {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
     }
 
     .crumb {
         display: inline-block;
-        font-size: 1.2rem;
+        font-size: 0.8rem;
         color: #333;
     }
 
-    .crumb__home {
-        font-size: 1.4rem;
+    .crumb__home-icon {
+        font-size: 1rem;
+        margin-left: 4px;
     }
 }

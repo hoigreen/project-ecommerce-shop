@@ -20,6 +20,7 @@ const CartConfirm = () => {
             })
         }
         fetchAPIs()
+        setOrderID(makeID(10))
     }, [])
 
     useEffect(() => {
@@ -37,10 +38,6 @@ const CartConfirm = () => {
         setTotalPriceOld(countTotalPriceOld)
         setCountTotalPrice(countPriceAll)
     }, [cartUser])
-
-    window.onload = () => {
-        setOrderID(makeID(10))
-    }
 
     const makeID = (length) => {
         let result = '';

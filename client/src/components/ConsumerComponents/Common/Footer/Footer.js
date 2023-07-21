@@ -57,29 +57,29 @@ const Footer = () => {
                         <div className='footer__col-group'>
                             <label className='footer__label'>Tổng đài viên hỗ trợ 24/7 <span style={{ fontWeight: "300", color: "red" }}>(Miễn phí tư vấn)</span></label>
                             <div href='/' className='footer__text'>
-                                <p className='footer__text-title'>Hỗ trợ mua hàng:</p>
-                                <span className='footer__text-info' style={{ fontWeight: "bold", color: "blue", paddingRight: "6px" }}>1800 3234</span>
-                                (24/7)
+                                <p className='footer__text-title '>Hỗ trợ mua hàng:</p>
+                                <span className='footer__text-info ' style={{ fontWeight: "bold", color: "blue", paddingRight: "6px" }}>1800 3234</span>
+                                <span className='hide-on-mobile'>(24/7)</span>
                             </div>
                             <div href='/' className='footer__text'>
-                                <p className='footer__text-title'>Hỗ trợ kỹ thuật:</p>
+                                <p className='footer__text-title '>Hỗ trợ kỹ thuật:</p>
                                 <span style={{ fontWeight: "bold", color: "blue", paddingRight: "6px" }}>1800 1234</span>
-                                (Giờ hành chính)
+                                <span className='hide-on-mobile'>(Giờ hành chính)</span>
                             </div>
                             <div href='/' className='footer__text'>
-                                <p className='footer__text-title'>Giải quyết khiếu nại:</p>
+                                <p className='footer__text-title '>Giải quyết khiếu nại:</p>
                                 <span style={{ fontWeight: "bold", color: "blue", paddingRight: "6px" }}>1800 4321</span>
-                                (24/7)
+                                <span className='hide-on-mobile'>(24/7)</span>
                             </div>
                             <div href='/' className='footer__text'>
-                                <p className='footer__text-title'>Bảo hành sản phẩm:</p>
+                                <p className='footer__text-title '>Bảo hành sản phẩm:</p>
                                 <span style={{ fontWeight: "bold", color: "blue", paddingRight: "6px" }}>1800 3234</span>
-                                (Giờ hành chính)
+                                <span className='hide-on-mobile'>(Giờ hành chính)</span>
                             </div>
                             <div href='/' className='footer__text'>
-                                <p className='footer__text-title'>Vấn đề khác:</p>
+                                <p className='footer__text-title '>Vấn đề khác:</p>
                                 <span style={{ fontWeight: "bold", color: "blue", paddingRight: "6px" }}>1800 3234</span>
-                                (Giờ hành chính)
+                                <span className='hide-on-mobile'>(Giờ hành chính)</span>
                             </div>
                         </div>
                     </div>

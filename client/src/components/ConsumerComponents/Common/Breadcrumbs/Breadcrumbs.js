@@ -32,14 +32,13 @@ const Breadcrumbs = ({ socket }) => {
         <div className="breadcrumbs__container">
             <div className="grid wide">
                 <div className="breadcrumbs">
-                    <a className="crumb__home" onClick={e => {
-                        handleLoadingPage(1);
-                        window.location.href = "/home";
-                    }}>
-                        <i className="crumb__home-icon fa fa-home"></i>
-                        Home
-                    </a>
-                    <span style={{ margin: "0 10px 0 0" }}>//</span>
+                    <div className="crumb" >
+                        <Link className="crumb-link" to={"/home"}>
+                            <i className="crumb__home-icon fa fa-home"></i>
+                            {"Home"}
+                        </Link>
+                    </div>
+
                     {crumbs}
                     {name}
                 </div>

@@ -842,28 +842,51 @@
     }
 
     .cart__label--empty {
-        line-height: 2.8rem;
+        line-height: 2.4rem;
+        font-size: 1.8rem;
         text-align: center;
+    }
+
+    .cart__btn--empty {
+        font-size: 1.4rem;
+    }
+
+    .cart__header {
+        margin-bottom: 8px
+    }
+
+    .cart__btn-cancel {
+        font-size: 1.2rem;
     }
 
     .cart__container {
         width: calc(100% - 20px);
     }
 
+    .cart__title {
+        font-size: 2rem;
+        margin: 6px auto 0;
+    }
+
+    .cart__list {
+        margin-bottom: 20px;
+    }
+
     .cart__item-img {
-        width: 120px;
-        height: 120px;
+        width: 80px;
+        height: 80px;
         padding: 6px;
         margin-right: 6px;
     }
 
     .cart__item-info {
         height: 120px;
+        font-size: 1rem;
     }
 
     .cart__item-info-name {
-        font-size: 1.4rem;
-        line-height: 1.8rem;
+        font-size: 1rem;
+        line-height: 1.6rem;
     }
 
     .cart__item-remove {
@@ -871,25 +894,26 @@
     }
 
     .cart__item-info-price {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        line-height: 1.4rem;
     }
 
     .cart__item-info-old-price {
-        font-size: 1.1rem
+        font-size: 0.8rem
     }
 
     .cart__item-info-percent {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
 
     .cart__item-info-installment {
-        font-size: 1rem;
+        font-size: 0.8rem;
         padding: 4px;
         width: fit-content;
     }
 
     .cart__item-info-installment-icon {
-        font-size: 1.4rem;
+        font-size: 1.2rem;
     }
 
     .cart__item-quantity-input {
@@ -898,7 +922,11 @@
     }
 
     .cart__item-quantity-edit {
-        font-size: 1.2rem;
+        font-size: 1rem;
+    }
+
+    .cart__item-remove {
+        font-size: 1rem;
     }
 
     .cart__control-container {
@@ -906,8 +934,21 @@
         bottom: 60px;
     }
 
+    .cart__control-total {
+        font-size: 1rem;
+        margin: 8px 8px 10px;
+    }
+
+    .cart__control-total-price {
+        font-size: 1.2rem;
+    }
+
     .cart__control-btn {
-        font-size: 1.6rem;
+        font-size: 1rem;
+    }
+
+    .cart__control-btn {
+        padding: 10px 12px
     }
 
     .block-process {
@@ -950,14 +991,14 @@
 
     .block-process {
         top: unset;
-        bottom: 240px;
+        bottom: 200px;
         right: 50%;
         transform: translateX(50%);
         flex-direction: row;
     }
 
     .block-process--lower {
-        bottom: 190px;
+        bottom: 170px;
     }
 
     .block-process-payment--lower {
@@ -968,8 +1009,57 @@
         margin: auto 12px;
     }
 
+    .cart-info__label {
+        font-size: 1.2rem;
+    }
+
+    .cart-info__input {
+        font-size: 1rem;
+    }
+
     .cart-info__input-radio-describe {
-        font-size: 1.6rem
+        font-size: 0.8rem
+    }
+
+    .detail-price__header {
+        font-size: 1.2rem;
+    }
+
+    .detail-price__item-label,
+    .detail-price__item-price {
+        font-size: 0.8rem;
+        line-height: 1.2rem;
+    }
+
+    .cart-confirm__item {
+        font-size: 0.8rem;
+        padding: 4px 0;
+        margin-bottom: 4px;
+        line-height: 1.4rem;
+    }
+
+    .cart-confirm__label,
+    .cart-confirm__data {
+        font-size: 0.8rem;
+    }
+
+    .cart-confirm__label-span {
+        font-size: 0.6rem;
+    }
+
+    .cart-confirm__item-product-info-label {
+        font-size: 1rem;
+        line-height: 1.4rem;
+        margin-bottom: 8px
+    }
+
+    .cart-confirm__item-product-info-quantity,
+    .cart-confirm__item-product-info-price {
+        font-size: 1rem;
+    }
+
+    .detail-price__item-describe {
+        font-size: 0.7rem;
     }
 
     .payment__list {
@@ -980,10 +1070,27 @@
         width: 100%;
     }
 
+    .payment__item-label {
+        font-size: 1.2rem;
+    }
+
+    .payment-done__label {
+        font-size: 1.2rem;
+    }
+
+    .payment-done__describe {
+        font-size: 0.8rem;
+    }
+
+
     .payment-done__thanks {
         margin: 20px 10px 0;
         text-align: center;
-        font-size: 1.6rem;
-        line-height: 2rem;
+        font-size: 1.2rem;
+        line-height: 1.6rem;
+    }
+
+    .payment-done__redirect {
+        font-size: 1rem;
     }
 }

@@ -16,7 +16,7 @@
 
 .info-product__header-name {
     display: inline-block;
-    font-size: 2.6rem;
+    font-size: 2.2rem;
     font-weight: 500;
     color: #000;
     margin: auto 12px auto 0;
@@ -216,7 +216,7 @@
 .info-product__detail-label {
     display: block;
     width: 100%;
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     font-weight: 500;
     padding: 10px 0;
 }
@@ -792,7 +792,7 @@
     }
 
     .info-product__header {
-        padding: 8px 6px;
+        padding: 6px 6px;
     }
 
     .product-client__item-tag {
@@ -800,13 +800,13 @@
     }
 
     .info-product__header-name {
-        font-size: 1.2rem;
-        margin-right: 0;
+        font-size: 1rem;
+        margin-right: 2px;
     }
 
     .info-product__header-star,
     .info-product__header-voters {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
     }
 
     .info-product__image-primary {
@@ -821,6 +821,10 @@
         margin: 0;
     }
 
+    .info-product__image-label {
+        font-size: 1.2rem;
+    }
+
     .info-product__image-list {
         margin-top: 8px;
     }
@@ -833,6 +837,7 @@
 
     .info-product__policy-item {
         width: 100%;
+        padding: 8px 10px;
     }
 
     .info-product__box {
@@ -848,32 +853,112 @@
 
     .info-product__policy-header,
     .info-product__detail-label-price {
-        font-size: 2rem;
+        font-size: 1.6rem;
+    }
+
+    .info-product__policy-item-icon {
+        font-size: 3rem;
     }
 
     .info-product__policy-item-content {
-        font-size: 1.2rem;
+        font-size: 1rem;
+        text-align: justify;
+    }
+
+    .info-product__policy-item-btn {
+        font-size: 0.8rem;
+        margin-left: 2px;
     }
 
     .info-product__detail-option-item {
         width: calc(25%);
     }
 
-    .info-product__detail-payment-btn-cart,
-    .info-product__detail-payment-btn-installment {
+    .info-product__detail-current-price {
+        font-size: 2rem;
+    }
+
+    .info-product__detail-old-price,
+    .info-product__detail-percent {
         font-size: 1.4rem;
     }
 
+    .info-product__detail-installment,
+    .info-product__detail-installment-icon {
+        font-size: 1.2rem;
+    }
+
+    .info-product__detail-label {
+        font-size: 1.4rem;
+    }
+
+    .info-product__detail-option-item-content,
+    .info-product__detail-option-item-price {
+        font-size: 0.8rem;
+        line-height: 1.4rem;
+    }
+
+    .info-product__detail-promote-label {
+        font-size: 1.4rem;
+    }
+
+    .info-product__detail-promote-item-content,
+    .info-product__detail-promote-item-content-btn {
+        font-size: 1rem;
+    }
+
+    .info-product__detail-payment-btn {
+        font-size: 1.4rem;
+    }
+
+    .info-product__detail-payment-btn-cart,
+    .info-product__detail-payment-btn-installment {
+        font-size: 1rem;
+        padding: 8px 12px;
+        line-height: 1.4rem
+    }
+
+    .info-product__detail-payment-btn-icon {
+        font-size: 1.4rem
+    }
+
     .info-product__detail-payment-describe {
-        font-size: 1.2rem
+        font-size: 0.8rem
+    }
+
+    .info-product__similar-label {
+        font-size: 1.8rem;
     }
 
     .product__sell-item-img {
         width: 100%;
+        height: 150px;
+    }
+
+    .product__sell-item-sold,
+    .product__sell-item-star {
+        width: 100%;
+        font-size: 1.2rem;
     }
 
     .info-product__review-container {
         flex-direction: column;
+    }
+
+    .info-product__rating-label,
+    .info-product__review-label {
+        font-size: 1.8rem;
+        line-height: 2.4rem;
+        margin-bottom: 20px;
+    }
+
+    .info-product__rating-star,
+    .info-product__rating-star-icon {
+        font-size: 1.8rem;
+    }
+
+    .info-product__rating-number {
+        font-size: 1.2rem;
     }
 
     .info-product__rating-box {
@@ -885,6 +970,29 @@
 
     .info-product__review-list {
         margin-top: 20px;
+    }
+
+    .info-product__review-item-fullname {
+        font-size: 1.2rem
+    }
+
+    .info-product__review-item-time {
+        font-size: 0.8rem
+    }
+
+    .info-product__review-item-vote-title,
+    .info-product__review-item-feedback-title {
+        font-size: 1.2rem;
+    }
+
+    .info-product__review-item-feedback-box {
+        padding: 6px;
+    }
+
+    .info-product__review-item-feedback-content {
+        font-size: 1rem;
+        padding: 4px 6px;
+        line-height: 1.4rem;
     }
 
 }

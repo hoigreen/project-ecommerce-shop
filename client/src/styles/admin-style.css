@@ -261,7 +261,7 @@ thead {
 .table .table__thead-primary td {
     border: none;
     padding: 20px;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
     font-weight: 600;
     color: white;
     text-align: center;
@@ -287,8 +287,8 @@ tbody {
     border-right: none;
     border-left: none;
     border-image: initial;
-    padding: 20px;
-    font-size: 1.7rem;
+    padding: 16px 8px;
+    font-size: 1.4rem;
     background: rgb(255, 255, 255);
     border-bottom: 4px solid rgb(248, 249, 253);
     vertical-align: middle;
@@ -306,8 +306,8 @@ tbody {
 
 .table-td__img {
     display: block;
-    width: 80px;
-    height: 80px;
+    width: 60px;
+    height: 60px;
     margin: 0 auto 10px;
     object-fit: contain;
 }

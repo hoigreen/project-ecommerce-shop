@@ -10,6 +10,7 @@ import axios from 'axios';
 const InfoProduct = () => {
     const [product, setProduct] = useState({})
     const { id } = useParams()
+    const [type, setType] = useState('')
     const [enType, setEnType] = useState('')
     const [colorProductEdit, setColorProductEdit] = useState([])
     const [boolHotDeal, setBoolHotDeal] = useState(false)
@@ -26,11 +27,31 @@ const InfoProduct = () => {
                 setProduct(data)
                 setCountImageInList(data.imageList.length)
                 setLoading(false)
+                setBoolHotDeal(data.hotDeal)
+                setBoolFeatured(data.featured)
+                setType(data.type)
             })
         }
         fetchAPIs()
         handleLoadOptionSelected(2)
     }, [])
+
+    useEffect(() => {
+        switch (type.toLowerCase()) {
+            case "điện thoại":
+                setEnType("smartphone");
+                break;
+            case "máy tính bảng":
+                setEnType("tablet");
+                break;
+            case "máy tính xách tay":
+                setEnType("laptop");
+                break;
+            case "phụ kiện":
+                setEnType("accessories");
+                break;
+        }
+    }, [type])
 
 
     // Thay đổi ảnh chính
@@ -241,36 +262,32 @@ const InfoProduct = () => {
         }
     }
 
+    const handleSelectFeatured = (event) => {
+        const newValue = event.target.value === 'true';
+        setBoolFeatured(newValue);
+    };
+
+    const handleSelectHotDeal = (event) => {
+        const newValue = event.target.value === 'true';
+        setBoolHotDeal(newValue);
+    };
+
     // Cập nhật thông tin sản phẩm
     const handleConfirmChangeInfo = async (e) => {
         e.preventDefault()
-        var boolFeaturedEdit;
-        var boolHotDealEdit;
-        if (boolFeatured === "true") {
-            boolFeaturedEdit = boolFeatured === "true"
-        }
-        else {
-            boolFeaturedEdit = String(boolFeatured).toLowerCase() === "False"
-        }
-        if (boolHotDeal === "true") {
-            boolHotDealEdit = boolHotDeal === true
-        }
-        else {
-            boolHotDealEdit = String(boolHotDeal).toLowerCase() === "False"
-        }
 
-        const inputElements = document.querySelectorAll(".info-admin-product__input");
+        const inputElements = document.querySelectorAll(".info-admin-product__input")
         if (window.confirm("Bạn muốn cập nhật thông tin sản phẩm?") == true) {
             try {
                 const res = await axios.put(`${process.env.REACT_APP_API}/api/products/update=${id}`, {
                     name: inputElements[0].value,
-                    type: inputElements[1].value,
-                    enType,
+                    type,
+                    enType: enType || product.enType,
                     brand: inputElements[2].value,
                     price: inputElements[4].value,
                     color: colorProductEdit,
-                    hotDeal: boolHotDealEdit,
-                    featured: boolFeaturedEdit,
+                    hotDeal: boolHotDeal,
+                    featured: boolFeatured,
                     status: inputElements[7].value
                 });
                 if (res && res.data.success) {
@@ -383,23 +400,7 @@ const InfoProduct = () => {
                                 <input style={{ fontWeight: 'bold' }} className='info-admin-product__input' defaultValue={product.name} />
 
                                 <label className="info-admin-product__label">Loại sản phẩm</label>
-                                <select style={{ fontWeight: '500' }} className='info-admin-product__input' defaultValue={product.type} onChange={(e) => {
-                                    switch ((e.target.value).toLowerCase()) {
-                                        case "điện thoại":
-                                            setEnType("smartphone");
-                                            break;
-                                        case "máy tính bảng":
-                                            setEnType("tablet");
-                                            break;
-                                        case "máy tính xách tay":
-                                            setEnType("laptop");
-                                            break;
-                                        case "phụ kiện":
-                                            setEnType("accessories");
-                                            break;
-                                    }
-                                }}>
-                                    <option value="">Chọn loại sản phẩm...</option>
+                                <select style={{ fontWeight: '500' }} className='info-admin-product__input' value={type} onChange={(e) => { setType(e.target.value) }}>
                                     <option value="Điện thoại">Điện thoại di động</option>
                                     <option value="Máy tính xách tay">Máy tính xách tay</option>
                                     <option value="Máy tính bảng">Máy tính bảng</option>
@@ -411,7 +412,7 @@ const InfoProduct = () => {
 
                                 <label className="info-admin-product__label">Màu sắc</label>
                                 <input type='text' className='info-admin-product__input' onChange={(e) => {
-                                    var arrayColor = (e.target.value).split(", ")
+                                    var arrayColor = (e.target.value).split(", " || ",")
                                     setColorProductEdit(arrayColor)
                                 }} placeholder="(Mỗi màu sắc được ngăn cách bằng dấu phẩy). Vd: Đỏ, Vàng, ..." defaultValue={product.color} />
 
@@ -421,22 +422,19 @@ const InfoProduct = () => {
                                     style={{ fontWeight: 'bold', color: 'red' }} />
 
                                 <label className="info-admin-product__label">Thêm vào sản phẩm nổi bật</label>
-                                <select className='info-admin-product__input' onChange={(e) => { setBoolFeatured(e.target.value); }}>
-                                    <option value="" selected >Chọn giá trị...</option>
-                                    <option value="true">Có</option>
-                                    <option value="False">Không</option>
+                                <select className='info-admin-product__input' value={boolFeatured.toString()} onChange={handleSelectFeatured}>
+                                    <option value="true" >Có</option>
+                                    <option value="false" >Không</option>
                                 </select>
 
                                 <label className="info-admin-product__label">Thêm vào sản phẩm khuyến mãi khung giờ vàng</label>
-                                <select className='info-admin-product__input' style={{ fontWeight: 'bold', color: 'green' }} onChange={(e) => { setBoolHotDeal(e.target.value); }}>
-                                    <option value="" selected >Chọn giá trị...</option>
-                                    <option value="true">Có</option>
-                                    <option value="False">Không</option>
+                                <select className='info-admin-product__input' value={boolHotDeal.toString()} onChange={handleSelectHotDeal} style={{ fontWeight: 'bold', color: 'green' }} >
+                                    <option value="true" >Có</option>
+                                    <option value="false" >Không</option>
                                 </select>
 
                                 <label className="info-admin-product__label">Trạng thái sản phẩm</label>
-                                <select className='info-admin-product__input'>
-                                    <option value="" selected >Chọn giá trị...</option>
+                                <select className='info-admin-product__input' value={product}>
                                     <option value="Sẵn hàng">Sẵn hàng</option>
                                     <option value="Cháy hàng">Cháy hàng</option>
                                 </select>

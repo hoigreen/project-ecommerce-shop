@@ -65,13 +65,12 @@
     width: 100%;
     display: block;
     padding: 10px;
-    margin-bottom: 20px;
 }
 
 .cart__btn-cancel {
     display: block;
     padding: 8px 0 2px 0;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 600;
     border: none;
     background-color: transparent;
@@ -95,7 +94,7 @@
     display: block;
     padding: 8px 0 4px;
     text-align: center;
-    font-size: 2.7rem;
+    font-size: 2.2rem;
     color: var(--button-color);
     margin: 10px;
 }
@@ -133,8 +132,8 @@
 
 .cart__item-info-name {
     display: block;
-    font-size: 2rem;
-    line-height: 2.4rem;
+    font-size: 1.6rem;
+    line-height: 2.2rem;
     max-width: 530px;
     padding: 4px 0;
     font-weight: bold;
@@ -144,7 +143,7 @@
     display: inline-block;
     color: #d70018;
     font-weight: 600;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     padding-right: 8px;
     line-height: 1.8rem;
 
@@ -152,7 +151,7 @@
 
 .cart__item-info-old-price {
     display: inline-block;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     text-decoration: line-through;
     font-style: italic;
     margin-right: 8px;
@@ -176,7 +175,7 @@
     padding: 6px;
     color: #333;
     background-color: #eee;
-    width: 100px;
+    width: fit-content;
     border-radius: 6px;
     border: 1px solid #ddd;
     line-height: 2rem;
@@ -201,13 +200,14 @@
     width: 28px;
     height: 28px;
     padding: 4px;
-    font-size: 2rem;
+    font-size: 1.8rem;
     line-height: 16px;
     background-color: #eee;
     font-weight: bold;
     border-radius: 4px;
     border: 1px solid #ccc;
     cursor: pointer;
+    font-weight: 300;
 }
 
 .cart__item-quantity-edit:hover,
@@ -219,7 +219,7 @@
     width: 40px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 2rem;
+    font-size: 1.8rem;
     margin: 0 4px;
     text-align: center;
     outline: none;
@@ -229,7 +229,7 @@
     display: block;
     padding: 4px 10px;
     color: #d70018;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     border: none;
     cursor: pointer;
     background-color: transparent;
@@ -264,7 +264,7 @@
     margin: 16px 10px;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: bold;
 }
 
@@ -288,7 +288,7 @@
 .cart__control-btn {
     display: block;
     padding: 14px 20px;
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: bold;
     border-radius: 20px;
     cursor: pointer;
@@ -344,7 +344,7 @@
 .cart-info__label {
     display: block;
     width: 100%;
-    font-size: 2rem;
+    font-size: 1.8rem;
     font-weight: bold;
     padding-left: 10px;
     margin: 10px 0;
@@ -352,7 +352,7 @@
 }
 
 .cart-info__input {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     padding: 12px 20px;
     margin: 0;
     font-weight: 400;
@@ -382,7 +382,7 @@
 }
 
 .cart-info__input-radio-describe {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
 }
 
 .cart-info__input-radio-describe--red {
@@ -480,7 +480,7 @@
 
 .detail-price__header {
     display: block;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     font-weight: 500;
     margin: 4px 0 10px;
 }
@@ -489,7 +489,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: #7d7d7d;
     padding: 4px 0;
     margin-bottom: 2px;
@@ -497,7 +497,7 @@
 }
 
 .detail-price__item-total {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     margin-top: 10px;
     font-weight: 500;
 }
@@ -529,7 +529,7 @@
     display: flex;
     justify-content: space-between;
     align-items: baseline;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     padding: 6px 0;
     margin-bottom: 8px;
 }
@@ -546,7 +546,7 @@
 
 .cart-confirm__data {
     font-weight: 600;
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .cart-confirm__list {
@@ -583,7 +583,7 @@
     display: block;
     margin-bottom: 14px;
     font-weight: 500;
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     line-height: 2.2rem;
 }
 
@@ -629,8 +629,8 @@
     padding: 10px 0;
     text-align: center;
     font-weight: 500;
-    font-size: 1.8rem;
-    line-height: 2.2rem;
+    font-size: 1.6rem;
+    line-height: 2rem;
 }
 
 .payment__item-img {

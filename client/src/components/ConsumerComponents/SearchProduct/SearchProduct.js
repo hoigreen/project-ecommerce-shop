@@ -90,7 +90,7 @@ const ResultSearch = () => {
                     class="product__sell-item"
                     key=${index}
                     style='display:block;
-                    margin: 10px 10px 12px;'>
+                    margin: 10px 5px 12px;'>
 
                     <img src=${p.imageLink} class='home__flash-sale-item-img' />
                     <label class='product__sell-item-label'>${p.name}</label>

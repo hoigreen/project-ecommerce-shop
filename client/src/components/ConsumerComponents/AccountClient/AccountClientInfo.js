@@ -18,7 +18,7 @@ const AccountClientInfo = () => {
         handleLoadOptionSidebar(1)
     }, [])
 
-    const changeImageUser = (filename) => {
+    const changeImageUser = () => {
         const preview = document.querySelector(".account__box-info-avatar")
         const imageUser = document.querySelector("#avatar-change").files[0]
 
@@ -33,48 +33,59 @@ const AccountClientInfo = () => {
         }
     }
 
-    const handleUploadAvatar = () => {
-        if (imageFile) {
-            const formData = new FormData();
-            formData.append('avatar-change', imageFile, changeFilename(imageFile.name, user._id));
-
-            axios.post('https://server-shoptech.onrender.com/api/users/upload-image', formData)
-                .then(response => {
-                    console.log(response)
-                })
-                .catch((error) => {
-                    alert('Lỗi khi upload:', error);
-                });
-        }
-
-    }
-
     const handleEditInfo = async (e) => {
         e.preventDefault()
-        handleUploadAvatar()
         const inputElements = document.querySelectorAll(".account__box-info-input")
-        var avatarUrl = ''
-        if (imageFile) {
-            avatarUrl = `/public/uploads/users/${changeFilename(imageFile.name, user._id)}`;
-        }
-
         if (window.confirm("Bạn muốn sửa đổi thông tin cá nhân!") == true) {
             try {
-                const res = await axios.put(`${process.env.REACT_APP_API}/api/users/update/${JSON.parse(window.localStorage.getItem('auth')).user._id}`, {
-                    avatarUrl: avatarUrl || user.avatarUrl,
-                    fullname: inputElements[0].value,
-                    email: inputElements[1].value,
-                    phone: inputElements[2].value,
-                    address: inputElements[3].value
-                });
-                if (res && res.data.success) {
-                    alert("Cập nhật thông tin thành công!");
-                    handleLoadingPage(1)
-                    window.setTimeout(() => {
-                        window.location.reload();
-                    }, 1000)
-                } else {
-                    alert("Cập nhật thông tin thất bại")
+                if (imageFile) {
+                    const formData = new FormData();
+                    formData.append('avatar-change', imageFile, changeFilename(imageFile.name, user._id));
+
+                    axios.post('https://server-shoptech.onrender.com/api/users/upload-image', formData)
+                        .then(response => {
+                            console.log(response);
+                            axios.put(`${process.env.REACT_APP_API}/api/users/update/${JSON.parse(window.localStorage.getItem('auth')).user._id}`, {
+                                avatarUrl: response.data.path,
+                                fullname: inputElements[0].value,
+                                email: inputElements[1].value,
+                                phone: inputElements[2].value,
+                                address: inputElements[3].value
+                            }).then(res => {
+                                if (res && res.data.success) {
+                                    alert("Cập nhật thông tin thành công!");
+                                    handleLoadingPage(1)
+                                    window.setTimeout(() => {
+                                        window.location.reload();
+                                    }, 1000)
+                                } else {
+                                    alert("Cập nhật thông tin thất bại")
+                                }
+                            });
+                        })
+                        .catch((error) => {
+                            alert('Lỗi khi upload:' + error);
+                            console.error(error);
+                        });
+                }
+                else {
+                    axios.put(`${process.env.REACT_APP_API}/api/users/update/${JSON.parse(window.localStorage.getItem('auth')).user._id}`, {
+                        avatarUrl: user.avatarUrl,
+                        fullname: inputElements[0].value,
+                        email: inputElements[1].value,
+                        phone: inputElements[2].value,
+                        address: inputElements[3].value
+                    }).then(res => {
+                        if (res && res.data.success) {
+                            alert("Cập nhật thông tin thành công!");
+                            handleLoadingPage(1)
+                            window.setTimeout(() => {
+                                window.location.reload();
+                            }, 1000)
+                        } else {
+                            alert("Cập nhật thông tin thất bại")
+                        }
+                    });
                 }
             } catch (error) {
                 alert(error)

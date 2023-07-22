@@ -1,5 +1,4 @@
 const express = require('express');
-const multer = require('multer');
 const UserModel = require('../models/UserModel');
 const {
     RegisterController,
@@ -13,7 +12,7 @@ const {
 } = require('../controllers/UserControllers')
 
 const { RequireSignIn } = require("../middlewares/MiddleWares");
-const { uploadAvatarUser } = require('../middlewares/UploadFile');
+const { uploadAvatarUser } = require('../middlewares/uploadToCloud');
 const router = express.Router();
 
 
@@ -48,7 +47,7 @@ router.post("/login", LoginController);
 
 // Upload ảnh khách hàng
 router.post('/upload-image', uploadAvatarUser.single('avatar-change'), (req, res) => {
-    res.status(200).json({ error: 'Upload thành công' });
+    res.status(200).json({ error: 'Upload thành công', path: req.file.path });
 });
 
 // Cập nhật thông tin cá nhân

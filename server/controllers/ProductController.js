@@ -184,10 +184,7 @@ const UpdateImageList = async (req, res) => {
 const VoteProduct = async (req, res) => {
     try {
         const _id = req.params.id;
-        // const name = req.params.name;
-        const {
-            star
-        } = req.body;
+        const { star } = req.body;
 
         const infoProduct = await ProductModel.findByIdAndUpdate(
             _id,

@@ -27,6 +27,8 @@ const Home = ({ socket }) => {
             })
         }
         fetchAPIs()
+        handleLoadBanner()
+        handleLoadCountdown()
     }, [])
 
     useEffect(() => {
@@ -73,7 +75,8 @@ const Home = ({ socket }) => {
         handleSetWidthBanner()
     }, [products])
 
-    window.onload = () => {
+
+    const handleLoadCountdown = () => {
         var countDownDate = new Date(`7 ${timeEnd}, 2023 00:00:00`).getTime();
         const countdown = setInterval(() => {
             var now = new Date().getTime();
@@ -94,8 +97,6 @@ const Home = ({ socket }) => {
                 clearInterval(countdown);
             }
         }, 1000)
-
-        handleLoadBanner()
     }
 
     const handleFormatStarProduct = (starOfProduct) => {

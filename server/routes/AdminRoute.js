@@ -2,7 +2,7 @@ const express = require('express');
 const LoginAdminController = require('../controllers/LoginAdminController');
 const AdminModel = require('../models/AdminModel');
 const UserModel = require('../models/UserModel');
-const { uploadAvatarAdmin } = require('../middlewares/UploadFile');
+const { uploadAvatarAdmin } = require('../middlewares/uploadToCloud');
 const router = express.Router();
 
 // Get All Admin
@@ -83,9 +83,7 @@ router.put("/update-info-user/:id", async (req, res) => {
 
 // Upload avatar admin
 router.post('/upload-image', uploadAvatarAdmin.single('avatar-admin'), (req, res) => {
-    const imagePath = req.file.path;
-    console.log(imagePath)
-    res.status(200).json({ error: 'Thành công' });
+    res.status(200).json({ message: 'Thành công', path: req.file.path });
 });
 
 module.exports = router;

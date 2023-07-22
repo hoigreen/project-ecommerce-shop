@@ -138,7 +138,7 @@ const AccountOrderDetail = () => {
                                 <ul className='order-detail__list'>
                                     {loading ? <p>Loading...</p> : order.lists.map((item, index) => (
                                         <li className='order-detail__item' key={index}>
-                                            <img src={process.env.REACT_APP_API + item.imageLink} className='order-detail__item-img' />
+                                            <img src={item.imageLink} className='order-detail__item-img' />
                                             <div className='order-detail__item-info'>
                                                 <label className='order-detail__item-name'>{item.productName}</label>
                                                 <label className='order-detail__item-content'>{item.option}</label>

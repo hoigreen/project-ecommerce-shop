@@ -8,6 +8,7 @@ import { changeFilename, handleLoadingPage } from '../../Common';
 const InfoAdmin = () => {
     const [admin, setAdmin] = useState({})
     const [imageFile, setImageFile] = useState(null);
+    const [avatarUrl, setAvatarUrl] = useState('');
 
     useEffect(() => {
         const fetchAPI = () => {
@@ -19,7 +20,7 @@ const InfoAdmin = () => {
         handleLoadOptionSelected(5)
     }, [])
 
-    const changeImageAdmin = (filename) => {
+    const changeImageAdmin = () => {
         const preview = document.querySelector(".info-page__avatar-img")
         const imageAdmin = document.querySelector("#avatar-change-input").files[0]
 
@@ -34,40 +35,56 @@ const InfoAdmin = () => {
         }
     }
 
-    const handleUploadAvatarAdmin = () => {
-        const formData = new FormData();
-        formData.append('avatar-admin', imageFile, changeFilename(imageFile.name, admin._id));
-        console.log(imageFile);
-
-        axios.post('https://server-shoptech.onrender.com/api/admins/upload-image', formData)
-            .then(response => {
-                console.log(response)
-            })
-            .catch((error) => {
-                alert('Lỗi khi upload:', error);
-            });
-    }
-
     const handleConfirmChange = async (e) => {
         e.preventDefault();
-        handleUploadAvatarAdmin()
         const inputElements = document.querySelectorAll(".info-page__input");
-        const avatarUrl = `/public/uploads/admins/${changeFilename(imageFile.name, admin._id)}`;
         try {
-            const res = await axios.put(`${process.env.REACT_APP_API}/api/admins/update-info/${JSON.parse(window.localStorage.getItem('authAdmin')).admin._id} `, {
-                avatarUrl: avatarUrl,
-                fullname: inputElements[1].value,
-                email: inputElements[2].value,
-                phone: inputElements[3].value,
-                address: inputElements[4].value
-            });
-            if (res && res.data.success) {
-                alert("Cập nhật thông tin thành công!");
-                handleLoadingPage(1)
-                window.location.reload()
-            } else {
-                alert("Cập nhật thông tin thất bại")
+            if (imageFile) {
+                const formData = new FormData();
+                formData.append('avatar-admin', imageFile, changeFilename(imageFile.name, admin._id));
+                axios.post('https://server-shoptech.onrender.com/api/admins/upload-image', formData)
+                    .then(response => {
+                        axios.put(`${process.env.REACT_APP_API}/api/admins/update-info/${JSON.parse(window.localStorage.getItem('authAdmin')).admin._id} `, {
+                            avatarUrl: response.data.path,
+                            fullname: inputElements[1].value,
+                            email: inputElements[2].value,
+                            phone: inputElements[3].value,
+                            address: inputElements[4].value
+                        }).then(res => {
+                            if (res && res.data.success) {
+                                alert("Cập nhật thông tin thành công!");
+                                handleLoadingPage(1)
+                                window.location.reload()
+                            } else {
+                                alert("Cập nhật thông tin thất bại")
+                            }
+                        });
+                    })
+                    .catch((error) => {
+                        alert('Lỗi khi upload ảnh: ' + error);
+                        console.log(error)
+                    });
             }
+
+            else {
+                axios.put(`${process.env.REACT_APP_API}/api/admins/update-info/${JSON.parse(window.localStorage.getItem('authAdmin')).admin._id} `, {
+                    avatarUrl: admin.avatarUrl,
+                    fullname: inputElements[1].value,
+                    email: inputElements[2].value,
+                    phone: inputElements[3].value,
+                    address: inputElements[4].value
+                }).then(res => {
+                    if (res && res.data.success) {
+                        alert("Cập nhật thông tin thành công!");
+                        handleLoadingPage(1)
+                        window.location.reload()
+                    } else {
+                        alert("Cập nhật thông tin thất bại")
+                    }
+                });
+            }
+
+
         } catch (error) {
             alert(error)
         }
@@ -89,7 +106,7 @@ const InfoAdmin = () => {
                     <div className="info-page__body">
                         <div className="info-page__col-1">
                             <div className="info-page__avatar">+
-                                <img className="info-page__avatar-img" src={process.env.REACT_APP_API + admin.avatarUrl}></img>
+                                <img className="info-page__avatar-img" src={admin.avatarUrl}></img>
                             </div>
                             <input type='file' name='avatar-admin' className="info-page__avatar-input" id="avatar-change-input" onChange={(e) => { changeImageAdmin() }} hidden></input>
                             <label className="info-page__avatar-btn" htmlFor="avatar-change-input">Thay đổi Avatar</label>

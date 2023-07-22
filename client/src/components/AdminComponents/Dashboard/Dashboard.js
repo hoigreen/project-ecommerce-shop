@@ -161,40 +161,6 @@ const Dashboard = () => {
                         </div>
                     </div>
                 </div>
-
-                {/* <div className='admin__group'>
-                    <label className='dash__group-title'>Danh sách quản trị viên</label>
-                    <PieChart chartData={productData} />
-
-                    <div className='admin__list'>
-                        {loading ? <p>Đang kết nối đến server ... </p> : admins.map((admin, index) => (
-                            <div className='admin__item' key={index}>
-                                <label className='admin__item-id'>ADMIN {index + 1}</label>
-                                <div className='admin__item-avatar'>
-                                    <img src={process.env.REACT_APP_API + admin.avatarUrl} className='admin__item-img'></img>
-                                </div>
-                                <label className='admin__item-admin-name'>{admin.adminName}</label>
-
-                                <div className='admin__item-info'>
-                                    <label className='admin__item-info-label'>Họ và tên:</label>
-                                    <p className='admin__item-info-content'>{admin.fullname}</p>
-                                </div>
-                                <div className='admin__item-info'>
-                                    <label className='admin__item-info-label'>Email:</label>
-                                    <p className='admin__item-info-content'>{admin.email || "Trống!"}</p>
-                                </div>
-                                <div className='admin__item-info'>
-                                    <label className='admin__item-info-label'>Số điện thoại: </label>
-                                    <p className='admin__item-info-content'>{admin.phone || "Trống!"}</p>
-                                </div>
-                                <div className='admin__item-info'>
-                                    <label className='admin__item-info-label'>Địa chỉ:</label>
-                                    <p className='admin__item-info-content'>{admin.address || "Trống!"} </p>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </div> */}
             </div>
         </div>
 

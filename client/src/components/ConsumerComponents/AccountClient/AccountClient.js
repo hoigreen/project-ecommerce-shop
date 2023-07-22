@@ -69,7 +69,7 @@ const AccountClient = () => {
                         <SidebarAccount />
                         <div className="account__box">
                             <div className="account__box-info">
-                                <img src={process.env.REACT_APP_API + user.avatarUrl || `${process.env.REACT_APP_API}/public/img-avatar-empty.png`} className="account__box-info-avatar"></img>
+                                <img src={user.avatarUrl || `${process.env.REACT_APP_API}/public/img-avatar-empty.png`} className="account__box-info-avatar"></img>
                                 <label className="account__box-info-label">Xin chào</label>
                                 <label className="account__box-info-fullname">{user.fullname}</label>
                                 <div className='account__box-info-list'>

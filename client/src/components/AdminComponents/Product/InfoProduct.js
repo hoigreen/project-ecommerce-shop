@@ -18,7 +18,6 @@ const InfoProduct = () => {
     const [imagePrimaryFile, setImagePrimaryFile] = useState(null)
     const [countImageInList, setCountImageInList] = useState(0)
     const [imageFileInList, setImageFileInList] = useState(null)
-    // const [arrayImageList, setArrayImageList] = useState([])
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -26,7 +25,6 @@ const InfoProduct = () => {
             fetch("https://server-shoptech.onrender.com/api/products/" + id).then(res => res.json()).then(data => {
                 setProduct(data)
                 setCountImageInList(data.imageList.length)
-                // setArrayImageList(data.imageList)
                 setLoading(false)
             })
         }
@@ -51,43 +49,50 @@ const InfoProduct = () => {
         }
     }
 
-    const handleUploadImage = () => {
-        if (imageLinkFile) {
-            const formData = new FormData();
-            formData.append('image-primary', imageLinkFile, changeFilename(imageLinkFile.name, "imageLink-" + product._id));
-
-            axios.post('https://server-shoptech.onrender.com/api/products/upload-image', formData)
-                .then(response => {
-                    console.log(response)
-                })
-                .catch((error) => {
-                    alert('Lỗi khi upload:', error);
-                });
-        }
-    }
-
     const handleConfirmChangeImageLink = async (e) => {
         e.preventDefault()
-        handleUploadImage()
-        var imageLinkProduct = ''
-        if (imageLinkFile) {
-            imageLinkProduct = `/public/uploads/products/${changeFilename(imageLinkFile.name, "imageLink-" + product._id)}`;
-        }
-
-        if (window.confirm("Bạn muốn cập nhật thông tin sản phẩm?") == true) {
+        if (window.confirm("Bạn muốn cập nhật ảnh sản phẩm?") == true) {
             try {
-                const res = await axios.put(`${process.env.REACT_APP_API}/api/products/update/image-link=${id}`, {
-                    imageLink: imageLinkProduct
-                });
-                if (res && res.data.success) {
-                    window.alert("Thành công!")
-                    handleLoadingPage(1)
-                    window.setTimeout(() => {
-                        window.location.reload()
-                    }, 1000)
-                } else {
-                    alert("Cập nhật thông tin thất bại")
+                if (imageLinkFile) {
+                    const formData = new FormData();
+                    formData.append('image-primary', imageLinkFile, changeFilename(imageLinkFile.name, "imageLink-" + product._id));
+
+                    axios.post('https://server-shoptech.onrender.com/api/products/upload-image', formData)
+                        .then(response => {
+                            axios.put(`${process.env.REACT_APP_API}/api/products/update/image-link=${id}`, {
+                                imageLink: response.data.path
+                            }).then(res => {
+                                if (res && res.data.success) {
+                                    window.alert("Thành công!")
+                                    handleLoadingPage(1)
+                                    window.setTimeout(() => {
+                                        window.location.reload()
+                                    }, 1000)
+                                } else {
+                                    alert("Cập nhật ảnh thất bại")
+                                }
+                            });
+                        })
+                        .catch((error) => {
+                            alert('Lỗi khi upload:', error);
+                        });
                 }
+                else {
+                    axios.put(`${process.env.REACT_APP_API}/api/products/update/image-link=${id}`, {
+                        imageLink: product.imageLink
+                    }).then(res => {
+                        if (res && res.data.success) {
+                            window.alert("Thành công!")
+                            handleLoadingPage(1)
+                            window.setTimeout(() => {
+                                window.location.reload()
+                            }, 1000)
+                        } else {
+                            alert("Cập nhật ảnh thất bại")
+                        }
+                    });
+                }
+
             } catch (error) {
                 alert(error)
             }
@@ -111,41 +116,52 @@ const InfoProduct = () => {
         }
     }
 
-    const handleUploadImagePrimary = () => {
-        if (imagePrimaryFile) {
-            const formData = new FormData();
-            formData.append('image-banner', imagePrimaryFile, changeFilename(imagePrimaryFile.name, "imagePrimary-" + product._id));
-
-            axios.post('https://server-shoptech.onrender.com/api/products/upload-image-primary', formData)
-                .then(response => {
-                    console.log(response)
-                })
-                .catch((error) => {
-                    alert('Lỗi khi upload:', error);
-                });
-        }
-    }
-
     const handleConfirmChangeImageBanner = async (e) => {
         e.preventDefault()
-        handleUploadImagePrimary()
         var imagePrimaryProduct = ''
         if (imagePrimaryFile) {
             imagePrimaryProduct = `/public/uploads/products/${changeFilename(imagePrimaryFile.name, "imagePrimary-" + product._id)}`;
         }
         if (window.confirm("Bạn muốn cập nhật thông tin sản phẩm?") == true) {
             try {
-                const res = await axios.put(`${process.env.REACT_APP_API}/api/products/update/image-banner=${id}`, {
-                    imagePrimary: imagePrimaryProduct
-                });
-                if (res && res.data.success) {
-                    window.alert("Thành công!")
-                    handleLoadingPage(1)
-                    window.setTimeout(() => {
-                        window.location.reload()
-                    }, 1000)
-                } else {
-                    alert("Cập nhật thông tin thất bại")
+                if (imagePrimaryFile) {
+                    const formData = new FormData();
+                    formData.append('image-banner', imagePrimaryFile, changeFilename(imagePrimaryFile.name, "imagePrimary-" + product._id));
+
+                    axios.post('https://server-shoptech.onrender.com/api/products/upload-image-primary', formData)
+                        .then(response => {
+                            axios.put(`${process.env.REACT_APP_API}/api/products/update/image-banner=${id}`, {
+                                imagePrimary: response.data.path
+                            }).then(res => {
+                                if (res && res.data.success) {
+                                    window.alert("Thành công!")
+                                    handleLoadingPage(1)
+                                    window.setTimeout(() => {
+                                        window.location.reload()
+                                    }, 1000)
+                                } else {
+                                    alert("Cập nhật thông tin thất bại")
+                                }
+                            });
+                        })
+                        .catch((error) => {
+                            alert('Lỗi khi upload:', error);
+                        });
+                }
+
+                else {
+                    const res = await axios.put(`${process.env.REACT_APP_API}/api/products/update/image-banner=${id}`, {
+                        imagePrimary: product.imagePrimary
+                    });
+                    if (res && res.data.success) {
+                        window.alert("Thành công!")
+                        handleLoadingPage(1)
+                        window.setTimeout(() => {
+                            window.location.reload()
+                        }, 1000)
+                    } else {
+                        alert("Cập nhật thông tin thất bại")
+                    }
                 }
             } catch (error) {
                 alert(error)
@@ -173,45 +189,59 @@ const InfoProduct = () => {
         }
     }
 
-    const handleUploadImageInList = () => {
-        if (imageFileInList) {
-            const formData = new FormData();
-            formData.append('image-list', imageFileInList, changeFilename(imageFileInList.name, "imageList-" + product._id + "-" + countImageInList));
-
-            axios.post('https://server-shoptech.onrender.com/api/products/upload-image-list', formData)
-                .then(response => {
-                    console.log(response)
-                })
-                .catch((error) => {
-                    alert('Lỗi khi upload:', error);
-                });
-        }
-    }
-
     var arrayImageList = []
     const handleConfirmEditList = async () => {
-        handleUploadImageInList()
         if (imageFileInList) {
-            arrayImageList = [...product.imageList, `/public/uploads/products/${changeFilename(imageFileInList.name, "imageList-" + product._id + "-" + countImageInList)}`]
         }
         try {
-            const res = await axios.put(`${process.env.REACT_APP_API}/api/products/update/image-list=${id}`, {
-                imageList: arrayImageList
-            });
-            if (res && res.data.success) {
-                window.alert("Thành công!")
-                handleLoadingPage(1)
-                window.setTimeout(() => {
-                    window.location.reload()
-                }, 1000)
-            } else {
-                alert("Cập nhật thông tin thất bại")
+            if (imageFileInList) {
+                const formData = new FormData();
+                formData.append('image-list', imageFileInList, changeFilename(imageFileInList.name, "imageList-" + product._id + "-" + countImageInList));
+
+                axios.post('https://server-shoptech.onrender.com/api/products/upload-image-list', formData)
+                    .then(response => {
+                        arrayImageList = [...product.imageList, response.data.path]
+                        axios.put(`${process.env.REACT_APP_API}/api/products/update/image-list=${id}`, {
+                            imageList: arrayImageList
+                        }).then(res => {
+                            if (res && res.data.success) {
+                                window.alert("Thành công!")
+                                handleLoadingPage(1)
+                                window.setTimeout(() => {
+                                    window.location.reload()
+                                }, 1000)
+                            } else {
+                                alert("Cập nhật thông tin thất bại")
+                            }
+                        });
+                    })
+                    .catch((error) => {
+                        alert('Lỗi khi upload:', error);
+                    });
             }
+            else {
+                arrayImageList = [...product.imageList]
+                axios.put(`${process.env.REACT_APP_API}/api/products/update/image-list=${id}`, {
+                    imageList: arrayImageList
+                }).then(res => {
+                    if (res && res.data.success) {
+                        window.alert("Thành công!")
+                        handleLoadingPage(10)
+                        window.setTimeout(() => {
+                            window.location.reload()
+                        }, 1000)
+                    } else {
+                        alert("Cập nhật thông tin thất bại")
+                    }
+                });
+            }
+
         } catch (error) {
             alert(error)
         }
     }
 
+    // Cập nhật thông tin sản phẩm
     const handleConfirmChangeInfo = async (e) => {
         e.preventDefault()
         var boolFeaturedEdit;
@@ -258,6 +288,8 @@ const InfoProduct = () => {
         }
     }
 
+
+    // Xóa sản phẩm
     const handleDeleteProduct = async (e) => {
         e.preventDefault()
         if (window.confirm("Bạn có chắc muốn xóa toàn bộ thông tin của sản phẩm này?") == true) {
@@ -294,7 +326,7 @@ const InfoProduct = () => {
                     <div className="info-admin-product__body">
                         <div className="info-admin-product__col-1">
                             <div className="info-admin-product__image-primary">
-                                <img className="info-admin-product__image-primary-img" src={process.env.REACT_APP_API + product.imageLink || "https://server-shoptech.onrender.com/public/img-product-empty.png"}></img>
+                                <img className="info-admin-product__image-primary-img" src={product.imageLink || "https://server-shoptech.onrender.com/public/img-product-empty.png"}></img>
                                 <input type='file' id="image-primary" value="" onChange={changeImageLink} hidden></input>
                                 <div className="info-admin-product__image-controll">
                                     <label htmlFor="image-primary" className="info-admin-product__image-btn">Chỉnh sửa</label>
@@ -305,7 +337,7 @@ const InfoProduct = () => {
 
                             <div className="info-admin-product__image-box">
                                 <div className="info-admin-product__image-banner">
-                                    <img className="info-admin-product__image-banner-img" src={process.env.REACT_APP_API + product.imagePrimary || "https://server-shoptech.onrender.com/public/img-product-empty.png"}></img>
+                                    <img className="info-admin-product__image-banner-img" src={product.imagePrimary || "https://server-shoptech.onrender.com/public/img-product-empty.png"}></img>
                                     <input type='file' id="image-banner" value="" onChange={changeImageBanner} hidden></input>
                                     <div className="info-admin-product__image-controll">
                                         <label htmlFor="image-banner" className="info-admin-product__image-btn">Chỉnh sửa</label>
@@ -334,7 +366,7 @@ const InfoProduct = () => {
 
                                     {loading ? <p>Đang kết nối đến server...</p> : product.imageList.map((item, index) => (
                                         <div className="info-admin-product__image-item" key={index}>
-                                            <img className="info-admin-product__image-item-img--existed" src={process.env.REACT_APP_API + product.imageList[index]} />
+                                            <img className="info-admin-product__image-item-img--existed" src={product.imageList[index]} />
                                         </div>
                                     ))}
                                 </ul>

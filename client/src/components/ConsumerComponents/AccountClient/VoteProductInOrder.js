@@ -152,7 +152,7 @@ const VoteProductInOrder = ({ socket }) => {
                     <div className="vote-product__header">ĐÁNH GIÁ SẢN PHẨM</div>
                     <div className="vote-product__body">
                         <div className='vote-product__item'>
-                            <img src={process.env.REACT_APP_API + imageLink} className='vote-product__item-img' />
+                            <img src={imageLink} className='vote-product__item-img' />
                             <div className='vote-product__item-info'>
                                 <label className='vote-product__item-name'>{productName}</label>
                                 <label className='vote-product__item-content'>{option}</label>

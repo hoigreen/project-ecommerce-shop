@@ -108,7 +108,7 @@ const CartConfirm = () => {
                                 <label className="detail-price__header">Chi tiết sản phẩm</label>
                                 {loading ? <p>Đang kết nối đến server ... </p> : cartUser.map((product, i) => (
                                     <li className="cart-confirm__item-product" key={i}>
-                                        <img className='cart-confirm__item-product-img' src={process.env.REACT_APP_API + product.imageLink}></img>
+                                        <img className='cart-confirm__item-product-img' src={product.imageLink}></img>
                                         <div className='cart-confirm__item-product-info'>
                                             <label className='cart-confirm__item-product-info-label'>{product.productName}</label>
                                             <p className='cart-confirm__item-product-info-quantity'>x{product.quantity}</p>

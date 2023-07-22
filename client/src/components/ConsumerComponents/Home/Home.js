@@ -208,7 +208,7 @@ const Home = ({ socket }) => {
 
                         <div className='home-promote__group'>
                             {loading ? <p>Đang kết nối đến server...</p> : promotes.map((promote, index) => (
-                                <img src={process.env.REACT_APP_API + promote.imageLink} className='home-promote__item' alt='' key={index}>
+                                <img src={promote.imageLink} className='home-promote__item' alt='' key={index}>
                                 </img>
                             ))}
                         </div>
@@ -255,7 +255,7 @@ const Home = ({ socket }) => {
                                                     window.location.href = `/product/${product.enType}/${product.name}`
                                                 }, 1000)
                                             }}>
-                                            <img src={process.env.REACT_APP_API + product.imageLink} className='home__flash-sale-item-img'></img>
+                                            <img src={product.imageLink} className='home__flash-sale-item-img'></img>
                                             <img className="product-client__item-hot-icon" src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"></img>
                                             <label className='home__flash-sale-item-label'>{product.name}</label>
                                             <label className='home__flash-sale-item-price'>{Number(product.price).toLocaleString()} ₫</label>
@@ -301,7 +301,7 @@ const Home = ({ socket }) => {
                                         }, 1000)
                                     }}
                                 >
-                                    <img src={process.env.REACT_APP_API + product.imageLink}
+                                    <img src={product.imageLink}
                                         className='home__flash-sale-item-img'>
                                     </img>
                                     <img className="product-client__item-hot-icon" src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"></img>
@@ -341,7 +341,7 @@ const Home = ({ socket }) => {
                                         }, 1000)
                                     }}
                                 >
-                                    <img src={process.env.REACT_APP_API + product.imageLink} className='home__flash-sale-item-img'></img>
+                                    <img src={product.imageLink} className='home__flash-sale-item-img'></img>
                                     <img className="product-client__item-hot-icon" src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"></img>
                                     <label className='product__sell-item-label'>{product.name}</label>
                                     <label className='product__sell-item-price'>{Number(product.price).toLocaleString()} ₫</label>
@@ -380,7 +380,7 @@ const Home = ({ socket }) => {
                                         }, 1000)
                                     }}
                                 >
-                                    <img src={process.env.REACT_APP_API + product.imageLink}
+                                    <img src={product.imageLink}
                                         className='home__flash-sale-item-img'>
                                     </img>
                                     <img className="product-client__item-hot-icon" src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"></img>
@@ -419,7 +419,7 @@ const Home = ({ socket }) => {
                                         }, 1000)
                                     }}
                                 >
-                                    <img src={process.env.REACT_APP_API + product.imageLink}
+                                    <img src={product.imageLink}
                                         className='home__flash-sale-item-img'>
                                     </img>
                                     <img className="product-client__item-hot-icon" src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"></img>

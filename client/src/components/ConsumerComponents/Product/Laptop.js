@@ -159,7 +159,7 @@ const Laptop = () => {
                                     }, 1000)
                                 }}
                             >
-                                <img src={process.env.REACT_APP_API + product.imageLink}
+                                <img src={product.imageLink}
                                     className='product-client__item-img'>
                                 </img>
                                 <label className='product-client__item-label'>{product.name}</label>

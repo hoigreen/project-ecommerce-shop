@@ -154,7 +154,7 @@ const SmartPhone = () => {
                                     }, 1000)
                                 }}
                             >
-                                <img src={process.env.REACT_APP_API + product.imageLink} className='product-client__item-img'></img>
+                                <img src={product.imageLink} className='product-client__item-img'></img>
                                 <label className='product-client__item-label'>{product.name}</label>
                                 <img className="product-client__item-hot-icon" src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-hot.gif"></img>
                                 <img className="product-client__item-icon" src="https://server-shoptech.onrender.com/public/product-img/smartphone-img/icon-18-month.png"></img>

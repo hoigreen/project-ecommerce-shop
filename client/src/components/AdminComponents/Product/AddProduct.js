@@ -76,7 +76,7 @@ const AddProduct = () => {
         try {
             const res = await axios.post(`${process.env.REACT_APP_API}/api/products/create`, {
                 imagePrimary: "",
-                imageLink: "",
+                imageLink: ``,
                 imageList: [],
                 name,
                 type,

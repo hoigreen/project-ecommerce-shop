@@ -161,7 +161,7 @@ const InfoProductClient = ({ socket }) => {
 
     const changeImage = (fileName) => {
         const imageElement = document.querySelector(".info-product__image-primary")
-        imageElement.style.backgroundImage = `url(${process.env.REACT_APP_API + fileName})`
+        imageElement.style.backgroundImage = `url(${fileName})`
         imageElement.style.animation = `toRight 0.2s linear`
 
         const imgItems = document.querySelectorAll('.info-product__image-item')
@@ -189,14 +189,14 @@ const InfoProductClient = ({ socket }) => {
         if (indexImageInArray >= arrayImage.length - 1) indexImageInArray = -1;
         indexImageInArray++;
         const imageElement = document.querySelector(".info-product__image-primary")
-        imageElement.style.backgroundImage = `url(${process.env.REACT_APP_API + arrayImage[indexImageInArray]})`
+        imageElement.style.backgroundImage = `url(${arrayImage[indexImageInArray]})`
 
     }
     const handlePrevImage = () => {
         if (indexImageInArray <= 0) indexImageInArray = arrayImage.length;
         indexImageInArray--;
         const imageElement = document.querySelector(".info-product__image-primary")
-        imageElement.style.backgroundImage = `url(${process.env.REACT_APP_API + arrayImage[indexImageInArray]})`
+        imageElement.style.backgroundImage = `url(${arrayImage[indexImageInArray]})`
     }
 
     const showSuccessMessage = () => {
@@ -298,7 +298,7 @@ const InfoProductClient = ({ socket }) => {
                             <div className="info-product__image-group">
                                 <div className="info-product__image-primary"
                                     style={{
-                                        backgroundImage: `url(${process.env.REACT_APP_API + product.imagePrimary})`,
+                                        backgroundImage: `url(${product.imagePrimary})`,
                                         backgroundPosition: "center center",
                                         backgroundColor: "transparent",
                                         backgroundRepeat: "no-repeat",
@@ -314,7 +314,7 @@ const InfoProductClient = ({ socket }) => {
                                 <label className="info-product__image-label">Những hình ảnh của sản phẩm</label>
                                 <ul className="info-product__image-list">
                                     <li style={{
-                                        backgroundImage: `url(${process.env.REACT_APP_API + product.imageLink})`,
+                                        backgroundImage: `url(${product.imageLink})`,
                                         backgroundPosition: "center center",
                                         backgroundColor: "transparent",
                                         backgroundRepeat: "no-repeat",
@@ -328,7 +328,7 @@ const InfoProductClient = ({ socket }) => {
                                     {loading ? <p>Đang kết nối đến server ... </p> : imageList.map((image, i) => (
                                         <li key={i}
                                             style={{
-                                                backgroundImage: `url(${process.env.REACT_APP_API + image})`,
+                                                backgroundImage: `url(${image})`,
                                                 backgroundPosition: "center center",
                                                 backgroundColor: "transparent",
                                                 backgroundRepeat: "no-repeat",
@@ -441,7 +441,7 @@ const InfoProductClient = ({ socket }) => {
                                             e.preventDefault();
                                             window.location.href = `/product/${product.enType}/${product.name}`
                                         }}>
-                                        <img src={process.env.REACT_APP_API + product.imageLink} className='product__sell-item-img'></img>
+                                        <img src={product.imageLink} className='product__sell-item-img'></img>
                                         <label className='product__sell-item-label'>{product.name}</label>
                                         <label className='product__sell-item-price'>{Number(product.price).toLocaleString()} ₫</label>
                                         <span className='product__sell-item-percent'>{(Number(product.price) * 1.065).toLocaleString()}đ</span>
@@ -470,7 +470,7 @@ const InfoProductClient = ({ socket }) => {
                                             <div className='info-product__review-item-info'>
                                                 <div className='info-product__review-item-avatar'
                                                     style={{
-                                                        backgroundImage: `url(${process.env.REACT_APP_API + comment.ownerAvatar})`
+                                                        backgroundImage: `url(${comment.ownerAvatar})`
                                                     }}>
                                                 </div>
                                                 <div className='info-product__review-item-fullname'>{comment.ownerName}</div>

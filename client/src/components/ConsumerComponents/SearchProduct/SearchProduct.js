@@ -54,7 +54,7 @@ const ResultSearch = () => {
                     margin: 0 5px 12px;'
                     >
 
-                    <img src=${process.env.REACT_APP_API + p.imageLink} class='home__flash-sale-item-img' />
+                    <img src=${p.imageLink} class='home__flash-sale-item-img' />
                     <label class='product__sell-item-label'>${p.name}</label>
                     <label class='product__sell-item-price'>${Number(p.price).toLocaleString()} ₫</label>
                     <span class='product__sell-item-percent'>${(Number(p.price) * 1.065).toLocaleString()}đ</span>
@@ -92,7 +92,7 @@ const ResultSearch = () => {
                     style='display:block;
                     margin: 10px 10px 12px;'>
 
-                    <img src=${process.env.REACT_APP_API + p.imageLink} class='home__flash-sale-item-img' />
+                    <img src=${p.imageLink} class='home__flash-sale-item-img' />
                     <label class='product__sell-item-label'>${p.name}</label>
                     <label class='product__sell-item-price'>${Number(p.price).toLocaleString()} ₫</label>
                     <span class='product__sell-item-percent'>${(Number(p.price) * 1.065).toLocaleString()}đ</span>

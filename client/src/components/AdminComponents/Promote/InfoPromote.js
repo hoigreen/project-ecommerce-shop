@@ -37,47 +37,60 @@ const InfoPromote = () => {
         }
     }
 
-    const handleUploadImage = () => {
-        if (imageFile) {
-            const formData = new FormData();
-            formData.append('image-change', imageFile, changeFilename(imageFile.name, promote._id));
-
-            axios.post('https://server-shoptech.onrender.com/api/promotes/upload-image', formData)
-                .then(response => {
-                    console.log(response)
-                })
-                .catch((error) => {
-                    alert('Lỗi khi upload:', error);
-                });
-        }
-    }
-
     const handleConfirmChange = async (e) => {
         e.preventDefault()
-        handleUploadImage()
-        var imageLink = promote.imageLink
-        if (imageFile)
-            imageLink = `/public/uploads/promotes/${changeFilename(imageFile.name, promote._id)}`
         const inputName = document.querySelector(".info-promote__input-name");
         const inputElements = document.querySelectorAll(".info-promote__input");
         if (window.confirm("Bạn muốn cập nhật thông tin chương trình khuyến mãi này?") == true) {
             try {
-                const res = await axios.put(`${process.env.REACT_APP_API}/api/promotes/update=${id}`, {
-                    imageLink: imageLink,
-                    name: inputName.value,
-                    timeStart: inputElements[0].value,
-                    timeEnd: inputElements[1].value,
-                    percent: Number(inputElements[2].value),
-                    apply: inputElements[3].value
-                });
-                if (res && res.data.success) {
-                    window.alert("Cập nhật thông tin thành công!")
-                    handleLoadingPage(1)
-                    window.setTimeout(() => {
-                        navigate(`/admin/promote`)
-                    }, 1000)
-                } else {
-                    alert("Cập nhật thông tin thất bại")
+                if (imageFile) {
+                    const formData = new FormData();
+                    formData.append('image-change', imageFile, changeFilename(imageFile.name, promote._id));
+
+                    axios.post('https://server-shoptech.onrender.com/api/promotes/upload-image', formData)
+                        .then(response => {
+                            axios.put(`${process.env.REACT_APP_API}/api/promotes/update=${id}`, {
+                                imageLink: response.data.path,
+                                name: inputName.value,
+                                timeStart: inputElements[0].value,
+                                timeEnd: inputElements[1].value,
+                                percent: Number(inputElements[2].value),
+                                apply: inputElements[3].value
+                            }).then(res => {
+                                if (res && res.data.success) {
+                                    window.alert("Cập nhật thông tin thành công!")
+                                    handleLoadingPage(1)
+                                    window.setTimeout(() => {
+                                        navigate(`/admin/promote`)
+                                    }, 1000)
+                                } else {
+                                    alert("Cập nhật thông tin thất bại")
+                                }
+                            });
+                        })
+                        .catch((error) => {
+                            alert('Lỗi khi upload:', error);
+                        });
+                }
+                else {
+                    axios.put(`${process.env.REACT_APP_API}/api/promotes/update=${id}`, {
+                        imageLink: promote.imageLink,
+                        name: inputName.value,
+                        timeStart: inputElements[0].value,
+                        timeEnd: inputElements[1].value,
+                        percent: Number(inputElements[2].value),
+                        apply: inputElements[3].value
+                    }).then(res => {
+                        if (res && res.data.success) {
+                            window.alert("Cập nhật thông tin thành công!")
+                            handleLoadingPage(1)
+                            window.setTimeout(() => {
+                                navigate(`/admin/promote`)
+                            }, 1000)
+                        } else {
+                            alert("Cập nhật thông tin thất bại")
+                        }
+                    });
                 }
             } catch (error) {
                 alert(error)
@@ -120,7 +133,7 @@ const InfoPromote = () => {
 
                     <div className="info-promote__body">
                         <div className="add__avatar">
-                            <img src={process.env.REACT_APP_API + promote.imageLink} className="info-promote__avatar-img"></img>
+                            <img src={promote.imageLink || `${process.env.REACT_APP_API}/public/img-avatar-empty.png`} className="info-promote__avatar-img"></img>
                             <input type='file' id="image-change" onChange={changeImage} hidden></input>
                             <label htmlFor="image-change" className="info-admin-product__image-btn">Thay đổi hình ảnh khuyến mãi</label>
                         </div>

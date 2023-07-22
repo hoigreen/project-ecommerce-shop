@@ -93,7 +93,7 @@ const AccountClientInfo = () => {
                         <div className="account__box">
                             <div className="account__box-info">
                                 <div className="account__box-info-container">
-                                    <img className="account__box-info-avatar" src={process.env.REACT_APP_API + user.avatarUrl || "https://server-shoptech.onrender.com/public/img-avatar-empty.png"}></img>
+                                    <img className="account__box-info-avatar" src={user.avatarUrl || "https://server-shoptech.onrender.com/public/img-avatar-empty.png"}></img>
                                     <input type='file' id="avatar-change" onChange={(e) => { changeImageUser(user._id) }} hidden></input>
                                     <label className="account__box-info-avatar-btn" htmlFor="avatar-change">Thay đổi Avatar</label>
                                 </div>

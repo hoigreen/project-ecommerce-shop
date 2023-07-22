@@ -453,3 +453,28 @@
     display: block;
     max-width: 100%;
 }
+
+@media screen and (max-width: 739px) {
+    .product-client__title-brand {
+        margin-bottom: 12px;
+        font-size: 1.6rem;
+    }
+
+    .fillter-range {
+        flex-direction: column;
+    }
+
+    .fillter-range__label {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+    }
+
+    .fillter-range__price {
+        font-size: 1rem;
+    }
+
+    .fillter-range__btn {
+        font-size: 1.4rem;
+        width: 200px;
+    }
+}

@@ -16,7 +16,7 @@
     display: block;
     padding: 6px 4px;
     background-color: #fff;
-    color: var(--text-gray);
+    color: #888787;
     cursor: pointer;
 }
 
@@ -29,14 +29,14 @@
     display: block;
     padding: 4px;
     text-align: center;
-    font-size: 2rem;
+    font-size: 1.6rem;
 }
 
 .nav-mobile__btn-name {
     display: block;
     padding: 4px 0;
     text-align: center;
-    font-size: 1.2rem;
+    font-size: 1rem;
 }
 
 .nav-mobile__option-list {

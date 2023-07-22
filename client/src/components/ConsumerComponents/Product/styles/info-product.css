@@ -721,7 +721,7 @@
     }
 
     .product-client__title-brand {
-        font-size: 2.6rem;
+        font-size: 2rem;
     }
 
     .product-client__brand {
@@ -742,7 +742,7 @@
 
     .product-client__item-img {
         margin-bottom: 8px;
-        height: 180px;
+        height: 150px;
     }
 
     .product-client__item-icon {
@@ -751,15 +751,23 @@
 
     .product-client__item-label,
     .product-client__item-price {
-        font-size: 1.4rem;
+        font-size: 1rem;
     }
 
     .product-client__item-percent {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
     }
 
     .product-client__item {
-        height: 360px;
+        height: 320px;
+    }
+
+    .product-client__item-vote {
+        font-size: 1rem;
+    }
+
+    .product-client__item-star-icon {
+        font-size: 1.4rem;
     }
 
     .accessories__group-cate {
@@ -774,6 +782,7 @@
     .accessories__group-category {
         width: calc(25% - 16px);
         margin: 0 8px;
+        font-size: 1rem;
     }
 
     .info-product__container {
@@ -786,8 +795,12 @@
         padding: 8px 6px;
     }
 
+    .product-client__item-tag {
+        font-size: 0.8rem;
+    }
+
     .info-product__header-name {
-        font-size: 1.6rem;
+        font-size: 1.2rem;
         margin-right: 0;
     }
 

@@ -66,10 +66,27 @@
     .policy__container {
         width: calc(100% - 20px);
         margin: 0 auto;
+        padding: 10px 10px 0 20px;
     }
 
     .policy__header {
-        font-size: 3rem;
-        line-height: 3.4rem
+        font-size: 2rem;
+        line-height: 2.6rem
+    }
+
+    .policy__describe {
+        font-size: 1rem
+    }
+
+    .policy__content {
+        font-size: 1.2rem;
+    }
+
+    .policy__title {
+        font-size: 1.4rem;
+    }
+
+    .policy__list-disc {
+        font-size: 1.2rem;
     }
 }

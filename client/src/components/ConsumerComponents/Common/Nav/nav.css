@@ -132,12 +132,12 @@
 
 .header--btn-icon {
     margin: 0 10px 0 4px;
-    font-size: 2.4rem;
+    font-size: 2.2rem;
 }
 
 .header--btn-name {
     margin-bottom: 0;
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-weight: 400;
 }
 
@@ -239,5 +239,9 @@
 
     .table {
         overflow: scroll;
+    }
+
+    .nav__option-item {
+        font-size: 1.2rem;
     }
 }

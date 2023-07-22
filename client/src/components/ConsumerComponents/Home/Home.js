@@ -27,8 +27,8 @@ const Home = ({ socket }) => {
             })
         }
         fetchAPIs()
-        handleLoadBanner()
         handleLoadCountdown()
+        
     }, [])
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const Home = ({ socket }) => {
                 infoProductFeaturedAccessories.style.display = "block";
             }
         })
-
+        handleLoadBanner()
         handleSetWidthBanner()
     }, [products])
 
@@ -140,6 +140,8 @@ const Home = ({ socket }) => {
             }
         }, 4000)
     }
+    
+
 
     const handleTransitionNextBanner = () => {
         const bannerGroup = document.querySelector(".home-promote__group")

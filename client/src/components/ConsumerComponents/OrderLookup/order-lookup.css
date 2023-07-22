@@ -15,8 +15,8 @@
     margin: 10px 0 0;
     padding: 20px;
     width: 100%;
-    font-size: 2.8rem;
-    line-height: 3.2rem;
+    font-size: 2.4rem;
+    line-height: 3rem;
     text-align: center;
     font-weight: bold;
     color: var(--button-color)
@@ -61,5 +61,20 @@
         min-width: unset;
         max-width: unset;
         width: calc(100% - 20px);
+    }
+
+    .order-lookup__box-header {
+        font-size: 2rem;
+    }
+
+    .order-lookup__box-label {
+        font-size: 1.4rem;
+        margin: 20px auto 10px
+    }
+
+    .order-lookup__box-input {
+        font-size: 1.2rem;
+        padding: 10px 12px;
+        width: 100%;
     }
 }

@@ -10,7 +10,7 @@ const NavMobile = () => {
     const arrayOptions = [
         {
             path: "/home",
-            icon: "ti-home",
+            icon: "fa fa-home",
             name: "Trang chủ"
         },
         {

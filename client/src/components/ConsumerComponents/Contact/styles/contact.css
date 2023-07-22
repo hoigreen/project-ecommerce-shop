@@ -157,12 +157,21 @@
         display: block;
         width: unset;
         height: unset;
-        font-size: 3rem;
+        font-size: 2rem;
         margin: 10px auto;
     }
 
     .contact__info-item-title {
-        margin-bottom: 6px;
+        margin: 6px auto 4px;
+        font-size: 1.2rem;
+    }
+
+    .contact__box-title {
+        font-size: 2rem;
+    }
+
+    .contact__info-item-content {
+        font-size: 1rem;
     }
 
     .contact__box {
@@ -180,6 +189,11 @@
     .contact__box-form-textbox,
     .contact__box-form-btn {
         width: 100%;
+        font-size: 1rem;
+    }
+
+    .contact__box-form-input {
+        font-size: 1rem;
     }
 
 }

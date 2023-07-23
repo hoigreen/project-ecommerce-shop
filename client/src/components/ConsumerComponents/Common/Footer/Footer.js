@@ -13,9 +13,9 @@ const Footer = () => {
                             <iframe
                                 className='footer__map'
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.2946148745355!2d106.6138108750036!3d10.865181857550368!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752a10b0f0554f%3A0x769800e8967d6703!2zNzAgVMO0IEvDvSwgVMOibiBDaMOhbmggSGnhu4dwLCBRdeG6rW4gMTIsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmlldG5hbQ!5e0!3m2!1sen!2s!4v1689436941428!5m2!1sen!2s"
-                                allowfullscreen=""
+                                allowFullScreen=""
                                 loading="lazy"
-                                referrerpolicy="no-referrer-when-downgrade">
+                                referrerPolicy="no-referrer-when-downgrade">
 
                             </iframe>
                             {/* <a href='/' className='footer__link'>Tìm cửa hàng gần bạn</a>

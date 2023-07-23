@@ -8,15 +8,12 @@ const OrderLookup = () => {
     const [order, setOrder] = useState(null)
     const [phone, setPhone] = useState('')
     const [orderID, setOrderID] = useState('')
-
     const [lists, setLists] = useState([])
     const [totalPriceOld, setTotalPriceOld] = useState()
     const [countTotalPrice, setCountTotalPrice] = useState()
-    const [percentApply, setPercentApply] = useState('')
-    const [loading, setLoading] = useState(true)
 
     useEffect(() => {
-        // setLists(order.lists)
+        document.title = "ShopTECH | Tra cứu đơn hàng"
 
         // show thông tin tổng tiền giỏ hàng
         let countTotalPriceOld = 0
@@ -49,11 +46,6 @@ const OrderLookup = () => {
             alert(error)
             console.error(error);
         }
-
-        setTimeout(() => {
-        }, 3000)
-
-        console.log(lists)
     }
 
     return (
@@ -156,7 +148,7 @@ const OrderLookup = () => {
 
                                     <li className='detail-price__item'>
                                         <label className="detail-price__item-label">Áp dụng mã giảm giá:</label>
-                                        <span className="detail-price__item-price">- {Number(percentApply)}% = {Number(Number(percentApply) / 100 * Number(countTotalPrice)).toLocaleString()} đ</span>
+                                        <span className="detail-price__item-price">- {Number(order.giftcodeApply)}% = {Number(Number(order.giftcodeApply) / 100 * Number(countTotalPrice)).toLocaleString()} đ</span>
                                     </li>
 
                                     <li className='detail-price__item'>

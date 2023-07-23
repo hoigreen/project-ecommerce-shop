@@ -7,8 +7,11 @@ import "./styles/login-style.css"
 
 const Login = () => {
     const [authAdmin, setAuthAdmin] = useContext(AuthAdminContext)
-
     const [details, setDetails] = useState({ adminName: "", password: "" })
+
+    useEffect(() => { 
+        document.title = "ShopTECH | Đăng nhập quản trị viên"
+    }, [])
 
     useEffect(() => {
         if (window.localStorage.getItem("authAdmin") && authAdmin) { window.location.href = '/admin/dashboard' }

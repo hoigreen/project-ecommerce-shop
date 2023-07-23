@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import './styles/contact.css'
 import { Nav, Footer, Breadcrumbs } from '../Common/';
@@ -11,6 +11,8 @@ const ContactPage = () => {
     const [type, setType] = useState('')
     const [content, setContent] = useState('')
     const form = useRef();
+
+    useEffect(() => { document.title = "ShopTECH | Liên hệ" }, [])
 
     const showSuccessMessage = () => {
         Toast({ title: 'Gửi góp ý thành công', message: 'Cám ơn bạn với góp ý dành cho ShopTECH!', type: 'success', duration: 5000 })

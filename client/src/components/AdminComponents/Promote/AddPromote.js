@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./styles/promote-style.css"
 import { handleLoadingPage } from '../../Common';
@@ -12,6 +12,8 @@ const AddPromote = () => {
     const [apply, setApply] = useState('')
 
     const navigate = useNavigate()
+
+    useEffect(() => { document.title = "ShopTECH | Thêm chương trình khuyến mãi" }, [])
 
     const handleAddPromote = async (e) => {
         e.preventDefault();

@@ -11,6 +11,7 @@ const SmartPhone = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        document.title = "ShopTECH | Điện thoại - Sale ngập tràn"
         const fetchAPIs = () => {
             fetch("https://server-shoptech.onrender.com/api/products").then(res => res.json()).then(data => {
                 setProducts(data)

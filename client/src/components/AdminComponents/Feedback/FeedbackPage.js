@@ -9,6 +9,7 @@ const FeedbackPage = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
+            document.title = "ShopTECH | Phản hồi khách hàng"
             fetch("https://server-shoptech.onrender.com/api/feedbacks").then(res => res.json()).then(data => {
                 setFeedbacks(data)
                 setLoading(false)

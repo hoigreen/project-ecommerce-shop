@@ -11,6 +11,7 @@ const Giftcode = () => {
     const [percentReduce, setPercentReduce] = useState()
 
     useEffect(() => {
+        document.title = "ShopTECH | Mã khuyến mãi"
         const fetchAPIs = () => {
             fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                 setCartUser(data.cart)

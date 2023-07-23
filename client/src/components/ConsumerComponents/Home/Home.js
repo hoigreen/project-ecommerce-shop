@@ -9,9 +9,7 @@ const Home = ({ socket }) => {
     const [products, setProducts] = useState([])
     const [timeStart, setTimeStartSale] = useState(20)
     const [timeEnd, setTimeEndSale] = useState(31)
-
     const [promotes, setPromotes] = useState([])
-
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
@@ -28,7 +26,7 @@ const Home = ({ socket }) => {
         }
         fetchAPIs()
         handleLoadCountdown()
-        
+
     }, [])
 
     useEffect(() => {
@@ -140,7 +138,7 @@ const Home = ({ socket }) => {
             }
         }, 4000)
     }
-    
+
 
 
     const handleTransitionNextBanner = () => {

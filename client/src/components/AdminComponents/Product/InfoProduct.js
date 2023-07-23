@@ -23,6 +23,7 @@ const InfoProduct = () => {
 
     useEffect(() => {
         const fetchAPIs = () => {
+            document.title = "ShopTECH | Thông tin sản phẩm"
             fetch("https://server-shoptech.onrender.com/api/products/" + id).then(res => res.json()).then(data => {
                 setProduct(data)
                 setCountImageInList(data.imageList.length)

@@ -14,6 +14,7 @@ const InfoCustomer = () => {
 
     useEffect(() => {
         const fetchAPI = () => {
+            document.title = "ShopTECH | Thông tin khách hàng"
             fetch(`${process.env.REACT_APP_API}/api/users/${userID}`).then(res => res.json()).then(data => {
                 setUser(data)
             })

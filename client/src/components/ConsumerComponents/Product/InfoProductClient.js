@@ -21,6 +21,7 @@ const InfoProductClient = ({ socket }) => {
 
 
     useEffect(() => {
+        document.title = "ShopTECH | " + name
         const fetchAPIs = () => {
             fetch("https://server-shoptech.onrender.com/api/products/get-by-name/" + name).then(res => res.json()).then(data => {
                 setProduct(data)

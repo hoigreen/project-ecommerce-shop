@@ -14,6 +14,7 @@ const PromotePage = () => {
 
     useEffect(() => {
         const fetchAPI = () => {
+            document.title = "ShopTECH | Chương trình khuyến mãi"
             fetch("https://server-shoptech.onrender.com/api/promotes").then(res => res.json()).then(data => {
                 setPromotes(data)
                 setLoading(false)

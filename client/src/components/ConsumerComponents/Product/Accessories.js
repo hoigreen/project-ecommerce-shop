@@ -11,6 +11,7 @@ const Accessories = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        document.title = "ShopTECH | Phụ kiện đỉnh \'chóp\'"
         const fetchAPIs = () => {
             fetch("https://server-shoptech.onrender.com/api/products").then(res => res.json()).then(data => {
                 setProducts(data)

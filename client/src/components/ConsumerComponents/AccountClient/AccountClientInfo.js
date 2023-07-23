@@ -9,6 +9,7 @@ const AccountClientInfo = () => {
     const [imageFile, setImageFile] = useState(null)
 
     useEffect(() => {
+        document.title = "ShopTECH | Thông tin cá nhân"
         const fetchAPIs = () => {
             fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                 setUser(data)

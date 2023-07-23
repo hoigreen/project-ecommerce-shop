@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Breadcrumbs, Footer, Nav } from '../Common'
 import "./policy.css"
 
 const PolicyPage = () => {
+    useEffect(() => { document.title = "ShopTECH | Chính sách và điều kiện" }, [])
+
     return (
         <>
             <Nav />

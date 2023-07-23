@@ -11,6 +11,7 @@ const CustomerPage = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        document.title = "ShopTECH | Khách hàng"
         const fetchAPI = () => {
             fetch("https://server-shoptech.onrender.com/api/users").then(res => res.json()).then(data => {
                 setUsers(data)

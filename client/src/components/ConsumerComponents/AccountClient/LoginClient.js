@@ -6,7 +6,6 @@ import { Toast, handleLoadingPage } from '../../Common';
 import AuthContext from '../../../context/AuthContext';
 import "./styles/account-client.css"
 
-
 const LoginClient = () => {
     const [details, setDetails] = useState({ username: "", password: "" })
     const [auth, setAuth] = useContext(AuthContext)
@@ -16,6 +15,8 @@ const LoginClient = () => {
     useEffect(() => {
         if (window.localStorage.getItem("auth") && auth.username) { window.location.href = '/account' }
     }, [auth])
+
+    useEffect(() => { document.title = "ShopTECH | Đăng nhập" }, [])
 
     const showErrorToast = () => {
         Toast({ title: 'Đăng nhập thất bại', message: 'Tên tài khoản hoặc mật khẩu không chính xác!', type: 'error', duration: 3000 })

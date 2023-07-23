@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useContext } from 'react';
-
 import { Breadcrumbs, Nav } from '../Common';
 import SidebarAccount, { handleLoadOptionSidebar } from './SidebarAccount';
 import { handleLoadingPage } from '../../Common';
@@ -15,6 +14,7 @@ const AccountHistory = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        document.title = "ShopTECH | Lịch sử mua hàng"
         const fetchAPIs = () => {
             fetch("https://server-shoptech.onrender.com/api/orders").then(res => res.json()).then(data => {
                 setOrders(data)

@@ -14,6 +14,7 @@ const InfoPromote = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        document.title = "ShopTECH | Thông tin khuyến mãi"
         const fetchAPI = () => {
             fetch("https://server-shoptech.onrender.com/api/promotes/" + id).then(res => res.json()).then(data => {
                 setPromote(data)

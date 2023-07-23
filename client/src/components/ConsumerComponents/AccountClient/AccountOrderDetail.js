@@ -14,6 +14,7 @@ const AccountOrderDetail = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
+        document.title = "ShopTECH | Chi tiết đơn hàng"
         const fetchAPIs = () => {
             fetch("https://server-shoptech.onrender.com/api/orders/" + orderID).then(res => res.json()).then(data => {
                 setOrder(data)

@@ -16,6 +16,7 @@ const AccountClient = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
+        document.title = "ShopTECH | Tài khoản"
         if (window.localStorage.getItem("auth")) {
             const fetchAPIs = () => {
                 fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {

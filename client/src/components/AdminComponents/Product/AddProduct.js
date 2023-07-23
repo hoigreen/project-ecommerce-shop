@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import "./product.css"
 import { handleLoadingPage } from '../../Common';
@@ -14,6 +14,8 @@ const AddProduct = () => {
     const [color, setColor] = useState([])
     const [status, setStatus] = useState('')
     const navigate = useNavigate()
+
+    useEffect(() => { document.title = "ShopTECH | Thêm sản phẩm" }, [])
 
     const handleAddOption = () => {
         const optionList = document.querySelector(".add__option-list")

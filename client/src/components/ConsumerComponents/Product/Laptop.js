@@ -11,6 +11,7 @@ const Laptop = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        document.title = "ShopTECH | Laptop thời thượng"
         const fetchAPIs = () => {
             fetch("https://server-shoptech.onrender.com/api/products").then(res => res.json()).then(data => {
                 setProducts(data)

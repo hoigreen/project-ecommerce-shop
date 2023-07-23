@@ -15,6 +15,7 @@ const Dashboard = () => {
     const [countPromotes, setCountPromotes] = useState(0)
 
     useEffect(() => {
+        document.title = "ShopTECH | Thống kê"
         const fetchAPIs = () => {
             fetch(`https://server-shoptech.onrender.com/api/products`).then(res => res.json()).then(data => {
                 setCountProduct(data.length)

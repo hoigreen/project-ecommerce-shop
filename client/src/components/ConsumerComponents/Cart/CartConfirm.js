@@ -13,6 +13,7 @@ const CartConfirm = () => {
     const [loading, setLoading] = useState(true)
 
     useEffect(() => {
+        document.title = "ShopTECH | Xác nhận đơn hàng"
         const fetchAPIs = () => {
             fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                 setCartUser(data.cart)

@@ -16,6 +16,7 @@ const RegisterClient = () => {
 
     useEffect(() => {
         if (window.localStorage.getItem("auth")) { window.location.href = '/account' }
+        document.title = "ShopTECH | Đăng ký"
         Validator({
             form: '#form-1',
             error: '.form-message',

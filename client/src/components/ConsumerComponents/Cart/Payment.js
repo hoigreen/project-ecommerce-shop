@@ -14,6 +14,7 @@ const Payment = ({ socket }) => {
 
 
     useEffect(() => {
+        document.title = "ShopTECH | Thanh toán đơn hàng"
         const fetchAPIs = () => {
             fetch(`https://server-shoptech.onrender.com/api/users/${JSON.parse(window.localStorage.getItem('auth')).user._id}`).then(res => res.json()).then(data => {
                 setUser(data)

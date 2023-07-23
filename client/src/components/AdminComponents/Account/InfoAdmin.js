@@ -8,9 +8,9 @@ import { changeFilename, handleLoadingPage } from '../../Common';
 const InfoAdmin = () => {
     const [admin, setAdmin] = useState({})
     const [imageFile, setImageFile] = useState(null);
-    const [avatarUrl, setAvatarUrl] = useState('');
 
     useEffect(() => {
+        document.title = "ShopTECH | Quản trị viên"
         const fetchAPI = () => {
             fetch(`${process.env.REACT_APP_API}/api/admins/${JSON.parse(window.localStorage.getItem('authAdmin')).admin._id}`).then(res => res.json()).then(data => {
                 setAdmin(data)

@@ -340,7 +340,7 @@
     margin: 0 -6px;
     width: 100%;
     max-height: 800px;
-    overflow: hidden;
+    overflow: scroll;
 }
 
 .home-flash-sale__group {
@@ -568,7 +568,6 @@
 .home__featured-list {
     display: flex;
     margin: 0 0 50px 0;
-    max-height: 820px;
     min-height: 410px;
     overflow: hidden;
     margin: 0 -10px;
@@ -774,7 +773,6 @@
     .home__featured-list {
         margin: 0 auto 50px;
         max-height: unset;
-        min-height: 410px;
         width: cacl(100% - 10px);
     }
 

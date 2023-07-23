@@ -8,13 +8,17 @@
 }
 
 .promote__group {
-    margin: 30px 40px;
+    margin: 20px 30px;
     background-color: #fff;
     padding: 25px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    min-height: 650px;
-    max-height: 650px;
     overflow-y: scroll;
+    position: fixed;
+    top: 160px;
+    bottom: 0;
+    right: 0;
+    left: 260px;
+    border-radius: 12px;
 }
 
 .promote__header {

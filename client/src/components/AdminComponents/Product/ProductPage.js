@@ -53,18 +53,18 @@ const ProductPage = () => {
                         </div>
                     </div>
 
-                    <div className='admin__list'>
+                    <div className='product__list'>
                         {loading ? <p >Đang kết nối đến server ... </p> : products.map((product, index) => (
-                            <div className='admin__item' key={index}>
+                            <div className='product__item' key={index}>
                                 <label style={{ color: 'white' }} className='admin__item-id'>STT: 0{index + 1}</label>
                                 <div className='product__item-avatar'>
                                     <img src={product.imageLink} className='product__item-img'></img>
                                 </div>
                                 <label
                                     style={{
-                                        fontSize: "1.8rem",
+                                        fontSize: "1.6rem",
                                         fontWeight: "bold",
-                                        lineHeight: "2rem",
+                                        lineHeight: "2.2rem",
                                         textAlign: "left",
                                         width: "100%"
                                     }} className='admin__item-admin-name'>{product.name}</label>
@@ -81,7 +81,7 @@ const ProductPage = () => {
 
                                     <div className='admin__item-info-price'>
                                         <p style={{
-                                            fontSize: "1.8rem",
+                                            fontSize: "1.6rem",
                                             fontWeight: "bold",
                                             color: "red",
                                             textAlign: "right",

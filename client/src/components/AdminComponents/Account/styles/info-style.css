@@ -3,10 +3,8 @@
     margin: 40px 40px 20px 40px;
     background-color: #fff;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    min-height: 650px;
-    max-height: 650px;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: scroll;
     position: relative;
 }
 
@@ -141,8 +139,13 @@
     margin-top: 20px;
     padding: 20px 50px 20px 20px;
     width: 100%;
-    position: absolute;
-    bottom: 0;
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    border-radius: 20px;
+    width: calc(100% - 320px);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 }
 
 .info-page__btn {
@@ -173,17 +176,6 @@
 }
 
 /* --------Stylesheet for the Info Product Page component ------*/
-.info-admin-product__group {
-    margin: 40px 40px 20px 40px;
-    background-color: #fff;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-    min-height: 650px;
-    max-height: 650px;
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
-}
-
 .info-admin-product__header {
     background-color: var(--primary-color);
     height: 8vh;

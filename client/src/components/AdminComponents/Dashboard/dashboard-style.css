@@ -7,9 +7,8 @@
 
 #admin-box {
     display: block;
-    position: fixed;
+    position: relative;
     left: 260px;
-    top: 0;
     width: calc(100% - 260px);
 }
 
@@ -65,7 +64,7 @@
 
 .dash__counting-number {
     height: 50%;
-    font-size: 3.2rem;
+    font-size: 2.8rem;
     font-weight: bold;
     padding: 6px 0;
 }
@@ -91,8 +90,8 @@
     background-color: #fff;
     padding: 25px;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-    min-height: 510px;
-    max-height: 510px;
+    /* min-height: 510px;
+    max-height: 510px; */
     border-radius: 20px;
     overflow: hidden;
 }
@@ -100,6 +99,7 @@
 .dash__group-title {
     display: block;
     margin-bottom: 20px;
+    padding: 6px 0;
     font-size: 2.4rem;
     font-weight: bold;
 }
@@ -109,7 +109,7 @@
     justify-content: center;
     align-items: center;
     height: 400px;
-    margin-top: 30px;
+    margin-top: 40px;
 }
 
 .dash__chart-item {

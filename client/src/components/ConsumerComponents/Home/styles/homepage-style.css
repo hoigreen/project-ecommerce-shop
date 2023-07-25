@@ -678,7 +678,6 @@
     }
 
     .hot-promote__container {
-        /* display: none !important */
         width: 100%;
         height: 260px;
     }

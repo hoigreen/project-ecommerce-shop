@@ -10,17 +10,12 @@ const VoteProductInOrder = ({ socket }) => {
     const [order, setOrder] = useState({})
     const [listProduct, setListProduct] = useState([])
 
-
-
-    const [owner, setOwner] = useState("")
-    const [ownerFullname, setOwnerFullname] = useState("")
     const [imageLink, setImageLink] = useState("")
-    // const [productName, setProductName] = useState("")
     const [option, setOption] = useState("")
     const [color, setColor] = useState("")
     const [price, setPrice] = useState()
 
-    const [numberStar, setNumberStar] = useState()
+    const [numberStar, setNumberStar] = useState(0)
     const [contentComment, setContentComment] = useState("")
 
     const [products, setProducts] = useState([])
@@ -64,7 +59,7 @@ const VoteProductInOrder = ({ socket }) => {
 
     useEffect(() => {
         products.map((p, index) => {
-            if (p.productName = productName) {
+            if (p.name === productName) {
                 setProductId(p._id)
                 setVoter(p.voter)
                 setStarCurrent(p.star)
@@ -107,7 +102,6 @@ const VoteProductInOrder = ({ socket }) => {
         var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
         var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
         var dateTime = date + ' ' + time;
-
         if (!numberStar) {
             alert("Vui lòng bình chọn số sao sản phẩm này")
             return;

@@ -120,7 +120,7 @@ const CartInfo = () => {
             <Nav />
             <Breadcrumbs />
             <div className="grid wide">
-                <div className="container" style={{ paddingBottom: "200px" }}>
+                <div className="container" style={{ paddingBottom: "240px" }}>
                     <div className="cart__container">
                         <div className="cart__header">
                             <button className="cart__btn-cancel" onClick={() => { window.location.href = "/cart" }}>

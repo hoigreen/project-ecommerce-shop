@@ -97,6 +97,7 @@ const Payment = ({ socket }) => {
             </div>
         `
         document.querySelector(".cart__control-container").style.display = 'none';
+        document.querySelector(".block-process").style.display = 'none';
     }
 
     const handleClickRemoveAll = () => {

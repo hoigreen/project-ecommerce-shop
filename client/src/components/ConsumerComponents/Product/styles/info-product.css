@@ -873,7 +873,9 @@
     }
 
     .info-product__detail-option-item {
-        width: calc(25%);
+        min-width: calc(33.333% - 10px);
+        max-width: calc(33.333% - 10px);
+        margin: 4px 5px 6px;
     }
 
     .info-product__detail-current-price {

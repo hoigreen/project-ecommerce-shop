@@ -256,7 +256,7 @@ const InfoProductClient = ({ socket }) => {
 
             axios.put('https://server-shoptech.onrender.com/api/users/add-product-to-cart-user/' + JSON.parse(window.localStorage.getItem('auth')).user._id,
                 {
-                    imageLink: "",
+                    imageLink: product.imageLink,
                     productName: name,
                     option: optionEdit,
                     color: colorEdit,
@@ -465,7 +465,7 @@ const InfoProductClient = ({ socket }) => {
 
                             <ul className="info-product__review-list">
                                 <label className="info-product__review-label">Nhận xét</label>
-                                {loading ? <p>Đang kết nối đến server ... </p> : comments.map((comment, index) => (
+                                {comments.map((comment, index) => (
                                     <li className="info-product__review-item" key={index}>
                                         <div className="info-product__review-item-title">
                                             <div className='info-product__review-item-info'>

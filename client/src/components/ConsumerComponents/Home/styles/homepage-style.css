@@ -602,7 +602,7 @@
     display: block;
     width: 100%;
     object-fit: contain;
-    height: 19  0px;
+    height: 19 0px;
     overflow: hidden;
     margin: 0 auto 10px;
 }
@@ -678,17 +678,29 @@
     }
 
     .hot-promote__container {
-        display: none !important
+        /* display: none !important */
+        width: 100%;
+        height: 260px;
+    }
+
+    .hot-promote-img {
+        height: 260px;
     }
 
     .home__container {
-        margin-top: 80px !important;
+        margin-top: 0px !important;
     }
 
     #home-promote {
         flex-wrap: nowrap;
         width: 100%;
         overflow: hidden;
+    }
+
+    .home-promote__next,
+    .home-promote__pre {
+        width: 40px;
+        height: 40px;
     }
 
     .home__list-label,

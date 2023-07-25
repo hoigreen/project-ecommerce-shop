@@ -991,7 +991,7 @@
 
     .block-process {
         top: unset;
-        bottom: 200px;
+        bottom: 220px;
         right: 50%;
         transform: translateX(50%);
         flex-direction: row;

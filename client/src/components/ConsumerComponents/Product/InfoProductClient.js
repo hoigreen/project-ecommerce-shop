@@ -5,7 +5,7 @@ import { Breadcrumbs, Footer, Nav } from '../Common';
 import { Toast, handleLoadingPage } from '../../Common';
 import axios from 'axios';
 
-const InfoProductClient = ({ socket }) => {
+const InfoProductClient = () => {
     const [products, setProducts] = useState([])
     const [product, setProduct] = useState({})
     const { name } = useParams()
@@ -502,7 +502,7 @@ const InfoProductClient = ({ socket }) => {
                     </div>
                 </div>
             </div>
-            <Footer socket={socket} />
+            <Footer />
             <p className='app-copyright'>©️ Bản quyền thuộc ShopTECH - năm 2023 <br />
                 Địa chỉ: 70 Tô Ký, phường Tân Chánh Hiệp. Quận 12, Thành phố Hồ Chí Minh.</p>
         </>

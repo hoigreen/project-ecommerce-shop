@@ -1,9 +1,6 @@
 import React from 'react'
 import { useLocation, Link, useParams } from 'react-router-dom';
-
 import "./breadcrumbs.css"
-
-import { handleLoadingPage } from '../../../Common';
 
 const Breadcrumbs = ({ socket }) => {
     const { name } = useParams()

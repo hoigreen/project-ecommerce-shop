@@ -13,6 +13,7 @@
     background-image: url(../../../../assets/images/client/cart-img/img-cart-empty.png);
     background-position: center center;
     background-repeat: no-repeat;
+    background-size: contain;
     width: 140px;
     height: 140px;
     margin: 50px 0 10px;
@@ -837,13 +838,18 @@
         display: none;
     }
 
+    .cart__icon {
+        width: 100px;
+        height: 100px;
+    }
+
     .cart__container--empty {
         width: 80%;
     }
 
     .cart__label--empty {
-        line-height: 2.4rem;
-        font-size: 1.8rem;
+        line-height: 2rem;
+        font-size: 1.4rem;
         text-align: center;
     }
 

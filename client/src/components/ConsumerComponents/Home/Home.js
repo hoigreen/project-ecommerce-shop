@@ -5,7 +5,7 @@ import HotPromote from './HotPromote';
 import HomeList from './HomeList';
 import { handleLoadingPage } from '../../Common';
 
-const Home = ({ socket }) => {
+const Home = () => {
     const [products, setProducts] = useState([])
     const [timeStart, setTimeStartSale] = useState(20)
     const [timeEnd, setTimeEndSale] = useState(31)
@@ -80,7 +80,6 @@ const Home = ({ socket }) => {
             var now = new Date().getTime();
             var timeleft = countDownDate - now;
 
-            // Calculating the days, hours, minutes and seconds left
             var daysLeft = Math.floor(timeleft / (1000 * 60 * 60 * 24));
             var hoursLeft = Math.floor((timeleft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             var minutesLeft = Math.floor((timeleft % (1000 * 60 * 60)) / (1000 * 60));
@@ -138,8 +137,6 @@ const Home = ({ socket }) => {
             }
         }, 4000)
     }
-
-
 
     const handleTransitionNextBanner = () => {
         const bannerGroup = document.querySelector(".home-promote__group")

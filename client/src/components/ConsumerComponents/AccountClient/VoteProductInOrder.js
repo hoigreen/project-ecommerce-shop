@@ -48,7 +48,7 @@ const VoteProductInOrder = ({ socket }) => {
 
     useEffect(() => {
         listProduct.map((item, index) => {
-            if (item.productName = productName) {
+            if (item.productName === productName) {
                 setImageLink(item.imageLink)
                 setOption(item.option)
                 setColor(item.color)

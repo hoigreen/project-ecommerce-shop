@@ -107,15 +107,15 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
     border-radius: 0.125rem;
     background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
     border-radius: 4px;
-    background-color: #b3b3b3;
+    background-color: var(--button-color);
 }
 
 .edit-icon {

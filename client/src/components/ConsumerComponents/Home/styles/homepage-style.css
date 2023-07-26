@@ -236,7 +236,7 @@
     background-image: linear-gradient(to right, var(--primary-color), var(--button-color));
     width: 100%;
     border-radius: 20px;
-    box-shadow: 1px 2px #fcb69f;
+    box-shadow: 1px 2px var(--primary-color);
     padding: 20px 20px 40px 20px;
     display: block;
     overflow: hidden;
@@ -795,6 +795,10 @@
     .home-promote__item {
         /* width: calc(100% - 20px); */
         margin: 10px 0;
+    }
+
+    .home__flash-sale-item-sold {
+        font-size: 1rem;
     }
 
     #home-promote {

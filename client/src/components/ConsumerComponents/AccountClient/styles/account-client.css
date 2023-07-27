@@ -1007,6 +1007,8 @@
 
     .account__box-info {
         width: calc(100% - 20px);
+        max-width: 390px;
+        overflow-x: scroll;
     }
 
     .account__box {
@@ -1150,10 +1152,42 @@
         font-size: 1rem;
     }
 
-    .account__box-info-table {
-        overflow-x: scroll;
-        width: 100%;
-        display: block;
+    .account__box-info-table {}
+
+    .account__box-info-table-box {
+        min-width: 1200px;
+        width: calc(100% - 20px);
+    }
+
+    .account__box-info-table-box .table__thead-primary td {
+        font-size: 1.2rem;
+        padding: 6px;
+    }
+
+    .account__box-info-table-box tbody td {
+        font-size: 1rem;
+        padding: 6px;
+    }
+
+    .table-td__label {
+        font-size: 1rem;
+    }
+
+    .account__box-info-counting-title {
+        font-size: 1.2rem;
+    }
+
+    .account__box-info-counting-number {
+        font-size: 1.4rem;
+    }
+
+    .account__box-info-fillter {
+        width: calc(100% - 20px);
+    }
+
+    .account__box-info-fillter-btn {
+        font-size: 1rem;
+
     }
 
     .account__box-info-label {
@@ -1214,7 +1248,8 @@
     .order-detail__item-name {
         font-size: 1rem;
         padding: 0;
-        margin-bottom: 4px;
+        line-height: 1.6rem;
+        margin-bottom: 2px;
     }
 
     .order-detail__item-content {
@@ -1225,6 +1260,7 @@
 
     .order-detail__item-quantity {
         font-size: 0.8rem;
+        padding-top: 4px;
     }
 
     .order_detail__item-btn-box {
@@ -1251,6 +1287,7 @@
 
     .vote-product__header {
         font-size: 2rem;
+        padding: 20px;
     }
 
     .vote-product__item {
@@ -1288,7 +1325,7 @@
     }
 
     .vote-product__start-group-item:before {
-        font-size: 4rem;
+        font-size: 3rem;
         margin: 6px auto;
     }
 

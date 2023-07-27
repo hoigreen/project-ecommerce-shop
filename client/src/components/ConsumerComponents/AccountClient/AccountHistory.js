@@ -114,7 +114,7 @@ const AccountHistory = () => {
                                 </div>
 
                                 <div className='account__box-info-table'>
-                                    <table className='table'>
+                                    <table className='account__box-info-table-box table'>
                                         <thead>
                                             <tr className='table__thead-primary'>
                                                 <td>Thời gian</td>
@@ -128,20 +128,20 @@ const AccountHistory = () => {
                                         <tbody className='table__tbody-primary'>
                                             {loading ? <tr><td>Loading...</td></tr> : orders.map((order, index) => (
                                                 <tr className='table__row-loading' key={index}>
-                                                    <td style={{ backgroundColor: "", fontSize: "1.4rem" }}>{order.time}</td>
-                                                    <td style={{ textAlign: "center", background: "#ffcdd2", fontWeight: 700, fontSize: "1.5rem" }}>{order.orderID}</td>
+                                                    <td >{order.time}</td>
+                                                    <td style={{ textAlign: "center", background: "#ffcdd2", fontWeight: 700 }}>{order.orderID}</td>
                                                     <td style={{ color: "red", textAlign: 'left' }}>
                                                         {
                                                             order.lists.map((list, i) => (
                                                                 <div className="table-td-element" key={i}>
                                                                     <img className="table-td__img" src={list.imageLink} ></img>
-                                                                    <label style={{ fontSize: "1.4rem" }} className="table-td__label">{list.productName}</label>
+                                                                    <label className="table-td__label">{list.productName}</label>
                                                                 </div>
                                                             ))
                                                         }
                                                     </td>
-                                                    <td style={{ fontWeight: 600, textAlign: "center", fontSize: "1.6rem", color: "red" }}>{Number(order.price).toLocaleString() || "None"} đ</td>
-                                                    <td style={{ backgroundColor: "", fontWeight: 700, fontSize: "1.4rem" }}>{order.status}</td>
+                                                    <td style={{ fontWeight: 600, textAlign: "center", color: "red" }}>{Number(order.price).toLocaleString() || "None"} đ</td>
+                                                    <td style={{ backgroundColor: "", fontWeight: 700 }}>{order.status}</td>
                                                     <td><button className="account-history__btn-detail" onClick={(e) => {
                                                         handleLoadingPage(1);
                                                         setTimeout(() => {
@@ -157,7 +157,7 @@ const AccountHistory = () => {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     )
 }

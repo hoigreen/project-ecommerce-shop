@@ -464,7 +464,7 @@ const InfoProductClient = () => {
                             <div className="info-product__rating-box">
                                 <label className="info-product__rating-label">ĐÁNH GIÁ SẢN PHẨM</label>
                                 <p className="info-product__rating-star">{Number(product.star).toFixed(1)}/5</p>
-                                <p className="info-product__rating-star-icon">{handleFormatStarProduct(product.name)}</p>
+                                <p className="info-product__rating-star-icon">{handleFormatStarProduct(Number(product.star))}</p>
                                 <p className="info-product__rating-number">{product.voter} lượt đánh giá</p>
                             </div>
 

@@ -126,7 +126,7 @@ const OrderLookup = () => {
                                             <div className='cart-confirm__item-product-info'>
                                                 <label className='cart-confirm__item-product-info-label'>{item.productName}</label>
                                                 <p className='cart-confirm__item-product-info-quantity'>x{item.quantity}</p>
-                                                <p className='cart-confirm__item-product-info-price'>{item.quantity} x {Number(item.price).toLocaleString()} đ = ${Number(item.quantity * item.price).toLocaleString()} đ</p>
+                                                <p className='cart-confirm__item-product-info-price'>{item.quantity} x {Number(item.price).toLocaleString()} đ = {Number(item.quantity * item.price).toLocaleString()} đ</p>
                                             </div>
                                         </li>
                                     ))}
@@ -162,7 +162,7 @@ const OrderLookup = () => {
 
                                     <li className='detail-price__item detail-price__item-total'>
                                         <label className="detail-price__item-label">Thành tiền</label>
-                                        <span className="detail-price__item-price" >{Number(countTotalPrice).toLocaleString()} đ</span>
+                                        <span className="detail-price__item-price" >{Number(countTotalPrice * Number((100 - Number(order.giftcodeApply)) / 100)).toLocaleString()} đ</span>
                                     </li>
                                 </ul>
                             </div>

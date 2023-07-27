@@ -135,7 +135,7 @@ const AccountHistory = () => {
                                                             order.lists.map((list, i) => (
                                                                 <div className="table-td-element" key={i}>
                                                                     <img className="table-td__img" src={list.imageLink} ></img>
-                                                                    <label className="table-td__label">{list.productName}</label>
+                                                                    <label style={{color: "var(--button-color)"}} className="table-td__label">{list.productName}</label>
                                                                 </div>
                                                             ))
                                                         }

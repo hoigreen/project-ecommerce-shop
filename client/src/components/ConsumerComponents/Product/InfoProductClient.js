@@ -24,6 +24,11 @@ const InfoProductClient = () => {
         document.title = "ShopTECH | " + name
         const fetchAPIs = () => {
             fetch("https://server-shoptech.onrender.com/api/products/get-by-name/" + name).then(res => res.json()).then(data => {
+                if (!data) {
+                    window.alert("Sản phẩm hiện không có sẵn hoặc đã bị xóa")
+                    handleLoadingPage(999)
+                    return;
+                }
                 setProduct(data)
                 setImageList(data.imageList)
                 setOption(data.option)
@@ -370,9 +375,9 @@ const InfoProductClient = () => {
                             <div className='info-product__detail'>
                                 <label className='info-product__detail-label info-product__detail-label-price'>Giá sản phẩm:</label>
                                 <div className='info-product__detail-price'>
-                                    <label className='info-product__detail-current-price'>{Number(product.price).toLocaleString()} đ</label>
-                                    <label className='info-product__detail-old-price'>{(Number(product.price) * (100 + product.percent) / 100).toLocaleString()} đ</label>
-                                    <label className='info-product__detail-percent'>-{product.percent}%</label>
+                                    <label className='info-product__detail-current-price'>{Number(product.price || 0).toLocaleString()} đ</label>
+                                    <label className='info-product__detail-old-price'>{(Number(product.price || 0) * (100 + product.percent) / 100).toLocaleString()} đ</label>
+                                    <label className='info-product__detail-percent'>-{product.percent || 0}%</label>
                                 </div>
                                 <label className='info-product__detail-installment'>
                                     <i className="info-product__detail-installment-icon fa fa-tag"></i>

@@ -74,3 +74,19 @@
         transform: rotate(360deg)
     }
 }
+
+@media screen and (max-width: 739px) {
+    .hide-on-mobile {
+        display: none;
+    }
+
+    .modal__body {
+        font-size: 1.2rem;
+        padding: 14px;
+    }
+
+    .modal__loading-spinner {
+        width: 30px;
+        height: 30px;
+    }
+}

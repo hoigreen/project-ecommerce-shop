@@ -5,19 +5,38 @@ import { handleLoadingPage } from '../../Common';
 
 const FeedbackPage = () => {
     const [feedbacks, setFeedbacks] = useState([])
-    const [loading, setLoading] = useState(true)
+
+    const fetchAPIs = () => {
+        document.title = "ShopTECH | Phản hồi khách hàng"
+        fetch("https://server-shoptech.onrender.com/api/feedbacks").then(res => res.json()).then(data => {
+            setFeedbacks(data)
+        });
+    }
 
     useEffect(() => {
-        const fetchAPIs = () => {
-            document.title = "ShopTECH | Phản hồi khách hàng"
-            fetch("https://server-shoptech.onrender.com/api/feedbacks").then(res => res.json()).then(data => {
-                setFeedbacks(data)
-                setLoading(false)
-            });
-        }
         fetchAPIs()
         handleLoadOptionSelected(4)
     }, [])
+
+    const handleFillterByType = (type) => {
+        var feedbackByType = []
+        fetch("https://server-shoptech.onrender.com/api/feedbacks").then(res => res.json()).then(data => {
+            data.map(feedback => {
+                if (feedback.type === type) {
+                    feedbackByType.push(feedback)
+                }
+            })
+            setFeedbacks(feedbackByType)
+        });
+
+        const fillterList = document.querySelectorAll('.search-control__btn')
+        fillterList.forEach(item => {
+            item.onclick = () => {
+                fillterList.forEach((btn) => btn.classList.remove("search-control__btn--active"));
+                item.classList.add("search-control__btn--active")
+            }
+        })
+    }
 
     return (
         <React.Fragment>
@@ -35,34 +54,34 @@ const FeedbackPage = () => {
                     <div className='admin__list' style={{ maxHeight: "none" }}>
                         <div style={{ marginLeft: "0", marginBottom: "20px" }} className="search-control">
                             <button className="search-control__btn search-control__btn--active" onClick={(e) => {
-                                handleLoadingPage(2)
+                                handleLoadingPage(1)
                                 setTimeout(() => {
                                     window.location.reload()
-                                }, 2000)
+                                }, 1000)
                             }}>Tất cả</button>
                             <button className="search-control__btn" onClick={(e) => {
-                                handleLoadingPage(2)
+                                handleLoadingPage(1)
                                 setTimeout(() => {
-
-                                }, 2000)
+                                    handleFillterByType("Vấn đề tài khoản")
+                                }, 1000)
                             }}>Vấn đề tài khoản</button>
                             <button className="search-control__btn" onClick={(e) => {
-                                handleLoadingPage(2)
+                                handleLoadingPage(1)
                                 setTimeout(() => {
-
-                                }, 2000)
+                                    handleFillterByType("Vấn đề khuyến mãi")
+                                }, 1000)
                             }}>Vấn đề khuyến mãi</button>
                             <button className="search-control__btn" onClick={(e) => {
-                                handleLoadingPage(2)
+                                handleLoadingPage(1)
                                 setTimeout(() => {
-
-                                }, 2000)
+                                    handleFillterByType("Cải thiện hệ thống")
+                                }, 1000)
                             }}>Cải thiện hệ thống</button>
                             <button className="search-control__btn" onClick={(e) => {
-                                handleLoadingPage(2)
+                                handleLoadingPage(1)
                                 setTimeout(() => {
-
-                                }, 2000)
+                                    handleFillterByType("Vấn đề khác")
+                                }, 1000)
                             }}>Vấn đề khác</button>
                         </div>
 
@@ -77,7 +96,7 @@ const FeedbackPage = () => {
                                 </tr>
                             </thead>
                             <tbody className='table__tbody-primary'>
-                                {loading ? <tr><td>Loading...</td></tr> : feedbacks.map((feedback, index) => (
+                                {feedbacks.map((feedback, index) => (
                                     <tr className='table__row-loading' key={index}>
                                         <td style={{ textAlign: "center", background: "#ffcdd2", fontWeight: 700 }}>{index + 1}</td>
                                         <td style={{ color: "#333", fontWeight: 700, textAlign: 'left' }}>{feedback.name}</td>

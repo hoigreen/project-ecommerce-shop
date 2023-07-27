@@ -134,7 +134,7 @@ const InfoPromote = () => {
 
                     <div className="info-promote__body">
                         <div className="add__avatar">
-                            <img src={promote.imageLink || `${process.env.REACT_APP_API}/public/img-avatar-empty.png`} className="info-promote__avatar-img"></img>
+                            <img src={promote.imageLink || `${process.env.REACT_APP_API}/public/img-product-empty.png`} className="info-promote__avatar-img"></img>
                             <input type='file' id="image-change" onChange={changeImage} hidden></input>
                             <label htmlFor="image-change" className="info-admin-product__image-btn">Thay đổi hình ảnh khuyến mãi</label>
                         </div>

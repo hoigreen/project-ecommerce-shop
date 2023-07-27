@@ -19,7 +19,7 @@ const AddPromote = () => {
         e.preventDefault();
         try {
             const res = await axios.post(`${process.env.REACT_APP_API}/api/promotes/create`, {
-                imageLink: "trống",
+                imageLink: "",
                 name,
                 timeStart,
                 timeEnd,

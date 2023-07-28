@@ -22,10 +22,10 @@ const Accessories = () => {
     }, [])
 
     useEffect(() => {
-        //  show thông tin phụ kiện nổi bật
+        //  show các phụ kiện 
         products.map((product, index) => {
             const infoProductFeaturedAccessories = document.querySelectorAll('.product-client__item')[index];
-            if (product.enType === "accessories" && product.featured === true) {
+            if (product.enType === "accessories") {
                 infoProductFeaturedAccessories.style.display = "block";
             }
         })

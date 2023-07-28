@@ -22,10 +22,10 @@ const SmartPhone = () => {
     }, [])
 
     useEffect(() => {
-        // show thông tin điện thoại nổi bật
+        // show tất cả những điện thoại di dộng
         products.map((product, index) => {
             const infoProductFeaturedSmartphone = document.querySelectorAll('.product-client__item')[index];
-            if (product.type === "Điện thoại" && product.featured === true) {
+            if (product.type === "Điện thoại") {
                 infoProductFeaturedSmartphone.style.display = "block";
             }
         })

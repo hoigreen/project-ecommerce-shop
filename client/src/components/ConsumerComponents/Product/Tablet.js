@@ -22,10 +22,10 @@ const Tablet = () => {
     }, [])
 
     useEffect(() => {
-        // show thông tin tablet nổi bật
+        // show tất cả các sản phẩm tablet
         products.map((product, index) => {
             const infoProductFeaturedTablet = document.querySelectorAll('.product-client__item')[index];
-            if (product.enType === "tablet" && product.featured === true) {
+            if (product.enType === "tablet") {
                 infoProductFeaturedTablet.style.display = "block";
             }
         })

@@ -22,10 +22,10 @@ const Laptop = () => {
     }, [])
 
     useEffect(() => {
-        // show thông tin laptop nổi bật
+        // show danh mục laptop
         products.map((product, index) => {
             const infoProductFeaturedlaptop = document.querySelectorAll('.product-client__item')[index];
-            if (product.enType === "laptop" && product.featured === true) {
+            if (product.enType === "laptop") {
                 infoProductFeaturedlaptop.style.display = "block";
             }
         })

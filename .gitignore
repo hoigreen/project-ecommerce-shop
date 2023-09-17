@@ -1,0 +1,8 @@
+/node_modules
+
+/.env
+.env
+
+/public/uploads
+
+project-ecommerce-shop.code-workspace

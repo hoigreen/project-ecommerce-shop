@@ -1,0 +1,19 @@
+{
+  "name": "shoptech",
+  "version": "1.0.0",
+  "description": "New website with technology - ShopTECH 2.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hoigreen/project-ecommerce-shop.git"
+  },
+  "author": "HoiGreen",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hoigreen/project-ecommerce-shop/issues"
+  },
+  "homepage": "https://github.com/hoigreen/project-ecommerce-shop#readme"
+}

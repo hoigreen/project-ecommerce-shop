@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "i": "cd client && npm i && cd ../server && npm i && cd ../shoptech-client && npm i",
     "install": "cd client && npm i && cd ../server && npm i && cd ../shoptech-client && npm i",
-    "client-shoptech": "npm run --prefix dev",
+    "client-shoptech": "npm start --prefix client",
+    "next-client": "npm run dev --prefix shoptech-client",
     "server-shoptech": "npm start --prefix server",
-    "shoptech": "concurrently --kill-others-on-fail \"npm run server-shoptech\" \"npm run client-shoptech\""
+    "shoptech": "concurrently --kill-others-on-fail \"npm run server-shoptech\" \"npm run client-shoptech\" \"npm run dev --prefix shoptech-client\""
   },
   "repository": {
     "type": "git",

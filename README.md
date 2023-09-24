@@ -10,7 +10,23 @@ This project is a simulation of an e-commerce website system that sells various 
 ## Live Preview:
 Production has been deploy at url [ShopTECH Website](https://shoptech.website)
 
-## Features:
+## Technologies 🔧
+- Next.js(React)
+- TypeScript / Javascript
+- Tailwind CSS
+- NodeJS
+- ExpressJS
+- Redis
+- MongoDB
+
+## Screenshots 📸
+![image](https://github.com/hoigreen/project-ecommerce-shop/assets/88929110/004949fb-e82e-4f08-b6d9-5231a40b0373)
+
+![image](https://github.com/hoigreen/project-ecommerce-shop/assets/88929110/4662dc0f-8d45-4593-b97c-32c759e22e22)
+
+![image](https://github.com/hoigreen/project-ecommerce-shop/assets/88929110/2b80d2d2-912a-4b5c-8b0b-cf369ec52f07)
+
+## Features :
 - Full-featured shopping cart
 - Product reviews and ratings
 - Product pagination

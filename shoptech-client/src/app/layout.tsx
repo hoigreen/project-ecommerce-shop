@@ -1,8 +1,10 @@
 import './globals.css'
+import { Suspense } from "react";
 import type { Metadata } from 'next'
 import { Roboto } from 'next/font/google'
 import { ToastContainer } from '@/utils/toast'
 import { StateProvider } from '@/contexts/StateContext'
+import ThemeSuspense from '@/components/theme/ThemeSuspense'
 
 const robotoFont = Roboto({ weight: '300', subsets: ['vietnamese'] })
 
@@ -21,6 +23,9 @@ export default function RootLayout({
       <body className={robotoFont.className}>
         <ToastContainer />
         <StateProvider>
+          <Suspense fallback={<ThemeSuspense />}>
+
+          </Suspense>
           {children}
         </StateProvider>
       </body>

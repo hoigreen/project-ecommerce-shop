@@ -10,7 +10,7 @@
     "client-shoptech": "npm start --prefix client",
     "next-client": "npm run dev --prefix shoptech-client",
     "server-shoptech": "npm start --prefix server",
-    "shoptech": "concurrently --kill-others-on-fail \"npm run server-shoptech\" \"npm run client-shoptech\" \"npm run dev --prefix shoptech-client\""
+    "shoptech": "concurrently --kill-others-on-fail \"npm run server-shoptech\" \"npm run next-client\""
   },
   "repository": {
     "type": "git",
@@ -23,9 +23,9 @@
   },
   "homepage": "https://github.com/hoigreen/project-ecommerce-shop#readme",
   "devDependencies": {
-    "concurrently": "^8.2.1"
+    "plop": "^4.0.0"
   },
   "dependencies": {
-    "multer-gridfs-storage": "^5.0.2"
+    "concurrently": "^8.2.1"
   }
 }

@@ -5,6 +5,7 @@ import { Roboto } from 'next/font/google'
 import { ToastContainer } from '@/utils/toast'
 import { StateProvider } from '@/contexts/StateContext'
 import ThemeSuspense from '@/components/theme/ThemeSuspense'
+import MuiTheme from './theme/MuiTheme';
 
 const robotoFont = Roboto({ weight: '300', subsets: ['vietnamese'] })
 
@@ -23,10 +24,11 @@ export default function RootLayout({
       <body className={robotoFont.className}>
         <ToastContainer />
         <StateProvider>
-          <Suspense fallback={<ThemeSuspense />}>
-
-          </Suspense>
-          {children}
+          <MuiTheme >
+            <Suspense fallback={<ThemeSuspense />}>
+              {children}
+            </Suspense>
+          </MuiTheme>
         </StateProvider>
       </body>
     </html>

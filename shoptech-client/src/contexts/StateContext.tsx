@@ -1,3 +1,4 @@
+"use client"
 import { createContext, useEffect, useMemo, useRef, useState, PropsWithChildren } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -62,7 +63,7 @@ export const StateProvider = ({ children }: PropsWithChildren<{}>) => {
     startDate: "",
     endDate: "",
     modalOpen: false,
-    windowDimension: window.innerWidth,
+    windowDimension: 0,
     loading: false,
     navBar: true,
     tabIndex: 0,
@@ -102,7 +103,7 @@ export const StateProvider = ({ children }: PropsWithChildren<{}>) => {
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
-  const [windowDimension, setWindowDimension] = useState(window.innerWidth);
+  const [windowDimension, setWindowDimension] = useState(0);
   const [loading, setLoading] = useState(false);
   const [navBar, setNavBar] = useState(true);
   const { i18n } = useTranslation();

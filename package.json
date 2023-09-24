@@ -5,9 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "i": "cd client && npm i && cd ../server && npm i",
-    "install": "cd client && npm i && cd ../server && npm i",
-    "client-shoptech": "npm start --prefix client",
+    "i": "cd client && npm i && cd ../server && npm i && cd ../shoptech-client && npm i",
+    "install": "cd client && npm i && cd ../server && npm i && cd ../shoptech-client && npm i",
+    "client-shoptech": "npm run --prefix dev",
     "server-shoptech": "npm start --prefix server",
     "shoptech": "concurrently --kill-others-on-fail \"npm run server-shoptech\" \"npm run client-shoptech\""
   },
@@ -23,5 +23,8 @@
   "homepage": "https://github.com/hoigreen/project-ecommerce-shop#readme",
   "devDependencies": {
     "concurrently": "^8.2.1"
+  },
+  "dependencies": {
+    "multer-gridfs-storage": "^5.0.2"
   }
 }

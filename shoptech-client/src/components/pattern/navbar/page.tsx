@@ -4,7 +4,7 @@ import Container from '@mui/material/Container';
 import Image from 'next/image'
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { FiSearch } from 'react-icons/fi'
+import { FiPhoneCall, FiSearch } from 'react-icons/fi'
 import { BsCart } from 'react-icons/bs'
 import { FaRegUser } from 'react-icons/fa'
 import { AiOutlineHistory } from 'react-icons/ai'
@@ -36,10 +36,11 @@ const NavBar = () => {
               />
             </Link>
 
-            <Link href="Tel: 00000" className="flex decoration-none text-center text-white font-bold bg-green-600 text-md rounded-lg h-fit w-fit px-4 py-2 mx-2 hover:bg-green-500 sm:none">
-              <p className="text-sm">Hỗ trợ
-                <span className="block font-semibold text-xs pt-1">1800.4433</span>
-              </p>
+            <Link
+              href="Tel: 00000"
+              className="hidden md:flex md:justify-center relative text-sm md:items-center mx-2 text-white font-semibold bg-green-600 w-28 h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500">
+              <FiPhoneCall />
+              <p className="ml-2 text-sm">Hỗ trợ</p>
             </Link>
 
             <nav className="flex w-full justify-between">
@@ -69,8 +70,8 @@ const NavBar = () => {
                   handleLoadingPage(1); window.location.href = "/cart"
                 }}>
                   <div className="w-4 h-4 flex items-center justify-center top-1 right-2 bg-red-600 absolute rounded-full text-xs">{0}</div>
-                  <div className="mr-2 text-xl"><BsCart /></div>
-                  <p className="header--btn-name" >Giỏ hàng</p>
+                  <div className="mr-2 text-xl "><BsCart className='text-center' /></div>
+                  <p className="hidden md:block text-sm" >Giỏ hàng</p>
                 </button>
 
                 <div className="relative inline-block text-left">
@@ -87,8 +88,8 @@ const NavBar = () => {
                       //   window.location.href = "/login"
                       // }
                     }}>
-                    <div className="mr-2 text-xl"><FaRegUser /></div>
-                    <p className="header--btn-name">Thành viên</p>
+                    <div className="mr-2 text-xl "><FaRegUser className='text-center' /></div>
+                    <p className="hidden md:block text-sm">Thành viên</p>
                   </button>
                   {
                     isDropdownAccountNavBarOpen &&
@@ -107,15 +108,15 @@ const NavBar = () => {
                 <button className="flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
                   handleLoadingPage(1); window.location.href = "/order"
                 }}>
-                  <div className="mr-2 text-xl"><AiOutlineHistory /></div>
-                  <p className="header--btn-name">Đơn hàng</p>
+                  <div className="mr-2 text-xl "><AiOutlineHistory className='text-center' /></div>
+                  <p className="hidden md:block text-sm">Đơn hàng</p>
                 </button>
                 <button className="flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
                   handleLoadingPage(1);
                   window.location.href = "/contact"
                 }}>
-                  <div className="mr-2 text-xl"><BiSupport /></div>
-                  <p className="header--btn-name">Liên hệ</p>
+                  <div className="mr-2 text-xl "><BiSupport className='text-center' /></div>
+                  <p className="hidden md:block text-sm">Liên hệ</p>
                 </button>
               </div>
 
@@ -126,7 +127,6 @@ const NavBar = () => {
                 }}>Tài khoản của bạn</li>
                 <li className="nav__option-item" style={{ color: "red" }} onClick={e => { }}>Đăng xuất</li>
               </ul> */}
-
             </nav>
           </div>
         </Container>

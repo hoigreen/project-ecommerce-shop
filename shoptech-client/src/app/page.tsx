@@ -20,8 +20,8 @@ export default function Home({ children }: { children: React.ReactNode }) {
             {children}
           </Grid>
         </main>
-        <Footer />
       </Container>
+      <Footer />
     </ThemeProvider>
   );
 }

@@ -7,7 +7,7 @@ import { StateProvider } from '@/contexts/StateContext'
 import ThemeSuspense from '@/components/theme/ThemeSuspense'
 import MuiTheme from './theme/MuiTheme';
 
-const robotoFont = Roboto({ weight: '300', subsets: ['vietnamese'] })
+const robotoFont = Roboto({ weight: '400', subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'ShopTECH 2.0',

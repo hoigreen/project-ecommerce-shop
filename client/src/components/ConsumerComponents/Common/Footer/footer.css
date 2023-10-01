@@ -1,136 +1,136 @@
 /* --------Stylesheet for the Footer component ------*/
 .footer-container {
-    width: 100%;
-    min-height: 260px;
-    background-color: #fff;
-    margin: 40px 0 30px 0;
+  width: 100%;
+  min-height: 260px;
+  background-color: #fff;
+  margin: 40px 0 30px 0;
 }
 
 .app-copyright {
-    display: block;
-    text-align: center;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
+  display: block;
+  text-align: center;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 }
 
 .footer-bar {
-    display: flex;
-    flex-wrap: nowrap;
-    width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  width: 100%;
 }
 
 .footer__col {
-    width: 25%;
+  width: 25%;
 }
 
 .footer__col-group {
-    display: block;
-    width: 100%;
-    font-size: 1.4rem;
-    padding: 10px 20px 10px 0;
+  display: block;
+  width: 100%;
+  font-size: 1.4rem;
+  padding: 10px 20px 10px 0;
 }
 
 .footer__col-group-cer {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .footer__payment-img {
-    margin: 0 4px 4px 0;
-    width: calc(20% - 4px);
-    object-fit: contain;
+  margin: 0 4px 4px 0;
+  width: calc(20% - 4px);
+  object-fit: contain;
 }
 
 .footer__label {
-    font-size: 1.4rem;
-    font-weight: 600;
-    display: block;
-    margin-bottom: 6px;
-    margin-top: 10px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  margin-top: 10px;
 
 }
 
 .footer__link {
-    display: block;
-    text-decoration: none;
-    font-size: 1.3rem;
-    color: #333;
-    margin: 4px 0;
-    padding: 4px 0;
+  display: block;
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: #333;
+  margin: 4px 0;
+  padding: 4px 0;
 }
 
 .footer__link:hover {
-    color: rgb(89, 89, 246);
-    cursor: pointer;
+  color: rgb(89, 89, 246);
+  cursor: pointer;
 }
 
 .footer__text {
-    display: block;
-    text-decoration: none;
-    font-size: 1.3rem;
-    color: #333;
-    margin: 6px 0;
-    padding: 4px 0;
+  display: block;
+  text-decoration: none;
+  font-size: 1.3rem;
+  color: #333;
+  margin: 6px 0;
+  padding: 4px 0;
 }
 
 .footer__text-title {
-    display: inline-block;
-    min-width: 100px;
-    max-width: 100px;
-    margin-right: 6px;
+  display: inline-block;
+  min-width: 100px;
+  max-width: 100px;
+  margin-right: 6px;
 }
 
 .footer__map {
-    margin: 10px 0 0;
-    width: calc(100% - 10px);
-    border-radius: 10px;
-    border: 1px solid #ccc
+  margin: 10px 0 0;
+  width: calc(100% - 10px);
+  border-radius: 10px;
+  border: 1px solid #ccc
 }
 
 /* Mobile */
 @media screen and (max-width: 739px) {
-    .hide-on-mobile {
-        display: none;
-    }
+  .hide-on-mobile {
+    display: none;
+  }
 
-    .footer-bar {
-        flex-wrap: wrap;
-        display: flex;
-    }
+  .footer-bar {
+    flex-wrap: wrap;
+    display: flex;
+  }
 
-    .footer__col {
-        width: calc(50% - 26px);
-        margin: 0px 16px 16px 10px;
-    }
+  .footer__col {
+    width: calc(50% - 26px);
+    margin: 0px 16px 16px 10px;
+  }
 
-    .footer__col-group {
-        padding: 0px;
-    }
+  .footer__col-group {
+    padding: 0px;
+  }
 
-    .footer__text-title {
-        width: fit-content;
-        min-width: unset;
-        max-width: fit-content;
-    }
+  .footer__text-title {
+    width: fit-content;
+    min-width: unset;
+    max-width: fit-content;
+  }
 
-    .app-copyright {
-        zoom: 0.5
-    }
+  .app-copyright {
+    zoom: 0.5
+  }
 
-    .footer__text {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.8rem;
-        line-height: 1.2rem;
-    }
+  .footer__text {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+  }
 
-    .footer__label {
-        font-size: 1rem;
-        line-height: 1.4rem;
-    }
+  .footer__label {
+    font-size: 1rem;
+    line-height: 1.4rem;
+  }
 
-    .footer__link {
-        font-size: 0.8rem;
-        line-height: 1.2rem;
-    }
+  .footer__link {
+    font-size: 0.8rem;
+    line-height: 1.2rem;
+  }
 }

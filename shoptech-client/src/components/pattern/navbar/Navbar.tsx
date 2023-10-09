@@ -20,7 +20,7 @@ const NavBar = () => {
   const handleLoadingPage = (second: number) => {
 
   }
-  
+
   return (
     <React.Fragment>
       <div className="shadow-sm p-2 z-index-10 text-white bg-green-700">
@@ -67,7 +67,7 @@ const NavBar = () => {
               </div>
 
               <div className="flex items-center flex-nowrap justify-end">
-                <button className="flex relative text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
+                <button className="flex relative text-sm items-center md:mx-2 px-2 text-white font-semibold bg-green-600 w-fit h-12 md:px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
                   handleLoadingPage(1); window.location.href = "/cart"
                 }}>
                   <div className="w-4 h-4 flex items-center justify-center top-1 right-2 bg-red-600 absolute rounded-full text-xs">{0}</div>
@@ -77,7 +77,7 @@ const NavBar = () => {
 
                 <div className="relative inline-block text-left">
                   <button
-                    className="flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500"
+                    className="hidden md:flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500"
                     onClick={(e) => {
                       toggleDropdownAccountNavBar()
                       // if (auth.username) {
@@ -106,13 +106,13 @@ const NavBar = () => {
                 </div>
 
 
-                <button className="flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
+                <button className="hidden md:flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
                   handleLoadingPage(1); window.location.href = "/order"
                 }}>
                   <div className="mr-2 text-xl "><AiOutlineHistory className='text-center' /></div>
                   <p className="hidden md:block text-sm">Đơn hàng</p>
                 </button>
-                <button className="flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
+                <button className="hidden md:flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
                   handleLoadingPage(1);
                   window.location.href = "/contact"
                 }}>

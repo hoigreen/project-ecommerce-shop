@@ -20,6 +20,7 @@ const NavBar = () => {
   const handleLoadingPage = (second: number) => {
 
   }
+  
   return (
     <React.Fragment>
       <div className="shadow-sm p-2 z-index-10 text-white bg-green-700">

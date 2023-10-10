@@ -106,13 +106,13 @@ const NavBar = () => {
                 </div>
 
 
-                <button className="hidden md:flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
+                <button className="hidden lg:flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
                   handleLoadingPage(1); window.location.href = "/order"
                 }}>
                   <div className="mr-2 text-xl "><AiOutlineHistory className='text-center' /></div>
                   <p className="hidden md:block text-sm">Đơn hàng</p>
                 </button>
-                <button className="hidden md:flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
+                <button className="hidden lg:flex text-sm items-center mx-2 text-white font-semibold bg-green-600 w-fit h-12 px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500" onClick={() => {
                   handleLoadingPage(1);
                   window.location.href = "/contact"
                 }}>

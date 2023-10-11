@@ -11,7 +11,8 @@
     "next-client": "npm run dev --prefix shoptech-client",
     "server-shoptech": "npm start --prefix server",
     "shoptech": "concurrently --kill-others-on-fail \"npm run server-shoptech\" \"npm run next-client\"",
-    "prettier-shoptech" : "prettier '{client,shoptech-client,server}/**/*.{js,jsx,ts,tsx,json,css}' --watch .prettierrc"
+    "prettier-shoptech": "lint-staged",
+    "prepare-husky": "husky install"
   },
   "repository": {
     "type": "git",
@@ -31,5 +32,8 @@
   },
   "dependencies": {
     "concurrently": "^8.2.1"
+  },
+  "lint-staged": {
+    "{client,shoptech-client,server}/**/*.{js,jsx,ts,tsx,json,css}": "prettier --watch --config .prettierrc"
   }
 }

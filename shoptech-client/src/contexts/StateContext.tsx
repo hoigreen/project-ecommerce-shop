@@ -1,11 +1,18 @@
-"use client"
-import { createContext, useEffect, useMemo, useRef, useState, PropsWithChildren } from "react";
-import { useTranslation } from "react-i18next";
+'use client';
+import {
+  createContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  PropsWithChildren,
+} from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface StateContextType {
   isDropdownAccountNavBarOpen: boolean;
-  closeDropdownAccountNavBarOpen: () => void,
-  toggleDropdownAccountNavBar: () => void
+  closeDropdownAccountNavBarOpen: () => void;
+  toggleDropdownAccountNavBar: () => void;
   // isSidebarOpen: boolean;
   // isDrawerOpen: boolean;
   // isBulkDrawerOpen: boolean;
@@ -37,16 +44,21 @@ interface StateContextType {
 }
 
 // create context
-export const StateContext = createContext<StateContextType>({} as StateContextType);
+export const StateContext = createContext<StateContextType>(
+  {} as StateContextType,
+);
 
 export const StateProvider = ({ children }: PropsWithChildren<{}>) => {
   const resultsPerPage = 20;
-  const searchRef = useRef("");
-  const invoiceRef = useRef("");
+  const searchRef = useRef('');
+  const invoiceRef = useRef('');
 
-  const [isDropdownAccountNavBarOpen, setIsDropdownAccountNavBarOpen] = useState(false)
-  const closeDropdownAccountNavBarOpen = () => setIsDropdownAccountNavBarOpen(false);
-  const toggleDropdownAccountNavBar = () => setIsDropdownAccountNavBarOpen(!isDropdownAccountNavBarOpen);
+  const [isDropdownAccountNavBarOpen, setIsDropdownAccountNavBarOpen] =
+    useState(false);
+  const closeDropdownAccountNavBarOpen = () =>
+    setIsDropdownAccountNavBarOpen(false);
+  const toggleDropdownAccountNavBar = () =>
+    setIsDropdownAccountNavBarOpen(!isDropdownAccountNavBarOpen);
 
   // const [isAddCaseModalOpen, setIsAddCaseModalOpen] = useState(false)
 
@@ -213,13 +225,13 @@ export const StateProvider = ({ children }: PropsWithChildren<{}>) => {
   // }, []);
 
   return (
-    <StateContext.Provider value={
-      {
+    <StateContext.Provider
+      value={{
         isDropdownAccountNavBarOpen,
         closeDropdownAccountNavBarOpen,
-        toggleDropdownAccountNavBar
-      }
-    }>
+        toggleDropdownAccountNavBar,
+      }}
+    >
       {children}
     </StateContext.Provider>
   );

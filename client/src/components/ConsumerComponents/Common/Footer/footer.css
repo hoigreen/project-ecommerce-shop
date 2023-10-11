@@ -47,7 +47,6 @@
   display: block;
   margin-bottom: 6px;
   margin-top: 10px;
-
 }
 
 .footer__link {
@@ -84,7 +83,7 @@
   margin: 10px 0 0;
   width: calc(100% - 10px);
   border-radius: 10px;
-  border: 1px solid #ccc
+  border: 1px solid #ccc;
 }
 
 /* Mobile */
@@ -114,7 +113,7 @@
   }
 
   .app-copyright {
-    zoom: 0.5
+    zoom: 0.5;
   }
 
   .footer__text {

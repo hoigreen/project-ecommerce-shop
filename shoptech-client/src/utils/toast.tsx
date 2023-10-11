@@ -4,62 +4,62 @@ import 'react-toastify/dist/ReactToastify.css';
 
 const notifySuccess = (message: string) =>
   toast.success(message, {
-    position: "top-center",
+    position: 'top-center',
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "colored",
+    theme: 'colored',
   });
 
 const notifyError = (message: string) =>
   toast.error(message, {
-    position: "top-center",
+    position: 'top-center',
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "colored",
+    theme: 'colored',
   });
 
 const notifyInfo = (message: string) =>
   toast.info(message, {
-    position: "top-center",
+    position: 'top-center',
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "colored",
+    theme: 'colored',
   });
 
 const notifyWarning = (message: string) =>
   toast.warn(message, {
-    position: "top-center",
+    position: 'top-center',
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "colored",
+    theme: 'colored',
   });
 
 const notifyMessage = (message: string) =>
   toast(message, {
-    position: "top-center",
+    position: 'top-center',
     autoClose: 5000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,
     draggable: true,
     progress: undefined,
-    theme: "colored",
+    theme: 'colored',
   });
 
 <ToastContainer
@@ -75,5 +75,11 @@ const notifyMessage = (message: string) =>
   theme="colored"
 />;
 
-
-export { ToastContainer, notifySuccess, notifyError, notifyInfo, notifyWarning, notifyMessage };
+export {
+  ToastContainer,
+  notifySuccess,
+  notifyError,
+  notifyInfo,
+  notifyWarning,
+  notifyMessage,
+};

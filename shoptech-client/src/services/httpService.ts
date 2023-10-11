@@ -1,5 +1,5 @@
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
-import Cookies from "js-cookie";
+import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
+import Cookies from 'js-cookie';
 
 interface AdminInfo {
   token: string;
@@ -9,36 +9,36 @@ const instance = axios.create({
   baseURL: `${process.env.REACT_APP_API_BASE_URL}`,
   timeout: 50000,
   headers: {
-    Accept: "application/json",
-    "Content-Type": "application/json",
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
   },
 });
 
 // Add a request interceptor
-instance.interceptors.request.use((config: any) => {
-  let adminInfo: AdminInfo | null = null;
-  const adminInfoCookie = Cookies.get("adminInfo");
-  if (adminInfoCookie) {
-    adminInfo = JSON.parse(adminInfoCookie) as AdminInfo;
-  }
+instance.interceptors.request.use(
+  (config: any) => {
+    let adminInfo: AdminInfo | null = null;
+    const adminInfoCookie = Cookies.get('adminInfo');
+    if (adminInfoCookie) {
+      adminInfo = JSON.parse(adminInfoCookie) as AdminInfo;
+    }
 
-  let company: string | undefined = Cookies.get("company");
+    let company: string | undefined = Cookies.get('company');
 
-  return Promise.resolve({
-    ...config,
-    headers: {
-      ...config.headers,
-      authorization: adminInfo ? `Bearer ${adminInfo.token}` : null,
-      company: company ? company : null,
-    },
-  });
-},
+    return Promise.resolve({
+      ...config,
+      headers: {
+        ...config.headers,
+        authorization: adminInfo ? `Bearer ${adminInfo.token}` : null,
+        company: company ? company : null,
+      },
+    });
+  },
   (error) => {
     // Handle request errors here
     return Promise.reject(error);
-  }
+  },
 );
-
 
 const responseBody = <T>(response: AxiosResponse<T>) => response.data;
 

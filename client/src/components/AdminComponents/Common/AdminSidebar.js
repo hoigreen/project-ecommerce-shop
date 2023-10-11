@@ -1,110 +1,166 @@
-import React, { useContext } from 'react'
-import { useState, useEffect } from 'react'
+import React, { useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { handleLoadingPage } from '../../Common';
 import AuthAdminContext from '../../../context/AuthAdminContext';
 
 const handleLoadOptionSelected = (index) => {
-    const optionItems = document.querySelectorAll('.sidebar__component-item')
-    const optionItemActive = document.querySelector(".sidebar__component-item.sidebar__component-item--active")
-    optionItems.forEach((item, i) => {
-        if (optionItemActive) {
-            optionItemActive.classList.remove("sidebar__component-item--active")
-        }
-    })
-    optionItems[index].classList.add("sidebar__component-item--active")
-}
+  const optionItems = document.querySelectorAll('.sidebar__component-item');
+  const optionItemActive = document.querySelector(
+    '.sidebar__component-item.sidebar__component-item--active',
+  );
+  optionItems.forEach((item, i) => {
+    if (optionItemActive) {
+      optionItemActive.classList.remove('sidebar__component-item--active');
+    }
+  });
+  optionItems[index].classList.add('sidebar__component-item--active');
+};
 
 const AdminSidebar = () => {
-    const [authAdmin, setAuthAdmin] = useContext(AuthAdminContext)
-    const [admins, setAdmins] = useState([])
-    const [adminID, setAdminID] = useState('')
+  const [authAdmin, setAuthAdmin] = useContext(AuthAdminContext);
+  const [admins, setAdmins] = useState([]);
+  const [adminID, setAdminID] = useState('');
 
-    useEffect(() => {
-        const fetchAPIs = () => {
-            fetch("https://server-shoptech.onrender.com/api/admins").then(res => res.json()).then(data => {
-                setAdmins(data)
-            })
-        }
-        fetchAPIs()
-    }, [])
+  useEffect(() => {
+    const fetchAPIs = () => {
+      fetch('https://server-shoptech.onrender.com/api/admins')
+        .then((res) => res.json())
+        .then((data) => {
+          setAdmins(data);
+        });
+    };
+    fetchAPIs();
+  }, []);
 
-    useEffect(() => {
-        admins.map((admin, index) => {
-            if (admin.adminName == window.localStorage.getItem('adminNameLogin')) {
-                setAdminID(admin.adminID);
-            }
-        })
-    }, [admins])
+  useEffect(() => {
+    admins.map((admin, index) => {
+      if (admin.adminName == window.localStorage.getItem('adminNameLogin')) {
+        setAdminID(admin.adminID);
+      }
+    });
+  }, [admins]);
 
-    const navigate = useNavigate()
+  const navigate = useNavigate();
 
-    const handleNevigate = (link) => {
-        handleLoadingPage(1)
-        window.setTimeout(() => {
-            navigate(link)
-        }, 1000)
-    }
+  const handleNevigate = (link) => {
+    handleLoadingPage(1);
+    window.setTimeout(() => {
+      navigate(link);
+    }, 1000);
+  };
 
-    const LogOut = (e) => {
-        e.preventDefault();
-        setAuthAdmin({ adminName: null, token: '' });
-        window.localStorage.removeItem('authAdmin')
-        window.alert("Đăng xuất tài khoản thành công")
-        handleLoadingPage(1)
-        window.setTimeout(() => {
-            window.location.href = `/admin`
-        }, 1000)
-    }
+  const LogOut = (e) => {
+    e.preventDefault();
+    setAuthAdmin({ adminName: null, token: '' });
+    window.localStorage.removeItem('authAdmin');
+    window.alert('Đăng xuất tài khoản thành công');
+    handleLoadingPage(1);
+    window.setTimeout(() => {
+      window.location.href = `/admin`;
+    }, 1000);
+  };
 
-    return (
-        <div id="sidebar">
-            <div className="sidebar__logo" onClick={(e) => {
-                e.preventDefault();
-                window.location.href = '/admin/dashboard'
-            }}>
-            </div>
+  return (
+    <div id="sidebar">
+      <div
+        className="sidebar__logo"
+        onClick={(e) => {
+          e.preventDefault();
+          window.location.href = '/admin/dashboard';
+        }}
+      ></div>
 
-            <div className="sidebar__component-item" onClick={() => { handleNevigate(`/admin/dashboard`) }}>
-                <i className="sidebar__component-item-icon fa fa-home" aria-hidden="true"></i>
-                Thống kê
-            </div>
+      <div
+        className="sidebar__component-item"
+        onClick={() => {
+          handleNevigate(`/admin/dashboard`);
+        }}
+      >
+        <i
+          className="sidebar__component-item-icon fa fa-home"
+          aria-hidden="true"
+        ></i>
+        Thống kê
+      </div>
 
-            <div className="sidebar__component">
-                <label className="sidebar__component-label">Quản lý dữ liệu</label>
-                <div className="sidebar__component-item" onClick={() => { handleNevigate(`/admin/customer`) }}>
-                    <i className="sidebar__component-item-icon fa fa-users" aria-hidden="true"></i>
-                    Khách hàng
-                </div>
-                <div className="sidebar__component-item" onClick={() => { handleNevigate(`/admin/product`) }}>
-                    <i className="sidebar__component-item-icon fa fa-table" aria-hidden="true"></i>
-                    Sản phẩm
-                </div>
-                <div className="sidebar__component-item" onClick={() => { handleNevigate(`/admin/promote`) }}>
-                    <i className="sidebar__component-item-icon fa fa-tag" aria-hidden="true"></i>
-                    Khuyến mãi
-                </div>
-                <div className="sidebar__component-item" onClick={() => { handleNevigate(`/admin/feedback`) }}>
-                    <i className="sidebar__component-item-icon fa fa-comments" aria-hidden="true"></i>
-                    Ý kiến khách hàng
-                </div>
-            </div>
-
-            <div className="sidebar__component">
-                <label className="sidebar__component-label">Tùy chọn</label>
-                <div className="sidebar__component-item" onClick={() => { handleNevigate(`/admin/info-admin/${adminID}`) }}>
-                    <i className="sidebar__component-item-icon fa fa-user" aria-hidden="true"></i>
-                    Thông tin cá nhân
-                </div>
-                <div className="sidebar__component-item" onClick={LogOut}>
-                    <i className="sidebar__component-item-icon fa fa-sign-out" aria-hidden="true"></i>
-                    Đăng xuất
-                </div>
-            </div>
+      <div className="sidebar__component">
+        <label className="sidebar__component-label">Quản lý dữ liệu</label>
+        <div
+          className="sidebar__component-item"
+          onClick={() => {
+            handleNevigate(`/admin/customer`);
+          }}
+        >
+          <i
+            className="sidebar__component-item-icon fa fa-users"
+            aria-hidden="true"
+          ></i>
+          Khách hàng
         </div>
+        <div
+          className="sidebar__component-item"
+          onClick={() => {
+            handleNevigate(`/admin/product`);
+          }}
+        >
+          <i
+            className="sidebar__component-item-icon fa fa-table"
+            aria-hidden="true"
+          ></i>
+          Sản phẩm
+        </div>
+        <div
+          className="sidebar__component-item"
+          onClick={() => {
+            handleNevigate(`/admin/promote`);
+          }}
+        >
+          <i
+            className="sidebar__component-item-icon fa fa-tag"
+            aria-hidden="true"
+          ></i>
+          Khuyến mãi
+        </div>
+        <div
+          className="sidebar__component-item"
+          onClick={() => {
+            handleNevigate(`/admin/feedback`);
+          }}
+        >
+          <i
+            className="sidebar__component-item-icon fa fa-comments"
+            aria-hidden="true"
+          ></i>
+          Ý kiến khách hàng
+        </div>
+      </div>
 
-    )
-}
+      <div className="sidebar__component">
+        <label className="sidebar__component-label">Tùy chọn</label>
+        <div
+          className="sidebar__component-item"
+          onClick={() => {
+            handleNevigate(`/admin/info-admin/${adminID}`);
+          }}
+        >
+          <i
+            className="sidebar__component-item-icon fa fa-user"
+            aria-hidden="true"
+          ></i>
+          Thông tin cá nhân
+        </div>
+        <div className="sidebar__component-item" onClick={LogOut}>
+          <i
+            className="sidebar__component-item-icon fa fa-sign-out"
+            aria-hidden="true"
+          ></i>
+          Đăng xuất
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export { handleLoadOptionSelected }
-export default AdminSidebar
+export { handleLoadOptionSelected };
+export default AdminSidebar;

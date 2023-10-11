@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
-@import url("./assets/fonts/fontawesome-free-6.3.0-web/css/all.css");
-@import url("./assets/fonts/themify-icons/themify-icons.css");
+@import url('./assets/fonts/fontawesome-free-6.3.0-web/css/all.css');
+@import url('./assets/fonts/themify-icons/themify-icons.css');
 
 @import url('./styles/grid-system.css');
 @import url('./styles/toast-message.css');
@@ -12,170 +12,168 @@
 
 /* --------Stylesheet for the common component ------*/
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', "Arial", sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', 'Arial', sans-serif;
 }
 
 :root {
-    /* --primary-color: #eb984c;
+  /* --primary-color: #eb984c;
     --button-color: #df8129; */
-    /* --background-color: #f3f3f3; */
-    --primary-color: #7eba9f;
-    --button-color: #2c9a79;
-    --background-color: #e9e8e4;
-    --navbar-background-color: #0d6139;
-    --text-color: #222222;
-    --background-login-color: #ffd3aa;
-    --star-color: #fcc702;
+  /* --background-color: #f3f3f3; */
+  --primary-color: #7eba9f;
+  --button-color: #2c9a79;
+  --background-color: #e9e8e4;
+  --navbar-background-color: #0d6139;
+  --text-color: #222222;
+  --background-login-color: #ffd3aa;
+  --star-color: #fcc702;
 }
 
-
 html {
-    font-size: 62.5%;
-    line-height: 1.6rem;
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    background-color: transparent;
+  font-size: 62.5%;
+  line-height: 1.6rem;
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  background-color: transparent;
 }
 
 body {
-    margin: 0;
-    background-color: var(--background-color);
+  margin: 0;
+  background-color: var(--background-color);
 }
 
 .container {
-    width: 100%;
-    margin-top: 115px;
+  width: 100%;
+  margin-top: 115px;
 }
 
 @keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
+  0% {
+    opacity: 0;
+  }
 
-    100% {
-        opacity: 1;
-    }
+  100% {
+    opacity: 1;
+  }
 }
 
 @keyframes topToDown {
-    from {
-        transform: translateY(-100px);
-        opacity: 0;
-    }
+  from {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
 
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 @keyframes downToTop {
-    from {
-        transform: translateY(100px);
-        opacity: 0;
-    }
+  from {
+    transform: translateY(100px);
+    opacity: 0;
+  }
 
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
-
 @keyframes modalFadein {
-    from {
-        transform: scale(0);
-    }
+  from {
+    transform: scale(0);
+  }
 
-    to {
-        transform: scale(100%);
-    }
+  to {
+    transform: scale(100%);
+  }
 }
 
 @keyframes popUp {
-    from {
-        transform: translateY(0)
-    }
+  from {
+    transform: translateY(0);
+  }
 
-    to {
-        transform: translateY(-10px)
-    }
+  to {
+    transform: translateY(-10px);
+  }
 }
 
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    border-radius: 0.125rem;
-    background-color: transparent;
+  width: 6px;
+  height: 6px;
+  border-radius: 0.125rem;
+  background-color: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 4px;
-    background-color: var(--button-color);
+  border-radius: 4px;
+  background-color: var(--button-color);
 }
 
 .edit-icon {
-    color: green;
-    height: 20px;
-    width: 20px;
-    cursor: pointer;
-    zoom: 1.2;
-    outline: none;
-    border: none;
+  color: green;
+  height: 20px;
+  width: 20px;
+  cursor: pointer;
+  zoom: 1.2;
+  outline: none;
+  border: none;
 }
 
 .edit-icon:hover {
-    cursor: pointer;
-    opacity: 0.8;
+  cursor: pointer;
+  opacity: 0.8;
 }
 
-input[type="range"] {
-    accent-color: var(--primary-color);
+input[type='range'] {
+  accent-color: var(--primary-color);
 }
 
 .fillter-range {
-    display: flex;
-    align-items: center;
-    font-size: 1.6rem;
-    padding: 10px 4px 20px;
+  display: flex;
+  align-items: center;
+  font-size: 1.6rem;
+  padding: 10px 4px 20px;
 }
 
 .fillter-range__label {
-    font-size: 1.8rem;
-    font-weight: bold;
-    padding: 4px 10px 0 0;
+  font-size: 1.8rem;
+  font-weight: bold;
+  padding: 4px 10px 0 0;
 }
 
 .fillter-range__control {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 4px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4px 8px;
 }
 
 .fillter-range__price {
-    font-size: 2rem;
-    font-style: italic;
-    color: var(--button-color);
+  font-size: 2rem;
+  font-style: italic;
+  color: var(--button-color);
 }
 
 .fillter-range__input {
-    width: 200px;
+  width: 200px;
 }
 
 .fillter-range__btn {
-    display: block;
-    margin: 10px 16px;
-    padding: 12px 26px;
-    border: none;
-    font-size: 1.8rem;
-    color: #fff;
-    background-color: var(--button-color);
-    font-weight: bold;
-    border-radius: 10px
+  display: block;
+  margin: 10px 16px;
+  padding: 12px 26px;
+  border: none;
+  font-size: 1.8rem;
+  color: #fff;
+  background-color: var(--button-color);
+  font-weight: bold;
+  border-radius: 10px;
 }

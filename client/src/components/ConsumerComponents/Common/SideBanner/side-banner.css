@@ -1,25 +1,23 @@
 .side-banner {
-    display: block;
+  display: block;
 }
-
 
 .side-banner__left {
-    display: block;
-    position: fixed;
-    left: calc(((100vw - 1200px)/2) - 140px);
-    top: 50%;
-    transform: translateY(-50%);
-    width: 110px;
-    z-index: 999;
+  display: block;
+  position: fixed;
+  left: calc(((100vw - 1200px) / 2) - 140px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 110px;
+  z-index: 999;
 }
 
-
 .side-banner__right {
-    display: block;
-    position: fixed;
-    right: calc(((100vw - 1200px)/2) - 140px);
-    top: 50%;
-    transform: translateY(-50%);
-    width: 110px;
-    z-index: 999;
+  display: block;
+  position: fixed;
+  right: calc(((100vw - 1200px) / 2) - 140px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: 110px;
+  z-index: 999;
 }

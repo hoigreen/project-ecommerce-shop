@@ -1,14 +1,14 @@
-"use client";
-import * as React from "react";
-import CssBaseline from "@mui/material/CssBaseline";
-import { createTheme, ThemeOptions, ThemeProvider } from "@mui/material/styles";
-import { Roboto } from "next/font/google";
-import { NextAppDirEmotionCacheProvider } from "./EmotionCache";
+'use client';
+import * as React from 'react';
+import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, ThemeOptions, ThemeProvider } from '@mui/material/styles';
+import { Roboto } from 'next/font/google';
+import { NextAppDirEmotionCacheProvider } from './EmotionCache';
 
 const roboto = Roboto({
-  weight: ["300", "400", "500", "700"],
-  style: ["normal", "italic"],
-  subsets: ["vietnamese"],
+  weight: ['300', '400', '500', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['vietnamese'],
 });
 
 const themeOptions: ThemeOptions = {
@@ -17,26 +17,22 @@ const themeOptions: ThemeOptions = {
   },
   palette: {
     background: {
-      default: "transparent",
+      default: 'transparent',
     },
     primary: {
-      main: "#1976d2",
+      main: '#1976d2',
     },
     text: {
-      primary: "#300000",
+      primary: '#300000',
     },
   },
 };
 
 const theme = createTheme(themeOptions);
 
-export default function MuiTheme({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function MuiTheme({ children }: { children: React.ReactNode }) {
   return (
-    <NextAppDirEmotionCacheProvider options={{ key: "mui" }}>
+    <NextAppDirEmotionCacheProvider options={{ key: 'mui' }}>
       <ThemeProvider theme={theme}>
         <CssBaseline />
         {children}

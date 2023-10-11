@@ -129,7 +129,6 @@
   border: 1px solid rgb(255, 47, 47);
 }
 
-
 .header--btn-icon {
   margin: 0 10px 0 4px;
   font-size: 2.2rem;
@@ -146,7 +145,6 @@
   font-weight: 400;
   font-size: 1.4rem;
   padding-top: 4px;
-
 }
 
 .nav__option-box {
@@ -168,7 +166,6 @@
   display: block;
   font-size: 1.6rem;
   line-height: 2rem;
-  ;
   padding: 10px 20px;
   border-bottom: 1px solid #eee;
   cursor: pointer;
@@ -197,7 +194,6 @@
     margin-left: 8px;
     margin-right: 8px;
   }
-
 
   .header-btn__cart {
     justify-content: center;

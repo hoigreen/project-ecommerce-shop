@@ -1,16 +1,16 @@
-"use client";
+'use client';
 
-import * as React from "react";
-import createCache from "@emotion/cache";
-import { useServerInsertedHTML } from "next/navigation";
-import { CacheProvider as DefaultCacheProvider } from "@emotion/react";
+import * as React from 'react';
+import createCache from '@emotion/cache';
+import { useServerInsertedHTML } from 'next/navigation';
+import { CacheProvider as DefaultCacheProvider } from '@emotion/react';
 import type {
   EmotionCache,
   Options as OptionsOfCreateCache,
-} from "@emotion/cache";
+} from '@emotion/cache';
 
 export type NextAppDirEmotionCacheProviderProps = {
-  options: Omit<OptionsOfCreateCache, "insertionPoint">;
+  options: Omit<OptionsOfCreateCache, 'insertionPoint'>;
   CacheProvider?: (props: {
     value: EmotionCache;
     children: React.ReactNode;
@@ -19,7 +19,7 @@ export type NextAppDirEmotionCacheProviderProps = {
 };
 
 export function NextAppDirEmotionCacheProvider(
-  props: NextAppDirEmotionCacheProviderProps
+  props: NextAppDirEmotionCacheProviderProps,
 ) {
   const { options, CacheProvider = DefaultCacheProvider, children } = props;
 
@@ -48,7 +48,7 @@ export function NextAppDirEmotionCacheProvider(
     if (names.length === 0) {
       return null;
     }
-    let styles = "";
+    let styles = '';
     // eslint-disable-next-line no-restricted-syntax
     for (const name of names) {
       styles += cache.inserted[name];
@@ -56,7 +56,7 @@ export function NextAppDirEmotionCacheProvider(
     return (
       <style
         key={cache.key}
-        data-emotion={`${cache.key} ${names.join(" ")}`}
+        data-emotion={`${cache.key} ${names.join(' ')}`}
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: styles,

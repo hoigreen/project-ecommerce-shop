@@ -10,7 +10,8 @@
     "client-shoptech": "npm start --prefix client",
     "next-client": "npm run dev --prefix shoptech-client",
     "server-shoptech": "npm start --prefix server",
-    "shoptech": "concurrently --kill-others-on-fail \"npm run server-shoptech\" \"npm run next-client\""
+    "shoptech": "concurrently --kill-others-on-fail \"npm run server-shoptech\" \"npm run next-client\"",
+    "prettier-shoptech" : "prettier '{client,shoptech-client,server}/**/*.{js,jsx,ts,tsx,json,css}' --watch .prettierrc"
   },
   "repository": {
     "type": "git",
@@ -23,7 +24,10 @@
   },
   "homepage": "https://github.com/hoigreen/project-ecommerce-shop#readme",
   "devDependencies": {
-    "plop": "^4.0.0"
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "plop": "^4.0.0",
+    "prettier": "^3.0.3"
   },
   "dependencies": {
     "concurrently": "^8.2.1"

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 const schema = mongoose.Schema;
 const mongooseDelete = require('mongoose-delete');
 
@@ -6,96 +6,98 @@ const mongooseDelete = require('mongoose-delete');
 const listProductSchema = new mongoose.Schema({
   imageLink: {
     type: String,
-    default: "",
-    required: true
+    default: '',
+    required: true,
   },
   productName: {
     type: String,
-    default: "",
-    required: true
+    default: '',
+    required: true,
   },
   option: {
     type: String,
-    default: "",
-    required: true
+    default: '',
+    required: true,
   },
   color: {
     type: String,
-    default: "",
-    required: true
+    default: '',
+    required: true,
   },
   price: {
     type: Number,
-    required: true
+    required: true,
   },
   percent: {
     type: Number,
-    required: true
+    required: true,
   },
   quantity: {
     type: Number,
-    required: true
+    required: true,
   },
   voted: {
     type: Boolean,
-    required: true
-  }
+    required: true,
+  },
 });
 
 const OrderSchema = new mongoose.Schema(
   {
-    owner: { type: schema.Types.ObjectId, ref: "Customer" },
+    owner: { type: schema.Types.ObjectId, ref: 'Customer' },
     fullname: {
       type: String,
-      default: "",
-      required: true
+      default: '',
+      required: true,
     },
     email: {
       type: String,
-      default: "",
+      default: '',
       required: true,
-      trim: true
+      trim: true,
     },
     phone: {
       type: String,
-      required: true
+      required: true,
     },
     method: {
       type: String,
-      default: "",
-      required: true
+      default: '',
+      required: true,
     },
     address: {
       type: String,
-      default: "",
+      default: '',
     },
     note: {
       type: String,
-      default: "",
+      default: '',
     },
     price: {
       type: String,
-      default: "0",
-      required: true
+      default: '0',
+      required: true,
     },
     giftcodeApply: {
       type: String,
-      default: "0",
-      required: true
+      default: '0',
+      required: true,
     },
     status: {
       type: String,
-      default: "",
-      required: true
+      default: '',
+      required: true,
     },
-    lists: [listProductSchema]
-  }, {
-  timestamps: true,
-}
+    lists: [listProductSchema],
+  },
+  {
+    timestamps: true,
+  },
 );
 
-OrderSchema.plugin(mongooseDelete, { overrideMethods: 'all' })
+OrderSchema.plugin(mongooseDelete, { overrideMethods: 'all' });
 
-const OrderModel = mongoose.models.OrderModel || mongoose.model('Order', OrderSchema);
+const OrderModel =
+  mongoose.models.OrderModel || mongoose.model('Order', OrderSchema);
 
 module.exports = OrderModel;

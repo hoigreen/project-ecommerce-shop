@@ -1,200 +1,200 @@
 /* Nav mobile */
 .nav-mobile {
-    display: none;
-    height: 60px;
-    width: 100%;
-    padding: 0 0 0px;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 10;
+  display: none;
+  height: 60px;
+  width: 100%;
+  padding: 0 0 0px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
 }
 
 .nav-mobile__btn {
-    width: 20%;
-    display: block;
-    padding: 6px 4px;
-    background-color: #fff;
-    color: #888787;
-    cursor: pointer;
+  width: 20%;
+  display: block;
+  padding: 6px 4px;
+  background-color: #fff;
+  color: #888787;
+  cursor: pointer;
 }
 
 .nav-mobile__btn--active {
-    color: var(--primary-color);
-    background-color: #eee;
+  color: var(--primary-color);
+  background-color: #eee;
 }
 
 .nav-mobile__btn-icon {
-    display: block;
-    padding: 4px;
-    text-align: center;
-    font-size: 1.6rem;
+  display: block;
+  padding: 4px;
+  text-align: center;
+  font-size: 1.6rem;
 }
 
 .nav-mobile__btn-name {
-    display: block;
-    padding: 4px 0;
-    text-align: center;
-    font-size: 1rem;
+  display: block;
+  padding: 4px 0;
+  text-align: center;
+  font-size: 1rem;
 }
 
 .nav-mobile__option-list {
-    display: none;
-    position: absolute;
-    top: calc(-6px);
-    left: 18%;
-    background: #fff;
-    list-style: none;
-    color: #000;
-    transform: translate(100%, -100%);
-    padding: 10px 0 0;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  display: none;
+  position: absolute;
+  top: calc(-6px);
+  left: 18%;
+  background: #fff;
+  list-style: none;
+  color: #000;
+  transform: translate(100%, -100%);
+  padding: 10px 0 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .nav-mobile__option-account {
-    display: none;
-    position: absolute;
-    top: calc(-6px);
-    right: 0;
-    background: #fff;
-    list-style: none;
-    color: #000;
-    transform: translateY(-100%);
-    padding: 10px 0 0;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  display: none;
+  position: absolute;
+  top: calc(-6px);
+  right: 0;
+  background: #fff;
+  list-style: none;
+  color: #000;
+  transform: translateY(-100%);
+  padding: 10px 0 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* Mobile & Tablet */
 @media (max-width: 1023px) {
-    :root {}
+  :root {
+  }
 
-    .hide-on-mobile-tablet {
-        display: none;
-    }
+  .hide-on-mobile-tablet {
+    display: none;
+  }
 
-    .header--logo {
-        margin-left: 8px;
-    }
+  .header--logo {
+    margin-left: 8px;
+  }
 
-    .header-search__input {
-        margin-left: 12px;
-    }
-
+  .header-search__input {
+    margin-left: 12px;
+  }
 }
 
 /* Tablet */
 @media (min-width: 740px) and (max-width: 1023px) {
-    .hide-on-tablet {
-        display: none;
-    }
+  .hide-on-tablet {
+    display: none;
+  }
 }
 
 /* Mobile */
 @media screen and (max-width: 739px) {
-    :root {}
+  :root {
+  }
 
-    .hide-on-mobile {
-        display: none;
-    }
+  .hide-on-mobile {
+    display: none;
+  }
 
-    .show-on-mobile {
-        display: block;
-    }
+  .show-on-mobile {
+    display: block;
+  }
 
-    #toast {
-        top: 10px;
-        right: 10px;
-        left: 10px;
-    }
+  #toast {
+    top: 10px;
+    right: 10px;
+    left: 10px;
+  }
 
-    .toast {
-        max-width: unset;
-        min-width: unset;
-        width: 100%;
-    }
+  .toast {
+    max-width: unset;
+    min-width: unset;
+    width: 100%;
+  }
 
-    .login-page__container {
-        width: calc(100% - 20px);
-        margin: 20px 10px 60px 10px;
-        height: unset;
-    }
+  .login-page__container {
+    width: calc(100% - 20px);
+    margin: 20px 10px 60px 10px;
+    height: unset;
+  }
 
-    .login-page__title {
-        font-size: 3rem;
-    }
+  .login-page__title {
+    font-size: 3rem;
+  }
 
-    .login-page__col {
-        width: 100%;
-    }
+  .login-page__col {
+    width: 100%;
+  }
 
-    .login-page__label-login {
-        font-size: 2.8rem;
-        line-height: 3.2rem;
-    }
+  .login-page__label-login {
+    font-size: 2.8rem;
+    line-height: 3.2rem;
+  }
 
-    .login-page__label {
-        font-size: 1.6rem;
-    }
+  .login-page__label {
+    font-size: 1.6rem;
+  }
 
-    .login-page__input {
-        font-size: 1.4rem;
-    }
+  .login-page__input {
+    font-size: 1.4rem;
+  }
 
-    .login-page__btn {
-        width: 100%;
-    }
+  .login-page__btn {
+    width: 100%;
+  }
 
-    .login-page__option {
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 0;
-        justify-content: center;
-        padding: 0;
-        margin-bottom: 20px;
-        width: 100%;
-    }
+  .login-page__option {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0;
+    justify-content: center;
+    padding: 0;
+    margin-bottom: 20px;
+    width: 100%;
+  }
 
-    .login-page__btn-other {
-        display: flex;
-        /* justify-content: space-between; */
-        min-width: 100%;
-        margin: 10px;
-    }
+  .login-page__btn-other {
+    display: flex;
+    /* justify-content: space-between; */
+    min-width: 100%;
+    margin: 10px;
+  }
 
-    .nav-mobile {
-        display: flex;
-    }
+  .nav-mobile {
+    display: flex;
+  }
 
-    .nav__logo {
-        padding-left: 0;
-        font-size: 2rem;
-        line-height: 2.4rem;
-    }
+  .nav__logo {
+    padding-left: 0;
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
 
-    .nav-notification__btn {
-        padding: 8px 0px;
-    }
+  .nav-notification__btn {
+    padding: 8px 0px;
+  }
 
-    .nav__account {
-        gap: 10px;
-    }
+  .nav__account {
+    gap: 10px;
+  }
 
-    .nav__account-name {
-        font-size: 1.4rem;
-    }
+  .nav__account-name {
+    font-size: 1.4rem;
+  }
 
-    .nav__account-balence {
-        font-size: 1.2rem
-    }
+  .nav__account-balence {
+    font-size: 1.2rem;
+  }
 
-    .nav__account-btn {
-        font-size: 1.2rem;
-    }
-
+  .nav__account-btn {
+    font-size: 1.2rem;
+  }
 }

@@ -1,92 +1,92 @@
 .policy__container {
-    display: block;
-    background-color: #fff;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
-    padding: 10px 20px;
-    border-radius: 12px;
-    font-size: 1.6rem;
-    line-height: 2rem;
+  display: block;
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 1.6rem;
+  line-height: 2rem;
 }
 
 .policy__box {
-    display: block;
+  display: block;
 }
 
 .policy__header {
-    display: block;
-    text-align: center;
-    color: var(--button-color);
-    font-weight: 700;
-    padding: 30px 20px 10px;
-    font-size: 3.2rem
+  display: block;
+  text-align: center;
+  color: var(--button-color);
+  font-weight: 700;
+  padding: 30px 20px 10px;
+  font-size: 3.2rem;
 }
 
 .policy__describe {
-    text-align: center;
-    display: block;
-    font-style: italic;
-    font-weight: bold;
-    padding: 10px 0;
+  text-align: center;
+  display: block;
+  font-style: italic;
+  font-weight: bold;
+  padding: 10px 0;
 }
 
 .policy__content {
-    text-indent: 20px;
-    text-align: justify;
-    font-size: 1.8rem;
-    line-height: 2.4rem;
-    margin: 6px 0 0;
+  text-indent: 20px;
+  text-align: justify;
+  font-size: 1.8rem;
+  line-height: 2.4rem;
+  margin: 6px 0 0;
 }
 
 .policy__content-group {
-    display: block;
-    padding: 10px;
-    font-size: 1.8rem;
-    text-align: justify;
-    line-height: 2.2rem;
+  display: block;
+  padding: 10px;
+  font-size: 1.8rem;
+  text-align: justify;
+  line-height: 2.2rem;
 }
 
 .policy__title {
-    font-weight: 500;
-    padding: 4px 0;
-    line-height: 2.8rem;
-    font-size: 2rem;
+  font-weight: 500;
+  padding: 4px 0;
+  line-height: 2.8rem;
+  font-size: 2rem;
 }
 
 .policy__list-disc {
-    padding: 6px 0px 6px 10px;
-    font-size: 1.8rem;
-    text-align: justify;
+  padding: 6px 0px 6px 10px;
+  font-size: 1.8rem;
+  text-align: justify;
 }
 
 @media screen and (max-width: 739px) {
-    .hide-on-mobile {
-        display: none;
-    }
+  .hide-on-mobile {
+    display: none;
+  }
 
-    .policy__container {
-        width: calc(100% - 20px);
-        margin: 0 auto;
-        padding: 10px 10px 0 20px;
-    }
+  .policy__container {
+    width: calc(100% - 20px);
+    margin: 0 auto;
+    padding: 10px 10px 0 20px;
+  }
 
-    .policy__header {
-        font-size: 2rem;
-        line-height: 2.6rem
-    }
+  .policy__header {
+    font-size: 2rem;
+    line-height: 2.6rem;
+  }
 
-    .policy__describe {
-        font-size: 1rem
-    }
+  .policy__describe {
+    font-size: 1rem;
+  }
 
-    .policy__content {
-        font-size: 1.2rem;
-    }
+  .policy__content {
+    font-size: 1.2rem;
+  }
 
-    .policy__title {
-        font-size: 1.4rem;
-    }
+  .policy__title {
+    font-size: 1.4rem;
+  }
 
-    .policy__list-disc {
-        font-size: 1.2rem;
-    }
+  .policy__list-disc {
+    font-size: 1.2rem;
+  }
 }

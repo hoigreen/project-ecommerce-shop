@@ -1,2 +1,2 @@
-export { default as CustomerPage } from './CustomerPage'
-export { default as InfoCustomer } from './InfoCustomer'
+export { default as CustomerPage } from './CustomerPage';
+export { default as InfoCustomer } from './InfoCustomer';

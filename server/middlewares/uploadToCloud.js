@@ -3,12 +3,12 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const multer = require('multer');
 const dotenv = require('dotenv');
 
-dotenv.config()
+dotenv.config();
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_NAME,
   api_key: process.env.CLOUDINARY_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET
+  api_secret: process.env.CLOUDINARY_SECRET,
 });
 
 // Admin
@@ -16,8 +16,8 @@ const storageAvatarAdmin = new CloudinaryStorage({
   cloudinary,
   allowFormats: ['png', 'jpg', 'jpeg', 'gif', 'webp'],
   params: {
-    folder: "shoptech/admins",
-    use_filename: true
+    folder: 'shoptech/admins',
+    use_filename: true,
   },
 });
 
@@ -26,11 +26,11 @@ const storageAvatarUser = new CloudinaryStorage({
   cloudinary,
   allowFormats: ['png', 'jpg', 'jpeg', 'gif', 'webp'],
   params: {
-    folder: "shoptech/users",
+    folder: 'shoptech/users',
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
-  }
+  },
 });
 
 // Product
@@ -38,11 +38,11 @@ const storageImageProduct = new CloudinaryStorage({
   cloudinary,
   allowFormats: ['png', 'jpg', 'jpeg', 'gif', 'webp'],
   params: {
-    folder: "shoptech/products",
+    folder: 'shoptech/products',
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
-  }
+  },
 });
 
 // Promote
@@ -51,11 +51,11 @@ const storageImagePromote = new CloudinaryStorage({
   cloudinary,
   allowFormats: ['png', 'jpg', 'jpeg', 'gif', 'webp'],
   params: {
-    folder: "shoptech/promotes",
+    folder: 'shoptech/promotes',
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
-  }
+  },
 });
 
 const uploadAvatarAdmin = multer({ storage: storageAvatarAdmin });
@@ -67,5 +67,5 @@ module.exports = {
   uploadAvatarAdmin,
   uploadAvatarUser,
   uploadImageProduct,
-  uploadImagePromote
-}
+  uploadImagePromote,
+};

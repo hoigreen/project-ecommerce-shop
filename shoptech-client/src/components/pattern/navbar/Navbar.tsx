@@ -65,7 +65,8 @@ const NavBar = () => {
                 </button>
               </div>
 
-                      <div      className="flex items-center flex-nowrap justify-end">
+                      <div      
+                      className="flex items-center flex-nowrap justify-end">
                 <button
                   className="flex relative text-sm items-center md:mx-2 px-2 text-white font-semibold bg-green-600 w-fit h-12 md:px-4 py-2 outline-none border-none cursor-pointer rounded-lg hover:bg-green-500"
                   onClick={() => {

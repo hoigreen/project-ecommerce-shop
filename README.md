@@ -77,10 +77,6 @@ npm run dev
 
 The UI application will run at http://localhost:3000
 
-## Project Structure
-- `client`: Contains source code for the user interface using ReactJS and NextJS.
-- `server`: Contains source code for the server using ExpressJS and the MVC pattern.
-
 ## Contributing
 
 Pull requests are welcome. For major changes, please open an issue first

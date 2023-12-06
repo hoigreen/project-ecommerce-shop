@@ -2,7 +2,6 @@
 
 ShopTECH - Website selling technology products
 
-
 ## Introduction
 
 This project is a simulation of an e-commerce website system that sells various technology products such as mobile phones, laptops, tablets, and more. The project utilizes the ReactJS and NextJS libraries for the user interface, along with a server built using the MVC pattern based on the ExpressJS framework to manage and process data.
@@ -11,13 +10,12 @@ This project is a simulation of an e-commerce website system that sells various 
 Production has been deploy at url [ShopTECH Website](https://shoptech.website)
 
 ## Technologies 🔧
-- Next.js(React)
-- TypeScript / Javascript
-- Tailwind CSS
+- React
+- Javascript
 - NodeJS
 - ExpressJS
-- Redis
 - MongoDB
+- Mongoose
 
 ## Screenshots 📸
 ![image](https://github.com/hoigreen/project-ecommerce-shop/assets/88929110/004949fb-e82e-4f08-b6d9-5231a40b0373)
@@ -74,7 +72,7 @@ yarn install
 
 5. Starting client and server
 ``` bash
-npm run shoptech
+npm run dev
 ```
 
 The UI application will run at http://localhost:3000

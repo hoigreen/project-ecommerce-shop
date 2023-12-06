@@ -4,7 +4,7 @@ ShopTECH - Website selling technology products
 
 ## Introduction
 
-This project is a simulation of an e-commerce website system that sells various technology products such as mobile phones, laptops, tablets, and more. The project utilizes the ReactJS and NextJS libraries for the user interface, along with a server built using the MVC pattern based on the ExpressJS framework to manage and process data.
+This project is a simulation of an e-commerce website system that sells various technology products such as mobile phones, laptops, tablets, and more. 
 
 ## Live Preview:
 Production has been deploy at url [ShopTECH Website](https://shoptech.website)

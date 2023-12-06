@@ -5,12 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "i": "cd client && npm i && cd ../server && npm i && cd ../shoptech-client && npm i",
-    "install": "cd client && npm i && cd ../server && npm i && cd ../shoptech-client && npm i",
-    "client-shoptech": "npm start --prefix client",
-    "next-client": "npm run dev --prefix shoptech-client",
-    "server-shoptech": "npm start --prefix server",
-    "shoptech": "concurrently --kill-others-on-fail \"npm run server-shoptech\" \"npm run next-client\"",
+    "i": "cd client && npm i && cd ../server && npm i",
+    "install": "cd client && npm i && cd ../server && npm i",
+    "client": "npm start --prefix client",
+    "server": "npm start --prefix server",
+    "shoptech": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "prettier-shoptech": "lint-staged",
     "prepare-husky": "husky install"
   },

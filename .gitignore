@@ -8,3 +8,4 @@
 project-ecommerce-shop.code-workspace
 package-lock.json
 /.vscode
+/yarn.lock
